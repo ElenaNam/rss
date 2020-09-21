@@ -428,7 +428,65 @@ a {
 
 }
 
+/*SIGN-UP*/
 
+.sign-up {
+    height: 524px;
+    width: 1600px;
+    background-image: url(C:\Git\elenanam-JS2020Q3\webdev\assets\pexels.png);
+    background-size: cover;
+}
+
+.signup-block {
+    /*width: 100%;*/
+    display: block;
+    padding: 0;
+    margin: 200px 597px 220px 597px;
+    
+}
+
+.sign-text {
+    display: inline-block;
+    padding: 0;
+    width: 406px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    /*color: #FFFFFF;*/
+    color: red;
+}
+
+.formbutton {
+    display: inline-block;
+    width: 406px;
+}
+.button-sign {
+    display: inline-block;
+    width: 66px;
+    height: 46px;
+    background-color: #00AFDB;
+    background-image: url(assets\check-icon.png) center no-repeat;
+
+}
+
+.form-email {
+    width: 406px;
+    height: 46px;
+    display: inline-block;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;     
+    color: #373737;
+    opacity: .8;
+}
 
 
 
