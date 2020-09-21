@@ -45,27 +45,53 @@ h1 {
     font-size: 1px;    
 }
 
-.img-header {
-    /*display: inline-block;*/
+.logo {    
     margin: 0 auto;
     padding-top: 25px;
-    
-
+    width: 44px;
+    height: 45px;
+   
 }
 
 nav {
     display: flex;
+    margin-left: 502px;
+    margin-right: 515px;
   }
   
-.nav-element {
+.nav-element {    
     flex: 1;
+    width: 53px;
+    height: 20px;
+    margin-top: 38px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-       
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;      
+}
+
+.choice-element {
+    border-bottom: 1px solid transparent;
+    line-height: 21px;
+}
+.choice-element:hover {    
+    border-bottom: 1px solid white;
+    font-weight: bold;
+}
+.aktiv-element {
+    left: calc(50% - 38px/2 - 279px);
+    top: 38px;
+    font-weight: bold;
+    line-height: 21px;
+    border-bottom: 1px solid white;
+
 }
 
 a {
     text-decoration: none;
     color: #fff;
 }
+
