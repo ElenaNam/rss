@@ -77,7 +77,8 @@ nav {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;      
+    font-size: 14px; 
+    opacity: .8;     
 }
 
 .choice-element {
@@ -107,8 +108,109 @@ a {
 
 .intro {
     width: 1600px;
-    height: 900px;
-    background-image: url("bgimage.png") center no-repeat;
+    height: 788px;
+    /*background-image: url("bgimage.png") center no-repeat;
+    background-size: cover;*/
+}
+
+.button {
+    background-color: #00AFDB;
+    width: 184px;
+    height: 46px;
+    border: none;
+    transition: .2s;
+}
+
+.button:hover {
+    background-color: #009CC2;
+    border: none;
+    }
+
+.button:active {
+    background-color:  #00AFDB;
+    border: none;
+}
+
+
+
+.button-inner {
+    display: flex;
+    margin: 15px 47px;
+    width: 90px;
+    height: 16px;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 16px;
+    color: #fff;
+    opacity: .8;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+} 
+
+.intro {
+    position: relative;
+    display: block;
+    margin: auto;
+    height: 744px;
+    width: 1600px;
+    /*background-color: aqua;*/
+    background: url(https://imgur.com/gallery/qUYQ8D7);
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
+.intro-block {
+    position: relative;
+    display: block;
+    margin-top: -770px;
+    /*margin-bottom: 293px;*/
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.intro-text1 {
+    margin: 231px auto 20px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 75px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 4.5px;
+    text-transform: uppercase;
+    color: white;
+    opacity: .8;
+
+}
+
+.intro-text2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 140%;/* or 25px */
+    text-align: center;
+    color: white;
+    opacity: .8;
+
+}
+
+.button-intro {
+    margin: 0 auto 30px;
+    display: flex;
+}
+
+.socials {
+
+}
+
+.socials-element {
+
+}
