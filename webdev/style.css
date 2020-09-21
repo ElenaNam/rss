@@ -288,20 +288,22 @@ a {
 
 
 .rappresent {
-    display: flex;
+   
     height: 842px;
-    background-color: #fff;
-    border: 3px solid springgreen;
+    background-color: #fff;    
     justify-content: space-between;
+}
+
+.rap-block {
+    display: inline-flex; 
+    width: 100%;    
 }
 
 .content-block {      
     display: inline-block;
-    /*margin: 295px 0 314px 268px;*/
-    /*width: 407px;*/
-    height: 233px;
-    border: 5px solid salmon;
-    width: 48%;
+    margin: 295px 0 314px 269px;   
+    padding: 0;
+    height: 233px;        
 }
 
 .rap-head {
@@ -317,8 +319,7 @@ a {
 
 .rap-text {
     height: 80px;
-    width: 407px;
-    border: 2px solid fuchsia;
+    width: 407px;    
     font-family: Roboto;
     font-size: 14px;
     font-weight: normal;
@@ -330,9 +331,10 @@ a {
     display: inline-block;
     /*margin: 120px 270px 140px 288px;*/
     /*width: 407px;*/
-    width: 48%;
+    /*width: 48%;*/
     height: 582px;
-    margin-right: 0;
+    margin: 120px 269px 140px 248px;
+    /*margin-left: 120px;*/
 }
 
 .our-community {
@@ -376,8 +378,51 @@ a {
     /*justify-content: space-between; */ 
 }
 
+/* IMPLEMENT*/
 
 
+.implement {
+    display: flex;    
+    height: 842px; 
+    justify-content: space-between;    
+    background-color: #fff;
+    border: 3px solid springgreen;    
+}
+
+.image-imp {
+    margin: 120px 139px 140px 269px;
+    display: block;
+    width: 407px;
+    height: 582px;
+}
+
+.imp-content {   
+    margin: 319px 378px 339px 0;
+    width: 407px;
+    height: 233px;
+    border: 5px solid salmon;
+}
+
+.imp-head {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #373737;
+
+}
+
+.imp-text {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+}
 
 
 
