@@ -43,9 +43,10 @@ body {
 /*HEADER*/
 
 header {
+    display: block;
     position: relative;
-    height: 95px;
-    background-color: black;
+    height: 95px;    
+    z-index: 1;
 }
 
 h1 {
@@ -106,13 +107,6 @@ a {
 
 /* секция YOUR LIFE */
 
-.intro {
-    width: 1600px;
-    height: 788px;
-    /*background-image: url("bgimage.png") center no-repeat;
-    background-size: cover;*/
-}
-
 .button {
     background-color: #00AFDB;
     width: 184px;
@@ -163,6 +157,11 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.img-intro {
+    margin-top: -95px;
+}
+
 
 .intro-block {
     position: relative;
