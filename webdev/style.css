@@ -105,7 +105,7 @@ a {
 }
 
 
-/* секция YOUR LIFE */
+/*YOUR LIFE */
 
 .button {
     background-color: #00AFDB;
@@ -118,6 +118,7 @@ a {
 .button:hover {
     background-color: #009CC2;
     border: none;
+    cursor: pointer;
     }
 
 .button:active {
@@ -153,6 +154,7 @@ a {
     height: 744px;
     width: 1600px;
     /*background-color: aqua;*/
+    padding-bottom: -95px;
     background: url(https://imgur.com/gallery/qUYQ8D7);
     background-repeat: no-repeat;
     background-size: cover;
@@ -281,6 +283,100 @@ a {
     -moz-transform: scale(1.1);
     -o-transform: scale(1.1);
 }
+
+/*RAPPRESENT*/
+
+
+.rappresent {
+    display: flex;
+    height: 842px;
+    background-color: #fff;
+    border: 3px solid springgreen;
+    justify-content: space-between;
+}
+
+.content-block {      
+    display: inline-block;
+    /*margin: 295px 0 314px 268px;*/
+    /*width: 407px;*/
+    height: 233px;
+    border: 5px solid salmon;
+    width: 48%;
+}
+
+.rap-head {
+    display: block;
+    height: 57px;
+    width: 367px;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 28px;
+}
+
+.rap-text {
+    height: 80px;
+    width: 407px;
+    border: 2px solid fuchsia;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    /*line-height: 19.6px;*/
+}
+
+.img-rapp {
+    display: inline-block;
+    /*margin: 120px 270px 140px 288px;*/
+    /*width: 407px;*/
+    width: 48%;
+    height: 582px;
+    margin-right: 0;
+}
+
+.our-community {
+    height: 504px;
+    display: flex;
+    overflow: hidden;
+    border: 5px solid salmon;
+}
+
+.community {
+    height: 504px;
+    overflow: hidden;
+}
+
+.slaider-image {
+    display: inline-flex;
+}
+
+.slaider-image1 {
+    
+    /*margin: 120px 15px 140px 706px;*/
+    width: 407px;
+    height: 244px;
+    flex-shrink: 0;
+    /*justify-content: space-between; */ 
+}
+
+.slaider-image2 {
+    
+    margin: 120px 15px 140px 15px;
+    height: 244px;
+    flex-shrink: 0;
+    /*justify-content: space-between;  */
+}
+
+.slaider-image3 {
+    
+    margin: 120px 15px 140px 0;
+    height: 244px;
+    flex-shrink: 0;
+    /*justify-content: space-between; */ 
+}
+
+
 
 
 
