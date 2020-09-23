@@ -89,7 +89,7 @@ header {
 }
   
 .navigation {
-    margin: auto;
+    margin: 19px 515px 0 502px;
     padding: 0;
     display: flex;
     list-style: none;
@@ -279,7 +279,7 @@ a {
 }
 
 .socials-element__1 {
-    padding: 0 15px 0 0;
+    padding: 0 10px 0 5px;
 }
 .socials-element__2 {
     padding: 0 15px 0 15px;
@@ -288,7 +288,7 @@ a {
     padding: 0 15px 0 15px;
 }
 .socials-element__4 {
-    padding: 0 0 0 15px;
+    padding: 0 0 0 10px;
 }
 
 /* RAPPRESENT */
@@ -323,7 +323,7 @@ a {
 
 .rap-text {
     padding: 0;
-    margin: 20px 0 30px;
+    margin: 24px 0 30px;
     height: 80px;
     width: 407px;
     /*border: 2px solid fuchsia;*/
@@ -377,7 +377,7 @@ a {
 
 .community-head {    
     text-align: center;
-    margin: 20px 69px 10px;
+    margin: 22px 69px 10px;
     white-space: nowrap;
     padding: 0;
     width: 160px;
@@ -387,7 +387,7 @@ a {
 .community-text {
     height: 80px;
     width: 298px;
-    margin: 0;
+    margin: 3px 0 0 0;
     padding: 0;
     text-align: center;
     font-size: 1.4rem;
@@ -410,7 +410,7 @@ a {
     width: 83px;
     height: 18px;
     padding: 0;
-    margin: 82px 269px 20px 542px;
+    margin: 84px 269px 20px 542px;
    /* border: 1px solid rgb(40, 139, 62);*/
 }
 
@@ -429,7 +429,7 @@ a {
 }
 
 .slaider-image1 {
-    margin: 0 30px 0 0;
+    margin: 0 28px -3px 0;
     width: 407px;
     height: 244px;
     /*flex-shrink: 0;*/
@@ -438,14 +438,14 @@ a {
 
 .slaider-image2 {
     width: 407px;
-    margin: 0 30px 0 0;
+    margin: 0 28px -3px -2px;
     height: 244px;
     /*flex-shrink: 0;*/
     /*justify-content: space-between;  */
 }
 
 .slaider-image3 {
-    margin: 0 30px 0 0;
+    margin: 0 30px -3px 0;
     width: 407px;
     height: 244px;
     /*flex-shrink: 0;*/
@@ -490,13 +490,13 @@ a {
 
 .imp-head {
     padding: 0;
-    margin: 0;
+    margin: 2px 0 0 0;
    /* border: 2px solid fuchsia;*/
 }
 
 .imp-text {
     padding: 0;
-    margin: 20px 0 30px;
+    margin: 22px 0 30px;
     height: 60px;
     width: 407px;
    /* border: 2px solid fuchsia;*/
@@ -513,7 +513,7 @@ a {
 }
 
 .image-imp {
-    margin: 120px 139px 140px 269px;
+    margin: 122px 139px 140px 269px;
     display: inline;
     width: 407px;
     height: 582px;
@@ -542,12 +542,12 @@ a {
     justify-content: center;
     width: 406px;
     height: 104px;
-    margin: 200px 597px 220px;
+    margin: 178px 597px 200px;
     flex-wrap: nowrap;
 }
 
 .sign-head {
-    margin: 0 auto;
+    margin: 22px auto 0;
     padding-bottom: 30px;
     width: 380px;
     height: 28px;
@@ -557,7 +557,8 @@ a {
 }
 
 .signup__form {
-    margin: 30px auto 0;
+    margin: 0 auto 0;
+    padding-top: 23px;
     width: 406px;
     display: flex;
     flex-direction: row;
@@ -565,13 +566,18 @@ a {
     border: none;
 }
 
-input:invalid {
+
+input:invalid {    
     border-color: red;
     width: 406px;
 }
 input:valid {
     border: none;
     width: 406px;
+}
+input {
+    padding-left: 25px;
+    padding-top: 7px;
 }
 
 .button__arrow {
@@ -610,7 +616,7 @@ input:valid {
 
   
 .download-content {
-    margin: 120px auto 180px;
+    margin: 122px auto 180px;
     height: 164px;
     width: 480px;
     display: flex;
@@ -629,11 +635,11 @@ input:valid {
 }
 
 .download-text {
-    margin: 20px auto 30px;
+    margin: 22px auto 30px;
     padding: 0;
     text-align: center;
     font-size: 1.4rem;
-    line-height: 1.96rem;
+    line-height: 2rem;
     color: #4E4E4E;
 }
 
@@ -641,7 +647,7 @@ input:valid {
 .download_buttons {
     display: flex;
     flex-direction: row;
-    margin: 0 29px 0;    
+    margin: 0 28px 0 41px;    
     width: 402px;
     height: 46px;
     /*border: 5px solid indigo;*/
@@ -763,7 +769,7 @@ input:valid {
     display: flex;
     flex-direction: row;
     justify-content: center;  
-    margin: 73px 382px 92px 160px; 
+    margin: 75px 382px 92px 160px; 
     width: 236px;    
     height: 20px;
     color: #fff;    
@@ -811,7 +817,7 @@ input:valid {
 }
 
 .footer-copyright {    
-    margin: 73px 160px 92px 0;
+    margin: 75px 160px 92px 0;
     width: 170px;
     height: 20px;
     color:#818181;
