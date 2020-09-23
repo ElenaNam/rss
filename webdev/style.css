@@ -31,6 +31,7 @@ body {
     box-sizing: border-box;
     width: 1600px;
     margin: 0 auto;
+    overflow-x: hidden;
 
     
 }
@@ -44,9 +45,12 @@ body {
 
 header {
     display: block;
-    position: relative;
+    position: absolute;
+    /*position: relative;*/
     height: 95px;    
     z-index: 1;
+    color: red;
+
 }
 
 h1 {
@@ -74,7 +78,7 @@ nav {
     margin-top: 38px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -150,11 +154,11 @@ a {
 .intro {
     position: relative;
     display: block;
-    margin: auto;
-    height: 744px;
+    margin-top: 95px;
+    height: 649px;
     width: 1600px;
     /*background-color: aqua;*/
-    padding-bottom: -95px;
+    /*padding-bottom: -95px;*/
     background: url(https://imgur.com/gallery/qUYQ8D7);
     background-repeat: no-repeat;
     background-size: cover;
@@ -345,17 +349,30 @@ a {
 }
 
 .community {
+    display: inline-block;
     height: 504px;
     overflow: hidden;
 }
 
+.community-block {
+    display: block;
+}
+
 .slaider-image {
-    display: inline-flex;
+    margin: 120px 0 140px 139px;
+    padding: 0;
+    display: inline-block;
+
+    overflow: hidden;
+    white-space: nowrap;
+    width: 894px;
+    height: 244px;
 }
 
 .slaider-image1 {
+    padding: 0 30px 0 0;
     
-    /*margin: 120px 15px 140px 706px;*/
+    margin: 120px 0 140px 0;
     width: 407px;
     height: 244px;
     flex-shrink: 0;
@@ -363,17 +380,17 @@ a {
 }
 
 .slaider-image2 {
-    
-    margin: 120px 15px 140px 15px;
+    padding: 0;
+    margin: 120px 50px 140px 30px;
     height: 244px;
     flex-shrink: 0;
     /*justify-content: space-between;  */
 }
 
 .slaider-image3 {
-    
-    margin: 120px 15px 140px 0;
-    height: 244px;
+    padding: 0;
+    margin: 120px 0 140px 0;
+    /*height: 244px;*/
     flex-shrink: 0;
     /*justify-content: space-between; */ 
 }
@@ -472,7 +489,7 @@ a {
     height: 46px;
     background-color: #00AFDB;
     background-image: url(assets\check-icon.png) center no-repeat;
-
+    /*не загружается картинка фоном!!!*/
 }
 
 .form-email {

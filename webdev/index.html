@@ -4,149 +4,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webdev</title>
-    <link rel="stylesheet" href="assets\normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="wrapper">
-            <h1>webdev</h1>
-            <nav>
-            <span class="nav-element">
-                <a href="#" class="aktiv-element">About</a>
-                <a href="#" class="choice-element">Syllabus</a>
-            </span>
-            <a href="#" class="nav-element" class="logo"><img src="assets\logo.png" alt="logo"></a>
-            <span class="nav-element">
-                  <a href="#" class="choice-element">Projects</a>
-                  <a href="#" class="choice-element">FAQ</a>
-              </span>
-          </nav>
+        <div class="container__h1"><h1>webdev</h1></div>
+        <div class="wrapper header__wrapper">            
+            <div>                
+                <nav class="header-navigation">               
+                  <ul class="navigation">
+                      <li class="navigation-link link__1"><a href="#"></a></li>
+                      <li class="navigation-link link__2"><a href="#"></a><li>
+                      <li class="navigation-link link__logo"><a href="#"><img src="" alt=""></a></li>
+                      <li class="navigation-link link__3"><a href="#"></a></li>
+                      <li class="navigation-link link__4"><a href="#"></a></li>    
+                  </ul>
+              </nav>
+            </div>            
         </div>
-       
     </header>
     <main>
-        <div class="intro">
-            <div class="wrapper">
-                <img src="assets\bgimage.jpg" alt="image" class="img-intro">
-                <div class="intro-block">
-                    <p class="intro-text1">your life is WebDev</p>
-                    <p class="intro-text2">Whatever the approach to development may be, the final<br> program must satisfy some fundamental properties</p>
-            
-                     <button class="button button-intro">                
-                        <span class="button-inner">GET STARTED</span>               
+        <section class="your-life">
+            <div class="wrapper your-life__wrapper">
+                <div class="yourlife-block">
+                    <h2 class="your-text1"></h2>
+                    <p class="your-text2"></p>
+                    <button class="button button-your">                
+                        <span class="button-inner"></span>               
                     </button>
                 </div>
-
                 <div class="socials">
-                    <ul class="socials-icon">
-                        <li class="socials-element__first"><a href="#"><img src="assets\mail_fff.png" alt="image"></a></li>
-                        <li class="socials-element__two"><a href="#"><img src="assets\facebook_fff.svg" alt="image"></a></li>
-                        <li class="socials-element__three"><a href="#"><img src="assets\insta_fff.png" alt="image"></a></li>
-                        <li class="socials-element__four"><a href="#"><img src="assets\telegram_fff.svg" alt="image"></a></li>
+                    <ul class="socials__ul">
+                        <li class="socials-element socials-element__1"><a href="#"><img src="" alt=""></a></li>
+                        <li class="socials-element socials-element__2"><a href="#"><img src="" alt="e"></a></li>
+                        <li class="socials-element socials-element__3"><a href="#"><img src="" alt=""></a></li>
+                        <li class="socials-element socials-element__4"><a href="#"><img src="" alt=""></a></li>                        
                     </ul>
                 </div>
+            </div>                      
+        </section>
 
-            </div>        
-        </div>
 
-        <div class="rappresent">
+
+
+
+        
+        <section class="rappresent">
             <div class="wrapper">
-                <div class="rap-block">
+                <div class="layout-2-column">
                     <div class="content-block">
-                        <p class="rap-head">Rappresent your idea with<br> a smart Design</p>
-                        <p class="rap-text">Tasks accompanying and related to programming include:<br> testing, debugging, source code maintenance, <strong>implementation of<br> build systems,</strong> and management of derived artifacts, such as the<br> machine code of computer programs. </p>
-                        <button class="button">
-                            <span class="button-inner">GET STARTED</span>                
+                        <h3 class="rap-head"></h3>
+                        <p class="rap-text"></p>
+                        <button class="button button-rapp">
+                            <span class="button-inner"></span>                
                         </button>
+                    </div>                           
+                        <img src="image\content-image-1.png" alt="" class=""> 
                     </div> 
-                    <div class="img-rapp">
-                        <img src="assets\content-image-1.png" alt="image"> 
-                    </div> 
-                </div>                           
-               
-                
-
-            </div>
-        </div>
-
-        <div class="our-community">
-            <div class="wrapper">
-                <div class="community">
-                    <img src="assets\userpic-wrapper.png" alt="image">
+                </div>  
+            </section>
     
-                </div>
-                <div class="slaider-image">                
-                    <img src="assets\slider-item1.png" alt="slider-item1" class="slaider-image1"/>
-                    <img src="assets\slider-item2.png" alt="slider-item2" class="slaider-image2"/>
-                    <img src="assets\slider-item3.png" alt="slider-item3" class="slaider-image3"/>               
-                    
-                </div>
 
-            </div>
-        </div>
 
-        <div class="implement">
+
+            <section class="our-community">
+                <div class="wrapper">
+                    <div class="layout-2-column">
+                        <div class="community">
+                            <div class="person">
+                                <img src="" alt="" >
+                            </div>                                
+                            <h4 class="community-head"></h4>
+                            <p class="community-text"></p>
+                        </div>
+                        <div class="slaider">
+                            <div class="slaider-navigation">
+                                <img src="" alt="" class="">
+                                <span class="slaider-navigation__item"></span>
+                                <span class="slaider-navigation__item"></span>
+                                <span class="slaider-navigation__item"></span>
+                                <img src="" alt="" class="">
+                            </div>
+                            <div class="slaider-image">                
+                                <img src="" alt="" class="slaider-image1"/>
+                                <img src="" alt="" class="slaider-image2"/>
+                                <img src="" alt="" class="slaider-image3"/>               
+                            </div>
+                        </div>
+                    </div>
+                </div>         
+        </section>
+
+
+
+
+        <section class="implement">
             <div class="wrapper">
-                <div class="imp-block">
-                    <div  class="image-imp">
-                        <img src="assets\content-image-2.png" alt="image">
-                    </div> 
-                    
+                <div class="layout-2-column">   
+                    <img src="" alt="" class="image-imp">                 
                     <div class="imp-content">
-                        <p class="imp-head">Implement right Code</p>
-                        <p class="imp-text">These might be considered part of the programming process, but<br> often the term software development is used for this larger<br> process with the term programming, implementation</p>
-                        <button class="button">
-                            <span class="button-inner">Learn more</span>                
+                        <h3 class="imp-head"></h3>
+                        <p class="imp-text"></p>
+                        <button class="button button-imp">
+                            <span class="button-inner"></span>                
                         </button>
-                    </div>
-                </div>
-
+                    </div>                    
+                </div>                
             </div>
-        </div>
+        </section>
 
-        <div class="sign-up">
-            <div class="wrapper">               
-                <div class="signup-block">
-                    <div class="sign-text">
-                        <span>sign up for our newsletter</span>
-                    </div>
-                    <div class="formbutton">
-                        <form class="form-email">
-                            
-                            <input type = "text"  name = "email" value ="E-mail" >                                                     
+
+
+
+        <section class="sign-up">
+            <div class="wrapper signup__wrapper">
+                <div class="signup_content">
+                    <div class="sign-head"><h3></h3></div>
+                    <div>
+                        <form class="signup__form">
+                            <input type="email" placeholder="E-mail"/>    
+                            <button class="button button__arrow"><img src="" alt="" class="tick"></button>       
                         </form>
-                        <button class="button button-sign">
-                            <img src="assets\check-icon.png" alt="">        
-                                          
-                        </button>
-                    </div>
-                </div>
+                    </div>            
+                </div>   
+            </div>
+                         
+        </section>
 
+
+
+        <section class="download">
+            <div class="wrapper download__wrapper">
+                <div class="download-content">
+                    <h3 class="download-head"></h3>
+                    <p class="download-text"></p>
+                    <div class="download_buttons">
+                        <div class="download-app">
+                            <button class="button-download">
+                                <span class="button-download__inner"></span>
+                            </button>
+                            <div class="icon">
+                                <a href=""><img src="" alt="" class=""></a>                              
+                            </div>                            
+                        </div>
+
+                        <div class="download-android">
+                            <button class="button-download">
+                                <span class="button-download__inner"></span>
+                            </button>
+                            <div class="icon">
+                                <a href=""><img src="" alt="" class=""></a>                               
+                            </div>                            
+                        </div>        
+          
+                </div>
             </div>
-        </div>     
+        </section>
     </main>
+
+
+
+    
+
+
     <footer>
-        <div class="wrapper">
-            <div class="additional-menu">
-                <!--<div class="additional-menu__item"><a href="#"></a>Credits</div>
-                <div class="additional-menu__divider"><img src="assets\mnu-items-divider.png" alt=""></div>
-                <div class="additional-menu__item"><a href="#"></a>Privacy</div>
-                <div class="additional-menu__divider"><img src="assets\mnu-items-divider.png" alt=""></div>
-                <div class="additional-menu__item"><a href="#"></a>Our teams</div>-->
-                <ul>
-                    <li class="additional-menu__item"><a href="#"></a>Credits</li>
-                    <li class="additional-menu__divider"><img src="assets\mnu-items-divider.png" alt=""></li>
-                    <li class="additional-menu__item"><a href="#"></a>Privacy</li>
-                    <li class="additional-menu__divider"><img src="assets\mnu-items-divider.png" alt=""></li>
-                    <li class="additional-menu__item"><a href="#"></a>Our teams</li>
-                </ul>
+        <div class="wrapper footer-wrapper">      
+            <div class="footer-block"> 
+                <div class="additional-menu">
+                    <ul class="add-menu__ul">
+                        <li class="footer-hover__li"><a href="#"></a></li>
+                        <li><img src="" alt=""></li>
+                        <li class="footer-hover__li"><a href="#"></a></li>
+                        <li><img src="" alt=""></li>
+                        <li class="footer-hover__li"><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="logo-footer__block"> 
+                    <img src="" alt="" class="img-footer">
+                </div>
+                <div class="footer-copyright">
+                    <span class="footer-copy__text"></span>
+                </div>
             </div>
-            <img src="assets\logo.png" alt="logo" class="img-footer">
-            <div class="footer-text">
-                <p class="footer-text__intro">by TonYem for RSS at 2020</p>
-            </div>
-            
+
         </div>
     </footer>
 </body>
