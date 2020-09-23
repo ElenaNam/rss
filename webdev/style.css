@@ -37,8 +37,6 @@ h1 {
 }
 
 h2 {
-    /*margin: 231px auto 20px;   */
-    
     font-style: normal;
     font-weight: bold;
     font-size: 6.4rem;
@@ -49,9 +47,6 @@ h2 {
 }
 
 h3 { 
-    /*display: block;
-    height: 57px;
-    width: 367px;  */  
     font-size: 2.4rem;
     font-weight: bold;
     font-style: normal;
@@ -67,10 +62,6 @@ h4 {
     font-weight: 500;
     font-size: 1.6rem;
     line-height: 20px;
-    /*display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 2.4px;*/
     text-transform: uppercase;
     color: #373737;
 }
@@ -172,9 +163,7 @@ a {
 
 /* section YOUR-LIFE */
 
-.your-life {
-    /*display: flex;
-    flex-direction: column;  */ 
+.your-life {  
     margin: auto;
     height: 649px;
     width: 1600px;          
@@ -196,8 +185,6 @@ a {
     padding: 0;
     display: flex;
     flex-direction: column;
-    /*align-items: flex-start;*/
-    /*height: 100%;*/
     /*border: 1px solid chartreuse;*/
 }
 
@@ -206,8 +193,7 @@ a {
     padding: 0;
     text-align: center;
     color: white;
-    /*border: 1px solid chartreuse;*/
-    
+    /*border: 1px solid chartreuse;*/    
 }
 
 .your-text2 {
@@ -289,18 +275,14 @@ a {
     filter: brightness(2) grayscale(1) opacity(0.5);
 }
 
-
-
 .socials-element__1 {
     padding: 0 15px 0 0;
-
 }
 .socials-element__2 {
     padding: 0 15px 0 15px;
 }
 .socials-element__3 {
     padding: 0 15px 0 15px;
-
 }
 .socials-element__4 {
     padding: 0 0 0 15px;
@@ -320,7 +302,6 @@ a {
 .layout-2-column {
     display: flex;
     justify-content: space-around;
-
 }
 
 .content-block {      
@@ -360,7 +341,6 @@ a {
 .button-rapp {
     width: 184px;
     padding: 15px 47px 15px 47px;
-
 }
 
 /* OUR COMMUNITY */
@@ -377,8 +357,7 @@ a {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /*align-self: center;*/
+    justify-content: space-between;   
     margin: 155px 139px 174px 269px;
     width: 298px;
     height: 175px;
@@ -416,20 +395,16 @@ a {
     width: 894px;
     margin-bottom: 140px;
     /*border: 5px solid salmon;*/
-    
 }
 
 .slaider-navigation {
     display: flex;
-    flex-direction: row;
-    /*justify-content: flex-end;*/   
+    flex-direction: row;    
     width: 83px;
     height: 18px;
     padding: 0;
     margin: 82px 269px 20px 542px;
    /* border: 1px solid rgb(40, 139, 62);*/
-    
-
 }
 
 .slaider-navigation__item { 
@@ -447,7 +422,6 @@ a {
 }
 
 .slaider-image1 {
-    
     margin: 0 30px 0 0;
     width: 407px;
     height: 244px;
@@ -464,7 +438,6 @@ a {
 }
 
 .slaider-image3 {
-    
     margin: 0 30px 0 0;
     width: 407px;
     height: 244px;
@@ -512,7 +485,6 @@ a {
     padding: 0;
     margin: 0;
    /* border: 2px solid fuchsia;*/
-
 }
 
 .imp-text {
@@ -526,7 +498,6 @@ a {
     font-weight: normal;
     font-style: normal;
     line-height: 19.6px;
-
 }
 
 .button-imp {
@@ -544,12 +515,10 @@ a {
 /* SIGN-UP*/
 
 .sign-up {
-    height: 524px;
-    /*background-image: url("image\image-bg.png");
-    background-size: 100%;
-    background-position: center;*/
+    height: 524px; 
     /*border: 5px solid salmon;*/
 }
+
 .signup__wrapper {
     height: 524px;
     width: 1600px;    
@@ -570,17 +539,13 @@ a {
     flex-wrap: nowrap;
 }
 
-
-
 .sign-head {
     margin: 0;
     padding-bottom: 30px;
     width: 380px;
     height: 28px;
     color: white;
-    text-align: center;
-    
-
+    text-align: center;  
 }
 
 .signup__form {
@@ -618,9 +583,7 @@ input:valid {border: none;}
 .download {
     height: 464px;
     background-color: white;
-    
     /*border: 5px solid indigo;*/
-
 }
 
 .download__wrapper {
@@ -640,17 +603,14 @@ input:valid {border: none;}
     flex-direction: column;
     justify-content: space-between;
     align-items: baseline; 
-    /*border: 5px solid seagreen;*/
-    
+    /*border: 5px solid seagreen;*/    
 }
 
 .download-head {
     margin: 0 115px;
     padding: 0;
     line-height: 2.8rem;
-    color: #373737;
-    
-
+    color: #373737;   
 }
 
 .download-text {
@@ -662,13 +622,10 @@ input:valid {border: none;}
 }
 
 
-
-
 .download_buttons {
     display: flex;
     flex-direction: row;
-    margin: 0 29px 0;
-    /*justify-content: center;*/
+    margin: 0 29px 0;    
     width: 402px;
     height: 46px;
     /*border: 5px solid indigo;*/
@@ -677,8 +634,7 @@ input:valid {border: none;}
 
 .button-download {
     display: flex;
-    padding: 15px 18px;
-    /*margin: 30px auto 183px;*/    
+    padding: 15px 18px;       
     width: 127px;
     background-color: #00AFDB;
    /* border: 1px solid chartreuse;*/
@@ -694,9 +650,7 @@ input:valid {border: none;}
 .button-download:active {
     background-color: #009CC2;
 }
-.button-download__inner {
-    /*margin: 15px 18px;*/
-    /*padding: 15px 18px;*/
+.button-download__inner {    
     display: flex;    
     width: 91px;
     height: 16px;
@@ -724,7 +678,6 @@ input:valid {border: none;}
 }
 
 .icon {
-    
     margin: 0;
     width: 59px;
     height: 46px;    
@@ -735,8 +688,7 @@ input:valid {border: none;}
 .icon-app {
     width: 16px;
     height: 18px;
-    padding: 14px 18px;
-    /*background: url(image/icon-apple.png);*/
+    padding: 14px 18px;    
 }
 .icon-app:hover {
     cursor: pointer;
@@ -744,16 +696,12 @@ input:valid {border: none;}
     filter: brightness(2) grayscale(1) opacity(0.5);
 }
 
-
 .icon_margin {
     width: 16px;
     height: 18px;
     margin: 0;
    /* border: 1px solid rgb(25, 240, 157);*/
 }
-
-
-
 
 .download-android {
     display: flex;
@@ -765,13 +713,10 @@ input:valid {border: none;}
    /* border: 1px solid gold;*/
 }
 
-
-
 .icon-android {
     width: 16px;
     height: 18px;
-    padding: 14px 18px;
-    /*background: url(image/icon-apple.png);*/
+    padding: 14px 18px;    
 }
 
 .icon-android:hover {
@@ -782,8 +727,7 @@ input:valid {border: none;}
 
 /* FOOTER */
 
-.footer-wrapper {
-    /*position: absolute;*/
+.footer-wrapper {    
     padding: 0;
     margin: 0;
     height: 184px;
@@ -796,7 +740,6 @@ input:valid {border: none;}
     margin: 0 160 0;
     display: flex;
     justify-content: space-between;
-
 }
 
 
@@ -809,8 +752,7 @@ input:valid {border: none;}
     height: 20px;
     color: #fff;    
     font: normal 400 14px Roboto; 
-    /*border: 1px solid yellow;  */
-    
+    /*border: 1px solid yellow;  */    
 }
 
 .add-menu__ul {
@@ -837,9 +779,7 @@ input:valid {border: none;}
     height: 45px;
     padding: 0;
     /*border: 1px solid blue; */
-
 }
-
 
 .img-footer {
     display: block;
@@ -851,18 +791,14 @@ input:valid {border: none;}
     cursor: pointer;
     transition: filter 0.5s linear;
     filter: brightness(2) grayscale(1) opacity(0.5);
-
 }
 
-.footer-copyright {
-    /*padding: 0;*/
+.footer-copyright {    
     margin: 73px 160px 92px 0;
     width: 170px;
     height: 20px;
     color:#818181;
-    /*border: 1px solid red; */
-  
-
+    /*border: 1px solid red; */ 
 }
 
 .footer-copy__text {
