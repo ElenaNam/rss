@@ -490,54 +490,55 @@ a {
     margin: 2px 0 2px 12px;
 }
 
-/* IMPLEMENT*/
+/* IMPLEMENT */
 
-.implement {   
-    height: 842px;
-    background-color: #fff;    
-    justify-content: space-between;
+.implement {
+    display: flex;    
+    height: 842px; 
+    justify-content: space-between;    
+    background-color: #fff;
+    /*border: 3px solid springgreen;    */
 }
 
-.imp-block {
-    display: inline-flex; 
-    width: 100%;    
-}
-
-.image-imp {
-    margin: 120px 139px 140px 269px;
-    padding: 0;
-    display: inline-block;
-    width: 407px;
-    height: 582px;
-}
 
 .imp-content {   
-    display: inline-block;
-    padding: 0;
     margin: 319px 378px 339px 0;
     width: 407px;
-    height: 233px;    
+    height: 184px;
+    /*border: 5px solid salmon;*/
 }
 
 .imp-head {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    display: flex;
-    align-items: flex-end;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #373737;
+    padding: 0;
+    margin: 0;
+   /* border: 2px solid fuchsia;*/
 
 }
 
 .imp-text {
-    display: inline-block;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    padding: 0;
+    margin: 20px 0 30px;
+    height: 60px;
+    width: 407px;
+   /* border: 2px solid fuchsia;*/
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 19.6px;
 
+}
+
+.button-imp {
+    width: 180px;
+    padding: 15px 47px 15px 47px;
+}
+
+.image-imp {
+    margin: 120px 139px 140px 269px;
+    display: inline;
+    width: 407px;
+    height: 582px;
 }
 
 /*SIGN-UP*/
