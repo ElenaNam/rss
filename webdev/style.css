@@ -780,63 +780,92 @@ input:valid {border: none;}
     filter: brightness(2) grayscale(1) opacity(0.5);
 }
 
-footer {
-    position: absolute;
+/* FOOTER */
+
+.footer-wrapper {
+    /*position: absolute;*/
+    padding: 0;
+    margin: 0;
     height: 184px;
     width: 1600px;
     background-color: black;    
 }
 
+.footer-block {
+    padding: 0;
+    margin: 0 160 0;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
 .additional-menu {
     display: flex;
+    flex-direction: row;
+    justify-content: center;  
+    margin: 73px 382px 92px 160px; 
     width: 236px;    
     height: 20px;
     color: #fff;    
-    font: normal 400 14px Roboto;
+    font: normal 400 14px Roboto; 
+    /*border: 1px solid yellow;  */
     
+}
+
+.add-menu__ul {
+    margin: 0;
+    padding-left: 0;  
+    width: 236px;    
+    height: 20px; 
+    list-style: none;
+    display: inline-flex; 
+    justify-content: space-between;
+    /*border: 1px solid red; */
+}
+
+.footer-hover__li:hover {
+    cursor: pointer;
+    font-weight: bold;
+    border-bottom: 1px solid white;  
+}
+
+.logo-footer__block {
+    margin: 60px 448px 80px 0;
+    padding: 0;
+    width: 44px;
+    height: 45px;
+    padding: 0;
+    /*border: 1px solid blue; */
+
+}
+
+
+.img-footer {
+    display: block;
+    padding: 0;   
+   /* border: 5px solid salmon;*/
+}
+
+.img-footer:hover {
+    cursor: pointer;
+    transition: filter 0.5s linear;
+    filter: brightness(2) grayscale(1) opacity(0.5);
+
+}
+
+.footer-copyright {
+    /*padding: 0;*/
+    margin: 73px 160px 92px 0;
+    width: 170px;
+    height: 20px;
+    color:#818181;
+    /*border: 1px solid red; */
   
 
 }
 
-
-.additional-menu__item {
-    display: inline-block;
-    list-style: none;
+.footer-copy__text {
+    font-size: 1.4rem;
+    line-height: 19.6px;   
 }
-
-.additional-menu__divider {
-    display: inline-block;
-    list-style: none;
-}
-
-
-
-.img-footer {
-    display: inline-block;
-    margin: 60px auto 81px;
-}
-
-.footer-text {
-    display: inline-block;
-    margin: 73px 160px 92px 1270px;
-    height: 20px;
-    width: 170px;
-
-}
-
-
-
-.footer-text__intro {
-    position: absolute;
-    width: 170px;
-    height: 20px;
-    left: 0px;
-    top: 0px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-   
-    text-align: center;
-    color: #818181;
-    }
