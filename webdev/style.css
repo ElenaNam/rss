@@ -553,6 +553,7 @@ a {
     height: 28px;
     color: white;
     text-align: center;  
+    white-space: nowrap;
 }
 
 .signup__form {
