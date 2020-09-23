@@ -305,57 +305,62 @@ a {
 .socials-element__4 {
     padding: 0 0 0 15px;
 }
-/*RAPPRESENT*/
 
+/* RAPPRESENT */
 
 .rappresent {
-   
-    height: 842px;
-    background-color: #fff;    
+    display: flex;
+    height: 840px;
+    background-color: #fff;
+    /*border: 3px solid springgreen;*/
     justify-content: space-between;
 }
 
-.rap-block {
-    display: inline-flex; 
-    width: 100%;    
+
+.layout-2-column {
+    display: flex;
+    justify-content: space-around;
+
 }
 
 .content-block {      
-    display: inline-block;
-    margin: 295px 0 314px 269px;   
-    padding: 0;
-    height: 233px;        
+    margin: 295px 0 314px 269px;
+    width: 407px;
+    height: 233px;
+    display: flex;
+    flex-direction: column;
+    /*border: 5px solid salmon;*/
 }
 
 .rap-head {
-    display: block;
-    height: 57px;
-    width: 367px;
-    font-family: Roboto;
-    font-size: 24px;
-    font-weight: bold;
-    font-style: normal;
-    line-height: 28px;
+    padding: 0;
+    margin: 0;
 }
 
 .rap-text {
+    padding: 0;
+    margin: 20px 0 30px;
     height: 80px;
-    width: 407px;    
+    width: 407px;
+    /*border: 2px solid fuchsia;*/
     font-family: Roboto;
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
-    /*line-height: 19.6px;*/
+    line-height: 19.6px;
 }
 
 .img-rapp {
-    display: inline-block;
-    /*margin: 120px 270px 140px 288px;*/
-    /*width: 407px;*/
-    /*width: 48%;*/
-    height: 582px;
+    display: inline;
     margin: 120px 269px 140px 248px;
-    /*margin-left: 120px;*/
+    width: 407px;
+    height: 582px;
+}
+
+.button-rapp {
+    width: 184px;
+    padding: 15px 47px 15px 47px;
+
 }
 
 .our-community {
