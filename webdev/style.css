@@ -541,64 +541,76 @@ a {
     height: 582px;
 }
 
-/*SIGN-UP*/
+/* SIGN-UP*/
 
 .sign-up {
     height: 524px;
-    width: 1600px;
-    background-image: url(C:\Git\elenanam-JS2020Q3\webdev\assets\pexels.png);
-    background-size: cover;
+    /*background-image: url("image\image-bg.png");
+    background-size: 100%;
+    background-position: center;*/
+    /*border: 5px solid salmon;*/
+}
+.signup__wrapper {
+    height: 524px;
+    width: 1600px;    
+    display: flex;
+    justify-content: center;  
+    background: url(assets/pexels.png);    
+    background-repeat: no-repeat;
+    background-size: cover;    
 }
 
-.signup-block {
-    /*width: 100%;*/
-    display: block;
-    padding: 0;
-    margin: 200px 597px 220px 597px;
-    
-}
-
-.sign-text {
-    display: inline-block;
-    padding: 0;
+.signup_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 406px;
-    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
+    height: 104px;
+    margin: 200px 597px 220px;
+    flex-wrap: nowrap;
+}
+
+
+
+.sign-head {
+    margin: 0;
+    padding-bottom: 30px;
+    width: 380px;
+    height: 28px;
+    color: white;
     text-align: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    /*color: #FFFFFF;*/
-    color: red;
+    
+
 }
 
-.formbutton {
-    display: inline-block;
+.signup__form {
+    margin: 30px auto 0;
     width: 406px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
 }
-.button-sign {
-    display: inline-block;
+
+input:invalid {border-color: red;}
+input:valid {border: none;}
+
+.button__arrow {
+    display: flex;
+    justify-content: center;
+    padding: 0;
     width: 66px;
     height: 46px;
-    background-color: #00AFDB;
-    background-image: url(assets\check-icon.png) center no-repeat;
-    /*не загружается картинка фоном!!!*/
+    text-align: center;
 }
 
-.form-email {
-    width: 406px;
-    height: 46px;
-    display: inline-block;
-
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;     
-    color: #373737;
-    opacity: .8;
+.tick {
+    margin: 16px 25px;
+    transition: .2s;
+    border: none;
+}
+.tick:hover {    
+    transform: scale(1.2);
 }
 
 
