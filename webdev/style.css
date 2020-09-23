@@ -50,7 +50,8 @@ h3 {
     font-size: 2.4rem;
     font-weight: bold;
     font-style: normal;
-    line-height: 28px;
+    line-height: 2.8rem;
+    letter-spacing: .1rem;
     text-transform: uppercase;
     color: #373737*
     
@@ -61,7 +62,8 @@ h4 {
     font-style: normal;
     font-weight: 500;
     font-size: 1.6rem;
-    line-height: 20px;
+    line-height: 2rem;
+    letter-spacing: .24rem;
     text-transform: uppercase;
     color: #373737;
 }
@@ -92,6 +94,7 @@ header {
     display: flex;
     list-style: none;
     font-size: 1.4rem;
+    line-height: 1.96rem;
 }  
 .navigation-link {
     padding: 0;
@@ -203,7 +206,7 @@ a {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 2.5rem;
     text-align: center;
     color: white;
@@ -235,7 +238,7 @@ a {
     font-size: 1.4rem;
     font-style: normal;
     font-weight: bold;
-    line-height: 16px;
+    line-height: 1.6rem;
     color: #fff;
     align-items: center;
     text-align: center;
@@ -315,7 +318,7 @@ a {
 
 .rap-head {
     padding: 0;
-    margin: 0;
+    margin: 0;   
 }
 
 .rap-text {
@@ -325,10 +328,10 @@ a {
     width: 407px;
     /*border: 2px solid fuchsia;*/
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: normal;
     font-style: normal;
-    line-height: 19.6px;
+    line-height: 1.96rem;
 }
 
 .img-rapp {
@@ -357,7 +360,7 @@ a {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;   
+    justify-content: space-between;  
     margin: 155px 139px 174px 269px;
     width: 298px;
     height: 175px;
@@ -375,8 +378,11 @@ a {
 .community-head {    
     text-align: center;
     margin: 20px 69px 10px;
+    white-space: nowrap;
     padding: 0;
     width: 160px;
+    height: 20px;
+   
 }
 .community-text {
     height: 80px;
@@ -384,6 +390,7 @@ a {
     margin: 0;
     padding: 0;
     text-align: center;
+    font-size: 1.4rem;
     line-height: 1.96rem;
 }
 
@@ -494,10 +501,10 @@ a {
     width: 407px;
    /* border: 2px solid fuchsia;*/
     font-family: Roboto;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: normal;
     font-style: normal;
-    line-height: 19.6px;
+    line-height: 1.96rem;
 }
 
 .button-imp {
@@ -616,6 +623,7 @@ input:valid {
     margin: 0 115px;
     padding: 0;
     line-height: 2.8rem;
+    white-space: nowrap;
     color: #373737;   
 }
 
@@ -624,6 +632,7 @@ input:valid {
     padding: 0;
     text-align: center;
     font-size: 1.4rem;
+    line-height: 1.96rem;
     color: #4E4E4E;
 }
 
@@ -664,7 +673,7 @@ input:valid {
     font-size: 1.4rem;
     font-style: normal;
     font-weight: bold;
-    line-height: 16px;
+    line-height: 1.6rem;
     color: #fff;
     align-items: center;
     text-align: center;
@@ -757,7 +766,8 @@ input:valid {
     width: 236px;    
     height: 20px;
     color: #fff;    
-    font: normal 400 14px Roboto; 
+    font: normal 400 1.4rem Roboto; 
+    line-height: 1.96rem;
     /*border: 1px solid yellow;  */    
 }
 
@@ -809,5 +819,5 @@ input:valid {
 
 .footer-copy__text {
     font-size: 1.4rem;
-    line-height: 19.6px;   
+    line-height: 1.96rem;   
 }
