@@ -11,9 +11,9 @@ var clearBtns = document.querySelectorAll('.clear-btn');
 var resultButton = document.getElementById('result');
 console.log(result);
 var display = document.getElementById('display');
-var memoryCurrentNumber = 0;
-var memoryNewNumber = false;
-var memoryPendingOperation = '';
+var MemoryCurrentNumber = 0;
+var MemoryNewNumber = false;
+var MemoryPendingOperation = '';
 
 //var whatDoButton = document.getElementById('whatDo')
 //console.log(whatDoButton);
@@ -53,15 +53,41 @@ resultButton.addEventListener('click', result);
 //Функции
 
 function numberPress(number) {
-    if(display.value === '0') {
+    if(MemoryNewNumber) {
         display.value = number;
+        MemoryNewNumber = false;
     } else {
-        display.value += number;
+         if(display.value === '0') {
+            display.value = number;
+        } else {
+            display.value += number;
+        }
     }
-    console.log('Клик по кнопке с номером ' + number);
+   
 };
 
 function operation(symbol) {
+    var localOperationMemory = display.value;
+    if (MemoryNewNumber && MemoryCurrentNumber !== '=') {
+        display.value = MemoryCurrentNumber;
+    } else {
+        MemoryNewNumber = true;
+        if (MemoryPendingOperation === '+') {
+            MemoryCurrentNumber += parseFloat(localOperationMemory);
+        } else if (MemoryPendingOperation === '-') {
+            MemoryCurrentNumber -= parseFloat(localOperationMemory);
+        } else if (MemoryPendingOperation === '*') {
+            MemoryCurrentNumber *= parseFloat(localOperationMemory);
+        } else if (MemoryPendingOperation === '/') {
+            MemoryCurrentNumber /= parseFloat(localOperationMemory);
+        } else {
+            MemoryCurrentNumber = parseFloat(localOperationMemory);  //равно
+        };
+        display.value = MemoryCurrentNumber;
+        MemoryPendingOperation = symbol;
+    };
+
+
     console.log('Клик по кнопке с операцией ' + symbol);
 };
 
