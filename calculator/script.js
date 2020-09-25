@@ -1,15 +1,20 @@
 // Объявляем переменные для всех кнопок
 
-var numbers = document.querySelectorAll('.number')
+var numbers = document.querySelectorAll('.number');
 console.log(numbers);
-var operations = document.querySelectorAll('.operator')
+var operations = document.querySelectorAll('.operator');
 console.log(operations);
-var point = document.getElementById('decimal')
+var point = document.getElementById('decimal');
 console.log(point);
-var clearBtns = document.querySelectorAll('.clear-btn')
+var clearBtns = document.querySelectorAll('.clear-btn');
 
-var resultButton = document.getElementById('result')
+var resultButton = document.getElementById('result');
 console.log(result);
+var display = document.getElementById('display');
+var memoryCurrentNumber = 0;
+var memoryNewNumber = false;
+var memoryPendingOperation = '';
+
 //var whatDoButton = document.getElementById('whatDo')
 //console.log(whatDoButton);
 
