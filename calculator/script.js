@@ -6,11 +6,9 @@ var operations = document.querySelectorAll('.operator')
 console.log(operations);
 var point = document.getElementById('decimal')
 console.log(point);
-var ce = document.getElementById('ce')
-console.log(ce);
-var c = document.getElementById('c')
-console.log(c);
-var result = document.getElementById('result')
+var clearBtns = document.querySelectorAll('.clear-btn')
+
+var resultButton = document.getElementById('result')
 console.log(result);
 //var whatDoButton = document.getElementById('whatDo')
 //console.log(whatDoButton);
@@ -21,35 +19,25 @@ console.log(result);
 
 for (var i=0; i<numbers.length; i++){
     var number = numbers[i];
-    number.addEventListener('click', function(e) {
-        console.log('Клик по кнопке с номером')
-    });
+    number.addEventListener('click', numberPress);
 };
 
 for (var i=0; i<operations.length; i++){
-    var operation = operations[i];
-    operation.addEventListener('click', function(e) {
-        console.log('Клик по кнопке с операцией')
+    var operationButton = operations[i];
+    operationButton.addEventListener('click', operation);
+};
+
+for (var i=0; i<clearBtns.length; i++){
+    var clearButton = clearBtns[i];
+    clearButton.addEventListener('click', function(e) {
+        clear(e.srcElement.id) 
     });
 };
 
 
-point.addEventListener('click', function(e) {
-    console.log('Клик по кнопке .')
-});
+point.addEventListener('click', decimal);
 
-ce.addEventListener('click', function(e) {
-    console.log('Клик по кнопке ce')
-});
-
-
-c.addEventListener('click', function(e) {
-    console.log('Клик по кнопке c')
-});
-
-result.addEventListener('click', function(e) {
-    console.log('Клик по кнопке =')
-});
+resultButton.addEventListener('click', result);
 
 
 
@@ -57,23 +45,27 @@ result.addEventListener('click', function(e) {
 
 
 function numberPress() {
-
+    console.log('Клик по кнопке с номером');
 };
 
 function operation() {
+    console.log('Клик по кнопке с операцией');
+};
 
+function clear(id) {
+    console.log('Клик по кнопке ' + id);
 };
 
 function decimal() {
-
+    console.log('Клик по кнопке .');
 };
 
-//function clear() {
+function result() {
+    console.log('Клик по кнопке результат');
+}
+
+//function whatDo() {
 
 //};
-
-function whatDo() {
-
-};
 
 
