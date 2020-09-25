@@ -43,7 +43,6 @@ for (var i=0; i<clearBtns.length; i++){
     });
 };
 
-
 point.addEventListener('click', decimal);
 
 resultButton.addEventListener('click', result);
@@ -51,9 +50,14 @@ resultButton.addEventListener('click', result);
 
 
 
-
+//Функции
 
 function numberPress(number) {
+    if(display.value === '0') {
+        display.value = number;
+    } else {
+        display.value += number;
+    }
     console.log('Клик по кнопке с номером ' + number);
 };
 
