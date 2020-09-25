@@ -19,12 +19,16 @@ console.log(result);
 
 for (var i=0; i<numbers.length; i++){
     var number = numbers[i];
-    number.addEventListener('click', numberPress);
+    number.addEventListener('click', function(e) {
+        numberPress(e.target.outerText);
+    });
 };
 
 for (var i=0; i<operations.length; i++){
     var operationButton = operations[i];
-    operationButton.addEventListener('click', operation);
+    operationButton.addEventListener('click', function(e) {
+        operation(e.target.outerText);
+    });
 };
 
 for (var i=0; i<clearBtns.length; i++){
@@ -44,12 +48,12 @@ resultButton.addEventListener('click', result);
 
 
 
-function numberPress() {
-    console.log('Клик по кнопке с номером');
+function numberPress(number) {
+    console.log('Клик по кнопке с номером ' + number);
 };
 
-function operation() {
-    console.log('Клик по кнопке с операцией');
+function operation(symbol) {
+    console.log('Клик по кнопке с операцией ' + symbol);
 };
 
 function clear(id) {
