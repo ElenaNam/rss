@@ -39,13 +39,16 @@ for (var i=0; i<operations.length; i++){
 for (var i=0; i<clearBtns.length; i++){
     var clearButton = clearBtns[i];
     clearButton.addEventListener('click', function(e) {
-        clear(e.srcElement.id) 
+        clear(e.target.outerText);
+        
     });
 };
 
 point.addEventListener('click', decimal);
 
 resultButton.addEventListener('click', result);
+    
+
 
 
 
@@ -96,15 +99,23 @@ function clear(id) {
 };
 
 function decimal() {
-    console.log('Клик по кнопке .');
+    var localDecimalMemory = display.value;
+    if(MemoryNewNumber) {
+        localDecimalMemory = '0.';
+        MemoryNewNumber = false;
+    } else { 
+        if (localDecimalMemory.indexOf('.') === -1) {
+            localDecimalMemory += '.';    
+        }
+    }
+    display.value = localDecimalMemory;    
 };
 
-function result() {
-    console.log('Клик по кнопке результат');
-}
+//function result() {
+    //console.log('Клик по кнопке результат');
+//}
 
 //function whatDo() {
 
 //};
-
 

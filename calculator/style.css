@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-top: 40px;        
+    padding-top: 40px;   
   }
 
   .main__image {
@@ -56,6 +56,11 @@ body {
     padding: 10px;
 
   }
+
+  .calc-buttons {
+    
+  }
+
   .calc_button-row td {
     margin: 0 auto;
     padding: 5px;
@@ -67,22 +72,26 @@ body {
     font-size: 27px;
     color: #666666;
     text-transform: uppercase;
-    border-radius: 6px;
+    border-radius: 16px;
+    border: 2px solid grey;
     padding: 0;
     cursor: pointer;
-    transition: 0.1s all;
+    transition: 0.3s all;
   }
   .btn-hover-red:hover {
     background-color: #d83e33;
     color: #f2f2f2;
+    font-weight: bold;
   }
   .btn-hover-orange:hover {
-    background-color: #ff6a00;
-    color: #f2f2f2;
+    background-color: #c794b0;
+    color: #141212;
+    font-weight: bold;
   }
   .btn-hover-green:hover {
-    background-color: green;
-    color: #f2f2f2;
+    background-color: rgb(181, 247, 181);
+    color: #141212;
+    font-weight: bold;
   }
   .btn:active {
     transform: translateY(-1px);
