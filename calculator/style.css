@@ -9,22 +9,31 @@ body {
     padding-top: 40px;        
   }
 
-  /*.main__image {
-      margin: 0;
+  .main__image {
+      margin: 0 -5px;
       padding: 0;
-  }*/
+  }
+  
   .image_left {
     margin: 150px 0 0;     
     width: 250px;
     height: 240px;
-    transform: rotate(90deg);
+    transform: rotate(90deg);  
+    cursor: pointer;    
   }
-
+  .image_left:hover {
+    margin-top: 155px;
+  }
+  
   .image_right {
-    margin: 225px 0;
+    margin: 225px 0 0;    
     width: 250px;
     height: 240px;
     transform: rotate(270deg);
+    cursor: pointer; 
+  }
+  .image_right:hover {
+    margin-top: 220px; 
   }
 
 
