@@ -192,7 +192,7 @@ body {
 
 .main {
     display: flex;
-    flex-direction: column;   
+    flex-direction: column;    
 }
 
 
@@ -265,5 +265,60 @@ body {
         letter-spacing: 0.11rem; /* 6%*/
         white-space: nowrap;
     }
+}
+
+/* ABOUT */
+
+.about {       
+    display: flex;
+
+    & .wrapper {
+        justify-content: center;
+    }
+
+    &__wrapper {
+        padding: 8rem 15.8rem 10rem 15.8rem;
+        display: flex;
+        width: 100%;
+        justify-content: space-around;   
+    }
+
+    &__image-wrapper {
+        display: flex;
+    }
+    &__image {
+        width: 100%;
+    }
+
+    &__content {
+        max-width: 43rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+    }
+
+
+    &__title {
+        span {
+            display: block;
+            letter-spacing: 0.2rem;
+        }
+
+        color: $color-dark-l;
+        @include h3;
+    }
+
+    &__description {
+        margin-top: 2.5rem;
+        p {
+            &:nth-child(2) {
+                margin-top: 2.5rem;
+            }
+            color: $color-dark-xl;
+            @include paragraph-l;
+        }
+
+    }
+
 }
 
