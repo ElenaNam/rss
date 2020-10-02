@@ -35,7 +35,7 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
         size: 3.5rem;
     }
     line-height: 130%;
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.2rem;
 }
 
 @mixin h4 {
@@ -101,7 +101,34 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
     line-height: 110%;    
     letter-spacing: 0.13rem;
 }
+
+@mixin slider-button {
+    max-width: 5.2rem;
+    max-height: 5.2rem;
+    align-self: center;
+    border: 3px solid $color-primary;
+    border-radius: 100%;
+    padding: 1.9rem;
+    background: none;
+}
  
+@mixin pets-card-title {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: normal;
+        size: 2rem;
+    }
+    align-self: center;
+    line-height: 2.3rem;    
+    letter-spacing: 0.06rem;
+}
+
+
+
+
+
+
 :root {
     font-size: 10px;
 }
@@ -208,12 +235,9 @@ body {
     }
 
     &__button {
-        margin-top: 4rem;
-        padding: 1.5rem 4.5rem;
+        margin-top: 4rem;        
         background-color: $color-primary;
-        border: none;      
-        size: 1.063rem;
-        letter-spacing: 0.05rem;
+        border: none;  
         color: $color-dark-3xl;
     }
     
@@ -256,6 +280,7 @@ body {
     }
     
     &__button {
+        padding: 1.5rem 4.5rem;
         max-width: 207px;        
         border-radius: 10rem;         
         font-family: Georgia, 'Times New Roman', Times, serif;
@@ -264,6 +289,8 @@ body {
         line-height: 130%; /*22.1rem*/
         letter-spacing: 0.11rem; /* 6%*/
         white-space: nowrap;
+        /*size: 1.063rem;*/
+        /*letter-spacing: 0.05rem;*/
     }
 }
 
@@ -321,4 +348,88 @@ body {
     }
 
 }
+
+/* PETS */
+
+.pets {
+    padding-top: 8rem;
+    padding-bottom: 10rem;
+    background-color: $color-light-l;
+
+    &__wrapper {
+        padding-bottom: 10rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    } 
+
+    &__title {
+            max-width: 40rem;
+            color: $color-dark-l;
+            @include h3;
+            text-align: center;
+
+            span {
+                display: block;            
+            }
+
+        }
+    
+    &__content {
+        width: 100%;
+        padding: 6rem 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .slider-button {
+            @include slider-button;
+
+        }
+        .slider-button_reverted {
+            transform: rotate(180deg);
+            @include slider-button;
+        }
+    }
+
+    &__cards {
+        max-width: 99rem;
+        max-height: 43.5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border: 2px solid firebrick; 
+    }
+
+    &__card {
+
+        display: flex;
+        flex-direction: column;
+        background-color: $color-light-s;
+                
+        p {
+            @include pets-card-title;
+            color: $color-dark-l;
+            margin-top: 3rem;
+        }
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+        max-width: 27rem;
+        max-height: 27rem;
+    }
+
+    &__button {
+        margin-top: 3rem;       
+        background-color: $color-light-s;
+        color: $color-dark-3xl;
+        border: 2px solid $color-primary;
+        align-self: center;    
+    }
+
+    
+}    
 
