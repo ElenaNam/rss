@@ -35,7 +35,7 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
         size: 3.5rem;
     }
     line-height: 130%;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.21rem;
 }
 
 @mixin h4 {
@@ -46,7 +46,7 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
         size: 2rem;
     }
     line-height: 115%;
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.12rem;
 }
 
 @mixin h5 {
@@ -287,7 +287,7 @@ body {
         font-weight: 400;
         font-size: 1.7rem;
         line-height: 130%; /*22.1rem*/
-        letter-spacing: 0.11rem; /* 6%*/
+        letter-spacing: 0.102rem; 
         white-space: nowrap;
         /*size: 1.063rem;*/
         /*letter-spacing: 0.05rem;*/
