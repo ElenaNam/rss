@@ -437,6 +437,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
             flex-direction: column;
             align-items: center;            
             background-color: $color-light-s;
+            
 
             &:hover {
                 box-shadow: $card_hover;
@@ -446,8 +447,11 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
             p {
                 @include h4();
                 color: $color-dark-l;
+                display: block;
                 margin: 3rem 0;  
                 align-self: center;
+                cursor: default;
+                
             }
 
         }
@@ -548,3 +552,28 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     } 
 }
 
+/* DONATION */
+
+.donation {
+    display: flex;
+
+    & .wrapper {
+
+    }
+
+    &__wrapper {
+
+    }
+
+    &__image-wrapper {
+
+    }
+
+    &__content {
+
+    }
+
+    &__contacts {
+        
+    }
+}

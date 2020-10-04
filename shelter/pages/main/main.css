@@ -467,10 +467,12 @@
   line-height: 115%;
   letter-spacing: 0.12rem;
   color: #545454;
+  display: block;
   margin: 3rem 0;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  cursor: default;
 }
 
 .pets .pets__content .pets__image {
@@ -641,5 +643,12 @@
   display: block;
   margin-top: 3rem;
   cursor: pointer;
+}
+
+/* DONATION */
+.donation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 /*# sourceMappingURL=main.css.map */
