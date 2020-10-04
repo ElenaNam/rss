@@ -504,27 +504,47 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     }
 
     &__content {
+        margin-top: 6rem;
         display: flex;
-        .help-list {
+        flex-wrap: wrap;
+        max-width: 128rem;
+        width: 100%;
+
+
+        .help-list {          
+            display: flex;
+            list-style-type: none;
+            flex-direction: row;            
+            flex-wrap: wrap;
 
         }
-            &__item {
-
-            }
-
-            &__link {
+            .help-list__item { 
+                display: flex;    
+                flex-direction: row;     
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
                 
             }
-    }
 
+            .help-list__link {                
+                text-decoration: none;
+                @include h4();
+                color: $color-dark-l; 
+                display: flex;
+                flex-direction: column;
+                text-align: center;               
+                margin: 0 6rem 5.5rem;
+                cursor: inherit;
+                
+                span {
+                    display: block;
+                    margin-top: 3rem;
+                    cursor: pointer;
+                }
+                
+            }
 
-
-    &__help-list {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+    } 
 }
 
