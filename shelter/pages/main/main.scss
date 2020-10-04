@@ -106,9 +106,9 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
     max-width: 5.2rem;
     max-height: 5.2rem;
     align-self: center;
-    border: 3px solid $color-primary;
-    border-radius: 100%;
-    padding: 1.9rem;
+    border: 2px solid $color-primary;
+    border-radius: 100%;    
+    
     background: none;
 }
  
@@ -121,7 +121,7 @@ radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20
     }
     align-self: center;
     line-height: 2.3rem;    
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.11rem;
 }
 
 
@@ -353,15 +353,15 @@ body {
 
 .pets {
     padding-top: 8rem;
-    padding-bottom: 10rem;
-    background-color: $color-light-l;
-
+    padding-bottom: 9.7rem;   /**должен быть 10!!/
+    background-color: $color-light-l;    
+    
     &__wrapper {
-        padding-bottom: 10rem;
+        /*padding-bottom: 10rem;*/
         width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center;        
         
     } 
 
@@ -377,36 +377,44 @@ body {
 
         }
     
-    &__content {
+    &__content {        
         width: 100%;
-        padding: 6rem 0;
+        padding: 6rem 4rem;
+        /*padding: 6rem 4rem 0;*/
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-between;        
         .slider-button {
+            margin-top:2.8rem;            
             @include slider-button;
 
         }
         .slider-button_reverted {
+            margin-top: 2.8rem;
             transform: rotate(180deg);
             @include slider-button;
         }
+        .slider-button__image {
+            display: block;
+            /*margin: 0 auto;*/
+            padding: 2.1rem 1.9rem 2.3rem 1.7rem;
+           
+        }
     }
 
-    &__cards {
-        max-width: 99rem;
-        max-height: 43.5rem;
+    &__cards {         
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        border: 2px solid firebrick; 
+        flex-direction: row;       
     }
 
     &__card {
-
+        max-width: 27rem;
+        margin: 0 4.4rem;
         display: flex;
         flex-direction: column;
+        text-align: center;
         background-color: $color-light-s;
+        
                 
         p {
             @include pets-card-title;
@@ -423,13 +431,28 @@ body {
     }
 
     &__button {
-        margin-top: 3rem;       
+        margin-top: 2.9rem; 
+        max-width: 18.7rem;      
         background-color: $color-light-s;
         color: $color-dark-3xl;
         border: 2px solid $color-primary;
         align-self: center;    
     }
 
-    
+    .pets-content__button {
+        margin-top: 3rem;
+        max-width: 26.1rem;
+        padding: 1.5rem 4.5rem;
+        border-radius: 10rem;         
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-weight: 400;
+        font-size: 1.7rem;
+        line-height: 130%; /*22.1rem*/
+        letter-spacing: 0.11rem; /* 6%*/
+        white-space: nowrap;
+        border: none;
+        background-color: $color-primary;
+
+    }
 }    
 
