@@ -181,8 +181,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
 
 /* HEADER */
-.wrapper {
-    /*width: 120rem;*/
+.wrapper {   
     max-width: 128rem;
     margin: 0 auto;
     display: flex;
@@ -288,10 +287,9 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 }
 
 
-.content-section {        
-    /*padding-left: 7px;  */
-    max-width: 46.8rem;
-    /*height: 321px;*/
+.content-section {   
+    
+    max-width: 46.8rem;   
     margin-left: 4rem;    
     padding-bottom: 8rem;
     display: flex;
@@ -311,11 +309,8 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         flex-direction: column;    
         color: $color-dark-s;  
         @include paragraph-l();
-    }
-    
-    /*&__button {
-        @include button_primary();
-    }*/
+    }    
+   
 }
 
 /* ABOUT */
@@ -479,4 +474,57 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
     }
 }    
+
+/* HELP */
+.help {
+    padding-top: 8.5rem;
+    display: flex;
+
+    & .wrapper{
+       justify-content: center;
+
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    &__title {
+        @include h3();
+        color: $color-dark-l;
+        /*max-width: 30.8rem;*/
+
+        span {
+            display: block;
+            text-align: center;
+        }
+    }
+
+    &__content {
+        display: flex;
+        .help-list {
+
+        }
+            &__item {
+
+            }
+
+            &__link {
+                
+            }
+    }
+
+
+
+    &__help-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
 
