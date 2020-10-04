@@ -555,25 +555,47 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 /* DONATION */
 
 .donation {
-    display: flex;
+    display: flex;  
+    background-color: $color-light-l; 
 
-    & .wrapper {
-
+    & .wrapper {        
+        justify-content: center;
     }
 
     &__wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 8rem 4rem 10rem;
+
 
     }
 
     &__image-wrapper {
+        width: 100%;
 
     }
 
     &__content {
+        max-width: 38rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+
+
+        p {
+            display: block;
+            @include h3();
+            color: $color-dark-l;
+        }
+        span {
+            @include h5;
+            color: $color-dark-l
+        }
 
     }
 
     &__contacts {
-        
+
     }
 }
