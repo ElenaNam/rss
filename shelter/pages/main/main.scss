@@ -646,3 +646,42 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         }
     }
 }
+
+
+/* FOOTER */
+
+footer {
+    display: flex;
+
+    & .wrapper {
+        justify-content: space-between;
+    }
+
+    &__wrapper {
+        padding: 4rem 4rem 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__contacts {
+
+    }
+
+    &__address {
+        
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+
+
+}
