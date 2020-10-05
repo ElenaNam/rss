@@ -459,8 +459,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         .pets__image {
             display: block;
             width: 100%;
-            max-width: 27rem;
-            /*max-height: 27rem;*/
+            max-width: 27rem;            
         }
 
         .pets-card__button {           
@@ -650,11 +649,13 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
 /* FOOTER */
 
-footer {
+.footer {
     display: flex;
-
+    background: $footer-gradient-background;
+    
     & .wrapper {
-        justify-content: space-between;
+       justify-content: space-between;
+        
     }
 
     &__wrapper {
@@ -662,26 +663,77 @@ footer {
         display: flex;
         width: 100%;
         justify-content: space-between;
+        flex-direction: row;
+        /*align-items: center; */
     }
 
     &__content {
+        width: 100%;   
+        padding: 1.6rem 0 6rem;
+        /*max-width: 74rem;     */
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+       
+        .footer__section {
+            &:nth-child(1) {
+                width:48.38%;
+            }
+            &:nth-child(2) {
+                width:51.62%;
+            }
+
+            /*max-width: 27.8rem;*/
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;          
+        }      
     }
 
-    &__contacts {
-
+    .footer-section__title {        
+        span {
+            
+            display: block;
+            color: $color-light-xl;
+            @include h3();
+        }
     }
 
-    &__address {
+    .icon-link {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
         
+        span {
+            display: block;
+            /*flex-direction: row;*/
+            /*justify-content: center;*/
+            margin-right: 2rem;
+        }
+
     }
 
-    &__image {
+    .footer__icon {
         width: 100%;
     }
 
+    .footer__link {
+        
+        text-decoration: none;        
+        color: $color-primary;
+        @include h4();
 
+    }
+
+    .footer__link:hover {
+        text-decoration: none;
+    }
+
+ 
+    &__image {
+        width: 100%;
+        max-width: 30rem;
+    }
 
 }
