@@ -653,9 +653,7 @@
 }
 
 .donation .wrapper {
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  /*justify-content: center;*/
 }
 
 .donation__wrapper {
@@ -665,6 +663,13 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   width: 100%;
   padding: 8rem 4rem 10rem;
 }
@@ -682,8 +687,7 @@
 
 .donation__content {
   max-width: 38rem;
-  padding-top: 0.2rem;
-  /*не должно быть*/
+  /*padding-top: 0.2rem; /*не должно быть*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -771,6 +775,8 @@
 
 /* FOOTER */
 .footer {
+  height: 35rem;
+  /*убрать !!!*/
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

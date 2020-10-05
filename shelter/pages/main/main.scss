@@ -559,12 +559,14 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     background-color: $color-light-l; 
 
     & .wrapper {        
-        justify-content: center;
+        /*justify-content: center;*/
     }
 
     &__wrapper {
         display: flex;
-        justify-content: center;        
+        justify-content: center;  
+        align-items: center;
+        flex-direction: row;    
       
         width: 100%;
         padding: 8rem 4rem 10rem; 
@@ -587,7 +589,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
     &__content {
         max-width: 38rem;
-        padding-top: 0.2rem; /*не должно быть*/
+        /*padding-top: 0.2rem; /*не должно быть*/
         display: flex;
         flex-direction: column;
         justify-content: flex-start;              
@@ -650,6 +652,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 /* FOOTER */
 
 .footer {
+    height: 35rem; /*убрать !!!*/
     display: flex;
     background: $footer-gradient-background;
     
