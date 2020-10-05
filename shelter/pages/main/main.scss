@@ -59,7 +59,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
         size: 1.5rem;
     }
     line-height: 110%;
-    letter-spacing: 0.06rem;
+    letter-spacing: 6%;
 }
 
 @mixin paragraph-l {
@@ -372,7 +372,7 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
 .pets {
     padding-top: 8rem;
-    padding-bottom: 9.7rem;   /*должен быть 10!!*/
+    padding-bottom: 10rem; 
     background-color: $color-light-l;    
     
 
@@ -481,7 +481,8 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
 /* HELP */
 .help {
-    padding-top: 8.5rem;
+    padding-top: 8rem;
+    padding-bottom: 4.5rem;
     display: flex;
 
     & .wrapper{
@@ -564,31 +565,46 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
 
     &__wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: center;        
+      
         width: 100%;
-        padding: 8rem 4rem 10rem;
+        padding: 8rem 4rem 10rem; 
 
 
     }
 
     &__image-wrapper {
-        width: 100%;
+       /* width: 100%;*/
+       margin-right: 3rem;
+       padding-top: 1.2rem;
+       padding-bottom: 1.1rem;
 
     }
+    
+    &__image {
+        width: 100%;
+    }
+
 
     &__content {
         max-width: 38rem;
+        padding-top: 0.2rem; /*не должно быть*/
         display: flex;
         flex-direction: column;
-        justify-content: center; 
+        justify-content: flex-start;              
 
 
         p {
-            display: block;
-            @include h3();
+            display: block;            
             color: $color-dark-l;
+            margin-bottom: 2rem;
+            span {
+                @include h3();
+                display: block;
+            }
         }
         span {
+            
             @include h5;
             color: $color-dark-l
         }
@@ -596,6 +612,37 @@ $card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
     }
 
     &__contacts {
+        max-width: 34.9rem;
+        margin: 2rem 0;
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;        
+        background-color: $color-primary;
+        border-radius: 0.9rem;  
+        justify-content: center;      
 
+        span {
+            padding: 1rem 1.5rem;
+            /*padding-left: 1.5rem;*/
+            display: block;
+            @include h4();
+            color: $color-dark-l;
+        }
+
+    }    
+    &__contacts-text {
+        width: 100%;            
+        color: $color-dark-m;
+        
+        span {
+            display: block;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+            font-weight: normal;
+            font-style: italic;
+            line-height: 1.8rem;
+            letter-spacing: 0.01rem;                 
+        }
     }
 }
