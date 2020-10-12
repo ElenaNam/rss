@@ -1,17 +1,17 @@
 // Объявляем переменные для всех кнопок
 
 var numbers = document.querySelectorAll('.number');
-//console.log(numbers);
+
 var operations = document.querySelectorAll('.operator');
-//console.log(operations);
+
 var point = document.getElementById('decimal');
-//console.log(point);
+
 var clearBtns = document.querySelectorAll('.clear-btn');
 
 var resultButton = document.getElementById('result');
-//console.log(result);
 
-//var sqrtBtn = document.getElementById('square');
+
+var sqrtButton = document.getElementById('square');
 
 var display = document.getElementById('display');
 var MemoryCurrentNumber = 0;
@@ -52,7 +52,7 @@ point.addEventListener('click', decimal);
 resultButton.addEventListener('click', result);
 
 
-//sqrtBtn.addEventListener('click', squar);
+sqrtButton.addEventListener('click', square);
 
 //Функции
 
@@ -83,10 +83,6 @@ function operation(symbol) {
             MemoryCurrentNumber *= parseFloat(localOperationMemory);
         } else if (MemoryPendingOperation === '/') {
             MemoryCurrentNumber /= parseFloat(localOperationMemory);
-        } else if (MemoryPendingOperation === '√'){            
-
-            MemoryCurrentNumber = +Math.sqrt(MemoryCurrentNumber);
-            console.log ('корень');
         } else if (MemoryPendingOperation === '^'){
             MemoryCurrentNumber = +Math.pow(MemoryCurrentNumber, localOperationMemory);
             /*MemoryCurrentNumber **= parseFloat(localOperationMemory)*/;             
@@ -96,26 +92,21 @@ function operation(symbol) {
         display.value = MemoryCurrentNumber;
         MemoryPendingOperation = symbol;       
     };
-  
-
-
-
-
-    //console.log('Клик по кнопке с операцией ' + symbol);
+      
 };
 
 function clear(id) {
     if (id == 'ce') {
         display.value = '0';
         MemoryNewNumber = true;
-        //console.log ('sdfsdfsfdsfsdfsd!!!');
+     
         
     } else if (id === 'c') {
         display.value = '0';
         MemoryNewNumber = true;
         MemoryCurrentNumber = '0';
         MemoryPendingOperation = ''; 
-       // console.log ('nnnnnnnnnnn');     
+      
     }   
 };
 
@@ -130,22 +121,18 @@ function decimal() {
         }
     }
     display.value = localDecimalMemory;    
-}
+};
 
-/*function squar(){
-    MemoryCurrentNumber = +Math.sqrt(display.value);
-    display.value = MemoryCurrentNumber;
-
-}*/
+function square() {  
 
 
-/*function square () {
-    if (display.value.indexOf("-") === -1) {
-        display.value = parseFloat(Math.sqrt(display.value));
+    if (display.value.indexOf('-') !== -1) {
+        display.value = 'Ошибка! Введено неверное значение!';
     } else {
-        display.value = 'ошибка (√ < 0)';
-    }
-}*/
+        display.value = +Math.sqrt(display.value);
+    } 
+    
+}
 
 //function whatDo() {
 
