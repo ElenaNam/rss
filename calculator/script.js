@@ -1,15 +1,15 @@
 // Объявляем переменные для всех кнопок
 
 var numbers = document.querySelectorAll('.number');
-console.log(numbers);
+//console.log(numbers);
 var operations = document.querySelectorAll('.operator');
-console.log(operations);
+//console.log(operations);
 var point = document.getElementById('decimal');
-console.log(point);
+//console.log(point);
 var clearBtns = document.querySelectorAll('.clear-btn');
 
 var resultButton = document.getElementById('result');
-console.log(result);
+//console.log(result);
 var display = document.getElementById('display');
 var MemoryCurrentNumber = 0;
 var MemoryNewNumber = false;
@@ -22,36 +22,32 @@ var MemoryPendingOperation = '';
 
 // Обработчики событий
 
-for (var i=0; i<numbers.length; i++){
+for (var i=0; i < numbers.length; i++){
     var number = numbers[i];
     number.addEventListener('click', function(e) {
         numberPress(e.target.outerText);
     });
 };
 
-for (var i=0; i<operations.length; i++){
+for (var i=0; i < operations.length; i++){
     var operationButton = operations[i];
     operationButton.addEventListener('click', function(e) {
         operation(e.target.outerText);
     });
 };
 
-for (var i=0; i<clearBtns.length; i++){
+for (var i=0; i < clearBtns.length; i++){
     var clearButton = clearBtns[i];
     clearButton.addEventListener('click', function(e) {
-        clear(e.target.outerText);
-        
+        //clear(e.target.outerText);
+        clear(e.target.id);       
     });
 };
 
 point.addEventListener('click', decimal);
 
-resultButton.addEventListener('click', result);
+//resultButton.addEventListener('click', result);
     
-
-
-
-
 
 //Функции
 
@@ -71,7 +67,7 @@ function numberPress(number) {
 
 function operation(symbol) {
     var localOperationMemory = display.value;
-    if (MemoryNewNumber && MemoryCurrentNumber !== '=') {
+    if (MemoryNewNumber && MemoryPendingOperation !== '=') {
         display.value = MemoryCurrentNumber;
     } else {
         MemoryNewNumber = true;
@@ -91,11 +87,21 @@ function operation(symbol) {
     };
 
 
-    console.log('Клик по кнопке с операцией ' + symbol);
+    //console.log('Клик по кнопке с операцией ' + symbol);
 };
 
 function clear(id) {
-    console.log('Клик по кнопке ' + id);
+    if (id == 'ce') {
+        display.value = '0';
+        MemoryNewNumber = true;
+        console.log ('sdfsdfsfdsfsdfsd!!!');
+        
+    } else if (id === 'c') {
+        display.value = '0';
+        MemoryNewNumber = true;
+        MemoryCurrentNumber = '0';
+        MemoryPendingOperation = '';      
+    }   
 };
 
 function decimal() {
@@ -109,11 +115,9 @@ function decimal() {
         }
     }
     display.value = localDecimalMemory;    
-};
+}
 
-//function result() {
-    //console.log('Клик по кнопке результат');
-//}
+
 
 //function whatDo() {
 
