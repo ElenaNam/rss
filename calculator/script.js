@@ -10,6 +10,9 @@ var clearBtns = document.querySelectorAll('.clear-btn');
 
 var resultButton = document.getElementById('result');
 //console.log(result);
+
+//var sqrtBtn = document.getElementById('square');
+
 var display = document.getElementById('display');
 var MemoryCurrentNumber = 0;
 var MemoryNewNumber = false;
@@ -33,21 +36,23 @@ for (var i=0; i < operations.length; i++){
     var operationButton = operations[i];
     operationButton.addEventListener('click', function(e) {
         operation(e.target.outerText);
+        console.log(e.target.outerText);
     });
 };
 
 for (var i=0; i < clearBtns.length; i++){
     var clearButton = clearBtns[i];
-    clearButton.addEventListener('click', function(e) {
-        //clear(e.target.outerText);
+    clearButton.addEventListener('click', function(e) {       
         clear(e.target.id);       
     });
 };
 
 point.addEventListener('click', decimal);
 
-//resultButton.addEventListener('click', result);
-    
+resultButton.addEventListener('click', result);
+
+
+//sqrtBtn.addEventListener('click', squar);
 
 //Функции
 
@@ -62,7 +67,6 @@ function numberPress(number) {
             display.value += number;
         }
     }
-   
 };
 
 function operation(symbol) {
@@ -79,12 +83,22 @@ function operation(symbol) {
             MemoryCurrentNumber *= parseFloat(localOperationMemory);
         } else if (MemoryPendingOperation === '/') {
             MemoryCurrentNumber /= parseFloat(localOperationMemory);
+        } else if (MemoryPendingOperation === '√'){            
+
+            MemoryCurrentNumber = +Math.sqrt(MemoryCurrentNumber);
+            console.log ('корень');
+        } else if (MemoryPendingOperation === '^'){
+            MemoryCurrentNumber = +Math.pow(MemoryCurrentNumber, localOperationMemory);
+            /*MemoryCurrentNumber **= parseFloat(localOperationMemory)*/;             
         } else {
             MemoryCurrentNumber = parseFloat(localOperationMemory);  //равно
         };
         display.value = MemoryCurrentNumber;
-        MemoryPendingOperation = symbol;
+        MemoryPendingOperation = symbol;       
     };
+  
+
+
 
 
     //console.log('Клик по кнопке с операцией ' + symbol);
@@ -94,13 +108,14 @@ function clear(id) {
     if (id == 'ce') {
         display.value = '0';
         MemoryNewNumber = true;
-        console.log ('sdfsdfsfdsfsdfsd!!!');
+        //console.log ('sdfsdfsfdsfsdfsd!!!');
         
     } else if (id === 'c') {
         display.value = '0';
         MemoryNewNumber = true;
         MemoryCurrentNumber = '0';
-        MemoryPendingOperation = '';      
+        MemoryPendingOperation = ''; 
+       // console.log ('nnnnnnnnnnn');     
     }   
 };
 
@@ -117,7 +132,20 @@ function decimal() {
     display.value = localDecimalMemory;    
 }
 
+/*function squar(){
+    MemoryCurrentNumber = +Math.sqrt(display.value);
+    display.value = MemoryCurrentNumber;
 
+}*/
+
+
+/*function square () {
+    if (display.value.indexOf("-") === -1) {
+        display.value = parseFloat(Math.sqrt(display.value));
+    } else {
+        display.value = 'ошибка (√ < 0)';
+    }
+}*/
 
 //function whatDo() {
 

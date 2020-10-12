@@ -1,4 +1,5 @@
 body {
+    
     font-size: 20px;
     background: linear-gradient(115deg, rgb(245, 237, 215), rgb(255, 211, 131));
   }
@@ -96,12 +97,13 @@ body {
   .btn:active {
     transform: translateY(-1px);
   }
-  .btn-long {
+  /*.btn-long {
     width: 183px;
   }
   .btn-equal {
     height: 145px;
-  }
+  }*/
+
   input,
   button {
     padding: 5px 15px;
