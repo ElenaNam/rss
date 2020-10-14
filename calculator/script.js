@@ -8,7 +8,7 @@ let point = document.getElementById('decimal');
 
 let clearBtns = document.querySelectorAll('.clear-btn');
 
-let resultButton = document.getElementById('result');
+//let resultButton = document.getElementById('result');
 
 let sqrtButton = document.getElementById('square');
 
@@ -32,15 +32,14 @@ let MemoryPendingOperation = '';
 for (let i=0; i < numbers.length; i++){
     let number = numbers[i];
     number.addEventListener('click', function(e) {
-        numberPress(e.target.outerText);
+        numberPress(e.target.textContent);
     });
 };
 
 for (let i=0; i < operations.length; i++){
     let operationButton = operations[i];
     operationButton.addEventListener('click', function(e) {
-        operation(e.target.outerText);
-        console.log(e.target.outerText);
+        operation(e.target.textContent);        
     });
 };
 
@@ -53,7 +52,7 @@ for (let i=0; i < clearBtns.length; i++){
 
 point.addEventListener('click', decimal);
 
-resultButton.addEventListener('click', result);
+//resultButton.addEventListener('click', result);
 
 
 sqrtButton.addEventListener('click', square);
@@ -74,7 +73,6 @@ function numberPress(number) {
             display.value += number;
         }
     }
-
 };
 
 function operation(symbol) {
@@ -98,9 +96,9 @@ function operation(symbol) {
         } else {
             MemoryCurrentNumber = parseFloat(localOperationMemory);  //равно
         };
-        //MemoryCurrentNumber = Math.round(MemoryCurrentNumber * 10000) / 10000;  //computation.toFixed(10).replace(/0*$/, '')
-        display.value = MemoryCurrentNumber;
-        //display.value = parseFloat(MemoryCurrentNumber.toFixed(10));
+        MemoryCurrentNumber = Math.round(MemoryCurrentNumber * 10000) / 10000;  //computation.toFixed(10).replace(/0*$/, '')
+        //display.value = MemoryCurrentNumber; *
+        display.value = parseFloat(MemoryCurrentNumber.toPrecision(15));
         MemoryPendingOperation = symbol; 
         //MemoryNewNumber = true;    
        
@@ -111,15 +109,13 @@ function operation(symbol) {
 function clear(id) {
     if (id == 'ce') {
         display.value = '0';
-        MemoryNewNumber = true;
-     
+        MemoryNewNumber = true;     
         
     } else if (id === 'c') {
         display.value = '0';
         MemoryNewNumber = true;
         MemoryCurrentNumber = '0';
-        MemoryPendingOperation = ''; 
-      
+        MemoryPendingOperation = '';       
     }   
 };
 
@@ -143,26 +139,15 @@ function square() {
     } else {
         display.value = +Math.sqrt(display.value);
     } 
-    
-}
-
-function minusPlus() {
-   
-    let localMinusMemory = display.value;
-   
-    if (MemoryNewNumber = true) {
-            localMinusMemory = parseFloat(localMinusMemory) * (-1);
-    //display.value =  (display.value * (-1);
-    display.value = localMinusMemory;
-    
-    }
     MemoryCurrentNumber = display.value;
-    
 }
 
+function minusPlus() {   
+    display.value *= -1;  
+}     
+        
 
-
-
+ 
 
 
 
