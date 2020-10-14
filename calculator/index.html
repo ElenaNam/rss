@@ -8,9 +8,11 @@
 </head>
 
 <body>
-  <main class="main">
-      <div class ="main__image"><img src="assets\hand.png" alt="" class="image_right"></div>
-      <div class="calc">
+  <div class="wrapper">
+    <div class="wrapper__image"></div>
+      <main class="main">
+        <div class ="main__image"><img src="assets\hand.png" alt="" class="image_right"></div>
+        <div class="calc">
         <div class="calc-display">
           <input disabled type="text" id="display" value="0" name=""  placeholder="000000000000000000"  class="calc-display-input">
         </div>
@@ -97,9 +99,25 @@
             </tr>
           </table>
         </div>
-      </div>
-      <div class ="main__image"><img src="assets\hand.png" alt="" class="image_left"></div>
+        </div>
+        <div class ="main__image"><img src="assets\hand.png" alt="" class="image_left"></div>
+        <div class="main__explanation">
+          <div class="explanation-image">
+            <div class="explanation-text">
+              <span>Я умею</span>         
+            </div>
+            <div class="list__wrapper">           
+                <ul class="list">
+                  <li>находить квадратный корень: число √</li>
+                  <li>считать число в степени: число ^ степень</li>
+                  <li>обозначить отрицательное число: число +/-</li>
+                </ul>            
+            </div>
+          </div>
+        </div>
   </main>
+  </div>
+
   <script src="script.js">
   </script>
 </body>
