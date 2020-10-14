@@ -1,13 +1,14 @@
 body {
     
     font-size: 20px;
-    background: linear-gradient(115deg, rgb(245, 237, 215), rgb(255, 211, 131));
+    background: linear-gradient(115deg, rgb(235, 232, 226), rgb(250, 233, 203));
   }
   .main {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-top: 40px;   
+    padding-top: 40px;  
+     
   }
 
   .main__image {
@@ -64,6 +65,14 @@ body {
 
   .calc-buttons {
     
+    
+    
+    
+  }
+  .calc-table {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .calc_button-row td {
@@ -83,15 +92,7 @@ body {
     cursor: pointer;
     transition: 0.3s all;
   }
-  #decimal {
-    width: 140px;
-  }
-  #result {
-    width: 140px;
-  }
-  #c {
-    width: 140px;
-  }
+
   #plusMinus {
     height: 140px;
   }
@@ -113,12 +114,12 @@ body {
   .btn:active {
     transform: translateY(-1px);
   }
-  /*.btn-long {
-    width: 183px;
+  .btn-long {
+    width: 140px;
   }
   .btn-equal {
-    height: 145px;
-  }*/
+    height: 140px;
+  }
 
   input,
   button {
@@ -137,6 +138,9 @@ body {
       width: 300px;
       margin: 0 auto;
     }
+    .calc-table{
+      width: 280px;
+    }
     .calc-display-input {
       width: 280px;
     }
@@ -153,24 +157,28 @@ body {
       font-size: 28px;
     }
     .btn {
-      width: 64px;
+      width: 44px;
     }
     .btn-long {
-      width: 140px;
+      width: 110px;
     }
   }
   @media screen and (max-width: 400px) {
     .calc {
       width: 280px;
+      margin: 0 auto;
     }
     .calc-display-input {
       width: 260px;
     }
+    .calc-table{
+      width: 260px;
+    }
     .btn {
-      width: 60px;
+      width: 42px;
     }
     .btn-long {
-      width: 132px;
+      width: 100px;
     }
   }
   
