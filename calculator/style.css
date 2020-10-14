@@ -46,6 +46,8 @@ body {
     border-radius: 46px;
   }
   .calc-display-input {
+    display: flex;
+    flex-wrap: wrap;
     width: 360px;
     height: 60px;
     margin: 20px 0;
@@ -54,9 +56,11 @@ body {
     color: #fff;
     text-align: right;
     font-size: 35px;
-    padding: 10px;
+    padding: 10px;  
+    
 
   }
+
 
   .calc-buttons {
     
@@ -67,7 +71,7 @@ body {
     padding: 5px;
   }
   .btn {
-    width: 85px;
+    width: 65px;
     height: 60px;
     background-color: #f4f4f4;
     font-size: 27px;
@@ -78,6 +82,18 @@ body {
     padding: 0;
     cursor: pointer;
     transition: 0.3s all;
+  }
+  #decimal {
+    width: 140px;
+  }
+  #result {
+    width: 140px;
+  }
+  #c {
+    width: 140px;
+  }
+  #plusMinus {
+    height: 140px;
   }
   .btn-hover-red:hover {
     background-color: #d83e33;
