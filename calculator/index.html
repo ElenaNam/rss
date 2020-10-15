@@ -8,11 +8,13 @@
 </head>
 
 <body>
-  <main class="main">
-      <div class ="main__image"><img src="assets\hand.png" alt="" class="image_right"></div>
-      <div class="calc">
+  <div class="wrapper">
+    <div class="wrapper__image"></div>
+      <main class="main">
+        <div class ="main__image"><img src="assets\hand.png" alt="" class="image_right"></div>
+        <div class="calc">
         <div class="calc-display">
-          <input disabled type="text" id="display" value="0" name="" placeholder="000000000000000000" class="calc-display-input">
+          <input disabled type="text" id="display" value="0" name=""  placeholder="000000000000000000"  class="calc-display-input">
         </div>
         <div class="calc-buttons">
           <table class="calc-table">
@@ -20,14 +22,15 @@
               <td>
                 <button type="button" class="clear-btn btn btn-hover-red" id="ce">ce</button>
               </td>
-              <td>
-                <button type="button" class="clear-btn btn btn-hover-red" id="c">c</button>
+              <td colspan="2">
+                <button type="button" class="clear-btn  btn-long btn btn-hover-red" id="c">c</button>
               </td>
-              <td>
-                <button type="button" class="operator btn btn-hover-orange">/</button>
-              </td>
+
               <td>
                 <button type="button" class="operator btn btn-hover-orange">*</button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-hover-orange" id = "square">√</button>
               </td>
             </tr>
             <tr class="calc-buttons-row">
@@ -41,8 +44,12 @@
                 <button type="button" class="number btn-hover-green btn">9</button>
               </td>
               <td>
-                <button type="button" class="operator btn btn-hover-orange">-</button>
+                <button type="button" class="operator btn btn-hover-orange">/</button>
               </td>
+              <td>
+                <button type="button" class="operator btn btn-hover-orange">^</button>
+              </td>
+
             </tr>
             <tr class="calc-buttons-row">
               <td>
@@ -57,6 +64,10 @@
               <td>
                 <button type="button" class="operator btn btn-hover-orange">+</button>
               </td>
+              <td rowspan="2">
+                <button type="button" class=" btn btn-equal btn-hover-orange" id = 'plusMinus'>+/-</button>
+              </td>
+
             </tr>
             <tr class="calc-buttons-row">
               <td>
@@ -68,23 +79,45 @@
               <td>
                 <button type="button" class="number btn-hover-green btn">3</button>
               </td>
-              <td rowspan="2">
-                <button type="button" class="operator btn btn-equal btn-hover-orange" id="result">=</button>
+              <td>
+                <button type="button" class="operator btn btn-hover-orange">-</button>
               </td>
+
             </tr>
             <tr class="calc-buttons-row">
-              <td colspan="2">
-                <button type="button" class="number btn-hover-green btn btn-long">0</button>
-              </td>
               <td>
-                <button type="button" class="btn  btn-hover-orange" id="decimal">.</button>
+                <button type="button" class="number btn-hover-green btn">0</button>
               </td>
+              <td colspan="2">
+                <button type="button" class="btn  btn-long  btn-hover-orange" id="decimal">.</button>
+              </td>
+              <td colspan="2">
+                <button type="button" class="operator btn btn-long btn-hover-orange" id="result">=</button>
+              </td>
+
+
             </tr>
           </table>
         </div>
-      </div>
-      <div class ="main__image"><img src="assets\hand.png" alt="" class="image_left"></div>
+        </div>
+        <div class ="main__image"><img src="assets\hand.png" alt="" class="image_left"></div>
+        <div class="main__explanation">
+          <div class="explanation-image">
+            <div class="explanation-text">
+              <span>Я умею</span>         
+            </div>
+            <div class="list__wrapper">           
+                <ul class="list">
+                  <li>находить квадратный корень: число √</li>
+                  <li>считать число в степени: число ^ степень</li>
+                  <li>обозначить отрицательное число: число +/-</li>
+                </ul>            
+            </div>
+          </div>
+        </div>
   </main>
+  </div>
+
   <script src="script.js">
   </script>
 </body>

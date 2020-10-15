@@ -1,55 +1,62 @@
 // Объявляем переменные для всех кнопок
 
-var numbers = document.querySelectorAll('.number');
-console.log(numbers);
-var operations = document.querySelectorAll('.operator');
-console.log(operations);
-var point = document.getElementById('decimal');
-console.log(point);
-var clearBtns = document.querySelectorAll('.clear-btn');
+let numbers = document.querySelectorAll('.number');
 
-var resultButton = document.getElementById('result');
-console.log(result);
-var display = document.getElementById('display');
-var MemoryCurrentNumber = 0;
-var MemoryNewNumber = false;
-var MemoryPendingOperation = '';
+let operations = document.querySelectorAll('.operator');
 
-//var whatDoButton = document.getElementById('whatDo')
+let point = document.getElementById('decimal');
+
+let clearBtns = document.querySelectorAll('.clear-btn');
+
+//let resultButton = document.getElementById('result');
+
+let sqrtButton = document.getElementById('square');
+
+let plusMinusButton = document.getElementById('plusMinus');
+
+
+
+let display = document.getElementById('display');
+
+let MemoryCurrentNumber = 0;
+let MemoryNewNumber = false;
+let MemoryPendingOperation = '';
+
+//let whatDoButton = document.getElementById('whatDo')
 //console.log(whatDoButton);
 
 
 
 // Обработчики событий
 
-for (var i=0; i<numbers.length; i++){
-    var number = numbers[i];
+for (let i=0; i < numbers.length; i++){
+    let number = numbers[i];
     number.addEventListener('click', function(e) {
-        numberPress(e.target.outerText);
+        numberPress(e.target.textContent);
     });
 };
 
-for (var i=0; i<operations.length; i++){
-    var operationButton = operations[i];
+for (let i=0; i < operations.length; i++){
+    let operationButton = operations[i];
     operationButton.addEventListener('click', function(e) {
-        operation(e.target.outerText);
+        operation(e.target.textContent);        
     });
 };
 
-for (var i=0; i<clearBtns.length; i++){
-    var clearButton = clearBtns[i];
-    clearButton.addEventListener('click', function(e) {
-        clear(e.target.outerText);
-        
+for (let i=0; i < clearBtns.length; i++){
+    let clearButton = clearBtns[i];
+    clearButton.addEventListener('click', function(e) {       
+        clear(e.target.id);       
     });
 };
 
 point.addEventListener('click', decimal);
 
-resultButton.addEventListener('click', result);
-    
+//resultButton.addEventListener('click', result);
 
 
+sqrtButton.addEventListener('click', square);
+plusMinusButton.addEventListener ('click', minusPlus);
 
 
 
@@ -66,15 +73,15 @@ function numberPress(number) {
             display.value += number;
         }
     }
-   
 };
 
 function operation(symbol) {
-    var localOperationMemory = display.value;
-    if (MemoryNewNumber && MemoryCurrentNumber !== '=') {
+    let localOperationMemory = display.value;
+    if (MemoryNewNumber && MemoryPendingOperation !== '=') {
         display.value = MemoryCurrentNumber;
     } else {
         MemoryNewNumber = true;
+
         if (MemoryPendingOperation === '+') {
             MemoryCurrentNumber += parseFloat(localOperationMemory);
         } else if (MemoryPendingOperation === '-') {
@@ -83,23 +90,37 @@ function operation(symbol) {
             MemoryCurrentNumber *= parseFloat(localOperationMemory);
         } else if (MemoryPendingOperation === '/') {
             MemoryCurrentNumber /= parseFloat(localOperationMemory);
+        } else if (MemoryPendingOperation === '^'){
+            MemoryCurrentNumber = +Math.pow(MemoryCurrentNumber, localOperationMemory);
+            /*MemoryCurrentNumber **= parseFloat(localOperationMemory)*/;             
         } else {
             MemoryCurrentNumber = parseFloat(localOperationMemory);  //равно
         };
-        display.value = MemoryCurrentNumber;
-        MemoryPendingOperation = symbol;
+        MemoryCurrentNumber = Math.round(MemoryCurrentNumber * 10000) / 10000;  //computation.toFixed(10).replace(/0*$/, '')
+        //display.value = MemoryCurrentNumber; *
+        display.value = parseFloat(MemoryCurrentNumber.toPrecision(15));
+        MemoryPendingOperation = symbol; 
+        //MemoryNewNumber = true;    
+       
     };
-
-
-    console.log('Клик по кнопке с операцией ' + symbol);
+      
 };
 
 function clear(id) {
-    console.log('Клик по кнопке ' + id);
+    if (id == 'ce') {
+        display.value = '0';
+        MemoryNewNumber = true;     
+        
+    } else if (id === 'c') {
+        display.value = '0';
+        MemoryNewNumber = true;
+        MemoryCurrentNumber = '0';
+        MemoryPendingOperation = '';       
+    }   
 };
 
 function decimal() {
-    var localDecimalMemory = display.value;
+    let localDecimalMemory = display.value;
     if(MemoryNewNumber) {
         localDecimalMemory = '0.';
         MemoryNewNumber = false;
@@ -111,9 +132,25 @@ function decimal() {
     display.value = localDecimalMemory;    
 };
 
-//function result() {
-    //console.log('Клик по кнопке результат');
-//}
+function square() {  
+
+    if (display.value.indexOf('-') !== -1) {
+        display.value = 'Ошибка!';
+    } else {
+        display.value = +Math.sqrt(display.value);
+    } 
+    MemoryCurrentNumber = display.value;
+}
+
+function minusPlus() {   
+    display.value *= -1;  
+}     
+        
+
+ 
+
+
+
 
 //function whatDo() {
 

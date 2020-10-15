@@ -1,13 +1,99 @@
-body {
+body {   
+    margin: 0; 
+    padding: 0;
     font-size: 20px;
-    background: linear-gradient(115deg, rgb(245, 237, 215), rgb(255, 211, 131));
+  }
+
+  .wrapper {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    height: 800px;  
+    
+    
+  }
+
+  .wrapper__image {
+    position: absolute;
+    z-index: -99999;
+    width: 100%;
+    height: 800px;
+    background-image: url(assets/5390918_071219-ktrk-ninfa-teachers-discounts-school-vid.jpg);
+    background-size: 100% cover;
+    background-position: center;
+    background-repeat:  no-repeat;
+    opacity: 0.3;
+
   }
   .main {
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    padding-top: 40px;   
+    padding-top: 40px;  
+    padding-bottom: 150px;
+    
+     
   }
+
+
+  .explanation-image {
+    position: absolute;
+    margin: 30px 0 0 -75px;  
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(28, 141, 185); 
+    border-radius: 50%;
+    border:1px solid black;
+    cursor: pointer;  
+    /*z-index: 9999;*/
+    
+  }
+  
+  .explanation-text {
+   padding: 35px 0;
+   text-align: center;
+   font-weight: bold;   
+   font-size: 1.4rem;   
+  }
+  .explanation-text:hover {
+    color: red;
+  }
+  .explanation-image:hover {
+    display: none;
+    .list__wrapper:hover {
+      display: block;
+    }
+  }
+
+
+  .list__wrapper {
+    display: none;
+    margin: -150px 0 0 -75px;     
+    background-color: blanchedalmond;
+    width: 300px;
+    /*z-index: 1;*/
+    /*margin-top: 30px;*/
+    position: absolute;
+    border-radius: 10%;
+    border: 1px solid white;
+    opacity: 0.5;
+    /*z-index: -9999;*/
+  }
+
+
+
+
+  .list {
+    padding-left: 30px;
+    padding-right: 10px;        
+  }
+
+  li {    
+    margin-top: 10px;
+  }
+
 
   .main__image {
       margin: 0 -5px;
@@ -15,25 +101,25 @@ body {
   }
   
   .image_left {
-    margin: 150px 0 0;     
+    margin: 130px 0 0;     
     width: 250px;
     height: 240px;
     transform: rotate(90deg);  
     cursor: pointer;    
   }
   .image_left:hover {
-    margin-top: 155px;
+    margin-top: 135px;
   }
   
   .image_right {
-    margin: 225px 0 0;    
+    margin: 220px 0 0;    
     width: 250px;
     height: 240px;
     transform: rotate(270deg);
     cursor: pointer; 
   }
   .image_right:hover {
-    margin-top: 220px; 
+    margin-top: 215px; 
   }
 
 
@@ -45,6 +131,8 @@ body {
     border-radius: 46px;
   }
   .calc-display-input {
+    display: flex;
+    flex-wrap: wrap;
     width: 360px;
     height: 60px;
     margin: 20px 0;
@@ -53,12 +141,22 @@ body {
     color: #fff;
     text-align: right;
     font-size: 35px;
-    padding: 10px;
+    padding: 10px;  
+    
 
   }
 
+
   .calc-buttons {
     
+    
+    
+    
+  }
+  .calc-table {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .calc_button-row td {
@@ -66,7 +164,7 @@ body {
     padding: 5px;
   }
   .btn {
-    width: 85px;
+    width: 65px;
     height: 60px;
     background-color: #f4f4f4;
     font-size: 27px;
@@ -76,7 +174,11 @@ body {
     border: 2px solid grey;
     padding: 0;
     cursor: pointer;
-    transition: 0.3s all;
+    transition: 0.2s all;
+  }
+
+  #plusMinus {
+    height: 140px;
   }
   .btn-hover-red:hover {
     background-color: #d83e33;
@@ -97,11 +199,12 @@ body {
     transform: translateY(-1px);
   }
   .btn-long {
-    width: 183px;
+    width: 140px;
   }
   .btn-equal {
-    height: 145px;
+    height: 140px;
   }
+
   input,
   button {
     padding: 5px 15px;
@@ -119,6 +222,9 @@ body {
       width: 300px;
       margin: 0 auto;
     }
+    .calc-table{
+      width: 280px;
+    }
     .calc-display-input {
       width: 280px;
     }
@@ -135,24 +241,28 @@ body {
       font-size: 28px;
     }
     .btn {
-      width: 64px;
+      width: 44px;
     }
     .btn-long {
-      width: 140px;
+      width: 110px;
     }
   }
   @media screen and (max-width: 400px) {
     .calc {
       width: 280px;
+      margin: 0 auto;
     }
     .calc-display-input {
       width: 260px;
     }
+    .calc-table{
+      width: 260px;
+    }
     .btn {
-      width: 60px;
+      width: 42px;
     }
     .btn-long {
-      width: 132px;
+      width: 100px;
     }
   }
   
