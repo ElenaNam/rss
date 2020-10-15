@@ -22,8 +22,7 @@ let MemoryCurrentNumber = 0;
 let MemoryNewNumber = false;
 let MemoryPendingOperation = '';
 
-//let whatDoButton = document.getElementById('whatDo')
-//console.log(whatDoButton);
+
 
 
 
@@ -96,11 +95,9 @@ function operation(symbol) {
         } else {
             MemoryCurrentNumber = parseFloat(localOperationMemory);  //равно
         };
-        MemoryCurrentNumber = Math.round(MemoryCurrentNumber * 10000) / 10000;  //computation.toFixed(10).replace(/0*$/, '')
-        //display.value = MemoryCurrentNumber; *
+        MemoryCurrentNumber = Math.round(MemoryCurrentNumber * 10000) / 10000;         
         display.value = parseFloat(MemoryCurrentNumber.toPrecision(15));
-        MemoryPendingOperation = symbol; 
-        //MemoryNewNumber = true;    
+        MemoryPendingOperation = symbol;         
        
     };
       
@@ -150,9 +147,4 @@ function minusPlus() {
  
 
 
-
-
-//function whatDo() {
-
-//};
 
