@@ -2,8 +2,11 @@
 const time = document.getElementById('time'),
     greeting = document.getElementById('greeting'),
     name = document.getElementById('name'),
-    focus = document.getElementById('focus'),
+    focustoday = document.getElementById('focustoday'),
     date1 = document.getElementById('date1');
+    input = document.querySelectorAll('input');
+
+
 // Options
 //const showAmPm = true;
 
@@ -35,13 +38,10 @@ function showTime() {
         day = today.getDay();
         date = today.getDate();
 
-// Set AM or PM   утро или вечер
- //   const amPm = hour >= 12 ? 'PM': 'AM';
-
-// 12hr Format 
+// 24hr Format 
     hour = hour % 24 || 24;
 
-    //new Date().toLocaleString('ru', {month: 'long'});
+   
 // Output Date
    date1.innerHTML = `${date} ${months[month]}<span>, </span>${String(days[day]).toLowerCase()}`;
 
@@ -81,24 +81,33 @@ function setBgGreet() {
     }
 }
 
+//for(i=0; i<input.length; i++){
+   // input[i].setAttribute('size',input[i].getAttribute('placeholder').length);}
+
+
+
+
 // Get Name
 function getName() {
-    if (localStorage.getItem('name') === null) {
-        name.textContent = 'Введите имя';        
-    } else {
-        name.textContent = localStorage.getItem('name');
+    if (localStorage.getItem('name') === null) {                // если в лок.хр имя - это null
+        name.textContent = 'Введите имя';                       // то выводится "Введите имя"
+    } else {                                                    // если что-то появилось
+        name.textContent = localStorage.getItem('name');        // то запиши это в лок.хр, это будет имя
     }
 }
 
 // Set Name
 function setName(e) {
-    if(e.type === 'keypress') {
+    if(e.type === 'keypress') {                                        // если нажата клавиша
         //убедиться что нажат Enter
         if(e.which == 13 || e.keyCode == 13) {                      //13 - это Enter
-            localStorage.setItem('name', e.target.innerText);
+            localStorage.setItem('name', e.target.innerText);   // сохранить в лок.хр пару (ключ,значение)
             name.blur();
         }
 
+    } else if (e.type === 'click') {                     // если был клик мышкой
+        name.textContent = '';                           // очисти поле ввода
+        localStorage.removeItemKey('name');             // удали из лок.хр предыдущее имя
     } else {
         localStorage.setItem('name', e.target.innerText);
     }
@@ -107,10 +116,10 @@ function setName(e) {
 
 // Get Focus
 function getFocus() {
-    if (localStorage.getItem('focus') === null) {
-        focus.textContent = 'Введите цель';        
+    if (localStorage.getItem('focustoday') === null) {
+        focustoday.textContent = 'Введите цель';        
     } else {
-        focus.textContent = localStorage.getItem('focus');
+        focustoday.textContent = localStorage.getItem('focustoday');
     }
 }
 
@@ -120,22 +129,28 @@ function setFocus(e) {
     if(e.type === 'keypress') {
         //убедиться что нажат Enter
         if(e.which == 13 || e.keyCode == 13) {                      //13 - это Enter
-            localStorage.setItem('focus', e.target.innerText);
+            localStorage.setItem('focustoday', e.target.innerText);
             name.blur();
         }
 
+    } else if (e.type === 'click') {                             // если был клик мышкой
+        focustoday.textContent = '';                           // очисти поле ввода
+        localStorage.removeItemKey('focustoday');             // удали из лок.хр предыдущую цель
     } else {
-        localStorage.setItem('focus', e.target.innerText);
+        localStorage.setItem('focustoday', e.target.innerText);
     }
 }
+
 
 
 // обработчики событий
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
+name. addEventListener('click', setName);
 
-focus.addEventListener('keypress', setFocus);
-focus.addEventListener('blur', setFocus);
+focustoday.addEventListener('keypress', setFocus);
+focustoday.addEventListener('blur', setFocus);
+focustoday. addEventListener('click', setFocus);
 
 
 
