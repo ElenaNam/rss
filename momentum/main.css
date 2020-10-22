@@ -5,7 +5,7 @@
   }
   
   body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Anonymous Pro', monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,30 +16,54 @@
     color: #000000;
   }
 
-  /*input {
-    width: 100%;
-    text-align: center;
+  .head-1 {
+    display: flex;
   }
 
-  input:focus::-webkit-input-placeholder { color:transparent; }
-  input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
- /* input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
- /* input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
+  input {
+    
+    width: 100%;
+    text-align: center;
+    background: none;
+    border: none;
+    border-bottom: 1px rgb(12, 11, 12) solid;
+    text-align: center;
+    
+    
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    background: rgba(56, 55, 55, 0.2);
+    border-radius: 10%;
+    margin-top: 3rem;   
+    
 
+  }
 
+  #name::placeholder {
+    color: #1d1b1b;
+    opacity: 0.5;
+    font-weight: 400;
+    margin: 0 auto;
+  }
+  #name:focus::placeholder {opacity: 0;}
 
   span {
     
   }
 
   #name {
-    display: block;
-    margin: 0 auto;
+    min-width: 0;
+    display: inline-block;
+    margin: 0.5 auto 0 0;
     outline: none;
     /*background: none;*/
     /*background: wheat;*/
-    border: none;
+    color: black;
+    
     font-size: 4rem;
+    font-weight: 700;
   }
   
   #date1 {
@@ -52,16 +76,32 @@
   }
   #greeting {
     white-space: pre-line;
+    font-size: 4rem;
+    opacity: 0.8; 
+
   }
   
   h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
   }
   
   h2 {
     margin-bottom: 0.5rem;
-    opacity: 0.6;
+    opacity: 0.8;
+    font-size: 4rem;
+
+
   }
+  #focustoday {
+    outline: none;
+    border: none;
+    font-size: 4rem;
+    font-weight: 700;
+  }
+
+  /*#focustoday: :focus {
+    border-bottom: 2px rgb(105, 103, 105) solid;
+  }*/
   
   @media (max-width: 700px) {
     .time {

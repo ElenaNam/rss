@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">-->
+  <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css" />
-  <title>momentum</title>
+  <title>Momentum</title>
 </head>
 <body>
   <time id = "date1"></time>
   <time id="time"></time>
-  <h1>
-    <span id="greeting"></span>
-    <!--<span><input id = "name" type="text" placeholder="Введите имя2"></span> -->
-    <span id="name" contenteditable="true"></span> 
-  </h1>
-  
-  <h2>Твоя цель на сегодня?</h2>
-  <h2 id="focustoday" contenteditable="true"></h2>
+  <div class="container">
+    <div class="head-1">
+      <h1>
+        <p id="greeting"></p>
+        <div><input id = "name" type="text" placeholder="Введите имя" autocomplete="off"></div> 
+        <!--<p><p id="name" contenteditable="true"></p> -->
+      </h1>
+    </div>
+
+    <h2>Твоя цель на сегодня?</h2>
+    <h2 id="focustoday" contenteditable="true"></h2>
+  </div>
+
+
   <script src="script.js"></script>
 </body>
 </html>

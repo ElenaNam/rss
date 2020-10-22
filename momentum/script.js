@@ -4,7 +4,8 @@ const time = document.getElementById('time'),
     name = document.getElementById('name'),
     focustoday = document.getElementById('focustoday'),
     date1 = document.getElementById('date1');
-    input = document.querySelectorAll('input');
+    
+    input = document.getElementById('input');
 
 
 // Options
@@ -47,7 +48,7 @@ function showTime() {
 
 
 // Output Time    
-    time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
+    time.innerHTML = `${addZero(hour)}<span>:</span>${addZero(min)}<span>:</span>${addZero(sec)}`;
     setTimeout(showTime, 1000); // показывать каждую секунду
 }
 
@@ -96,6 +97,9 @@ function getName() {
     }
 }
 
+
+
+
 // Set Name
 function setName(e) {
     if(e.type === 'keypress') {                                        // если нажата клавиша
@@ -107,7 +111,7 @@ function setName(e) {
 
     } else if (e.type === 'click') {                     // если был клик мышкой
         name.textContent = '';                           // очисти поле ввода
-        localStorage.removeItemKey('name');             // удали из лок.хр предыдущее имя
+        //localStorage.removeItemKey('name');             // удали из лок.хр предыдущее имя
     } else {
         localStorage.setItem('name', e.target.innerText);
     }
@@ -135,7 +139,7 @@ function setFocus(e) {
 
     } else if (e.type === 'click') {                             // если был клик мышкой
         focustoday.textContent = '';                           // очисти поле ввода
-        localStorage.removeItemKey('focustoday');             // удали из лок.хр предыдущую цель
+        //localStorage.removeItemKey('focustoday');             // удали из лок.хр предыдущую цель
     } else {
         localStorage.setItem('focustoday', e.target.innerText);
     }
@@ -150,7 +154,7 @@ name. addEventListener('click', setName);
 
 focustoday.addEventListener('keypress', setFocus);
 focustoday.addEventListener('blur', setFocus);
-focustoday. addEventListener('click', setFocus);
+//focustoday. addEventListener('click', setFocus);
 
 
 
