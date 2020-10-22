@@ -16,6 +16,11 @@
     color: #000000;
   }
   
+  #date1 {
+    font-size: 8rem;
+  }
+
+
   #time {
     font-size: 8rem;
   }
