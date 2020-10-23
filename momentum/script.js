@@ -95,9 +95,9 @@ function setBgGreet() {
 // Get Name
 function getName() {
     if (localStorage.getItem('name') === null) {                // если в лок.хр имя - это null
-        name.textContent = 'Введите имя';                       // то выводится "Введите имя"
+        name.value = 'Введите имя';                       // то выводится "Введите имя"
     } else {                                                    // если что-то появилось
-        name.textContent = localStorage.getItem('name');        // то запиши это в лок.хр, это будет имя
+        name.value = localStorage.getItem('name');        // то запиши это в лок.хр, это будет имя
     }
 }
 
@@ -109,15 +109,15 @@ function setName(e) {
     if(e.type === 'keypress') {                                        // если нажата клавиша
         //убедиться что нажат Enter
         if(e.which == 13 || e.keyCode == 13) {                      //13 - это Enter
-            localStorage.setItem('name', e.target.innerText);   // сохранить в лок.хр пару (ключ,значение)
+            localStorage.setItem('name', e.target.value);   // сохранить в лок.хр пару (ключ,значение)
             name.blur();
         }
 
     } else if (e.type === 'click') {                     // если был клик мышкой
-        name.textContent = '';                           // очисти поле ввода
+        name.value = '';                                 // очисти поле ввода
         //localStorage.removeItemKey('name');             // удали из лок.хр предыдущее имя
     } else {
-        localStorage.setItem('name', e.target.innerText);
+        localStorage.setItem('name', e.target.value);
     }
 }
 

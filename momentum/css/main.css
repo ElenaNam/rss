@@ -5,22 +5,29 @@
   }
   
   body {
+    
     font-family: 'Anonymous Pro', monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 100vh;
+    /*height: 100vh;*/
     background-size: cover;
     color: #000000;
   }
 
   .weather {
+    margin-top: 1rem;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
+
+
+  }
+  .weather-icon {
 
   }
   .temperature {
@@ -107,11 +114,11 @@
 
 
   #time {
-    font-size: 8rem;
+    font-size: 7rem;
   }
   #greeting {
     white-space: pre-line;
-    font-size: 4rem;
+    font-size: 3rem;
     opacity: 0.8; 
 
   }
@@ -123,14 +130,14 @@
   h2 {
     margin-bottom: 0.5rem;
     opacity: 0.8;
-    font-size: 4rem;
+    font-size: 3rem;
 
 
   }
   #focustoday {
     outline: none;
     border: none;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
   }
 
