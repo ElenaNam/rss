@@ -5,12 +5,16 @@ const time = document.getElementById('time'),
     focustoday = document.getElementById('focustoday'),
     date1 = document.getElementById('date1'),    
     input = document.getElementById('input'),
+
     weatherIcon = document.querySelector('.weather-icon'),
     temperature = document.querySelector('.temperature'),
     humidity = document.querySelector('.humidity'),
     windspeed = document.querySelector('.windspeed'),
     weatherDescription = document.querySelector('.weather-description'),
-    city = document.querySelector('.city');
+    city = document.querySelector('.city'),
+
+    quote = document.querySelector('.quote'),
+    author = document.querySelector('.author');
 
 // Options
 //const showAmPm = true;
@@ -148,7 +152,7 @@ function setFocus(e) {
         localStorage.setItem('focustoday', e.target.innerText);
     }
 }
-
+           //  ПОГОДА
 
 async function getWeather() {  
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
@@ -173,32 +177,46 @@ function setCity(event) {
       getWeather();
       city.blur();
     }
-  }
+}
 
+            // ЦИТАТА
 
-
-
+async function getQuote() {
+    const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
+    const res = await fetch(url);
+    const data = await res.json();
+    quote.textContent = `<<${data.quote.quoteText}>>`;
+    author.textContent = data.quote.quoteAuthor;
+}
 
 
 
 
 // обработчики событий
+
+//Имя
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
 name. addEventListener('click', setName);
+
+//Цель
 
 focustoday.addEventListener('keypress', setFocus);
 focustoday.addEventListener('blur', setFocus);
 //focustoday. addEventListener('click', setFocus);
 
+//Погода
+
 document.addEventListener('DOMContentLoaded', getWeather);
 city.addEventListener('keypress', setCity);
 
-
+//Цитата
+document.addEventListener('DOMContentLoaded', getQuote);
 
 // Run 
 showTime();
 setBgGreet();
 getName();
 getFocus();
-getWeather()
+getWeather();
+getQuote();
