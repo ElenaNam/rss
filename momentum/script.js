@@ -3,10 +3,12 @@ const time = document.getElementById('time'),
     greeting = document.getElementById('greeting'),
     name = document.getElementById('name'),
     focustoday = document.getElementById('focustoday'),
-    date1 = document.getElementById('date1');
-    
-    input = document.getElementById('input');
-
+    date1 = document.getElementById('date1'),    
+    input = document.getElementById('input'),
+    weatherIcon = document.querySelector('.weather-icon'),
+    temperature = document.querySelector('.temperature'),
+    weatherDescription = document.querySelector('.weather-description'),
+    city = document.querySelector('.city');
 
 // Options
 //const showAmPm = true;
@@ -146,6 +148,30 @@ function setFocus(e) {
 }
 
 
+async function getWeather() {  
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
+  const res = await fetch(url);
+  const data = await res.json(); 
+  //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+  weatherIcon.className = 'weather-icon owf';
+  weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+  temperature.textContent = `${data.main.temp}°C`;
+  weatherDescription.textContent = data.weather[0].description;
+}
+
+function setCity(event) {
+    if (event.code === 'Enter') {
+      getWeather();
+      city.blur();
+    }
+  }
+
+
+
+
+
+
+
 
 // обработчики событий
 name.addEventListener('keypress', setName);
@@ -156,6 +182,9 @@ focustoday.addEventListener('keypress', setFocus);
 focustoday.addEventListener('blur', setFocus);
 //focustoday. addEventListener('click', setFocus);
 
+document.addEventListener('DOMContentLoaded', getWeather);
+city.addEventListener('keypress', setCity);
+
 
 
 // Run 
@@ -163,3 +192,4 @@ showTime();
 setBgGreet();
 getName();
 getFocus();
+getWeather()
