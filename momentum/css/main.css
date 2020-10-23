@@ -21,11 +21,32 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
+
   }
-  
-  .weather * {
+  .temperature {
     display: flex;
     font-size: 2rem;
+  }
+
+  .humidity {
+    display: flex;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .windspeed {
+    display: flex;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .weather-description {
+    display: flex;
+    font-size: 2rem;
+  }
+  
+  .city {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
   }
 
 

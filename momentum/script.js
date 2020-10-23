@@ -7,6 +7,8 @@ const time = document.getElementById('time'),
     input = document.getElementById('input'),
     weatherIcon = document.querySelector('.weather-icon'),
     temperature = document.querySelector('.temperature'),
+    humidity = document.querySelector('.humidity'),
+    windspeed = document.querySelector('.windspeed'),
     weatherDescription = document.querySelector('.weather-description'),
     city = document.querySelector('.city');
 
@@ -155,7 +157,9 @@ async function getWeather() {
   //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
   weatherIcon.className = 'weather-icon owf';
   weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-  temperature.textContent = `${data.main.temp}°C`;
+  temperature.textContent = `${data.main.temp}°C`;  
+  windspeed.textContent = `скорость ветра ${data.wind.speed}м/с`; 
+  humidity.textContent = `относительная влажность ${data.main.humidity}%`;
   weatherDescription.textContent = data.weather[0].description;
 }
 
