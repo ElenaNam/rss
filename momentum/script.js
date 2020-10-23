@@ -1,9 +1,12 @@
 // DOM Elements
 const time = document.getElementById('time'),
+
     greeting = document.getElementById('greeting'),
     name = document.getElementById('name'),
+
     focustoday = document.getElementById('focustoday'),
-    date1 = document.getElementById('date1'),    
+    date1 = document.getElementById('date1'), 
+
     input = document.getElementById('input'),
 
     weatherIcon = document.querySelector('.weather-icon'),
@@ -11,10 +14,12 @@ const time = document.getElementById('time'),
     humidity = document.querySelector('.humidity'),
     windspeed = document.querySelector('.windspeed'),
     weatherDescription = document.querySelector('.weather-description'),
-    city = document.querySelector('.city'),
+    city = document.getElementById('city'),
 
     quote = document.querySelector('.quote'),
-    author = document.querySelector('.author');
+    author = document.querySelector('.author'),
+
+    btn = document.querySelector('.btn');
 
 // Options
 //const showAmPm = true;
@@ -65,35 +70,31 @@ function addZero(number) {
     return (parseInt(number, 10) < 10 ? '0' : '') + number;
 }
 
-// Set Background and Greeting
-function setBgGreet() {
+// Set Greeting
+function setGreet() {
     let today = new Date(),
         hour = today.getHours();
-    if(hour > 6 && hour < 12) {
-        // Morning   
-        document.body.style.backgroundImage = "url('../img/morning.jpg')";  
-        greeting.textContent = 'Доброе утро \n';  
+    if(hour < 6) {
+        // Night      
+        greeting.textContent = 'Доброй ночи, \n'; 
+        document.body.style.color = 'white';  
+    } else if(hour < 12) {
+        // Morning           
+        greeting.textContent = 'Доброе утро, \n';  
     } else if (hour < 18) {
-        // Afternoon
-        document.body.style.backgroundImage = "url('img/afternoon.jpg')";  
-        greeting.textContent = 'Добрый день \n'; 
+        // Afternoon  
+        greeting.textContent = 'Добрый день, \n'; 
     } else if (hour < 24) {
-        // Evening
-        document.body.style.backgroundImage = "url('img/evening.jpg')";  
-        greeting.textContent = 'Добрый вечер \n'; 
+        // Evening     
+        greeting.textContent = 'Добрый вечер, \n'; 
     } 
-    else {
-        // Night
-        document.body.style.backgroundImage = "url('../img/night.jpg')";  
-        greeting.textContent = 'Доброй ночи \n'; 
-        document.body.style.color = 'white';   
-    }
+
 }
 
 //for(i=0; i<input.length; i++){
    // input[i].setAttribute('size',input[i].getAttribute('placeholder').length);}
 
-
+   
 
 
 // Get Name
@@ -105,9 +106,6 @@ function getName() {
     }
 }
 
-
-
-
 // Set Name
 function setName(e) {
     if(e.type === 'keypress') {                                        // если нажата клавиша
@@ -118,8 +116,7 @@ function setName(e) {
         }
 
     } else if (e.type === 'click') {                     // если был клик мышкой
-        name.value = '';                                 // очисти поле ввода
-        //localStorage.removeItemKey('name');             // удали из лок.хр предыдущее имя
+        name.value = '';                                 // очисти поле ввода       
     } else {
         localStorage.setItem('name', e.target.value);
     }
@@ -129,9 +126,9 @@ function setName(e) {
 // Get Focus
 function getFocus() {
     if (localStorage.getItem('focustoday') === null) {
-        focustoday.textContent = 'Введите цель';        
+        focustoday.value = 'Введите цель';        
     } else {
-        focustoday.textContent = localStorage.getItem('focustoday');
+        focustoday.value = localStorage.getItem('focustoday');
     }
 }
 
@@ -141,21 +138,20 @@ function setFocus(e) {
     if(e.type === 'keypress') {
         //убедиться что нажат Enter
         if(e.which == 13 || e.keyCode == 13) {                      //13 - это Enter
-            localStorage.setItem('focustoday', e.target.innerText);
+            localStorage.setItem('focustoday', e.target.value);
             name.blur();
         }
 
-    } else if (e.type === 'click') {                             // если был клик мышкой
-        focustoday.textContent = '';                           // очисти поле ввода
-        //localStorage.removeItemKey('focustoday');             // удали из лок.хр предыдущую цель
+    } else if (e.type === 'click') {                     // если был клик мышкой
+        focustoday.value = '';                         // очисти поле ввода                
     } else {
-        localStorage.setItem('focustoday', e.target.innerText);
+        localStorage.setItem('focustoday', e.target.value);
     }
 }
-           //  ПОГОДА
+          //  ПОГОДА
 
 async function getWeather() {  
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.textContent}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
   try { 
     const res = await fetch(url);
     const data = await res.json();   
@@ -166,18 +162,44 @@ async function getWeather() {
     humidity.textContent = `относительная влажность ${data.main.humidity}%`;
     weatherDescription.textContent = data.weather[0].description;
   } catch (error) {
-    city.textContent = 'Город не найден';
+    city.value = 'Город не найден';
     city.style.background = 'red';
     localStorage.setItem('city', '');    
   }
+  console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+}
+// Get City
+function getCity() {
+    if (localStorage.getItem('city') === null) {
+        city.value = 'Ваш город';        
+    } else {
+        city.value = localStorage.getItem('city');
+    }
 }
 
-function setCity(event) {
+// Set City
+
+function setCity(e) {
+    if(e.type === 'keypress') {
+            if(e.which == 13 || e.keyCode == 13) {  
+            getWeather();                    
+            localStorage.setItem('city', e.target.value);
+            name.blur();
+        }
+    } else if (e.type === 'click') {                        
+        city.value = '';                       
+               
+    } else {
+        localStorage.setItem('city', e.target.value);
+    }
+}
+
+/*function setCity(event) {
     if (event.code === 'Enter') {
       getWeather();
       city.blur();
     }
-}
+}*/
 
             // ЦИТАТА
 const quotes = {
@@ -208,7 +230,7 @@ const quotes = {
 const quotesArr = Object.keys(quotes);
 const q = quotesArr[Math.floor(Math.random() * quotesArr.length)];
 const a = quotes[q];
-
+// другой вариант
 /*async function getQuote() {
     const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
     const res = await fetch(url);
@@ -222,8 +244,105 @@ function getQuote() {
     author.textContent = a;
 }
 
+           // ФОНОВЫЕ ИЗОБРАЖЕНИЯ
+
+const base = 'assets/images/';
+const images = ['01.jpg', '02.jpg', '03.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'];
 
 
+//for (let j = 0; j < images.length; j++) {
+   // const imgOne = images[j][Math.floor(Math.random() * images[j].length)];
+//}
+
+
+let sixArray = [];
+// получаем массив с 6 jpg-ми
+function randomImg(){
+    const i = Math.floor(Math.random() * images.length);
+    let j = i;
+    let arr = [];
+    j > 13 ? j = j - 7 : true
+    for (let o = j; o < images.length; o++) {
+        if (o >= 19 || images[o] === undefined) {
+            o = o - 10
+            arr.push(images[o])
+        } else {
+            arr.push(images[o])
+        }
+    }
+    let k = 0;
+    while (k < 6) {
+        sixArray.push(arr[k]);
+        k++;
+    }
+    console.log (sixArray);
+    return sixArray;
+}
+console.log (randomImg())
+
+let dailyArray = [...sixArray, ...sixArray, ...sixArray, ...sixArray];
+console.log (dailyArray);
+// получаем кокретную картинку в зависимости от времени суток
+window.onload = function getDailyBg() {
+    let imageSrc = '',
+        today = new Date(),
+        hour = today.getHours(),
+        index = Math.floor(Math.random() * sixArray.length);
+    if (hour < 6) {
+        imageSrc = 'night/' + sixArray[index];        
+    } else if (hour < 12) {
+        imageSrc = 'morning/' + sixArray[index];
+    } else if (hour < 18) {
+        imageSrc = 'day/' + sixArray[index];
+    } else if (hour < 24) {
+        imageSrc = 'evening/' + sixArray[index];
+    }
+    viewBgImg(imageSrc);
+}
+
+
+// передаем  конкретную картинку в стиль body в качестве фона 
+function viewBgImg(data) {
+    const body = document.querySelector('body'),
+          src = data,
+          img = document.createElement('img');
+    img.src = src;
+    img.onload = () => {body.style.backgroundImage = `url(${src})`}; //это она самая
+}
+// получаем конкретную картинку каждый час
+let i = 0;
+function getImage() {
+    const index = Math.floor(Math.random() * images.length);
+    let imageSrc = '',
+        today = new Date();
+        hour = today.getHours();    
+            
+    let count = hour + i;
+
+    if (count >= 24) {
+        i = i - count;
+    }  
+    if (count < 6 || count === 24) {
+        imageSrc = base + 'night/' + dailyArray[count - 1];
+        console.log (imageSrc);
+      
+    } else if (count < 12) {
+        imageSrc = base + 'morning/' + dailyArray[count];  
+    
+    } else if (count < 18) {
+        imageSrc =  base + 'day/' + dailyArray[count];   
+    
+    } else if (count < 24) {
+        imageSrc = base + 'evening/' + dailyArray[count];
+    }
+
+    viewBgImg(imageSrc);
+    i++;
+
+    btn.disabled = true;
+    setTimeout(function() {btn.disabled = false;}, 1000);
+    
+}
 
 // обработчики событий
 
@@ -236,20 +355,28 @@ name. addEventListener('click', setName);
 
 focustoday.addEventListener('keypress', setFocus);
 focustoday.addEventListener('blur', setFocus);
-//focustoday. addEventListener('click', setFocus);
+focustoday. addEventListener('click', setFocus);
 
 //Погода
 
 document.addEventListener('DOMContentLoaded', getWeather);
+
 city.addEventListener('keypress', setCity);
+city.addEventListener('click', setCity);
+city.addEventListener('blur', setCity);
 
 //Цитата
 document.addEventListener('DOMContentLoaded', getQuote);
 
+//Фон
+btn.addEventListener('click', getImage);
+
 // Run 
 showTime();
-setBgGreet();
+setGreet();
 getName();
 getFocus();
 getWeather();
+getCity();
 getQuote();
+getImage();
