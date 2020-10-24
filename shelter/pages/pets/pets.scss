@@ -1,4 +1,200 @@
 
+// _variables
+
+$color-light-s: #FAFAFA;
+$color-light-l: #F6F6F6;
+$color-light-xl:#FFFFFF;
+
+$color-dark-s: #CDCDCD;
+$color-dark-m: #B2B2B2;
+$color-dark-l: #545454;
+$color-dark-xl: #4C4C4C;
+$color-dark-2xl: #444444;
+$color-dark-3xl: #292929;
+
+$color-primary: #F1CDB3;
+$color-primary-light: #FDDCC4;
+
+$start-screen-gradient-background: url(/assets/images/noise_transparent.png), 
+radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+
+$footer-gradient-background: url(/assets/images/footer-gradient-background.png),
+radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%), #211F20;
+
+$card_hover: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+
+
+// _texts
+
+@mixin h2 {
+    font: {
+        family: Georgia;                
+        size: 4.4rem;
+        weight: 400;      
+    }
+    line-height: 130%;
+}
+
+@mixin h3 {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: normal;
+        size: 3.5rem;
+    }
+    line-height: 130%;
+    letter-spacing: 0.21rem;
+}
+
+@mixin h4 {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: normal;
+        size: 2rem;
+    }
+    line-height: 115%;
+    letter-spacing: 0.12rem;
+}
+
+@mixin h5 {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: normal;
+        size: 1.5rem;
+    }
+    line-height: 110%;
+    letter-spacing: 6%;
+}
+
+@mixin paragraph-l {
+    font: {
+        family: Arial;
+        style: normal;
+        weight: normal;
+        size: 1.5rem;
+    }
+    line-height: 160%;
+}
+
+@mixin paragraph-s {
+    font: {
+        family: Arial;
+        style: italic;
+        weight: normal;
+        size: 1.2rem;
+    }
+    line-height: 150%;
+}
+
+@mixin logo_title {
+    font: {
+        family: Georgia;
+        style: normal;
+        weight: 400;
+        size: 3.2rem;
+    }
+    line-height: 110%;
+    letter-spacing: 0.192rem;
+}
+
+@mixin logo_subtitle {
+    font: {
+        family: Arial;
+        style: normal;
+        weight: normal;
+        size: 1.3rem;
+    }
+    line-height: 110%;    
+    letter-spacing: 0.13rem;
+}
+
+// _buttons
+
+@mixin slider-button {
+    display: flex;
+    justify-content: center;
+    max-width: 5.2rem;
+    max-height: 5.2rem;
+    align-items: center;
+    border: none;
+    border-radius: 100%;    
+    background: none;
+    cursor: pointer;
+    outline: none;
+    box-shadow: inset 0 0 0 0.3rem $color-primary;
+    transition-duration: 0.5s;
+
+
+
+    &:hover {
+        box-shadow: none;
+        background-color: $color-primary-light;
+
+    }
+}
+ 
+
+
+@mixin button() {
+    padding: 1.5rem 4.5rem;         
+    border-radius: 10rem;      
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-size: 1.7rem;
+    line-height: 130%; 
+    letter-spacing: 0.108rem; 
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;    
+    transition-duration: 0.5s;
+    
+}
+
+@mixin button_primary() {
+    background-color: $color-primary;
+    &:hover {
+        background-color: $color-primary-light;
+    }
+   
+    @include button;
+}
+
+@mixin button_secondary() {
+
+    background-color: transparent;   
+    box-shadow: inset 0 0 0 2px $color-primary;
+    &:hover {
+        box-shadow: none;
+        background-color: $color-primary-light;
+    }
+    @include button;
+}
+
+@mixin pagination_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5.2rem;
+    height: 5.2rem;
+    box-shadow: inset 0 0 0 0.3rem $color-primary;
+    border-radius: 100%;
+    transition-duration: 0.5s;
+    padding: 1.9rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+
+    &:hover {
+        box-shadow: none;
+        background-color: $color-primary-light;
+    }
+}
+
+
+
 
 /* HEADER */
 .wrapper {   
@@ -9,15 +205,262 @@
     justify-content: space-between;
 }
 
-.header {
+.pets-header {
     width: 100vw;
     max-width: 100%;
-    position: absolute;
+    position: sticky;
     top: 6rem;  
   
 }
+
+.logo { 
+    margin-left: 4rem; 
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        color: $color-primary;
+        @include logo_title;
+    }
+
+    &__subtitle {
+        margin-top: 1rem;
+        color: $color-light-xl;       
+        text-align: center;
+        @include logo_subtitle;
+    }
+}
+
 .menu {
     width: 44.3rem;
     display: flex;
     margin-right: 4rem;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    list-style-type: none;
+
+    .list__item {
+        display: flex;
+        align-items: center;
+
+        .list__link {
+            @include paragraph-l;
+            color: $color-light-xl;
+        
+
+            &_active {
+                color: $color-light-s;
+                border-bottom: solid 0.3rem $color-primary;
+            }
+
+            &_disabled {
+                color: $color-dark-l;
+            }
+        }
+    }
+}
+.main {
+    &__wrapper {
+        padding-top: 8rem;
+        padding-bottom: 10rem;
+        flex-direction: column;
+    }
+    &-pets__title {
+        color: &color-dark-l;
+        text-align: center;
+        @include h3();
+        span {
+            display:block;
+        }
+    }
+
+    &-pets-cards {
+        margin-top: 6rem;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 4rem;
+        row-gap: 3rem;
+    }
+
+    &-paginations {
+        display: flex;
+        margin-top: 6rem;
+        justify-content: center;
+
+
+        &__button {
+            margin: 0 1rem;
+            @include pagination_button();
+            @include h4();
+
+            &_active {
+                box-shadow: none;
+                background-color: $color-primary();
+                cursor: auto;
+
+                &:hover {                    
+                    background-color: $color-primary();
+                   
+                }
+            }
+            
+            &_disabled {
+                box-shadow: inset 0 0 0 0.3rem $color-dark-s;
+
+                &:hover {
+                    box-shadow: inset 0 0 0 0.3rem $color-dark-s;
+                    background-color: transparent;
+                    cursor: auto;
+                }
+            }
+        }
+    }
+}
+
+.pets__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.9rem;
+
+    &:hover {
+        box-shadow: $card_hover;
+    }
+
+    .pets__image {
+        width: 100%;
+    }
+
+
+    .pets__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 3rem;    
+
+
+        p {
+            margin: 3rem 0;
+            text-align: center;
+            @include h4();     
+        }
+
+        &__button {
+            @include button_secondary();            
+        }
+    }
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        color: $color-dark-l;
+        @include logo_title();
+    }
+
+    &__subtitle {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+
+}
+
+
+
+/* FOOTER */
+
+.footer {
+    height: 35rem; /*убрать !!!*/
+    display: flex;
+    background: $footer-gradient-background;
+    
+    & .wrapper {
+       justify-content: space-between;
+        
+    }
+
+    &__wrapper {
+        padding: 4rem 4rem 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-direction: row;
+        /*align-items: center; */
+    }
+
+    &__content {
+        width: 100%;   
+        padding: 1.6rem 0 6rem;
+        /*max-width: 74rem;     */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+       
+        .footer__section {
+            &:nth-child(1) {
+                width:48.38%;
+            }
+            &:nth-child(2) {
+                width:51.62%;
+            }
+
+            /*max-width: 27.8rem;*/
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;          
+        }      
+    }
+
+    .footer-section__title {        
+        span {
+            
+            display: block;
+            color: $color-light-xl;
+            @include h3();
+        }
+    }
+
+    .icon-link {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        
+        span {
+            display: block;
+            /*flex-direction: row;*/
+            /*justify-content: center;*/
+            margin-right: 2rem;
+        }
+
+    }
+
+    .footer__icon {
+        width: 100%;
+    }
+
+    .footer__link {
+        
+        text-decoration: none;        
+        color: $color-primary;
+        @include h4();
+
+    }
+
+    .footer__link:hover {
+        text-decoration: none;
+    }
+
+ 
+    &__image {
+        width: 100%;
+        max-width: 30rem;
+    }
+
 }
