@@ -1,0 +1,30 @@
+/* HEADER */
+.wrapper {
+  max-width: 128rem;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header {
+  width: 100vw;
+  max-width: 100%;
+  position: absolute;
+  top: 6rem;
+}
+
+.menu {
+  width: 44.3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 4rem;
+}
+/*# sourceMappingURL=pets.css.map */
