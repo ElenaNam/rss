@@ -5,14 +5,13 @@
   }
   
   body {
-    
     font-family: 'Anonymous Pro', monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /*height: 100vh;*/
+    height: 100vh;
     background-size: cover;
     color: #ffffff;
     text-shadow: rgb(7, 7, 7) 3px 3px 5px, rgb(3, 3, 3) -1px -1px 0, rgb(3, 3, 3) -1px 1px 0,
@@ -76,30 +75,32 @@
     display: flex;
   }
 
-  input {
-    
-    /*width: 100%;*/
+  input {    
+    width: 20em;
     text-align: center;
     background: none;
     border: none;
     /*border-bottom: 1px rgb(246, 236, 246) solid;*/
     text-align: center;
+    word-wrap: break-word;
     
     
   }
   .container {
     position: relative;
-    display: flex;
+    word-wrap: break-word;
+    display: inline-flex;
     flex-direction: column;
     /*background: rgba(56, 55, 55, 0.2);
     border-radius: 10%;*/
-    margin-top: 3rem;    
+    margin-top: 3rem;   
+   
 
   }
 
   #name::placeholder {
     color: #cfcaca;
-    opacity: 0.4;
+    opacity: 0.6;
     font-weight: 400;
     margin: 0 auto;
   }
@@ -158,7 +159,7 @@
 
   #focustoday::placeholder {
     color: #cfcaca;
-    opacity: 0.5;
+    opacity: 0.6;
     font-weight: 400;
     margin: 0 auto;
   }
@@ -196,35 +197,24 @@
     border-radius: 50%;
     background: url(/assets/bg-icon.png);
     background-size: contain;
-    background-repeat: no-repeat;
-    /*filter: grayscale(6);*/
-    
-
+    background-repeat: no-repeat;     
   }
 
-  .btn:hover {
-    /*filter: grayscale(0.1);*/
+  .btn:hover {  
     cursor: pointer;   
     background-color: rgb(192, 130, 5); 
-
   }
 
   .btn:active,
   .btn:focus {
     outline: 0;
     cursor: pointer;
-
-
   }
 
-  .btn:active {
-    /*transform: scale(1.2)*/    
-   transform: rotate(360deg);   
-   transition: all .2s ease-in-out; 
+  .btn:active {    
+   transform: rotate(90deg);   
+   transition: all .3s ease-in-out; 
   }
-
-
-
 
 
 
