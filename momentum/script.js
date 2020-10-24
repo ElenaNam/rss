@@ -91,8 +91,8 @@ function setGreet() {
 
 }
 
-//for(i=0; i<input.length; i++){
-   // input[i].setAttribute('size',input[i].getAttribute('placeholder').length);}
+//for(let i=0; i<input.length; i++){
+    //input[i].setAttribute('size',input[i].getAttribute('placeholder').length);}
 
    
 
@@ -139,7 +139,7 @@ function setFocus(e) {
         //убедиться что нажат Enter
         if(e.which == 13 || e.keyCode == 13) {                      //13 - это Enter
             localStorage.setItem('focustoday', e.target.value);
-            name.blur();
+            focustoday.blur();
         }
 
     } else if (e.type === 'click') {                     // если был клик мышкой
@@ -184,7 +184,7 @@ function setCity(e) {
             if(e.which == 13 || e.keyCode == 13) {  
             getWeather();                    
             localStorage.setItem('city', e.target.value);
-            name.blur();
+            city.blur();
         }
     } else if (e.type === 'click') {                        
         city.value = '';                       

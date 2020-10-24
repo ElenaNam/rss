@@ -16,11 +16,10 @@
     background-size: cover;
     color: #ffffff;
     text-shadow: rgb(7, 7, 7) 3px 3px 5px, rgb(3, 3, 3) -1px -1px 0, rgb(3, 3, 3) -1px 1px 0,
-    rgb(0, 0, 0) 1px -1px 0;
-    
+    rgb(0, 0, 0) 1px -1px 0;    
     background-blend-mode: multiply;
     background: url("assets/images/overlay.png") center center / cover no-repeat, linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-    
+    transition: background-image 1.5s ease-in-out;
   }
 
   .weather {
@@ -30,10 +29,9 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
-
-
   }
   .weather-icon {
+    width: 100%;
 
   }
   .temperature {
@@ -90,6 +88,7 @@
     
   }
   .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     /*background: rgba(56, 55, 55, 0.2);
@@ -139,7 +138,7 @@
   }
   
   h1 {
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
   }
   
   h2 {
@@ -173,40 +172,60 @@
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;
-    max-width: 70%;
-    font-size: 1.5rem;
+    max-width: 60%;
+    
   }
   .quote {
     display: flex; 
+    font-size: 1.7rem;
   }
   .author {
     margin-top: 2rem;
     margin-left: auto; 
+    font-size: 1.5rem;
   }
 
 
   .btn {
-    width: 5rem;
-    height: 5rem;
+    position: absolute;
+    vertical-align: auto;
+    right: 5rem;
+    width: 3rem;
+    height: 3rem;
     border: 0;
+    border-radius: 50%;
     background: url(/assets/bg-icon.png);
     background-size: contain;
     background-repeat: no-repeat;
-    filter: grayscale(1);
+    /*filter: grayscale(6);*/
+    
+
   }
 
   .btn:hover {
-    filter: grayscale(0.7);
+    /*filter: grayscale(0.1);*/
+    cursor: pointer;   
+    background-color: rgb(192, 130, 5); 
+
   }
 
   .btn:active,
   .btn:focus {
     outline: 0;
+    cursor: pointer;
+
+
   }
 
   .btn:active {
-    transform: scale(1.02)
+    /*transform: scale(1.2)*/    
+   transform: rotate(360deg);   
+   transition: all .2s ease-in-out; 
   }
+
+
+
+
 
 
 
