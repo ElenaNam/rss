@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Anonymous Pro', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    background-size: cover;
+    color: #ffffff;
+    text-shadow: rgb(7, 7, 7) 3px 3px 5px, rgb(3, 3, 3) -1px -1px 0, rgb(3, 3, 3) -1px 1px 0,
+    rgb(0, 0, 0) 1px -1px 0;    
+    background-blend-mode: multiply;
+    background: url("assets/images/overlay.png") center center / cover no-repeat, linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    transition: background-image 1.5s ease-in-out;
+  }
+
+  .weather {
+    margin-top: 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .weather-icon {
+    width: 100%;
+
+  }
+  .temperature {
+    display: flex;
+    font-size: 2rem;
+  }
+
+  .humidity {
+    display: flex;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .windspeed {
+    display: flex;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .weather-description {
+    display: flex;
+    font-size: 1.8rem;
+  }
+  
+  #city {
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+    outline: none;
+  }
+
+  #city::placeholder {
+    color: #cfcaca;
+    opacity: 0.4;
+    font-weight: 400;
+    margin: 0 auto;
+  }
+  #city:focus::placeholder {
+    opacity: 0;    
+  }
+
+
+  .head-1 {
+    display: flex;
+  }
+
+  input {    
+    width: 20em;
+    text-align: center;
+    background: none;
+    border: none;
+    /*border-bottom: 1px rgb(246, 236, 246) solid;*/
+    text-align: center;
+    word-wrap: break-word;
+    
+    
+  }
+  .container {
+    position: relative;
+    word-wrap: break-word;
+    display: inline-flex;
+    flex-direction: column;
+    /*background: rgba(56, 55, 55, 0.2);
+    border-radius: 10%;*/
+    margin-top: 3rem;   
+   
+
+  }
+
+  #name::placeholder {
+    color: #cfcaca;
+    opacity: 0.6;
+    font-weight: 400;
+    margin: 0 auto;
+  }
+  #name:focus::placeholder {
+    opacity: 0;    
+  }
+
+
+
+
+  #name {
+    min-width: 0;
+    display: inline-block;
+    margin: 0.5 auto 0 0;
+    outline: none;
+    /*background: none;*/
+    /*background: wheat;*/
+    color: rgb(255, 255, 255);
+    
+    font-size: 4rem;
+    font-weight: 700;
+  }
+  
+  #date1 {
+    font-size: 5rem;
+  }
+
+
+  #time {
+    font-size: 7rem;
+  }
+  #greeting {
+    white-space: pre-line;
+    font-size: 3rem;
+    opacity: 0.8; 
+  }
+  
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    font-size: 3rem;
+
+
+  }
+  #focustoday {
+    outline: none;
+    border: none;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+  }
+
+  #focustoday::placeholder {
+    color: #cfcaca;
+    opacity: 0.6;
+    font-weight: 400;
+    margin: 0 auto;
+  }
+  #focustoday:focus::placeholder {opacity: 0;}
+  /*#focustoday: :focus {
+    border-bottom: 2px rgb(105, 103, 105) solid;
+  }*/
+  
+  .quotes-wrapper  {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    max-width: 60%;
+    
+  }
+  .quote {
+    display: flex; 
+    font-size: 1.7rem;
+  }
+  .author {
+    margin-top: 2rem;
+    margin-left: auto; 
+    font-size: 1.5rem;
+  }
+
+
+  .btn {
+    position: absolute;
+    vertical-align: auto;
+    right: 5rem;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    border-radius: 50%;
+    background: url(/assets/bg-icon.png);
+    background-size: contain;
+    background-repeat: no-repeat;     
+  }
+
+  .btn:hover {  
+    cursor: pointer;   
+    background-color: rgb(192, 130, 5); 
+  }
+
+  .btn:active,
+  .btn:focus {
+    outline: 0;
+    cursor: pointer;
+  }
+
+  .btn:active {    
+   transform: rotate(90deg);   
+   transition: all .3s ease-in-out; 
+  }
+
+
+
+
+  @media (max-width: 700px) {
+    .time {
+      font-size: 6rem;
+    }
+  }
