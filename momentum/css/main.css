@@ -204,10 +204,11 @@ h2 {
   height: 3rem;
   border: 0;
   border-radius: 50%;
-  background: url(/assets/bg-icon.png);
+  background: url(../assets/bg-icon.png);
   background-size: contain;
   background-repeat: no-repeat;     
 }
+
 
 .btn:hover {  
   cursor: pointer;   
