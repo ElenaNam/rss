@@ -343,6 +343,7 @@ window.onload = function getDailyBg() {
         imageSrc = 'day/' + sixArray[index];
     } else if (hour < 24) {
         imageSrc = 'evening/' + sixArray[index];
+        console.log(imageSrc);
     }
     viewBgImg(imageSrc);
 }
@@ -370,17 +371,18 @@ function getImage() {
         i = i - count;
     }  
     if (count < 6 || count === 24) {
-        imageSrc = base + 'night/' + dailyArray[count - 1];
+        imageSrc = './' + base + 'night/' + dailyArray[count - 1];
         console.log (imageSrc);
       
     } else if (count < 12) {
-        imageSrc = base + 'morning/' + dailyArray[count];  
+        imageSrc = './' + base + 'morning/' + dailyArray[count];  
     
     } else if (count < 18) {
-        imageSrc =  base + 'day/' + dailyArray[count];   
+        imageSrc =  './' + base + 'day/' + dailyArray[count];   
     
     } else if (count < 24) {
-        imageSrc = base + 'evening/' + dailyArray[count];
+        imageSrc = './' + base + 'evening/' + dailyArray[count];
+        console.log (imageSrc);
     }
 
     viewBgImg(imageSrc);
