@@ -7,7 +7,7 @@ const time = document.getElementById('time'),
     focustoday = document.getElementById('focustoday'),
     date1 = document.getElementById('date1'), 
 
-    input = document.getElementById('input'),
+    //input = document.getElementById('input'),
 
     weatherIcon = document.querySelector('.weather-icon'),
     temperature = document.querySelector('.temperature'),
@@ -152,49 +152,86 @@ function setFocus(e) {
 }
           //  ПОГОДА
 
-async function getWeather() {  
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
-  try { 
-    const res = await fetch(url);
-    const data = await res.json();   
-    weatherIcon.className = 'weather-icon owf';
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    temperature.textContent = `${data.main.temp}°C`;  
-    windspeed.textContent = `скорость ветра ${data.wind.speed}м/с`; 
-    humidity.textContent = `относительная влажность ${data.main.humidity}%`;
-    weatherDescription.textContent = data.weather[0].description;
-  } catch (error) {
-    city.value = 'Город не найден';
-    city.style.background = 'red';
-    localStorage.setItem('city', '');    
-  }
-  console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
-}
 // Get City
 function getCity() {
-    if (localStorage.getItem('city') === null) {
-        city.value = 'Ваш город';        
+    if (localStorage.getItem('city') === null  || localStorage.getItem('city') === '') {
+        city.value = 'Ваш город';
+        city.style.color = 'white';        
     } else {
         city.value = localStorage.getItem('city');
+        getWeather();
     }
 }
+
+
 
 // Set City
 
 function setCity(e) {
     if(e.type === 'keypress') {
-            if(e.which == 13 || e.keyCode == 13) {  
-            getWeather();                    
-            localStorage.setItem('city', e.target.value);
+            city.style.color = 'white'; 
+            if(e.which == 13 || e.keyCode == 13) { 
+                if (localStorage.getItem('city') === ''){   //localStorage.getItem('city') === null || 
+                    city.value = '';  
+                    //city.value = 'Ваш город';
+                }  else {
+                   
+                    //city.value = localStorage.getItem('city');
+                    //getWeather();
+                    localStorage.setItem('city', e.target.value); 
+                    getWeather();
+                    /*localStorage.setItem('city', e.target.value); */ //работает только после обновления страницы*/                  
+                  
+                }  
+                     
+            
             city.blur();
-        }
-    } else if (e.type === 'click') {                        
-        city.value = '';                       
+            }
+    } else if (e.type === 'click') {      
+            city.value = ''; 
+                       
+                     
                
-    } else {
+    } else {//blur
         localStorage.setItem('city', e.target.value);
+        getWeather();  
     }
+    
 }
+
+async function getWeather() {  
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=ru&appid=8d9aaf89b688cf115332aee8f50199c7&units=metric`;
+   
+    try { 
+        
+        const res = await fetch(url);
+        const data = await res.json();   
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        temperature.textContent = `${data.main.temp}°C`;  
+        windspeed.textContent = `скорость ветра ${data.wind.speed}м/с`; 
+        humidity.textContent = `относительная влажность ${data.main.humidity}%`;
+        weatherDescription.textContent = data.weather[0].description;
+           
+        } catch (error) {
+            city.value = 'Город не найден';
+            city.style.border = '1px solid red';
+            
+            //localStorage.setItem('city', '');       
+          
+          
+    
+            /*weatherIcon.className = "weather-icon owf";
+            temperature.textContent = ``;
+            weatherDescription.textContent = "";
+            humidity.textContent = ``;
+            windspeed.textContent = ``;*/
+   
+        }
+    
+
+    //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+  }
 
 
             // ЦИТАТА
@@ -369,7 +406,7 @@ focustoday. addEventListener('click', setFocus);
 
 //Погода
 
-document.addEventListener('DOMContentLoaded', getWeather);
+//document.addEventListener('DOMContentLoaded', getWeather);
 
 city.addEventListener('keypress', setCity);
 city.addEventListener('click', setCity);
@@ -389,7 +426,7 @@ showTime();
 setGreet();
 getName();
 getFocus();
-getWeather();
 getCity();
+//getWeather();
 getQuote();
 getImage();
