@@ -163,8 +163,6 @@ function getCity() {
     }
 }
 
-
-
 // Set City
 
 function setCity(e) {
@@ -194,9 +192,9 @@ function setCity(e) {
                
     } else {//blur
         localStorage.setItem('city', e.target.value);
-        getWeather();  
+        //getWeather();  
     }
-    
+   
 }
 
 async function getWeather() {  
@@ -217,20 +215,12 @@ async function getWeather() {
             city.value = 'Город не найден';
             city.style.border = '1px solid red';
             
-            //localStorage.setItem('city', '');       
-          
-          
-    
-            /*weatherIcon.className = "weather-icon owf";
-            temperature.textContent = ``;
-            weatherDescription.textContent = "";
-            humidity.textContent = ``;
-            windspeed.textContent = ``;*/
-   
+            //localStorage.setItem('city', '');         
+                
         }
     
 
-    //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
+ 
   }
 
 
@@ -325,10 +315,10 @@ function randomImg(){
     console.log (sixArray);
     return sixArray;
 }
-console.log(randomImg());
+//console.log(randomImg());
 
 let dailyArray = [...sixArray, ...sixArray, ...sixArray, ...sixArray];
-console.log (dailyArray);
+//console.log (dailyArray);
 // получаем кокретную картинку в зависимости от времени суток
 window.onload = function getDailyBg() {
     let imageSrc = '',
@@ -364,9 +354,11 @@ function getImage() {
     const index = Math.floor(Math.random() * images.length);
     let imageSrc = '',
         today = new Date();
-        hour = today.getHours();    
+        //hour = today.getHours();  
+        min = today.getMinutes();  
             
-    let count = hour + i;
+    //let count = hour + i;
+    let count = min + i;
 
     if (count >= 24) {
         i = i - count;
@@ -387,6 +379,7 @@ function getImage() {
     }
 
     viewBgImg(imageSrc);
+    console.log (imageSrc);
     i++;
 
     btn.disabled = true;
@@ -433,3 +426,8 @@ getCity();
 //getWeather();
 getQuote();
 getImage();
+
+
+
+// починить смену фона каждый час
+// ошибку в городе
