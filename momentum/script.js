@@ -287,12 +287,8 @@ const base = 'assets/images/';
 const images = ['01.jpg', '02.jpg', '03.jpg', '05.jpg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpg', '19.jpg', '20.jpg'];
 
 
-//for (let j = 0; j < images.length; j++) {
-   // const imgOne = images[j][Math.floor(Math.random() * images[j].length)];
-//}
-
-
 let sixArray = [];
+
 // получаем массив с 6 jpg-ми
 function randomImg(){
     const i = Math.floor(Math.random() * images.length);
@@ -315,7 +311,7 @@ function randomImg(){
     console.log (sixArray);
     return sixArray;
 }
-//console.log(randomImg());
+console.log(randomImg()); //МАГИЯ - если закомментировать эту строчку, то фон не загрузится...
 
 let dailyArray = [...sixArray, ...sixArray, ...sixArray, ...sixArray];
 //console.log (dailyArray);
@@ -325,15 +321,16 @@ window.onload = function getDailyBg() {
         today = new Date(),
         hour = today.getHours(),
         index = Math.floor(Math.random() * sixArray.length);
-    if (hour < 6) {
-        imageSrc = './' + base + 'night/' + sixArray[index];        
+        console.log(index);
+    if (hour < 6|| hour===24) {//костыль
+        imageSrc = base + 'night/' + sixArray[index];      
+        console.log (imageSrc);  
     } else if (hour < 12) {
-        imageSrc = './' + base + 'morning/' + sixArray[index];
+        imageSrc = base + 'morning/' + sixArray[index];
     } else if (hour < 18) {
-        imageSrc = './' + base + 'day/' + sixArray[index];
+        imageSrc = base + 'day/' + sixArray[index];
     } else if (hour < 24) {
-        imageSrc = './' + base +  'evening/' + sixArray[index];
-        console.log (imageSrc);
+        imageSrc = base +  'evening/' + sixArray[index];       
        
     }
     viewBgImg(imageSrc);
@@ -354,18 +351,18 @@ function getImage() {
     const index = Math.floor(Math.random() * images.length);
     let imageSrc = '',
         today = new Date();
-        //hour = today.getHours();  
-        min = today.getMinutes();  
+        hour = today.getHours();  
+        //min = today.getMinutes();  
             
-    //let count = hour + i;
-    let count = min + i;
+    let count = hour + i;
+    //let count = min + i;
 
     if (count >= 24) {
         i = i - count;
     }  
     if (count < 6 || count === 24) {
-        imageSrc = './' + base + 'night/' + dailyArray[count - 1];
-        console.log (imageSrc);
+        imageSrc = '../' + base + 'night/' + dailyArray[count - 1];
+        //console.log (imageSrc);
       
     } else if (count < 12) {
         imageSrc = './' + base + 'morning/' + dailyArray[count];  
@@ -375,7 +372,7 @@ function getImage() {
     
     } else if (count < 24) {
         imageSrc = './' + base + 'evening/' + dailyArray[count];
-        console.log (imageSrc);
+        
     }
 
     viewBgImg(imageSrc);
