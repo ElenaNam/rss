@@ -155,7 +155,8 @@ function setFocus(e) {
 // Get City
 function getCity() {
     if (localStorage.getItem('city') === null  || localStorage.getItem('city') === '') {
-        city.value = 'Ваш город';        
+        city.value = 'Ваш город';
+        city.style.color = 'white';        
     } else {
         city.value = localStorage.getItem('city');
         getWeather();
@@ -169,25 +170,30 @@ function getCity() {
 function setCity(e) {
     if(e.type === 'keypress') {
             if(e.which == 13 || e.keyCode == 13) { 
-                if (localStorage.getItem('city') === null){
+                if (localStorage.getItem('city') === ''){   //localStorage.getItem('city') === null || 
                     city.value = '';  
+                    //city.value = 'Ваш город';
                 }  else {
-                    getWeather();
+                   
+                    //city.value = localStorage.getItem('city');
+                    //getWeather();
                     localStorage.setItem('city', e.target.value); 
-                    /*getWeather();
-                    localStorage.setItem('city', e.target.value); */ //работает только после обновления страницы
+                    getWeather();
+                    /*localStorage.setItem('city', e.target.value); */ //работает только после обновления страницы*/                  
+                  
                 }  
                      
             
             city.blur();
-        }
+            }
     } else if (e.type === 'click') {      
-            city.value = '';               
+            city.value = ''; 
+                       
                      
                
     } else {//blur
         localStorage.setItem('city', e.target.value);
-        //getWeather();  
+        getWeather();  
     }
     
 }
