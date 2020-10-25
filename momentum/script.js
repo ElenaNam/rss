@@ -18,8 +18,10 @@ const time = document.getElementById('time'),
 
     quote = document.querySelector('.quote'),
     author = document.querySelector('.author'),
-
+    btnquote = document.querySelector('.btn-quote'),
     btn = document.querySelector('.btn');
+    
+    
 
 // Options
 //const showAmPm = true;
@@ -194,12 +196,6 @@ function setCity(e) {
     }
 }
 
-/*function setCity(event) {
-    if (event.code === 'Enter') {
-      getWeather();
-      city.blur();
-    }
-}*/
 
             // ЦИТАТА
 const quotes = {
@@ -227,9 +223,7 @@ const quotes = {
     'Только в спокойных водах вещи отражаются неискаженными. Только спокойное сознание пригодно для восприятия мира' : 'Ганс Марголиус',
 }
 
-const quotesArr = Object.keys(quotes);
-const q = quotesArr[Math.floor(Math.random() * quotesArr.length)];
-const a = quotes[q];
+
 // другой вариант
 /*async function getQuote() {
     const url = `https://quote-garden.herokuapp.com/api/v2/quotes/random`;
@@ -239,10 +233,26 @@ const a = quotes[q];
     author.textContent = data.quote.quoteAuthor;
 }*/
 
-function getQuote() {
+function getQuote() {   
+    const quotesArr = Object.keys(quotes);
+    const q = quotesArr[Math.floor(Math.random() * quotesArr.length)];
+    const a = quotes[q];
     quote.textContent = `<<${q}>>`;
     author.textContent = a;
 }
+
+function setQuote(e) {
+    if (e.type === 'click') {
+        quote.textContent = '';    
+        console.log(quote.textContent);    
+        quote.textContent = `<<${q}>>`;
+        author.textContent = a;   
+        console.log(quote.textContent);
+            
+    }                    
+
+}
+
 
            // ФОНОВЫЕ ИЗОБРАЖЕНИЯ
 
@@ -278,7 +288,7 @@ function randomImg(){
     console.log (sixArray);
     return sixArray;
 }
-console.log (randomImg())
+console.log(randomImg());
 
 let dailyArray = [...sixArray, ...sixArray, ...sixArray, ...sixArray];
 console.log (dailyArray);
@@ -367,6 +377,9 @@ city.addEventListener('blur', setCity);
 
 //Цитата
 document.addEventListener('DOMContentLoaded', getQuote);
+btnquote.addEventListener('click', getQuote);
+
+
 
 //Фон
 btn.addEventListener('click', getImage);

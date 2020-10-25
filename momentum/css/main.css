@@ -23,6 +23,8 @@
   }
 
   .weather {
+    position: fixed;
+    top: 2rem;
     margin-top: 1rem;
     padding: 0;
     display: flex;
@@ -121,7 +123,7 @@
     /*background: wheat;*/
     color: rgb(255, 255, 255);
     
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
   }
   
@@ -153,7 +155,7 @@
   #focustoday {
     outline: none;
     border: none;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 700;
     color: rgb(255, 255, 255);
   }
@@ -165,21 +167,24 @@
     margin: 0 auto;
   }
   #focustoday:focus::placeholder {opacity: 0;}
-  /*#focustoday: :focus {
-    border-bottom: 2px rgb(105, 103, 105) solid;
-  }*/
+
   
   .quotes-wrapper  {
-    position: relative;
+    position: absolute;
+    bottom: 2rem;
     display: flex;
     flex-direction: column;
     margin-top: 1.5rem;
     max-width: 60%;
     
+    
   }
   .quote {
     display: flex; 
     font-size: 1.7rem;
+
+    /*position: fixed;*/
+    /*height: 10%;*/
   }
   .author {
     margin-top: 2rem;
@@ -188,7 +193,7 @@
   }
 
 
-  .btn {
+  .btn {    
     position: absolute;
     vertical-align: auto;
     right: 5rem;
@@ -219,9 +224,41 @@
 
 
 
+  .btn-quote {
+    margin: auto;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 50%;
+    background: url(/assets/bg-icon.png);
+    background-size: contain;
+    background-repeat: no-repeat;  
+  }
+
+  .btn-quote:hover {  
+    cursor: pointer;   
+    background-color: rgb(216, 105, 41); 
+  }
+
+  .btn-quote:active,
+  .btn-quote:focus {
+    outline: 0;
+    cursor: pointer;
+  }
+
+  .btn-quote:active {    
+   transform: rotate(90deg);   
+   transition: all .3s ease-in-out; 
+  }
+
+
+
 
   @media (max-width: 700px) {
     .time {
       font-size: 6rem;
     }
   }
+
+
+
