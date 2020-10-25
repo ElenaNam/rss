@@ -326,14 +326,14 @@ window.onload = function getDailyBg() {
         hour = today.getHours(),
         index = Math.floor(Math.random() * sixArray.length);
     if (hour < 6) {
-        imageSrc = base + 'night/' + sixArray[index];        
+        imageSrc ='./' + base + 'night/' + sixArray[index];        
     } else if (hour < 12) {
-        imageSrc = base + 'morning/' + sixArray[index];
+        imageSrc = './' + base + 'morning/' + sixArray[index];
     } else if (hour < 18) {
-        imageSrc = base + 'day/' + sixArray[index];
+        imageSrc = './' + base + 'day/' + sixArray[index];
     } else if (hour < 24) {
-        imageSrc = base +  'evening/' + sixArray[index];
-        console.log (imageSrc);
+        imageSrc = './' + base +  'evening/' + sixArray[index];
+        
        
     }
     viewBgImg(imageSrc);
@@ -354,11 +354,11 @@ function getImage() {
     const index = Math.floor(Math.random() * images.length);
     let imageSrc = '',
         today = new Date();
-        //hour = today.getHours();  
-        min = today.getMinutes();  
+        hour = today.getHours();  
+        //min = today.getMinutes();  
             
-    //let count = hour + i;
-    let count = min + i;
+    let count = hour + i;
+    //let count = min + i;
 
     if (count >= 24) {
         i = i - count;
