@@ -323,14 +323,14 @@ window.onload = function getDailyBg() {
         index = Math.floor(Math.random() * sixArray.length);
         console.log(index);
     if (hour < 6|| hour===24) {//костыль
-        imageSrc = base + 'night/' + sixArray[index];      
+        imageSrc = './' + base + 'night/' + sixArray[index];      
         console.log (imageSrc);  
     } else if (hour < 12) {
-        imageSrc = base + 'morning/' + sixArray[index];
+        imageSrc = './' + base + 'morning/' + sixArray[index];
     } else if (hour < 18) {
-        imageSrc = base + 'day/' + sixArray[index];
+        imageSrc = './' + base + 'day/' + sixArray[index];
     } else if (hour < 24) {
-        imageSrc = base +  'evening/' + sixArray[index];       
+        imageSrc = './' + base +  'evening/' + sixArray[index];       
        
     }
     viewBgImg(imageSrc);
@@ -361,7 +361,7 @@ function getImage() {
         i = i - count;
     }  
     if (count < 6 || count === 24) {
-        imageSrc = '../' + base + 'night/' + dailyArray[count - 1];
+        imageSrc = './' + base + 'night/' + dailyArray[count - 1];
         //console.log (imageSrc);
       
     } else if (count < 12) {
