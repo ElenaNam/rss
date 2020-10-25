@@ -375,8 +375,7 @@ function getImage() {
         
     }
 
-    viewBgImg(imageSrc);
-    console.log (imageSrc);
+    viewBgImg(imageSrc);    
     i++;
 
     btn.disabled = true;
