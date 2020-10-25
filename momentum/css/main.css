@@ -11,8 +11,11 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  width: 100vw;
   height: 100vh;
   background-size: cover;
+  background: no-repeat;
+  background-position: center center;
   color: #ffffff;
   text-shadow: rgb(7, 7, 7) 3px 3px 5px, rgb(3, 3, 3) -1px -1px 0, rgb(3, 3, 3) -1px 1px 0,
   rgb(0, 0, 0) 1px -1px 0;    
@@ -21,6 +24,19 @@ body {
   /*background: url("assets/images/overlay.png") center center / cover no-repeat, linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));*/
   transition: background-image 1.5s ease-in-out;
 }
+
+.wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid red;
+}
+
 
 .weather {
   position: fixed;
@@ -88,7 +104,6 @@ input {
   /*border-bottom: 1px rgb(246, 236, 246) solid;*/
   text-align: center;
   word-wrap: break-word;
-  
   
   
 }
@@ -170,7 +185,6 @@ h2 {
   margin: 0 auto;
 }
 #focustoday:focus::placeholder {opacity: 0;}
-
 
 .quotes-wrapper  {
   position: absolute;
@@ -255,11 +269,370 @@ h2 {
  transition: all .3s ease-in-out; 
 }
 
+@media screen and (max-width: 1600px){
+  .quotes-wrapper  {   
+    bottom: 1rem;
+    margin-top: 0.5rem; 
+    max-width: 90%; 
+    
+  }
+  .quote {
+    font-size: 2.5rem;
+  }
+  .author {
+    margin-top: 1rem;
+    margin-left: auto; 
+    font-size: 2rem;
+  }
+
+  .btn {
+    width: 3.5rem;
+    height: 3.5rem;  
+    right: 3rem;
+  }
+  .btn-quote {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+
+  .weather {
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+  .weather-icon {
+    width: 100%;
+    font-size: 5rem;
+  
+  }
+  .temperature {
+    font-size: 2rem;
+    margin-bottom: 0.1rem;
+  }
+  .humidity {    
+    font-size: 1.5rem;
+    margin-bottom: 0.1rem;
+  }
+  .windspeed {    
+    margin-top: 0.1rem;
+    font-size: 1.5rem;
+  }
+  .weather-description {    
+    font-size: 1.7rem;
+  }
+  #city {
+    font-size: 2rem;
+  }
+  input {
+    width: 15em;
+  }
+  #name {
+    font-size: 3.5rem;
+  }
+  #time {
+    font-size: 3rem;
+  }
+
+  #date1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    margin-top: 1rem;
+  }
+  #greeting {   
+    margin-top: 2rem; 
+    font-size: 3rem;    
+  }
+  h1 {
+    margin-bottom: 2rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem;    
+    font-size: 3rem; 
+  
+  }
+
+  #focustoday {   
+    font-size: 3.5rem;
+  }
+  .quotes-wrapper  {   
+    bottom: 1rem;
+    margin-top: 0.5rem; 
+    max-width: 80%; 
+    
+  }
+  .quote {
+    font-size: 2rem;
+  }
+  .author {
+    margin-top: 1rem;
+    margin-left: auto; 
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    width: 3rem;
+    height: 3rem;  
+    right: 2rem;
+  }
+  .btn-quote {
+    width: 2rem;
+    height: 2rem;
+  }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+  .weather {
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+  .weather-icon {
+    width: 100%;
+    font-size: 2rem;
+  
+  }
+  .temperature {
+    font-size: 1.3rem;
+    margin-bottom: 0.1rem;
+  }
+  .humidity {    
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+  }
+  .windspeed {    
+    margin-top: 0.1rem;
+    font-size: 1rem;
+  }
+  .weather-description {    
+    font-size: 1.1rem;
+  }
+  #city {
+    font-size: 1rem;
+  }
+  input {
+    width: 10em;
+  }
+  #name {
+    font-size: 2.5rem;
+  }
+  #time {
+    font-size: 3rem;
+  }
+
+  #date1 {
+    font-size: 2rem;
+  }
+
+  .container {
+    margin-top: 1rem;
+  }
+  #greeting {    
+    font-size: 2rem;    
+  }
+  h1 {
+    margin-bottom: 0.1rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem;    
+    font-size: 2rem; 
+  
+  }
+
+  #focustoday {   
+    font-size: 2.5rem;
+  }
+  .quotes-wrapper  {   
+    bottom: 1rem;
+    margin-top: 0.5rem; 
+    max-width: 90%; 
+    
+  }
+  .quote {
+    font-size: 1.2rem;
+  }
+  .author {
+    margin-top: 1rem;
+    margin-left: auto; 
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 2rem;
+    height: 2rem;  
+    right: 1rem;
+  }
+  .btn-quote {
+    width: 1rem;
+    height: 1rem;
+  }
+
+}
 
 
 
 @media (max-width: 700px) {
   .time {
-    font-size: 6rem;
+    font-size: 5rem;
+  }
+
+  .weather {
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .weather-icon {
+    width: 100%;
+    font-size: 2rem;
+  
+  }
+  .temperature {
+    font-size: 1.5rem;
+  }
+  .humidity {    
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+  }
+  .windspeed {
+    
+    margin-top: 0.3rem;
+    font-size: 1rem;
+  }
+  .weather-description {    
+    font-size: 1.5rem;
+  }
+  #city {
+    font-size: 1rem;
+  }
+  input {
+    width: 10em;
+  }
+  #name {
+    font-size: 2.5rem;
+  }
+
+  #date1 {
+    font-size: 3rem;
+  }
+  #greeting {    
+    font-size: 2rem;    
+  }
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    margin-bottom: 0.5rem;    
+    font-size: 2rem; 
+  
+  }
+
+  #focustoday {   
+    font-size: 2.5rem;
+  }
+  .quotes-wrapper  {   
+    bottom: 1rem;
+    margin-top: 0.5rem; 
+    max-width: 90%; 
+    
+  }
+  .quote {
+    font-size: 1.2rem;
+  }
+  .author {
+    margin-top: 1rem;
+    margin-left: auto; 
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 2rem;
+    height: 2rem;  
+    right: 1rem;
+  }
+  .btn-quote {
+    width: 1rem;
+    height: 1rem;
+  }
+
+}
+@media (max-width: 500px) {
+  .container {
+    margin-top:1rem;    
+  }
+  .weather {
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .weather-icon {
+    width: 100%;
+    font-size: 2rem;
+    margin-bottom: 0;
+  
+  }
+  .temperature {
+    margin-top: 0;
+    font-size: 1rem;
+  }
+  .humidity {    
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+  }
+  .windspeed {
+    
+    margin-top: 0.1rem;
+    font-size: 1rem;
+  }
+  .weather-description {    
+    font-size: 1rem;
+  }
+  #time {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
+  #date1 {
+    font-size: 1rem;
+  }
+
+  #greeting {    
+    margin-top: 1rem;
+    font-size: 1rem;    
+  }
+  #name {
+    font-size: 1rem;
+  }
+
+  h2 {
+    margin-bottom: 0.5rem;    
+    font-size: 1rem; 
+  
+  }
+  #focustoday {   
+    font-size: 1rem;
+  }
+  .quotes-wrapper  {   
+    bottom: 1rem;
+    margin-top: 0.5rem; 
+    max-width: 90%; 
+    
+  }
+  .quote {
+    font-size: 1rem;
+  }
+  .author {
+    margin-top: 1rem;
+    margin-left: auto; 
+    font-size: 0.8rem;
   }
 }
+
+
+
+
+
