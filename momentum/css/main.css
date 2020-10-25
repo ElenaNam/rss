@@ -17,7 +17,7 @@ body {
   text-shadow: rgb(7, 7, 7) 3px 3px 5px, rgb(3, 3, 3) -1px -1px 0, rgb(3, 3, 3) -1px 1px 0,
   rgb(0, 0, 0) 1px -1px 0;    
   background-blend-mode: multiply;
-  background-image: url(/assets/images/bg.jpg);
+  background-image: url(../assets/images/bg.jpg);
   /*background: url("assets/images/overlay.png") center center / cover no-repeat, linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));*/
   transition: background-image 1.5s ease-in-out;
 }
@@ -204,7 +204,7 @@ h2 {
   height: 3rem;
   border: 0;
   border-radius: 50%;
-  background: url(../assets/bg-icon.png);
+  background: url(../assets/bg-icon.png);  /* без .. все работало локально, но не загружалось на гитхаб*/
   background-size: contain;
   background-repeat: no-repeat;     
 }
@@ -234,7 +234,7 @@ h2 {
   height: 2rem;
   border: 0;
   border-radius: 50%;
-  background: url(/assets/bg-icon.png);
+  background: url(../assets/bg-icon.png);
   background-size: contain;
   background-repeat: no-repeat;  
 }
