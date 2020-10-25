@@ -67,7 +67,7 @@ body {
 
 #city::placeholder {
   color: #cfcaca;
-  opacity: 0.4;
+  opacity: 0.8;
   font-weight: 400;
   margin: 0 auto;
 }
@@ -81,13 +81,14 @@ body {
 }
 
 input {    
-  width: 20em;
+  width: 10em;
   text-align: center;
   background: none;
   border: none;
   /*border-bottom: 1px rgb(246, 236, 246) solid;*/
   text-align: center;
   word-wrap: break-word;
+  
   
   
 }
