@@ -169,6 +169,7 @@ function getCity() {
 
 function setCity(e) {
     if(e.type === 'keypress') {
+            city.style.color = 'white'; 
             if(e.which == 13 || e.keyCode == 13) { 
                 if (localStorage.getItem('city') === ''){   //localStorage.getItem('city') === null || 
                     city.value = '';  
