@@ -6,8 +6,13 @@
     font-size: 20px;
     height: calc(100vh - 380px);
     min-height: 300px;
+    cursor: text;
   }
   
+  audio {
+      display: none;
+  }
+
   .keyboard {
     position: fixed;
     left: 0;
