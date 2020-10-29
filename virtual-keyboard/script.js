@@ -90,6 +90,9 @@ const Keyboard = {
                     keyElement.addEventListener('click', () => {
                         this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
                         this._triggerEvent('oninput'); // триггер события
+                        //звук
+                         const backSound = document.getElementById('back');                    
+                         backSound.play(); 
                     })
 
                     break;
@@ -100,7 +103,10 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this._toggleCapsLock();
-                        keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock);                        
+                        keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock); 
+                         //звук
+                         const capsSound = document.getElementById('caps');                    
+                         capsSound.play();                          
                     })
                     
                     break;
@@ -111,7 +117,11 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.value += '\n';
-                        this._triggerEvent('oninput');     //для физ.клав                  
+                        this._triggerEvent('oninput');     //для физ.клав 
+                         //звук               
+                        const enterSound = document.getElementById('enter');                    
+                        enterSound.play();  
+
                     })
                     
                     break;
@@ -122,7 +132,11 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.value += ' ';
-                        this._triggerEvent('oninput');                       
+                        this._triggerEvent('oninput');  
+                         //звук
+                         const spaceSound = document.getElementById('space');                    
+                         spaceSound.play();  
+            
                     })
                     
                     break;
@@ -133,7 +147,10 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.close();
-                        this._triggerEvent('onclose');                       
+                        this._triggerEvent('onclose'); 
+                        //звук
+                        const doneSound = document.getElementById('done');                    
+                        doneSound.play();                         
                     })
                     
                     break;    
@@ -142,7 +159,8 @@ const Keyboard = {
                     keyElement.textContent = key.toLowerCase();
                     keyElement.addEventListener('click', () => {
                         this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-                        this._triggerEvent('oninput');                    
+                        this._triggerEvent('oninput');  
+                         //звук                  
                         const normalSound = document.getElementById('normal');                    
                         normalSound.play();           
                     })
