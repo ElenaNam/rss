@@ -179,11 +179,7 @@ const Keyboard = {
 
 
 
-                        //keyElement.addEventListener('click', () => {
-                            //this.properties.language = !this.properties.language;
-                            while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
-                            this.elements.keysContainer.appendChild(this._createKeys());
-                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
                  
 
 
@@ -271,6 +267,8 @@ const Keyboard = {
                     keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
                     keyElement.innerHTML = createIconHTML('keyboard_capslock');
 
+                      
+
                     keyElement.addEventListener('click', () => {
                         this._toggleCapsLock();
                         keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock); 
@@ -283,7 +281,8 @@ const Keyboard = {
                     
                 case 'shift': 
                     keyElement.classList.add('keyboard__key--wide');
-                    //keyElement.innerHTML = createIconHTML('keyboard_capslock'); 
+                    keyElement.classList.add('keyboard__key--activatable'); //стиль с лампочкой
+                    
                     keyElement.innerHTML = keyLayout[keyLayout.length -2];                    
 
                     keyElement.addEventListener('click', () => {
@@ -294,8 +293,7 @@ const Keyboard = {
 
                         //звук
                         const doneSound = document.getElementById('done');                    
-                        doneSound.play();   
-                        
+                        doneSound.play();                
 
 
 
