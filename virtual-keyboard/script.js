@@ -132,10 +132,10 @@ const Keyboard = {
                 //for (keyElement of this.elements.keys) {
                 if (Array.isArray(key)){
                     keyElement.setAttribute('data', `${String.fromCharCode(key[0])}`); 
-                    //console.log(e.keyCode); 
+                    //console.log(key[0].keyCode); 
                 } else {
                    keyElement.setAttribute('data', `${String.fromCharCode(key)}`);
-                   //console.log(e.keyCode);  
+                   //console.log(key.keyCode);  
                 }
                   
             }                
@@ -159,26 +159,42 @@ const Keyboard = {
 
 
 
-                /*case 'en': //ДОДЕЛАТЬ
+                case 'en': //ДОДЕЛАТЬ
                     keyElement.classList.add('keyboard__key--wide');
                     keyElement.innerHTML = 'en';
 
                     keyElement.addEventListener('click', () => {
                         this.properties.lang = !this.properties.lang;
+                        keyElement.innerHTML = keyLayout[21];  
 
 
                         for (const key of this.elements.keys) {
                             //
                             if (key.childElementCount === 0) {
-                                key.textContent = this.properties.lang ? keyLayoutEn : keyLayoutRu;
+                                if(key.textContent = this.properties.lang) {this.elements.keysContainer.children[0].remove() && this.elements.keysContainer.appendChild(this._createKeys())};
                 
                             }
                 
                         }
+
+
+
+                        //keyElement.addEventListener('click', () => {
+                            //this.properties.language = !this.properties.language;
+                            while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
+                            this.elements.keysContainer.appendChild(this._createKeys());
+                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
                  
+
+
+
+
+
+
+
                          //звук
-                         const capsSound = document.getElementById('en');                    
-                         capsSound.play();                          
+                         //const enruSound = document.getElementById('enru');                    
+                         //enruSound.play();                          
                     })
                     
                     break;
@@ -189,6 +205,7 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.lang = !this.properties.lang;
+                        keyElement.innerHTML = keyLayout[23];  
 
 
                         for (const key of this.elements.keys) {
@@ -200,11 +217,11 @@ const Keyboard = {
                         }
                  
                          //звук
-                         const capsSound = document.getElementById('ru');                    
-                         capsSound.play();                          
+                         //const enruSound = document.getElementById('enru');                    
+                        // enruSound.play();                          
                     })
                     
-                    break;*/
+                    break;
 
                 case 'enter': 
                     keyElement.classList.add('keyboard__key--wide');
@@ -266,17 +283,19 @@ const Keyboard = {
                     
                 case 'shift': 
                     keyElement.classList.add('keyboard__key--wide');
-                    keyElement.innerHTML = createIconHTML('keyboard_capslock');                    
+                    //keyElement.innerHTML = createIconHTML('keyboard_capslock'); 
+                    keyElement.innerHTML = keyLayout[keyLayout.length -2];                    
 
                     keyElement.addEventListener('click', () => {
                         this._toggleShift(); 
-                        keyElement.classList.toggle('keyboard__key--active', this.properties.shift);           
+                        keyElement.classList.toggle('keyboard__key--active', this.properties.shift); 
+                        //чтобы надпись шифт не меняла регистр  
+                        keyElement.innerHTML = keyLayout[keyLayout.length -2];   
+
                         //звук
                         const doneSound = document.getElementById('done');                    
                         doneSound.play();   
                         
-                        
-
 
 
 
@@ -292,16 +311,24 @@ const Keyboard = {
                         } else {     // if (typeof key == 'string')
                             keyElement.textContent = key.toLowerCase();
                         }
-                    }
+                    }                
 
-                    /*keyElement.textContent = key.toLowerCase();*/
+
+
                     keyElement.addEventListener('click', () => {
                         if (Array.isArray(key)){
                             keyElement.textContent = key[0];
                         }
+
+
                         // изменить регистр по капсу или шифту
-                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase();                       
-                        this._triggerEvent('oninput');                   
+
+                        if (Array.isArray(key)){                            
+                            this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key[0].toUpperCase() : key[0].toLowerCase();  
+                        } else {
+                            this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase(); 
+                        }                                                                      
+                        this._triggerEvent('oninput');                 
                    
   
                          //звук                  
