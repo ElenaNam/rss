@@ -134,6 +134,7 @@ const Keyboard = {
                     keyElement.setAttribute('data', `${String.fromCharCode(key[0])}`); 
                     //console.log(key[0].keyCode); 
                 } else {
+                   //keyElement.setAttribute('data', `${String.fromCharCode(key)}`);
                    keyElement.setAttribute('data', `${String.fromCharCode(key)}`);
                    //console.log(key.keyCode);  
                 }
@@ -179,7 +180,11 @@ const Keyboard = {
 
 
 
-
+                        //keyElement.addEventListener('click', () => {
+                            //this.properties.language = !this.properties.language;
+                            while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
+                            this.elements.keysContainer.appendChild(this._createKeys());
+                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
                  
 
 
@@ -313,12 +318,23 @@ const Keyboard = {
 
 
 
-                    keyElement.addEventListener('click', () => {
+                    keyElement.addEventListener('click', (e) => {
+                        //если массив, то возьми 1-й элемент
                         if (Array.isArray(key)){
                             keyElement.textContent = key[0];
                         }
 
 
+                        // подсветка нажатой клавиши на вирт.клаве
+                        const selectKey = () => {
+                            //e.target.style.border = '2px solid #245389'
+                            e.target.style.background = '#245389'
+                            const deselectKey = () => {e.target.style.background = ' rgba(80, 66, 40, 0.8)'};  
+                            setTimeout(deselectKey, 500);                    
+                        };
+                        selectKey();                  
+                        
+                        
                         // изменить регистр по капсу или шифту
 
                         if (Array.isArray(key)){                            
