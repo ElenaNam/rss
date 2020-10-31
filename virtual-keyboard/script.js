@@ -225,8 +225,8 @@ const Keyboard = {
                 };          
 
                     //звук
-                     const backSound = document.getElementById('back');                    
-                     backSound.play(); 
+                     const soundSound = document.getElementById('sound');                    
+                     soundSound.play(); 
                 })
 
                 break;
@@ -282,9 +282,9 @@ const Keyboard = {
 
 
 
-                         //звук
-                         //const enruSound = document.getElementById('enru');                    
-                         //enruSound.play();                          
+                         звук
+                         const enruSound = document.getElementById('enru');                    
+                         enruSound.play();                          
                     })
                     
                     break;
@@ -306,9 +306,9 @@ const Keyboard = {
                 
                         }
                  
-                         //звук
-                         //const enruSound = document.getElementById('enru');                    
-                        // enruSound.play();                          
+                         звук
+                         const enruSound = document.getElementById('enru');                    
+                         enruSound.play();                          
                     })
                     
                     break;
@@ -388,8 +388,8 @@ const Keyboard = {
                         keyElement.innerHTML = keyLayout[keyLayout.length -3];   
 
                         //звук
-                        const doneSound = document.getElementById('done');                    
-                        doneSound.play();              
+                        const shiftSound = document.getElementById('shift');                    
+                        shiftSound.play();              
 
 
 
