@@ -284,8 +284,27 @@ const Keyboard = {
                     keyElement.innerHTML = createIconHTML('backspace');
                     // обработчик события клик
                     keyElement.addEventListener('click', () => {
-                        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-                        this._triggerEvent('oninput'); // триггер события
+                        
+                        const textar = document.querySelector('.use-keyboard-input');
+
+                        this.properties.start = textar.selectionStart;
+                        this.properties.end = textar.selectionEnd;
+                        console.log(this.properties.start);
+                        console.log(this.properties.end);
+
+                        //удали 1 символ с позиции курсора
+                        let str = this.properties.value.substring(0, this.properties.start - 1);
+                        this.properties.value = str + this.properties.value.substring(this.properties.end, this.properties.value.length);
+                        //важно поставить его здесь
+                        this._triggerEvent('oninput');
+                        
+                      
+
+                        this.properties.start --;
+                        this.properties.end --;
+                        textar.setSelectionRange(this.properties.start, this.properties.end);
+                       
+
                         //звук
                          const backSound = document.getElementById('back');                    
                          backSound.play(); 
