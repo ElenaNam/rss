@@ -54,30 +54,34 @@ const Keyboard = {
                 //this.properties.start = this.selectionStart;
                 //this.properties.end = this.selectionEnd;
 
-                //this.properties.start = element.selectionStart;
-                //this.properties.end = element.selectionEnd; 
-                //console.log(`${this.properties.start}`);            
-                //console.log(`${this.properties.end}`); 
+
+                /*if (document.getSelection) {
+                    element.value = element.value.substring(0, element.selectionStart)+element.value.substring(element.selectionEnd, element.value.length);
+                }
+*/
+
                 
                 
                 //const start = textarea.selectionStart;
                 //const end = textarea.selectionEnd;
                 //textarea.setRangeText('Ваш символ тут', start, end, 'end');
-
-
-
-
-
-
-
-
+                //const start = element.selectionStart;
+                //const end = element.selectionEnd;
+               // element.setRangeText(start, end);
 
                 //this.setSelectionRange(this.properties.start, this.properties.end);
+                //element.setSelectionRange(this.properties.start, this.properties.end);
+
+                
+
+                
 
                 
                 //this.selectionStart = this.value.length;
 
             });
+            //this.properties.start++;
+            //this.properties.end++;
 
            // element.addEventListener('keydown',(e) => {
                 //document.textarea.style.border = '2px solid red';
@@ -95,6 +99,34 @@ const Keyboard = {
 
         });
 
+        const textar = document.querySelector('.use-keyboard-input');
+        textar.focus();
+        textar.addEventListener('click', (e) => {
+            //получить положение курсора
+            this.properties.start = textar.selectionStart;
+            this.properties.end = textar.selectionEnd;
+            
+            //this.properties.start = this.properties.end;
+
+            console.log(this.properties.start);            
+            console.log(textar.selectionEnd); 
+
+            //textar.setRangeText(this.properties.value, this.properties.start, this.properties.end, 'end');
+
+            /*if(this.properties.start == this.properties.end){
+                alert("The position of the cursor is (" + this.properties.start + "/" + this.properties.value.length + ")");
+            }else{
+                alert("Selected text from ("+ this.properties.start +" to "+ this.properties.end + " of " + this.properties.value.length + ")");
+            };*/
+
+
+            //изменить выделение, чтобы начиналось с позиции start, и заканчивалось end
+            //textar.setSelectionRange(this.properties.start, this.properties.end);
+
+
+        });
+
+
     },
     // создать клавиши
 
@@ -105,14 +137,14 @@ const Keyboard = {
             "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","en",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
             "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-            "shift", "space", "campaign"
+            "shift", "space", "campaign", "left", "right"
           ];
         const keyLayoutRu = [
             ["1","!"], ["2","\""], ["3","№"], ["4",";"], ["5","%"], ["6",":"], ["7","?"], ["8","*"], ["9","("], ["0",")"], "backspace",
             "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з","х","ъ", "ru",
             "caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "enter",
             "done", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "?",
-            "shift","space", "campaign"
+            "shift","space", "campaign", "left", "right"
           ]; 
         
         
@@ -143,7 +175,7 @@ const Keyboard = {
             //чтобы не было фокуса на клавишах           
             keyElement.setAttribute('onmousedown', 'return false'); 
 
-            for (let m = 0; m < keyLayout.length; m++) {
+            /*for (let m = 0; m < keyLayout.length; m++) {
                 //for (keyElement of this.elements.keys) {
                 if (Array.isArray(key)){
                     keyElement.setAttribute('data', `${String.fromCharCode(key[0])}`); 
@@ -154,7 +186,7 @@ const Keyboard = {
                    //console.log(key.keyCode);  
                 }
                   
-            }  
+            }  */
             // для всех клавиш - и обычных и специальных
             keyElement.addEventListener('click', (e) => {
                 //если массив, то возьми 1-й элемент
@@ -172,7 +204,6 @@ const Keyboard = {
                         setTimeout(deselectKey, 500); 
                     }
                    
-
                 };
                 selectKey();
 
@@ -180,9 +211,9 @@ const Keyboard = {
                 
 
 
-                console.log('keyCode: ' +  e.keyCode);
-                console.log('Key: ' + e.key);
-                console.log('Key: ' + e.charCode);
+                //console.log('keyCode: ' +  e.keyCode);
+                //console.log('Key: ' + e.key);
+                //console.log('Key: ' + e.charCode);
                 
 
             });
@@ -203,16 +234,66 @@ const Keyboard = {
 
 
             switch (key) {
-                case 'campaign': 
-                // применить к клавише класс 'keyboard__key--wide'
-                keyElement.classList.add('keyboard__key--wide', 'keyboard__key--blue');
+                case 'left':                 
+                    keyElement.classList.add('keyboard__key--small');                
+                    keyElement.innerHTML = createIconHTML('arrow_back');
 
-                // применить иконку
+                    keyElement.addEventListener('click', () => {
+
+                        const textar = document.querySelector('.use-keyboard-input');                  
+                        
+                        this.properties.start = textar.selectionStart;
+                        this.properties.end = textar.selectionEnd;
+
+                        textar.selectionStart = textar.selectionEnd -= 1;
+                        //textar.focus();
+
+
+                        console.log(this.properties.start);
+                        console.log(this.properties.end);
+                                           
+          
+    
+                        //звук
+                         const arrowSound = document.getElementById('arrow');                    
+                         arrowSound.play(); 
+                    })
+
+                break;
+
+                case 'right':                 
+                    keyElement.classList.add('keyboard__key--small');                
+                    keyElement.innerHTML = createIconHTML('arrow_forward');
+
+                    keyElement.addEventListener('click', () => {
+                        const textar = document.querySelector('.use-keyboard-input');                  
+                        
+                        this.properties.start = textar.selectionStart;
+                        this.properties.end = textar.selectionEnd;
+
+                        textar.selectionStart = textar.selectionEnd += 1;
+                        //textar.focus();
+
+
+                        console.log(this.properties.start);
+                        console.log(this.properties.end);
+                                           
+          
+    
+                        //звук
+                         const arrowSound = document.getElementById('arrow');                    
+                         arrowSound.play(); 
+                    })
+
+                break;
+
+
+                case 'campaign':                 
+                keyElement.classList.add('keyboard__key--wide', 'keyboard__key--blue');                
                 keyElement.innerHTML = createIconHTML('campaign');
-                // обработчик события клик
+              
                 keyElement.addEventListener('click', () => {
-                    this._toggleSound(); 
-                    
+                    this._toggleSound();                     
                 // изменить цвет клавиши
                 if (this.properties.sound) {
                     keyElement.classList.remove('keyboard__key--inactive')
@@ -271,9 +352,9 @@ const Keyboard = {
 
                         //keyElement.addEventListener('click', () => {
                             //this.properties.language = !this.properties.language;
-                            while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
+                            /*while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
                             this.elements.keysContainer.appendChild(this._createKeys());
-                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");*/
                  
 
 
@@ -282,7 +363,7 @@ const Keyboard = {
 
 
 
-                         звук
+                         //звук
                          const enruSound = document.getElementById('enru');                    
                          enruSound.play();                          
                     })
@@ -379,13 +460,13 @@ const Keyboard = {
                     keyElement.classList.add('keyboard__key--wide');
                     keyElement.classList.add('keyboard__key--activatable'); //стиль с лампочкой
                     
-                    keyElement.innerHTML = keyLayout[keyLayout.length -3].toLowerCase();                    
+                    keyElement.innerHTML = keyLayout[keyLayout.length -5].toLowerCase();                    
 
                     keyElement.addEventListener('click', () => {
                         this._toggleShift(); 
                         keyElement.classList.toggle('keyboard__key--active', this.properties.shift); 
                         //чтобы надпись шифт не меняла регистр  
-                        keyElement.innerHTML = keyLayout[keyLayout.length -3];   
+                        keyElement.innerHTML = keyLayout[keyLayout.length -5];   
 
                         //звук
                         const shiftSound = document.getElementById('shift');                    
@@ -405,15 +486,51 @@ const Keyboard = {
                         } else {     // if (typeof key == 'string')
                             keyElement.textContent = key.toLowerCase();
                         }
-                    }                
-
-
+                    }              
 
                     keyElement.addEventListener('click', (e) => {
                         //если массив, то возьми 1-й элемент
                         if (Array.isArray(key)){
                             keyElement.textContent = key[0];
+                        } else {
+                            keyElement.textContent = key;
                         }
+                        //console.log(this.properties.value, 'value')
+                        //console.log(this.properties.value.substring(0, this.properties.start), 'before')
+                        //console.log(this.properties.value.substring(this.properties.end, this.properties.value.length), 'after')
+
+                        //значение от начала до положения курсора + новый символ + значение от конечного положения курсора (если что-то выделено) до конца текста
+               
+                        /*let range = this.properties.end - this.properties.start;
+                        if (range > 0) {
+                          this.properties.end-=range;
+                        }*/
+                         //подсчет места курсора +1 так как добавили 1 символ
+
+                        const textar = document.querySelector('.use-keyboard-input');                  
+                        
+                        this.properties.start = textar.selectionStart;
+                        this.properties.end = textar.selectionEnd;
+
+                        this.properties.start++;
+                        this.properties.end++;
+                        console.log(this.properties.start);
+                        console.log(this.properties.end);
+                        this._triggerEvent("oninput");
+
+                        //возвращает фокус textarea
+                        //input.focus();
+                        //ставит курсор на место ввода
+                        //textar.setSelectionRange(this.properties.start, this.properties.end);
+
+                        //this.properties.value = this.properties.value.slice(0,this.properties.start) + key + this.properties.value.slice(this.properties.start);
+                        /*this.input.focus();
+                        this.input.selectionStart = start + char.length;
+                        this.input.selectionEnd = this.input.selectionStart;*/
+
+
+
+
 
                         // изменить регистр по капсу или шифту
 
@@ -422,10 +539,18 @@ const Keyboard = {
                         } else {
                             this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase(); 
                         }                                                                      
-                        this._triggerEvent('oninput');                 
+                        this._triggerEvent('oninput');   
+                        
+
                    
+                        //if(this.properties.start = this.properties.end){
+                           //this.properties.value = this.properties.value.substring(0, this.properties.start) + key + this.properties.value.substring(this.properties.end, this.properties.value.length);
+                        //}
+
   
-                        //substring, slice, split('').splice
+                        //substring, slice, split('').splice 
+                                                               
+
 
 
                          //звук                  

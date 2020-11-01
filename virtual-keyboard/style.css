@@ -18,14 +18,14 @@
     width: 90%;
     margin: 30px auto;
     padding: 10px;
-    font-size: 20px;
+    /*font-size: 20px;*/
     height: calc(100vh - 380px);
     min-height: 300px;
     cursor: text;
     color: rgb(255, 255, 255);
     border: 2px solid rgb(10, 47, 82);
     text-shadow: 2px 3px 2px rgb(0, 0, 0, 0.8);
-    /*font-size: 2.5rem;*/
+    font-size: 2.5rem;
     background-color: rgba(46, 125, 170, 0.3);
   }
   .use-keyboard-input::placeholder {
@@ -67,7 +67,7 @@
     width: 6%;
     max-width: 90px;
     margin: 3px;
-    border-radius: 4px;
+    border-radius: 14px;
     border: 1px solid white;
     background: rgba(80, 66, 40, 0.8);
     color: #ffffff;
@@ -83,18 +83,34 @@
     -webkit-tap-highlight-color: transparent;
     position: relative;
   }
+  /* исчезает после клика */
+  .keyboard__key:hover{
+    background: rgba(192, 174, 72, 0.5);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);   
+    cursor: pointer;
+    /*-webkit-transition:  0s ease-in-out 0s;*/
+  }
+  
   
   .keyboard__key:active {
     background: rgba(138, 125, 51, 0.8);
   }
   
+  .keyboard__key--small {
+    width: 8%;
+    background: rgba(92, 56, 15, 0.8);
+  }
+
+
   .keyboard__key--wide {
     width: 12%;
+    background: rgba(92, 56, 15, 0.8);
   }
-  
+
   .keyboard__key--extra-wide {
     width: 36%;
     max-width: 500px;
+    background: rgba(92, 56, 15, 0.8);
   }
   
   .keyboard__key--activatable::after {
