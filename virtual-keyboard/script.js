@@ -1,7 +1,7 @@
 const Keyboard = {
     elements: {
-        main: null, //не существует
-        keysContainer: null, //не существует
+        main: null, 
+        keysContainer: null, 
         keys:[]        
     },
 
@@ -15,6 +15,7 @@ const Keyboard = {
         value: "",
         capsLock: false,
         shift: false,
+        direction: 'none',
         lang: true,
         start: 0,
         end: 0,
@@ -47,25 +48,15 @@ const Keyboard = {
 
             });
 
-
-
             element.addEventListener('сlick',() => {
                 this.properties.start = element.selectionStart;
                 this.properties.end = element.selectionEnd; 
 
             });
-            this.properties.start++;
-            this.properties.end++;
 
         });
 
         const textar = document.querySelector('.use-keyboard-input');
-        //textar.focus();
-        /*_setSelectionRange(text) {
-            textar.focus();
-            textar.setRangeText(text, textar.selectionStart, textar.selectionEnd, 'end');
-    
-        };*/
     
         textar.addEventListener('click', (e) => {
             //получить положение курсора
@@ -76,20 +67,6 @@ const Keyboard = {
 
             console.log('по клику в textarea ' + this.properties.start);            
             console.log('по клику в textarea ' + textar.selectionEnd); 
-
-
-            //textar.setRangeText(this.properties.value, this.properties.start, this.properties.end, 'end');
-
-            /*if(this.properties.start == this.properties.end){
-                alert("The position of the cursor is (" + this.properties.start + "/" + this.properties.value.length + ")");
-            }else{
-                alert("Selected text from ("+ this.properties.start +" to "+ this.properties.end + " of " + this.properties.value.length + ")");
-            };*/
-
-
-            //изменить выделение, чтобы начиналось с позиции start, и заканчивалось end
-            //textar.setSelectionRange(this.properties.start, this.properties.end);
-
 
         });
 
@@ -143,18 +120,6 @@ const Keyboard = {
             //чтобы не было фокуса на клавишах           
             keyElement.setAttribute('onmousedown', 'return false'); 
 
-            /*for (let m = 0; m < keyLayout.length; m++) {
-                //for (keyElement of this.elements.keys) {
-                if (Array.isArray(key)){
-                    keyElement.setAttribute('data', `${String.fromCharCode(key[0])}`); 
-                    //console.log(key[0].keyCode); 
-                } else {
-                   //keyElement.setAttribute('data', `${String.fromCharCode(key)}`);
-                   keyElement.setAttribute('data', `${String.fromCharCode(key)}`);
-                   //console.log(key.keyCode);  
-                }
-                  
-            }  */
             // для всех клавиш - и обычных и специальных
             keyElement.addEventListener('click', (e) => {
                 //если массив, то возьми 1-й элемент
@@ -173,30 +138,11 @@ const Keyboard = {
                     }
                    
                 };
-                selectKey();               
+                selectKey();              
 
 
-                //console.log('keyCode: ' +  e.keyCode);
-                //console.log('Key: ' + e.key);
-                //console.log('Key: ' + e.charCode);
-                
 
             });
-
-            /*keyElement.addEventListener('keypress', (e) => {
-                //если массив, то возьми 1-й элемент
-                if (Array.isArray(key)){
-                    keyElement.textContent = key[0];
-                }   
-
-                let code = String.fromCharCode(e.key);               
-                console.log (code);
-               
-                console.log('Key: ' + e.key);
-                
-                
-            });*/
-
 
             switch (key) {
                 case 'left':                 
@@ -210,18 +156,22 @@ const Keyboard = {
                         this.properties.start = textar.selectionStart;
                         this.properties.end = textar.selectionEnd;
 
-                        textar.selectionStart = textar.selectionEnd -= 1;
-                        //textar.focus();
+                        textar.selectionStart = textar.selectionEnd -= 1; 
+                        
+                        //выделение по шифту
+                    /*    if (!this.properties.shift) {
+                            this.properties.direction = 'backward';
+                        }
 
-
-                        //console.log(this.properties.start);
-                        //console.log(this.properties.end);
-                                           
-          
-    
+                        if (this.properties.start <= this.properties.end) {
+                          this.properties.start--;                          
+                        }                       
+                        
+                        textar.setSelectionRange(this.properties.start, this.properties.end);                    
+                    */
                         //звук
-                         const arrowSound = document.getElementById('arrow');                    
-                         arrowSound.play(); 
+                        const arrowSound = document.getElementById('arrow');                    
+                        arrowSound.play(); 
                     })
 
                 break;
@@ -236,13 +186,7 @@ const Keyboard = {
                         this.properties.start = textar.selectionStart;
                         this.properties.end = textar.selectionEnd;
 
-                        textar.selectionStart = textar.selectionEnd += 1;
-                        //textar.focus();
-
-
-                        //console.log(this.properties.start);
-                        //console.log(this.properties.end);
-                                           
+                        textar.selectionStart = textar.selectionEnd += 1;    
           
     
                         //звук
@@ -350,7 +294,7 @@ const Keyboard = {
 
                         for (const key of this.elements.keys) {
                             if (key.childElementCount === 0) {
-                               // key.textContent = this.properties.lang ? keyLayoutRu : keyLayoutEn;
+                               // key.textContent = this.properties.lang ? 
                 
                             }
                 
@@ -368,8 +312,15 @@ const Keyboard = {
                     keyElement.innerHTML = createIconHTML('keyboard_return');
 
                     keyElement.addEventListener('click', () => {
-                        this.properties.value += '\n';
-                        this._triggerEvent('oninput');   
+                        //this.properties.value += '\n';
+                        const textar = document.querySelector('.use-keyboard-input');                                               
+                        this.properties.value = this.properties.value.substring(0, this.properties.start) + "\n" + this.properties.value.substring(this.properties.end, this.properties.value.length);
+              
+                        this.properties.start++;
+                        this.properties.end++;
+                        this._triggerEvent("oninput");                      
+                        textar.setSelectionRange(this.properties.start, this.properties.end);
+
                          //звук               
                         const enterSound = document.getElementById('enter');                    
                         enterSound.play();  
@@ -387,8 +338,7 @@ const Keyboard = {
                         this._triggerEvent('oninput');  
                          //звук
                          const spaceSound = document.getElementById('space');                    
-                         spaceSound.play();  
-            
+                         spaceSound.play();              
                     })
                     
                     break;
@@ -409,14 +359,12 @@ const Keyboard = {
 
                 case 'caps': 
                     keyElement.classList.add('keyboard__key--wide', 'keyboard__key--activatable');
-                    keyElement.innerHTML = createIconHTML('keyboard_capslock');
-                      
+                    keyElement.innerHTML = createIconHTML('keyboard_capslock');                    
 
                     keyElement.addEventListener('click', () => {
 
                         this._toggleCapsLock();
-                        keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock); 
-                        
+                        keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock);                         
 
                          //звук
                         const capsSound = document.getElementById('caps');                    
@@ -445,22 +393,29 @@ const Keyboard = {
                     
                     break; 
 
-                default: 
+                default:     
+
                     for (let j = 0; j < keyLayout.length; j++){
-                        if (Array.isArray(key)){
-                            keyElement.textContent = key[0];
-                        } else {   
+                        if (!Array.isArray(key)){
                             keyElement.textContent = key.toLowerCase();
-                        }
-                    }   
-                    
+                        } else if (Array.isArray(key)){
+                            keyElement.textContent = key[0]; 
+                        }                     
+                      
+                    }                        
+
+
 
                     // изменить регистр по капсу или шифту
-                    if (Array.isArray(key)){                            
-                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key[0] : key[0];  
-                    } else {
-                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase(); 
-                    }                                                                      
+                    
+                    if (!Array.isArray(key)){ 
+                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase();
+                    } 
+                    
+                    if (Array.isArray(key)){ 
+                        this.properties.value += this.properties.shift ? key[1] : key[0];
+                    }              
+
                     this._triggerEvent('oninput');     
 
 
@@ -471,6 +426,7 @@ const Keyboard = {
                         } else {
                             keyElement.textContent = key;
                         }
+
 
                         console.log (key);
                         //console.log('по клику на клавише ' + this.properties.start);
@@ -538,13 +494,24 @@ const Keyboard = {
 
     _toggleShift() {
         this.properties.shift = !this.properties.shift;
+
+
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'ru') {
-                key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase();            
+            if (key.childElementCount === 0  && key.textContent !== 'shift' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
+                key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase(); 
+                //console.log(key.textContent);         
+            } else if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'ru' && Array.isArray(key)) {
+                for (let k = 0; k < key.length; k++){
+                    key.textContent = this.properties.shift ? key[k][1] : key[k][0];
+                    //console.log(key);
+                }
+                 
+               
             }
         }
 
         console.log('туглшифт');
+        //console.log(key.textContent);
     },
 
     _toggleSound() {
@@ -558,8 +525,6 @@ const Keyboard = {
         }
         console.log('туглсаунд');
     },
-
-
 
     //выезжает клавиатура
     open(initialValue, oninput, onclose) {
@@ -591,6 +556,10 @@ window.addEventListener("DOMContentLoaded", function() {
                         
 
 
-
+// Капс и шифт - меняется innerHTML клавиш
+// Шифт - спец.символы
+// en and ru
+// шифт выделение
+// ввод с вирт.клав перетирает текст с физ.клав
 
 
