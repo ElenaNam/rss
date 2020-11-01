@@ -50,57 +50,23 @@ const Keyboard = {
 
 
             element.addEventListener('сlick',() => {
-                //element.setSelectionRange(element, 10);
-                //this.properties.start = this.selectionStart;
-                //this.properties.end = this.selectionEnd;
-
-
-                /*if (document.getSelection) {
-                    element.value = element.value.substring(0, element.selectionStart)+element.value.substring(element.selectionEnd, element.value.length);
-                }
-*/
-
-                
-                
-                //const start = textarea.selectionStart;
-                //const end = textarea.selectionEnd;
-                //textarea.setRangeText('Ваш символ тут', start, end, 'end');
-                //const start = element.selectionStart;
-                //const end = element.selectionEnd;
-               // element.setRangeText(start, end);
-
-                //this.setSelectionRange(this.properties.start, this.properties.end);
-                //element.setSelectionRange(this.properties.start, this.properties.end);
-
-                
-
-                
-
-                
-                //this.selectionStart = this.value.length;
+                this.properties.start = element.selectionStart;
+                this.properties.end = element.selectionEnd; 
 
             });
-            //this.properties.start++;
-            //this.properties.end++;
-
-           // element.addEventListener('keydown',(e) => {
-                //document.textarea.style.border = '2px solid red';
-                //document.getElementsByClassName('keyboard-key').style.border = '2px solid red';
-                //document.querySelectorAll('keyboard-key').style.backgroundColor = 'red';
-                //key.setAttribute('onmousedown', 'return false');
-                //keyElement.classList.add('keyboard__key--illumination');
-                //element.style.border = '2px solid red';
-                //console.log(e.code);          
-                //console.log(e.keyCode);          
-    
-       // });
-
-
+            this.properties.start++;
+            this.properties.end++;
 
         });
 
         const textar = document.querySelector('.use-keyboard-input');
-        textar.focus();
+        //textar.focus();
+        /*_setSelectionRange(text) {
+            textar.focus();
+            textar.setRangeText(text, textar.selectionStart, textar.selectionEnd, 'end');
+    
+        };*/
+    
         textar.addEventListener('click', (e) => {
             //получить положение курсора
             this.properties.start = textar.selectionStart;
@@ -108,8 +74,9 @@ const Keyboard = {
             
             //this.properties.start = this.properties.end;
 
-            console.log(this.properties.start);            
-            console.log(textar.selectionEnd); 
+            console.log('по клику в textarea ' + this.properties.start);            
+            console.log('по клику в textarea ' + textar.selectionEnd); 
+
 
             //textar.setRangeText(this.properties.value, this.properties.start, this.properties.end, 'end');
 
@@ -128,6 +95,7 @@ const Keyboard = {
 
 
     },
+    
     // создать клавиши
 
     _createKeys() {
@@ -205,10 +173,7 @@ const Keyboard = {
                     }
                    
                 };
-                selectKey();
-
-
-                
+                selectKey();               
 
 
                 //console.log('keyCode: ' +  e.keyCode);
@@ -218,7 +183,7 @@ const Keyboard = {
 
             });
 
-            keyElement.addEventListener('keypress', (e) => {
+            /*keyElement.addEventListener('keypress', (e) => {
                 //если массив, то возьми 1-й элемент
                 if (Array.isArray(key)){
                     keyElement.textContent = key[0];
@@ -230,7 +195,7 @@ const Keyboard = {
                 console.log('Key: ' + e.key);
                 
                 
-            });
+            });*/
 
 
             switch (key) {
@@ -249,8 +214,8 @@ const Keyboard = {
                         //textar.focus();
 
 
-                        console.log(this.properties.start);
-                        console.log(this.properties.end);
+                        //console.log(this.properties.start);
+                        //console.log(this.properties.end);
                                            
           
     
@@ -275,8 +240,8 @@ const Keyboard = {
                         //textar.focus();
 
 
-                        console.log(this.properties.start);
-                        console.log(this.properties.end);
+                        //console.log(this.properties.start);
+                        //console.log(this.properties.end);
                                            
           
     
@@ -342,26 +307,11 @@ const Keyboard = {
                         for (const key of this.elements.keys) {
                             //
                             if (key.childElementCount === 0) {
-                                if(key.textContent = this.properties.lang) {this.elements.keysContainer.children[0].remove() && this.elements.keysContainer.appendChild(this._createKeys())};
+                                //if(key.textContent = this.properties.lang) {this.elements.keysContainer.children[0].remove() && this.elements.keysContainer.appendChild(this._createKeys())};
                 
                             }
                 
-                        }
-
-
-
-                        //keyElement.addEventListener('click', () => {
-                            //this.properties.language = !this.properties.language;
-                            /*while (this.elements.keysContainer.children.length>0) this.elements.keysContainer.children[0].remove();
-                            this.elements.keysContainer.appendChild(this._createKeys());
-                            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");*/
-                 
-
-
-
-
-
-
+                        }               
 
                          //звук
                          const enruSound = document.getElementById('enru');                    
@@ -381,13 +331,13 @@ const Keyboard = {
 
                         for (const key of this.elements.keys) {
                             if (key.childElementCount === 0) {
-                                key.textContent = this.properties.lang ? keyLayoutRu : keyLayoutEn;
+                               // key.textContent = this.properties.lang ? keyLayoutRu : keyLayoutEn;
                 
                             }
                 
                         }
                  
-                         звук
+                         //звук
                          const enruSound = document.getElementById('enru');                    
                          enruSound.play();                          
                     })
@@ -445,13 +395,13 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
 
-                    this._toggleCapsLock();
-                    keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock); 
+                        this._toggleCapsLock();
+                        keyElement.classList.toggle('keyboard__key--active', this.properties.capsLock); 
                         
 
                          //звук
-                         const capsSound = document.getElementById('caps');                    
-                         capsSound.play();                          
+                        const capsSound = document.getElementById('caps');                    
+                        capsSound.play();                          
                     })
                     
                     break;
@@ -470,10 +420,7 @@ const Keyboard = {
 
                         //звук
                         const shiftSound = document.getElementById('shift');                    
-                        shiftSound.play();              
-
-
-
+                        shiftSound.play();            
 
                     })
                     
@@ -483,10 +430,20 @@ const Keyboard = {
                     for (let j = 0; j < keyLayout.length; j++){
                         if (Array.isArray(key)){
                             keyElement.textContent = key[0];
-                        } else {     // if (typeof key == 'string')
+                        } else {   
                             keyElement.textContent = key.toLowerCase();
                         }
-                    }              
+                    }   
+                    
+
+                    // изменить регистр по капсу или шифту
+                    if (Array.isArray(key)){                            
+                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key[0] : key[0];  
+                    } else {
+                        this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase(); 
+                    }                                                                      
+                    this._triggerEvent('oninput');     
+
 
                     keyElement.addEventListener('click', (e) => {
                         //если массив, то возьми 1-й элемент
@@ -495,70 +452,40 @@ const Keyboard = {
                         } else {
                             keyElement.textContent = key;
                         }
-                        //console.log(this.properties.value, 'value')
-                        //console.log(this.properties.value.substring(0, this.properties.start), 'before')
-                        //console.log(this.properties.value.substring(this.properties.end, this.properties.value.length), 'after')
 
-                        //значение от начала до положения курсора + новый символ + значение от конечного положения курсора (если что-то выделено) до конца текста
-               
-                        /*let range = this.properties.end - this.properties.start;
-                        if (range > 0) {
-                          this.properties.end-=range;
-                        }*/
-                         //подсчет места курсора +1 так как добавили 1 символ
+                        console.log (key);
+                        //console.log('по клику на клавише ' + this.properties.start);
+                        //console.log('по клику на клавише ' + this.properties.end);
 
-                        const textar = document.querySelector('.use-keyboard-input');                  
+                        // если включен капс или шифт
+                        if (this.properties.capsLock || this.properties.shift) {
+                            key = keyElement.textContent.toUpperCase();
+                        } else {
+                            key = keyElement.textContent.toLowerCase(); 
+                        } 
+                        // если включены оба
+                        if (this.properties.capsLock && this.properties.shift) key = keyElement.textContent.toLowerCase(); 
+                  
+
+                         //значение от начала до положения курсора + новый символ + значение от конечного положения курсора (если что-то выделено) до конца текста
+                        this.properties.value = this.properties.value.substring(0, this.properties.start) + key + this.properties.value.substring(this.properties.end, this.properties.value.length);
                         
-                        this.properties.start = textar.selectionStart;
-                        this.properties.end = textar.selectionEnd;
-
                         this.properties.start++;
                         this.properties.end++;
-                        console.log(this.properties.start);
-                        console.log(this.properties.end);
                         this._triggerEvent("oninput");
 
-                        //возвращает фокус textarea
-                        //input.focus();
-                        //ставит курсор на место ввода
-                        //textar.setSelectionRange(this.properties.start, this.properties.end);
-
-                        //this.properties.value = this.properties.value.slice(0,this.properties.start) + key + this.properties.value.slice(this.properties.start);
-                        /*this.input.focus();
-                        this.input.selectionStart = start + char.length;
-                        this.input.selectionEnd = this.input.selectionStart;*/
-
-
-
-
-
-                        // изменить регистр по капсу или шифту
-
-                        if (Array.isArray(key)){                            
-                            this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key[0].toUpperCase() : key[0].toLowerCase();  
-                        } else {
-                            this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase(); 
-                        }                                                                      
-                        this._triggerEvent('oninput');   
                         
+                        const textar = document.querySelector('.use-keyboard-input');
+                        textar.focus();
+                        //печатай там, где курсор                       
+                        textar.setSelectionRange(this.properties.start, this.properties.end);
 
-                   
-                        //if(this.properties.start = this.properties.end){
-                           //this.properties.value = this.properties.value.substring(0, this.properties.start) + key + this.properties.value.substring(this.properties.end, this.properties.value.length);
-                        //}
-
-  
-                        //substring, slice, split('').splice 
-                                                               
-
-
-
-                         //звук                  
+                        //звук                  
                         const normalSound = document.getElementById('normal');                    
-                        normalSound.play();                       
-                                               
-                    })
-                    break;                               
+                        normalSound.play();       
+                    });
+
+                    break;                 
      
             }
             //перенести строку на клаве
@@ -583,17 +510,17 @@ const Keyboard = {
     _toggleCapsLock() {
         this.properties.capsLock = !this.properties.capsLock;
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0) {
+            if (key.childElementCount === 0 && key.textContent !== 'shift' && key.textContent !== 'en' && key.textContent !== 'ru') {
                 key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
             }
         }
-        console.log('Caps Lock Toggled!');
+        console.log('Caps Lock!');
     },
 
     _toggleShift() {
         this.properties.shift = !this.properties.shift;
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0) {
+            if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'ru') {
                 key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase();            
             }
         }
@@ -642,8 +569,6 @@ window.addEventListener("DOMContentLoaded", function() {
         console.log('keyboard closed! Finishing value: ' + currentValue);  
     });*/
 });
-
-
                         
 
 
