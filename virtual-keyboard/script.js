@@ -29,6 +29,11 @@ const Keyboard = {
 
         //устанавливаем элементы
         this.elements.main.classList.add('keyboard', 'keyboard--hidden'); 
+        this.elements.main.classList.add('onmousedown'); 
+
+        //чтобы не было фокуса на keyboard   
+        this.elements.main.setAttribute('onmousedown', 'return false'); 
+
         this.elements.keysContainer.classList.add('keyboard__keys');
         this.elements.keysContainer.appendChild(this._createKeys());
 
@@ -100,7 +105,7 @@ const Keyboard = {
         } else {
             keyLayout = keyLayoutRu;
         }    
-     
+        
 
         //Create HTML for an icon
         const createIconHTML = (icon_name) => {
@@ -116,9 +121,7 @@ const Keyboard = {
             
             //добавить атрибуты/классы клавишам
             keyElement.setAttribute('type', 'button'); //type="button"
-            keyElement.classList.add('keyboard__key'); 
-            //чтобы не было фокуса на клавишах           
-            keyElement.setAttribute('onmousedown', 'return false'); 
+            keyElement.classList.add('keyboard__key');      
 
             // для всех клавиш - и обычных и специальных
             keyElement.addEventListener('mousedown', (e) => {
