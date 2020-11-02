@@ -2,25 +2,21 @@
 .wrapper {
   width: 100%;
   height: 100vh;
-  margin: auto;
-  
-  /*background: url(assets/images/field.jpg)*/
+  margin: 0 auto;
   background: url(assets/images/field1.jpg);
   background-size: cover;
   background-clip: border-box;
   overflow: hidden;
-
 }
 
 
 .use-keyboard-input {
     display: block;
     width: 90%;
-    margin: 30px auto;
-    padding: 10px;
-    /*font-size: 20px;*/
-    height: calc(100vh - 380px);
-    min-height: 300px;
+    margin: 1.5rem auto;
+    padding: 0.5rem;
+    height: calc(100vh - 40%);
+    min-height: 50vh;
     cursor: text;
     color: rgb(255, 255, 255);
     border: 2px solid rgb(10, 47, 82);
@@ -32,14 +28,11 @@
     color: rgb(243, 232, 208, 0.5);
     text-shadow: 1px 1px 1px rgb(5, 5, 5);
   }
-  
-  /*.use-keyboard-input::placeholder:focus {
-    color: transparent;
-  }*/
 
   audio {
       display: none;
   }
+
   .material-icons {
     pointer-events: none;
     background: transparent;    
@@ -50,10 +43,8 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 270px; /*100px*/
+    height: 28vh; 
     padding: 5px 0;
-    /*background: rgba(138, 63, 236, 0.5);
-    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);*/
     user-select: none;
     transition: bottom 0.4s;
   }
@@ -67,7 +58,7 @@
   }
   
   .keyboard__key {
-    height: 45px;
+    height: 4.8vh;
     width: 6%;
     max-width: 90px;
     margin: 3px;
@@ -136,7 +127,7 @@
   }
   
   .keyboard__key--dark {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
   }
 
   .keyboard__key--blue {
@@ -152,4 +143,27 @@
   .keyboard__key--illumination {
     //background: rgba(0, 0, 0, 0.25);
     border: 1px solid red;
+  }
+
+  @media (max-width: 620px) {
+    .keyboard__key--activatable::after {
+      content: '';
+      top: 5px;
+      right: 8px;
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+    }
+    .keyboard__key {
+      font-size: .9rem;
+      height: 4vh;
+    }
+    .material-icons { 
+      font-size: 2vh;        
+    }
+
+
+
   }
