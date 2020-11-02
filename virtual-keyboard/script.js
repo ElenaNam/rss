@@ -16,6 +16,7 @@ const Keyboard = {
         capsLock: false,
         shift: false,
         keyLayout:true,
+        enru: true,
         direction: 'none',
         lang: true,
         start: 0,
@@ -88,14 +89,14 @@ const Keyboard = {
             "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","clear",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
             "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-            "en", "shift", "space", "campaign", "left", "right"
+            "enru", "shift", "space", "campaign", "left", "right"
           ];
         const keyLayoutRu = [
             ["1","!"], ["2","\""], ["3","№"], ["4",";"], ["5","%"], ["6",":"], ["7","?"], ["8","*"], ["9","("], ["0",")"], "backspace",
             "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з","х","ъ", "clear",
             "caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "enter",
             "done", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "?",
-            "ru","shift","space", "campaign", "left", "right"
+            "enru","shift","space", "campaign", "left", "right"
           ]; 
         
         
@@ -226,25 +227,25 @@ const Keyboard = {
 
 
                 case 'campaign':                 
-                keyElement.classList.add('keyboard__key--wide', 'keyboard__key--blue');                
-                keyElement.innerHTML = createIconHTML('campaign');
+                    keyElement.classList.add('keyboard__key--wide', 'keyboard__key--blue');                
+                    keyElement.innerHTML = createIconHTML('campaign');
               
-                keyElement.addEventListener('click', () => {
-                    this._toggleSound();                     
-                // изменить цвет клавиши
-                if (this.properties.sound) {
-                    keyElement.classList.remove('keyboard__key--inactive')
-                    keyElement.classList.add('keyboard__key--blue');
+                    keyElement.addEventListener('click', () => {
+                        this._toggleSound();                     
+                        // изменить цвет клавиши
+                        if (this.properties.sound) {
+                        keyElement.classList.remove('keyboard__key--inactive')
+                        keyElement.classList.add('keyboard__key--blue');
                     
-                } else {
-                    keyElement.classList.remove('keyboard__key--blue');
-                    keyElement.classList.add('keyboard__key--inactive');                   
+                        } else {
+                            keyElement.classList.remove('keyboard__key--blue');
+                            keyElement.classList.add('keyboard__key--inactive');                   
                   
-                };          
+                        };          
 
                     //звук
-                     const soundSound = document.getElementById('sound');                    
-                     soundSound.play(); 
+                    const soundSound = document.getElementById('sound');                    
+                    soundSound.play(); 
                 })
 
                 break;
@@ -320,41 +321,28 @@ const Keyboard = {
 
 
 
-                case 'en': //ДОДЕЛАТЬ
+                case 'enru': //ДОДЕЛАТЬ
                     keyElement.classList.add('keyboard__key--small'); 
-                    keyElement.innerHTML = 'en';
-
-                    keyElement.addEventListener('click', () => {
-                        this.properties.lang = !this.properties.lang;
-                        keyElement.innerHTML = 'ru';                        
-                          
-                        //console.log(this.properties.lang);       
- 
-                        while (this.elements.keysContainer.children.length > 0)  this.elements.keysContainer.children[0].remove();
-                        this.elements.keysContainer.appendChild(this._createKeys());
-                        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
-
-
-                         //звук
-                         const enruSound = document.getElementById('enru');                    
-                         enruSound.play();                          
-                    })
+                    if (this.properties.enru) {
+                        keyElement.innerHTML = 'en';
+                    } else {
+                        keyElement.innerHTML = 'ru';
+                    }
                     
-                    break;
-
-                case 'ru': //ДОДЕЛАТЬ
-                    keyElement.classList.add('keyboard__key--wide', 'keyboard__key--small');
-                    keyElement.innerHTML = 'ru';
 
                     keyElement.addEventListener('click', () => {
                         this.properties.lang = !this.properties.lang;
-                        keyElement.innerHTML = 'en';                        
+                        this.properties.enru = !this.properties.enru;                        
                           
                         //console.log(this.properties.lang);       
  
                         while (this.elements.keysContainer.children.length > 0)  this.elements.keysContainer.children[0].remove();
                         this.elements.keysContainer.appendChild(this._createKeys());
                         this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
+                        //this._open();
+
+
                          //звук
                          const enruSound = document.getElementById('enru');                    
                          enruSound.play();                          
@@ -390,6 +378,8 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.value += ' ';
+                        this.properties.start++;
+                        this.properties.end++;
                         this._triggerEvent('oninput');  
                          //звук
                          const spaceSound = document.getElementById('space');                    
@@ -433,13 +423,11 @@ const Keyboard = {
                     keyElement.classList.add('keyboard__key--wide');
                     keyElement.classList.add('keyboard__key--activatable'); //стиль с лампочкой
                     
-                    keyElement.innerHTML = keyLayout[keyLayout.length -5].toLowerCase();                    
+                    keyElement.innerHTML = 'shift';                 
 
                     keyElement.addEventListener('click', () => {
                         this._toggleShift(); 
                         keyElement.classList.toggle('keyboard__key--active', this.properties.shift); 
-                        //чтобы надпись шифт не меняла регистр  
-                        keyElement.innerHTML = keyLayout[keyLayout.length -5];   
 
                         //звук
                         const shiftSound = document.getElementById('shift');                    
@@ -451,18 +439,16 @@ const Keyboard = {
 
                 default:     
            
-                  //рисуется
+                  //рисуются клавиши
                     if (!Array.isArray(key)){
                         keyElement.textContent = key.toLowerCase();
                     } else if (Array.isArray(key)){
                         keyElement.textContent = key[0]; 
-                    }                     
-                      
-                                 
+                    }                       
 
 
 
-                    // изменить регистр по капсу или шифту
+                    // изменить регистр на клавишах по капсу или шифту
                     
                     if (!Array.isArray(key)){ 
                         this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase();
@@ -476,15 +462,15 @@ const Keyboard = {
 
 
                     keyElement.addEventListener('click', (e) => {
-                        //если массив, то возьми 1-й элемент
-                        if (Array.isArray(key)){
+                        //УБРАТЬ: так при шифте и капсе клавиши не теряют регистр
+                        /*if (Array.isArray(key)){
                             keyElement.textContent = key[0];
                         } else {
                             keyElement.textContent = key;
-                        }
+                        }*/
 
 
-                        console.log (key);
+                        //console.log (key);
                         //console.log('по клику на клавише ' + this.properties.start);
                         //console.log('по клику на клавише ' + this.properties.end);
 
@@ -495,7 +481,7 @@ const Keyboard = {
                             key = keyElement.textContent.toLowerCase(); 
                         } 
                         // если включены оба
-                        if (this.properties.capsLock && this.properties.shift) key = keyElement.textContent.toLowerCase();                    
+                        if (this.properties.capsLock && this.properties.shift) key = keyElement.textContent.toLowerCase();   
 
 
                          //значение от начала до положения курсора + новый символ + значение от конечного положения курсора (если что-то выделено) до конца текста
@@ -553,17 +539,17 @@ const Keyboard = {
 
 
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0  && key.textContent !== 'shift' && key.textContent !== 'clear' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
+            if (key.childElementCount === 0 && key.textContent !== 'clear' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
                 key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase(); 
                 //console.log(key.textContent);         
-            } else if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'clear' && key.textContent !== 'ru' && Array.isArray(key)) {
+            } else if (key.childElementCount === 0&& key.textContent !== 'en' && key.textContent !== 'clear' && key.textContent !== 'ru' && Array.isArray(key)) {
                 for (let k = 0; k < key.length; k++){
                     key.textContent = this.properties.shift ? key[k][1] : key[k][0];
                     //console.log(key);
                 }
                  
                
-            }
+            } 
         }
 
         console.log('туглшифт');
