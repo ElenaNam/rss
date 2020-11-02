@@ -40,10 +40,9 @@
   audio {
       display: none;
   }
-
-  .material-icons:hover {
+  .material-icons {
     pointer-events: none;
-    background: rgba(92, 56, 15, 0.8);
+    background: transparent;    
   }
 
   .keyboard {
