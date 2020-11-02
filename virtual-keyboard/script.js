@@ -15,6 +15,7 @@ const Keyboard = {
         value: "",
         capsLock: false,
         shift: false,
+        keyLayout:true,
         direction: 'none',
         lang: true,
         start: 0,
@@ -100,12 +101,12 @@ const Keyboard = {
         
         let keyLayout;
         // выбрать раскладку      
-        if (this.properties.lang = true) {
+        if (this.properties.lang) {
             keyLayout = keyLayoutEn;
         } else {
             keyLayout = keyLayoutRu;
         }    
-        
+        console.log(this.properties.lang);
 
         //Create HTML for an icon
         const createIconHTML = (icon_name) => {
@@ -325,17 +326,14 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.lang = !this.properties.lang;
-                        keyElement.innerHTML = 'en'; 
+                        keyElement.innerHTML = 'ru';                        
+                          
+                        //console.log(this.properties.lang);       
+ 
+                        while (this.elements.keysContainer.children.length > 0)  this.elements.keysContainer.children[0].remove();
+                        this.elements.keysContainer.appendChild(this._createKeys());
+                        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
 
-
-                        for (const key of this.elements.keys) {
-                            //
-                            if (key.childElementCount === 0) {
-                                //if(key.textContent = this.properties.lang) {this.elements.keysContainer.children[0].remove() && this.elements.keysContainer.appendChild(this._createKeys())};
-                
-                            }
-                
-                        }               
 
                          //звук
                          const enruSound = document.getElementById('enru');                    
@@ -350,17 +348,13 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
                         this.properties.lang = !this.properties.lang;
-                        keyElement.innerHTML = 'ru';  
-
-
-                        for (const key of this.elements.keys) {
-                            if (key.childElementCount === 0) {
-                               // key.textContent = this.properties.lang ? 
-                
-                            }
-                
-                        }
-                 
+                        keyElement.innerHTML = 'en';                        
+                          
+                        //console.log(this.properties.lang);       
+ 
+                        while (this.elements.keysContainer.children.length > 0)  this.elements.keysContainer.children[0].remove();
+                        this.elements.keysContainer.appendChild(this._createKeys());
+                        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
                          //звук
                          const enruSound = document.getElementById('enru');                    
                          enruSound.play();                          
@@ -456,15 +450,15 @@ const Keyboard = {
                     break; 
 
                 default:     
-
-                    for (let j = 0; j < keyLayout.length; j++){
-                        if (!Array.isArray(key)){
-                            keyElement.textContent = key.toLowerCase();
-                        } else if (Array.isArray(key)){
-                            keyElement.textContent = key[0]; 
-                        }                     
+           
+                  //рисуется
+                    if (!Array.isArray(key)){
+                        keyElement.textContent = key.toLowerCase();
+                    } else if (Array.isArray(key)){
+                        keyElement.textContent = key[0]; 
+                    }                     
                       
-                    }                        
+                                 
 
 
 
@@ -478,7 +472,7 @@ const Keyboard = {
                         this.properties.value += this.properties.shift ? key[1] : key[0];
                     }              
 
-                    this._triggerEvent('oninput');     
+                    //this._triggerEvent('oninput');     
 
 
                     keyElement.addEventListener('click', (e) => {
