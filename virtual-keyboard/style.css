@@ -112,12 +112,13 @@
     background: rgba(92, 56, 15, 0.8);
   }
 
+
   .keyboard__key--extra-wide {
     width: 36%;
     max-width: 500px;
     background: rgba(92, 56, 15, 0.8);
   }
-  
+  /*с лампочкой*/
   .keyboard__key--activatable::after {
     content: '';
     top: 10px;

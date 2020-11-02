@@ -133,7 +133,14 @@ const Keyboard = {
                     // только не трогай кнопку переключения звука
                     if (key != 'campaign'){
                         e.target.style.background = '#245389'
-                        const deselectKey = () => {e.target.style.background = ' rgba(80, 66, 40, 0.8)'};  
+                        const deselectKey = () => {
+                            if(key === 'shift' || key === 'clear' || key === 'en' || key === 'ru' || key === 'backspace' || key === 'space'){
+                                e.target.style.background = 'rgba(92, 56, 15, 0.8)';
+                            } else {
+                                e.target.style.background = 'rgba(80, 66, 40, 0.8)'; 
+                            }
+                            
+                        };  
                         setTimeout(deselectKey, 500); 
                     }
                    
@@ -272,32 +279,19 @@ const Keyboard = {
                     break;
 
                 case 'clear': 
-                    // применить к клавише класс 'keyboard__key--wide'
+
                     keyElement.classList.add('keyboard__key--wide');
-                    // применить иконку
-                    keyElement.innerHTML = createIconHTML('backspace');
+                    keyElement.innerHTML = 'clear'.toLowerCase();  
+
                     // обработчик события клик
                     keyElement.addEventListener('click', () => {
-                        
                         const textar = document.querySelector('.use-keyboard-input');
+                        textar.value = '';  
 
-                        this.properties.start = textar.selectionStart;
-                        this.properties.end = textar.selectionEnd;
-                        console.log(this.properties.start);
-                        console.log(this.properties.end);
-
-                        //удали 1 символ с позиции курсора
-                        let str = this.properties.value.substring(0, this.properties.start - 1);
-                        this.properties.value = str + this.properties.value.substring(this.properties.end, this.properties.value.length);
-                        //важно поставить его здесь
-                        this._triggerEvent('oninput');
+                        keyElement.classList.add('keyboard__key--wide');
                         
-                      
+                        
 
-                        this.properties.start --;
-                        this.properties.end --;
-                        textar.setSelectionRange(this.properties.start, this.properties.end);
-                       
 
                         //звук
                          const backSound = document.getElementById('back');                    
@@ -309,7 +303,7 @@ const Keyboard = {
 
 
                 case 'en': //ДОДЕЛАТЬ
-                    keyElement.classList.add('keyboard__key--wide');
+                    keyElement.classList.add('keyboard__key--small'); 
                     keyElement.innerHTML = 'en';
 
                     keyElement.addEventListener('click', () => {
@@ -334,7 +328,7 @@ const Keyboard = {
                     break;
 
                 case 'ru': //ДОДЕЛАТЬ
-                    keyElement.classList.add('keyboard__key--wide');
+                    keyElement.classList.add('keyboard__key--wide', 'keyboard__key--small');
                     keyElement.innerHTML = 'ru';
 
                     keyElement.addEventListener('click', () => {
@@ -424,6 +418,7 @@ const Keyboard = {
                     break;
                     
                 case 'shift': 
+                
                     keyElement.classList.add('keyboard__key--wide');
                     keyElement.classList.add('keyboard__key--activatable'); //стиль с лампочкой
                     
@@ -535,7 +530,7 @@ const Keyboard = {
     _toggleCapsLock() {
         this.properties.capsLock = !this.properties.capsLock;
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0 && key.textContent !== 'shift' && key.textContent !== 'en' && key.textContent !== 'ru') {
+            if (key.childElementCount === 0 && key.textContent !== 'shift' && key.textContent !== 'clear' && key.textContent !== 'en' && key.textContent !== 'ru') {
                 key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
             }
         }
@@ -547,10 +542,10 @@ const Keyboard = {
 
 
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0  && key.textContent !== 'shift' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
+            if (key.childElementCount === 0  && key.textContent !== 'shift' && key.textContent !== 'clear' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
                 key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase(); 
                 //console.log(key.textContent);         
-            } else if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'ru' && Array.isArray(key)) {
+            } else if (key.childElementCount === 0  && key.textContent !== 'en' && key.textContent !== 'clear' && key.textContent !== 'ru' && Array.isArray(key)) {
                 for (let k = 0; k < key.length; k++){
                     key.textContent = this.properties.shift ? key[k][1] : key[k][0];
                     //console.log(key);
