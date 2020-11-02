@@ -423,7 +423,7 @@ const Keyboard = {
                     keyElement.classList.add('keyboard__key--wide');
                     keyElement.classList.add('keyboard__key--activatable'); //стиль с лампочкой
                     
-                    keyElement.innerHTML = 'shift';                 
+                    keyElement.innerHTML = 'shift'.toLowerCase();                 
 
                     keyElement.addEventListener('click', () => {
                         this._toggleShift(); 
@@ -539,10 +539,10 @@ const Keyboard = {
 
 
         for (const key of this.elements.keys) {
-            if (key.childElementCount === 0 && key.textContent !== 'clear' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
+            if (key.childElementCount === 0 && key.textContent !== 'clear'  && key.textContent !== 'shift' && key.textContent !== 'en' && key.textContent !== 'ru' && !Array.isArray(key)) {
                 key.textContent = this.properties.shift ? key.textContent.toUpperCase() : key.textContent.toLowerCase(); 
                 //console.log(key.textContent);         
-            } else if (key.childElementCount === 0&& key.textContent !== 'en' && key.textContent !== 'clear' && key.textContent !== 'ru' && Array.isArray(key)) {
+            } else if (key.childElementCount === 0&& key.textContent !== 'en' && key.textContent !== 'shift' && key.textContent !== 'clear' && key.textContent !== 'ru' && Array.isArray(key)) {
                 for (let k = 0; k < key.length; k++){
                     key.textContent = this.properties.shift ? key[k][1] : key[k][0];
                     //console.log(key);
