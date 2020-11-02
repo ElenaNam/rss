@@ -197,7 +197,8 @@ const Keyboard = {
                             this.properties.start = textar.selectionStart;
                             this.properties.end = textar.selectionEnd;
     
-                            textar.selectionStart = textar.selectionEnd += 1; 
+                            //textar.selectionStart = textar.selectionEnd += 1; 
+                            textar.selectionEnd = textar.selectionStart += 1; 
 
                         } else {
                             
@@ -207,7 +208,7 @@ const Keyboard = {
                               this.properties.end++;                          
                             }                               
 
-                            textar.setSelectionRange(this.properties.start+1, this.properties.end+1);  
+                            textar.setSelectionRange(this.properties.start-1, this.properties.end-1);  
 
                         }   
           
