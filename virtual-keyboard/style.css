@@ -41,6 +41,10 @@
       display: none;
   }
 
+  .material-icons:hover {
+    pointer-events: none;
+  }
+
   .keyboard {
     position: fixed;
     left: 0;

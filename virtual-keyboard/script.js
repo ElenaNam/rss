@@ -79,17 +79,17 @@ const Keyboard = {
         const fragment = document.createDocumentFragment();
         const keyLayoutEn = [
             ["1","!"], ["2","@"], ["3","#"], ["4","$"], ["5","%"], ["6","^"], ["7","&"], ["8","*"], ["9","("], ["0",")"], "backspace",
-            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","en",
+            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p","clear",
             "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
             "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
-            "shift", "space", "campaign", "left", "right"
+            "en", "shift", "space", "campaign", "left", "right"
           ];
         const keyLayoutRu = [
             ["1","!"], ["2","\""], ["3","№"], ["4",";"], ["5","%"], ["6",":"], ["7","?"], ["8","*"], ["9","("], ["0",")"], "backspace",
-            "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з","х","ъ", "ru",
+            "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з","х","ъ", "clear",
             "caps", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "enter",
             "done", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".", "?",
-            "shift","space", "campaign", "left", "right"
+            "ru","shift","space", "campaign", "left", "right"
           ]; 
         
         
@@ -111,7 +111,7 @@ const Keyboard = {
             
             const keyElement = document.createElement('button');
             // перенос строки
-            const insertLineBreak = ['backspace', 'en', 'enter', '?'].indexOf(key) !== -1;         
+            const insertLineBreak = ['backspace', 'clear', 'enter', '?'].indexOf(key) !== -1;         
            
             
             //добавить атрибуты/классы клавишам
@@ -121,7 +121,7 @@ const Keyboard = {
             keyElement.setAttribute('onmousedown', 'return false'); 
 
             // для всех клавиш - и обычных и специальных
-            keyElement.addEventListener('click', (e) => {
+            keyElement.addEventListener('mousedown', (e) => {
                 //если массив, то возьми 1-й элемент
                 if (Array.isArray(key)){
                     keyElement.textContent = key[0];
@@ -151,24 +151,26 @@ const Keyboard = {
 
                     keyElement.addEventListener('click', () => {
 
-                        const textar = document.querySelector('.use-keyboard-input');                  
-                        
-                        this.properties.start = textar.selectionStart;
-                        this.properties.end = textar.selectionEnd;
+                        const textar = document.querySelector('.use-keyboard-input');               
 
-                        textar.selectionStart = textar.selectionEnd -= 1; 
-                        
-                        //выделение по шифту
-                    /*    if (!this.properties.shift) {
-                            this.properties.direction = 'backward';
-                        }
 
-                        if (this.properties.start <= this.properties.end) {
-                          this.properties.start--;                          
-                        }                       
-                        
-                        textar.setSelectionRange(this.properties.start, this.properties.end);                    
-                    */
+                        if (!this.properties.shift) {
+                            this.properties.start = textar.selectionStart;
+                            this.properties.end = textar.selectionEnd;
+    
+                            textar.selectionStart = textar.selectionEnd -= 1; 
+
+                        } else {                            
+                            this.properties.direction = 'backward';                          
+    
+                            if (this.properties.start <= this.properties.end) {
+                              this.properties.start--;                          
+                            }                               
+
+                            textar.setSelectionRange(this.properties.start-1, this.properties.end-1);
+
+                        }                    
+
                         //звук
                         const arrowSound = document.getElementById('arrow');                    
                         arrowSound.play(); 
@@ -183,10 +185,23 @@ const Keyboard = {
                     keyElement.addEventListener('click', () => {
                         const textar = document.querySelector('.use-keyboard-input');                  
                         
-                        this.properties.start = textar.selectionStart;
-                        this.properties.end = textar.selectionEnd;
+                        if (!this.properties.shift) {
+                            this.properties.start = textar.selectionStart;
+                            this.properties.end = textar.selectionEnd;
+    
+                            textar.selectionStart = textar.selectionEnd += 1; 
 
-                        textar.selectionStart = textar.selectionEnd += 1;    
+                        } else {
+                            
+                            this.properties.direction = 'forward';                           
+    
+                            if (this.properties.start <= this.properties.end) {
+                              this.properties.end++;                          
+                            }                               
+
+                            textar.setSelectionRange(this.properties.start+1, this.properties.end+1);  
+
+                        }   
           
     
                         //звук
@@ -222,6 +237,41 @@ const Keyboard = {
                 break;
 
                 case 'backspace': 
+                    // применить к клавише класс 'keyboard__key--wide'
+                    keyElement.classList.add('keyboard__key--wide');
+                    // применить иконку
+                    keyElement.innerHTML = createIconHTML('backspace');
+                    // обработчик события клик
+                    keyElement.addEventListener('click', () => {
+                        
+                        const textar = document.querySelector('.use-keyboard-input');
+
+                        this.properties.start = textar.selectionStart;
+                        this.properties.end = textar.selectionEnd;
+                        console.log(this.properties.start);
+                        console.log(this.properties.end);
+
+                        //удали 1 символ с позиции курсора
+                        let str = this.properties.value.substring(0, this.properties.start - 1);
+                        this.properties.value = str + this.properties.value.substring(this.properties.end, this.properties.value.length);
+                        //важно поставить его здесь
+                        this._triggerEvent('oninput');
+                        
+                      
+
+                        this.properties.start --;
+                        this.properties.end --;
+                        textar.setSelectionRange(this.properties.start, this.properties.end);
+                       
+
+                        //звук
+                         const backSound = document.getElementById('back');                    
+                         backSound.play(); 
+                    })
+
+                    break;
+
+                case 'clear': 
                     // применить к клавише класс 'keyboard__key--wide'
                     keyElement.classList.add('keyboard__key--wide');
                     // применить иконку
