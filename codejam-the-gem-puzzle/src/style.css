@@ -1,0 +1,78 @@
+body {
+    margin: 0 auto;
+}
+
+:root {
+    font-size: 10px;
+    font-family: 'Changa', sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: url(assets/bg.jpg);
+    background-size: cover;
+    /*opacity: 0.7;*/
+}
+.cell-container {
+    display: flex;
+    width: 40.5rem;
+    height: 10.1rem;
+}
+
+.additional-wrapper {
+    width: 400px;
+    height: 50px;
+    background-color: aquamarine;
+}
+
+.puzzle-wrapper {
+    position: fixed;    
+    top: 300px;
+    display: flex;  
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 40.5rem;
+    border: 5px double rgb(119, 72, 45);
+    border-radius: 2%;
+    background: linear-gradient(45deg, #5a4125, #ff9b29, #df3b6c);
+}
+.puzzle-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95px;
+    height: 95px;
+    border: 1px solid rgb(51, 28, 6);
+    border-radius: 10%;
+    background-color: rgb(100, 57, 21);
+       
+    margin-left: 2px;
+    margin-right: 2px;
+    font-size: 4.5rem;
+    text-shadow: 2px 3px 2px rgb(0, 0, 0, 0.8);
+    color: rgb(228, 191, 133);
+}
+.puzzle-cell:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.puzzle-cell--empty {
+    display: flex;
+
+    width: 95px;
+    height: 95px;
+
+    margin-left: 1px;
+    margin-right: 1px;
+
+
+}
