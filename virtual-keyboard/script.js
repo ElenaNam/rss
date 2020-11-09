@@ -442,9 +442,11 @@ const Keyboard = {
                   //рисуются клавиши
                     if (!Array.isArray(key)){
                         keyElement.textContent = key.toLowerCase();
-                    } else if (Array.isArray(key)){
+                    } else if (Array.isArray(key) && !this.properties.shift){
                         keyElement.textContent = key[0]; 
-                    }                       
+                    } else if (Array.isArray(key) && this.properties.shift){
+                        keyElement.textContent = key[1]; 
+                    };                      
 
 
 
@@ -452,11 +454,19 @@ const Keyboard = {
                     
                     if (!Array.isArray(key)){ 
                         this.properties.value += (this.properties.capsLock ||  this.properties.shift)  ? key.toUpperCase() : key.toLowerCase();
+                        
+
                     } 
                     
                     if (Array.isArray(key)){ 
                         this.properties.value += this.properties.shift ? key[1] : key[0];
-                    }              
+                    } 
+                    
+                    
+
+
+                    // если включены оба - in textarea
+                   //if (this.properties.capsLock && this.properties.shift) key = key.toLowerCase();          
 
                     //this._triggerEvent('oninput');     
 
@@ -480,7 +490,14 @@ const Keyboard = {
                         } else {
                             key = keyElement.textContent.toLowerCase(); 
                         } 
-                        // если включены оба
+
+
+
+
+
+
+
+                        // если включены оба - in textarea
                         if (this.properties.capsLock && this.properties.shift) key = keyElement.textContent.toLowerCase();   
 
 
