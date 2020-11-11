@@ -4,6 +4,8 @@ const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка 
 let count = 0;  //счетчик кликов
+let time = 00;
+const btnPlay = document.createElement('button'); // кнопка Play
 
 
 //const cellContainer = document.createElement('div'); //строка
@@ -22,9 +24,17 @@ function init() {
 
         //дополнительное поле
         additionalWrapper.classList.add('additional-wrapper');
-        additionalWrapper.innerHTML = `<span class="score">score:  <span>${count}</span></span>`;
+        additionalWrapper.innerHTML = `<div class="score">score:  <span>${count}</span></div>
+        <div class="time">time:  <span>${time}</span></div>`;
+
+        btnPlay.classList.add('play');
+        btnPlay.textContent = "PLAY";        
+        additionalWrapper.appendChild(btnPlay);
+
         document.body.appendChild(additionalWrapper);
-        additionalWrapper.appendChild(addScore());
+        //additionalWrapper.appendChild(addScore());
+
+        
 
 
 
@@ -75,6 +85,8 @@ function createCells() {
         cell.left = emptyLeft;
         cell.top = emptyTop;
 
+        addScore();  
+
     }
     
     for (let i = 1; i < 16; i++) {
@@ -102,11 +114,8 @@ function createCells() {
         //КЛИК
         cellElement.addEventListener('click', () => {
                    
-            move(i);  
-            addScore();  
+            move(i);            
 
-           
-    
         });
 /*
         // DRAG N DROP                   
