@@ -1,6 +1,7 @@
 const wrapper = document.createElement('div'); //фон
 const puzzleWrapper = document.createElement('div');//поле
-const cellSize = 95; //размер клетки
+const additionalWrapper = document.createElement('div');//доп.поле
+const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка   
 
 //const cellContainer = document.createElement('div'); //строка
@@ -31,6 +32,10 @@ function init() {
         puzzleWrapper.classList.add('puzzle-wrapper');
         document.body.appendChild(puzzleWrapper);
 
+        //дополнительное поле
+        additionalWrapper.classList.add('additional-wrapper');
+        document.body.appendChild(additionalWrapper);
+
         //клетки
            
         //puzzleWrapper.appendChild(createCells());
@@ -58,6 +63,7 @@ function createCells() {
     };  
     cells.push(empty);
 
+    //поменяться координатами
     function move (index) {
         const cell = cells[index];
 
@@ -68,7 +74,6 @@ function createCells() {
         if (leftVar + topVar > 1) {
             return;
         }
-
         
         cell.element.style.left = `${empty.left * cellSize}px`;
         cell.element.style.top = `${empty.top * cellSize}px`;
@@ -108,46 +113,63 @@ function createCells() {
 
         //КЛИК
         cellElement.addEventListener('click', () => {
-        //
-        //cellElement.classList.remove('puzzle-cell');
-        move(i);     
-                               
+                   
+            move(i);    
+    
         });
+/*
+        // DRAG N DROP                   
+        cellElement.addEventListener('dragstart', function(e){
+            e.dataTransfer.setData('text/html', 'dragstart');
+                                    
+            setTimeout(() => {
+                this.style.display = 'none';
+            }, 0)
+                            
+        });
+
+       /*cellElement.addEventListener('dragend', function(e){
+            //cellElement.style.position = 'absolute';
+            cellElement.style.top = e.pageY + 'px';
+            cellElement.style.left = e.pageX + 'px';
+
+            setTimeout(() => {
+                this.style.display = 'flex';
+            }, 0)
+                            
+        });*/
+            //когда пятнашка находится над пустым местом
+ /*       puzzleWrapper.addEventListener('dragover', function(e){
+            e.preventDefault();
+            console.log('dragover');
+        }); 
+                                
+            //
+        puzzleWrapper.addEventListener('drop', function(e){
+            //cellContainer.appendChild(cell[j]);            
+            //puzzleWrapper.setAttribute('droppable', 'true');
+
+            cellElement.style.position = 'absolute';
+            cellElement.style.top = e.pageY + 'px';
+            cellElement.style.left = e.pageX + 'px';
+            setTimeout(() => {
+                this.style.display = 'flex';
+            }, 0)
+            
+
+            
+
+
+
+            //puzzleWrapper.appendChild(cellElement);
+            
+            e.target.appendChild(cellElement);
+            console.log('drop');
+        }); */
+
+
     };
 
-                    //                     
-                    /*cellElement.addEventListener('dragstart', function(){
-                            //                            
-                        setTimeout(() => {
-                            this.style.display = 'none';
-                        }, 0)
-                            
-                    });
-
-                    cellElement.addEventListener('dragend', function(){
-                            //
-                        setTimeout(() => {
-                            this.style.display = 'flex';
-                        }, 0)
-                            
-                    });
-
-                        //когда пятнашка находится над пустым местом
-                    puzzleWrapper.addEventListener('dragover', function(e){
-                        e.preventDefault();
-                        console.log('dragover');
-                    }); 
-                                
-                        //
-                    puzzleWrapper.addEventListener('drop', function(){
-                        //cellContainer.appendChild(cell[j]);
-                        //puzzleWrapper.appendChild(cellElement);
-                        console.log('drop');
-                    }); 
-*/
-
-
-  
         fragment.appendChild(cellElement);
         return fragment;
 };       
