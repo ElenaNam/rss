@@ -2,26 +2,12 @@ const wrapper = document.createElement('div'); //фон
 const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
-const cellElement = document.createElement('div'); //клетка   
+const cellElement = document.createElement('div'); //клетка 
+let count = 0;  //счетчик кликов
+
 
 //const cellContainer = document.createElement('div'); //строка
 const fragment = document.createDocumentFragment();
-
-/*let cells = [
-    ['1','2','3','4'],
-    ['5','6','7','8'],
-    ['9','10','11','12'],
-    ['13','14','15']
-  ];*/
-
-/*let cells = [
-    '1','2','3','4',
-    '5','6','7','8',
-    '9','10','11','12',
-    '13','14','15',''
-];*/
-
-
 
 function init() {
         //фон        
@@ -31,15 +17,16 @@ function init() {
         //поле        
         puzzleWrapper.classList.add('puzzle-wrapper');
         document.body.appendChild(puzzleWrapper);
+        //клетки      
+        puzzleWrapper.appendChild(createCells());
 
         //дополнительное поле
         additionalWrapper.classList.add('additional-wrapper');
+        additionalWrapper.innerHTML = `<span class="score">score:  <span>${count}</span></span>`;
         document.body.appendChild(additionalWrapper);
+        additionalWrapper.appendChild(addScore());
 
-        //клетки
-           
-        //puzzleWrapper.appendChild(createCells());
-        puzzleWrapper.appendChild(createCells());
+
 
         //анимация фона
        /* const blinkBg = () => {
@@ -65,7 +52,8 @@ function createCells() {
 
     //поменяться координатами
     function move (index) {
-        const cell = cells[index];
+        const cell = cells[index];        
+        
 
         //ищем разницу с коорд.пустой клетки
         const leftVar = Math.abs(empty.left - cell.left);
@@ -114,7 +102,10 @@ function createCells() {
         //КЛИК
         cellElement.addEventListener('click', () => {
                    
-            move(i);    
+            move(i);  
+            addScore();  
+
+           
     
         });
 /*
@@ -155,10 +146,6 @@ function createCells() {
             setTimeout(() => {
                 this.style.display = 'flex';
             }, 0)
-            
-
-            
-
 
 
             //puzzleWrapper.appendChild(cellElement);
@@ -172,7 +159,18 @@ function createCells() {
 
         fragment.appendChild(cellElement);
         return fragment;
-};       
+};  
+
+
+
+function addScore(){
+    const score = document.querySelector('.score');
+    score.textContent = `score: ${count}`;
+    count++;
+    
+    console.log (`Сделано ${count} ходов`);   
+    
+}
       
 
 
