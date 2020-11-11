@@ -3,8 +3,12 @@ const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка 
+
 let count = 0;  //счетчик кликов
-let time = 00;
+let sec= 0;
+let min = 0;
+let hour = 0;
+
 const btnPlay = document.createElement('button'); // кнопка Play
 
 
@@ -19,14 +23,17 @@ function init() {
         //поле        
         puzzleWrapper.classList.add('puzzle-wrapper');
         document.body.appendChild(puzzleWrapper);
+
         //клетки      
         puzzleWrapper.appendChild(createCells());
 
         //дополнительное поле
         additionalWrapper.classList.add('additional-wrapper');
         additionalWrapper.innerHTML = `<div class="score">score:  <span>${count}</span></div>
-        <div class="time">time:  <span>${time}</span></div>`;
-
+        <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
+        
+        
+        //кнопка play
         btnPlay.classList.add('play');
         btnPlay.textContent = "PLAY";        
         additionalWrapper.appendChild(btnPlay);
@@ -171,15 +178,66 @@ function createCells() {
 };  
 
 
-
+//считать ходы
 function addScore(){
     const score = document.querySelector('.score');
-    score.textContent = `score: ${count}`;
     count++;
+    score.textContent = `score: ${count}`;
+    
     
     console.log (`Сделано ${count} ходов`);   
     
 }
+// Add Zeros 
+function addZero(number) {
+    return (parseInt(number, 10) < 10 ? '0' : '') + number;
+}
+
+const timer = () =>{
+    let time = document.querySelector('.time');
+    //time.classList.add('.time');    
+    sec++; 
+
+    
+    if (sec === 60){
+        sec = 0;
+        min += 1;
+    };
+    if (min === 60){
+        min = 0;
+        hour += 1;
+    };
+
+    
+
+
+    time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;
+    
+    console.log('новая игра'); 
+    
+};
+
+
+btnPlay.addEventListener('click', () => {
+    //нажимаем play и запускаем таймер
+    if (btnPlay.textContent === "PLAY"){
+        btnPlay.textContent = "PAUSE";
+        btnPlay.style.fontSize = '1.8rem';
+        
+        setInterval(timer, 1000); 
+        
+        
+    
+    //нажимаем на паузу, таймер останавливается
+    } else if (btnPlay.textContent === "PAUSE"){
+        btnPlay.textContent = "PLAY";
+        var intervalID = setInterval(timer, 1000);
+        clearInterval(intervalID);
+    };
+
+     
+    //начинается новая игра
+});
       
 
 
