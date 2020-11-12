@@ -120,12 +120,13 @@ body {
     top: 250px;
 }
 
-.play {
+.pause {
     position: absolute;
     width: 66px;
     height: 28px;
     left: 305px;
     top: 17px;
+    font-size: 1.8rem;
 }
 
 
