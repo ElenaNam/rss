@@ -6,6 +6,7 @@ const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка 
 const congratulation = document.createElement('div');
 const sound = document.createElement('audio');
+const soundWin = document.createElement('audio');
 
 let count = 0;  //счетчик кликов
 let sec= 0;
@@ -74,6 +75,9 @@ function init() {
 
         sound.setAttribute('src', 'src/assets/1596830637_clickb7.mp3');     
         document.body.appendChild(sound);
+
+        soundWin.setAttribute('src', 'src/assets/903a9e120e7b9b3.mp3');
+        document.body.appendChild(soundWin);
 
         
 
@@ -144,6 +148,7 @@ function createCells() {
 
             setTimeout(() => {
                document.body.appendChild(congratulation); 
+               soundWin.play();  
             }, 300)            
 
             congratulation.addEventListener ('click', () => {

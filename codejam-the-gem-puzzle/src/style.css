@@ -202,7 +202,7 @@ body {
     border: 1px solid rgb(51, 28, 6);
     border-radius: 10%;
     background-color: rgb(100, 57, 21);
-    transition: all .3s;
+    transition: all .5s;
     margin: 2px;      
 
     font-size: 4.5rem;
@@ -212,6 +212,7 @@ body {
 .puzzle-cell:hover {
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    opacity: 0.8;
 }
 
 .puzzle-cell--empty {
