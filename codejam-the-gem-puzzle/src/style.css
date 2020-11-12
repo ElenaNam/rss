@@ -63,12 +63,7 @@ body {
     text-shadow: 2px 3px 2px rgba(173, 97, 10, 0.8);
 }
 
-.play {
-    width: 66px;
-    height: 28px;
-    position: absolute;
-    left: 305px;
-    top: 17px;
+.button {
     background: rgba(255, 255, 255, 0.8);    
     color: rgb(128, 0, 90);    
     border:1px solid rgb(194, 9, 117);
@@ -78,15 +73,68 @@ body {
     justify-content: center;
     align-items: center;
     outline: none;
-    
     font-weight: bold;
     text-shadow: 1px 1px 1px rgba(226, 161, 161, 0.8);
 
 }
-.play:hover {
+.button:hover {
     cursor: pointer;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     outline: none;
+}
+.button-newgame {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+}
+.button-progress {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 200px;
+}
+.button-select3x3 {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 250px;
+}
+
+.play {
+    position: absolute;
+    width: 66px;
+    height: 28px;
+    left: 305px;
+    top: 17px;
+}
+
+
+.popap-wrapper {
+    position: fixed; 
+    padding-top: 2px;   
+    top: 244px;
+    display: flex;  
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 47rem;    
+    border-radius: 2%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2;
 }
 
 

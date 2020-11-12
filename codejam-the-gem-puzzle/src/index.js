@@ -1,4 +1,5 @@
 const wrapper = document.createElement('div'); //фон
+const popapWrapper = document.createElement('div'); //popap
 const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
@@ -10,9 +11,12 @@ let min = 0;
 let hour = 0;
 
 const btnPlay = document.createElement('button'); // кнопка Play
+const btnNewGame =  document.createElement('button');
+const btnSound = document.createElement('button');
+const btnProgress =  document.createElement('button');
+const btnSelect3x3 =  document.createElement('button');
 
 
-//const cellContainer = document.createElement('div'); //строка
 const fragment = document.createDocumentFragment();
 
 function init() {
@@ -34,12 +38,28 @@ function init() {
         
         
         //кнопка play
-        btnPlay.classList.add('play');
+        btnPlay.classList.add('play', 'button');
         btnPlay.textContent = "PLAY";        
         additionalWrapper.appendChild(btnPlay);
 
         document.body.appendChild(additionalWrapper);
         //additionalWrapper.appendChild(addScore());
+
+        //popap
+        popapWrapper.classList.add('popap-wrapper');
+        document.body.appendChild(popapWrapper);
+        //элементы popap
+        btnNewGame.classList.add ('button', 'button-newgame');
+        btnNewGame.textContent = "New Game";        
+        popapWrapper.appendChild(btnNewGame);
+
+        btnProgress.classList.add ('button', 'button-progress');
+        btnProgress.textContent = "Progress";        
+        popapWrapper.appendChild(btnProgress);
+
+        btnSelect3x3.classList.add ('button', 'button-select3x3');
+        btnSelect3x3.textContent = "3x3";        
+        popapWrapper.appendChild(btnSelect3x3);
 
         
 
@@ -69,7 +89,7 @@ function createCells() {
 
     //поменяться координатами
     function move (index) {
-        const cell = cells[index];        
+        const cell = cells[index];      
         
 
         //ищем разницу с коорд.пустой клетки
@@ -197,7 +217,6 @@ const timer = () =>{
     let time = document.querySelector('.time');
     //time.classList.add('.time');    
     sec++; 
-
     
     if (sec === 60){
         sec = 0;
@@ -208,13 +227,7 @@ const timer = () =>{
         hour += 1;
     };
 
-    
-
-
-    time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;
-    
-    console.log('новая игра'); 
-    
+    time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;   
 };
 
 
