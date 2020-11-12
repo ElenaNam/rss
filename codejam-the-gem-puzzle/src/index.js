@@ -35,7 +35,7 @@ function init() {
 
         //дополнительное поле
         additionalWrapper.classList.add('additional-wrapper');
-        additionalWrapper.innerHTML = `<div class="score">score:  <span>${ count}</span></div>
+        additionalWrapper.innerHTML = `<div class="score">score: ${ count}</div>
         <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
         
         
@@ -45,7 +45,7 @@ function init() {
         additionalWrapper.appendChild(btnPlay);
 
         document.body.appendChild(additionalWrapper);
-        //additionalWrapper.appendChild(addScore());
+      
 
         //popap
         popapWrapper.classList.add('popap-wrapper');
@@ -62,6 +62,8 @@ function init() {
         btnSelect3x3.classList.add ('button', 'button-select3x3');
         btnSelect3x3.textContent = "3x3";        
         popapWrapper.appendChild(btnSelect3x3);
+
+        congratulation.classList.add('congratulation');
 
         
 
@@ -124,17 +126,28 @@ function createCells() {
         if (isFinished) {
             console.log ("Вы выиграли!");
             congratulation.innerHTML = 
-            `<div class="congratulation"><span></span>Congratulations! </span>
-            <span>You won with ${ count } score </span>
+            `<div class="congratulation"><span>Congratulations!</span>
+            <span>You won with ${ count + 1 } score </span>
             <span>for time 0${hour}: 0${min}: 0${sec}</span></div>`;
 
 
 
-            congratulation.classList.add('congratulation');
+            
             document.body.appendChild(congratulation);
+
             congratulation.addEventListener ('click', () => {
-                congratulation.style.display = 'none';
+                //congratulation.style.display = 'none';
+                document.body.removeChild(congratulation);
                 popapWrapper.style.display = 'flex';
+                count = 0;
+                sec = 0;
+                min = 0;
+                hour = 0;
+
+                additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
+                <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
+                additionalWrapper.appendChild(btnPlay);
+                
             })
 
         }
