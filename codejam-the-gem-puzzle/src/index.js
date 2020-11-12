@@ -4,6 +4,7 @@ const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка 
+const congratulation = document.createElement('div');
 
 let count = 0;  //счетчик кликов
 let sec= 0;
@@ -15,6 +16,7 @@ const btnNewGame =  document.createElement('button');
 const btnSound = document.createElement('button');
 const btnProgress =  document.createElement('button');
 const btnSelect3x3 =  document.createElement('button');
+const btnContinue =  document.createElement('button');
 
 
 const fragment = document.createDocumentFragment();
@@ -33,7 +35,7 @@ function init() {
 
         //дополнительное поле
         additionalWrapper.classList.add('additional-wrapper');
-        additionalWrapper.innerHTML = `<div class="score">score:  <span>${count}</span></div>
+        additionalWrapper.innerHTML = `<div class="score">score:  <span>${ count}</span></div>
         <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
         
         
@@ -80,15 +82,18 @@ function init() {
 };
 
 function createCells() {
+    
     const cells = [];
     const empty = {
-    top: 0,
-    left: 0
+        value: 0,    
+        top: 0,
+        left: 0
     };  
     cells.push(empty);
 
     //поменяться координатами
     function move (index) {
+        
         const cell = cells[index];      
         
 
@@ -112,13 +117,38 @@ function createCells() {
         cell.left = emptyLeft;
         cell.top = emptyTop;
 
+        const isFinished = cells.every(cell => {
+            return cell.value === cell.top * 4 + cell.left;
+        });
+
+        if (isFinished) {
+            console.log ("Вы выиграли!");
+            congratulation.innerHTML = 
+            `<div class="congratulation"><span></span>Congratulations! </span>
+            <span>You won with ${ count } score </span>
+            <span>for time 0${hour}: 0${min}: 0${sec}</span></div>`;
+
+
+
+            congratulation.classList.add('congratulation');
+            document.body.appendChild(congratulation);
+            congratulation.addEventListener ('click', () => {
+                congratulation.style.display = 'none';
+                popapWrapper.style.display = 'flex';
+            })
+
+        }
+        
+
         addScore();  
 
     }
-    
+    const newCells = [...Array(15).keys()];
+    //.sort(() => Math.random() - 0.5)
     for (let i = 1; i < 16; i++) {
-        const cellElement = document.createElement('div'); //клетка                    
-        cellElement.textContent = i;
+        const cellElement = document.createElement('div'); //клетка  
+        const value = newCells[i-1] + 1;                
+        cellElement.textContent = value;
         cellElement.classList.add('puzzle-cell');
         //разрешить перетаскивание мышью
         cellElement.setAttribute('draggable', 'true'); 
@@ -127,6 +157,7 @@ function createCells() {
         const top = (i - left) / 4;
 
         cells.push ({
+            value: value,
             left: left,
             top: top,
             element: cellElement
@@ -192,8 +223,8 @@ function createCells() {
 
 
     };
-
-        fragment.appendChild(cellElement);
+        fragment.appendChild(cellElement);        
+        
         return fragment;
 };  
 
@@ -230,7 +261,7 @@ const timer = () =>{
     time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;   
 };
 
-
+// ПАУЗА и ПРОДОЛЖИТЬ
 btnPlay.addEventListener('click', () => {
     //нажимаем play и запускаем таймер
     if (btnPlay.textContent === "PLAY"){
@@ -246,14 +277,40 @@ btnPlay.addEventListener('click', () => {
         btnPlay.textContent = "PLAY";
         var intervalID = setInterval(timer, 1000);
         clearInterval(intervalID);
-    };
 
-     
-    //начинается новая игра
+        popapWrapper.style.display = 'flex';
+        btnContinue.classList.add ('button', 'button-continue');
+        btnContinue.textContent = "Continue";        
+        popapWrapper.appendChild(btnContinue);
+
+    };    
+
 });
-      
+
+
+
+
+btnNewGame.addEventListener('click', () => {
+    console.log ('клик по кнопке Новая игра');        
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);
+    
+
+    //ИСПРАВИТЬ ОШИБКУ В КОНСОЛИ!!
+    puzzleWrapper.removeChild(puzzleWrapper.childNodes);
+   // puzzleWrapper.removeChild(cellElement);
+    //puzzleWrapper.remove();
+    //puzzleWrapper.appendChild(createCells());
+    //cellElement.parentNode.removeChild(cellElement);   
+    //puzzleWrapper.replaceChild(createCells());
+    
+    createCells();    
+});
+   
+
+
 
 
 window.addEventListener("DOMContentLoaded", function() {
-    init();    
+    init(); 
+    //initNewGame();   
 });
