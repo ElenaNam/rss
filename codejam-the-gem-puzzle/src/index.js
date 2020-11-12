@@ -5,13 +5,14 @@ const additionalWrapper = document.createElement('div');//доп.поле
 const cellSize = 99; //размер клетки
 const cellElement = document.createElement('div'); //клетка 
 const congratulation = document.createElement('div');
+const sound = document.createElement('audio');
 
 let count = 0;  //счетчик кликов
 let sec= 0;
 let min = 0;
 let hour = 0;
 
-const btnPlay = document.createElement('button');
+//const btnPlay = document.createElement('button');
 const btnPause = document.createElement('button');
 
 const btnNewGame =  document.createElement('button');
@@ -70,6 +71,9 @@ function init() {
         popapWrapper.appendChild(btnSelect3x3);
 
         congratulation.classList.add('congratulation');
+
+        sound.setAttribute('src', 'src/assets/1596830637_clickb7.mp3');     
+        document.body.appendChild(sound);
 
         
 
@@ -131,10 +135,11 @@ function createCells() {
 
         if (isFinished) {
             console.log ("Вы выиграли!");
+            //clearInterval(intervalID);
             congratulation.innerHTML = 
             `<div class="congratulation"><span>Congratulations!</span>
             <span>You won with ${ count + 1 } score </span>
-            <span>for time 0${hour}: 0${min}: 0${sec}</span></div>`;
+            <span>for time 0${hour}: 0${min}: ${sec}</span></div>`;
 
 
             setTimeout(() => {
@@ -145,24 +150,25 @@ function createCells() {
                
                 document.body.removeChild(congratulation);
                 popapWrapper.style.display = 'flex';
-                count = 0;
+                
+                /*count = 0;
                 sec = 0;
                 min = 0;
                 hour = 0;
 
                 additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
                 <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
-                additionalWrapper.appendChild(btnPlay);
-                
+                additionalWrapper.appendChild(btnPause);
+                */
             })
 
-        }
-        
+        }       
 
         addScore();  
 
     }
-    const newCells = [...Array(15).keys()].sort(() => Math.random() - 0.5);
+    const newCells = [...Array(15).keys()];
+    //.sort(() => Math.random() - 0.5);
     for (let i = 1; i < 16; i++) {
         const cellElement = document.createElement('div'); //клетка  
         const value = newCells[i-1] + 1;                
@@ -190,7 +196,8 @@ function createCells() {
         //КЛИК
         cellElement.addEventListener('click', () => {
                    
-            move(i);            
+            move(i);  
+            sound.play();        
 
         });
 /*
@@ -251,11 +258,8 @@ function createCells() {
 function addScore(){
     const score = document.querySelector('.score');
     count++;
-    score.textContent = `score: ${count}`;
-    
-    
-    console.log (`Сделано ${count} ходов`);   
-    
+    score.textContent = `score: ${count}`;  
+    console.log (`Сделано ${count} ходов`);      
 }
 // Add Zeros 
 function addZero(number) {
@@ -278,41 +282,16 @@ const timer = () =>{
 
     time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;   
 };
-/*
-// ПАУЗА и ПРОДОЛЖИТЬ
-btnPlay.addEventListener('click', () => {
-    //нажимаем play и запускаем таймер
-    if (btnPlay.textContent === "PLAY"){
-        btnPlay.textContent = "PAUSE";
-        btnPlay.style.fontSize = '1.8rem';
-        
-        setInterval(timer, 1000); 
-        
-        
-    
-    //нажимаем на паузу, таймер останавливается
-    } else if (btnPlay.textContent === "PAUSE"){
-        btnPlay.textContent = "PLAY";
-        var intervalID = setInterval(timer, 1000);
-        clearInterval(intervalID);
 
-        popapWrapper.style.display = 'flex';
-        btnContinue.classList.add ('button', 'button-continue');
-        btnContinue.textContent = "Continue";        
-        popapWrapper.appendChild(btnContinue);
+const intervalID = setInterval(timer, 1000); 
 
-    };    
-
-});
-*/
-var intervalID = setInterval(timer, 1000); 
 btnNewGame.addEventListener('click', () => {
     console.log ('клик по кнопке Новая игра');        
     setTimeout(() => {popapWrapper.style.display = 'none'},100);
     
 
     //ИСПРАВИТЬ ОШИБКУ В КОНСОЛИ!!
-    puzzleWrapper.removeChild(puzzleWrapper.childNodes);
+    //puzzleWrapper.removeChild(puzzleWrapper.childNodes);
    
    // puzzleWrapper.removeChild(cellElement);
     //puzzleWrapper.remove();
@@ -326,14 +305,15 @@ btnNewGame.addEventListener('click', () => {
 
     additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
     <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
+    additionalWrapper.appendChild(btnPause);
+
     setInterval(timer, 1000); 
     createCells();    
 });
 
 btnPause.addEventListener('click', () => {
-    //var intervalID = setInterval(timer, 1000);
+  
     clearInterval(intervalID);
-
     popapWrapper.style.display = 'flex';
     btnContinue.classList.add ('button', 'button-continue');
     btnContinue.textContent = "Continue";        
@@ -342,6 +322,5 @@ btnPause.addEventListener('click', () => {
 
 
 window.addEventListener("DOMContentLoaded", function() {
-    init(); 
-    //initNewGame();   
+    init();        
 });
