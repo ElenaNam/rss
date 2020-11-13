@@ -216,11 +216,11 @@ body {
 .puzzle-cell--empty {
     display: flex;
 
-    width: 95px;
-    height: 95px;
+    width: 93px;
+    height: 93px;
 
-    margin-left: 1px;
-    margin-right: 1px;
+    /*margin-left: 1px;
+    margin-right: 1px;*/
 
 }
 
