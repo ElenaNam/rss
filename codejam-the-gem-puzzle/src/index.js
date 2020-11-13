@@ -1,5 +1,6 @@
 const wrapper = document.createElement('div'); //фон
 const popapWrapper = document.createElement('div'); //popap
+const resultWrapper = document.createElement('div'); //popap
 const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
 let cellSize = 99; //размер клетки
@@ -105,8 +106,8 @@ function createCells() {
         top: 0,
         left: 0
     }; 
-    //empty.classList.add ('puzzle-cell--empty');  
-     cells.push(empty);
+
+    cells.push(empty);
 
     //поменяться координатами
     function move (index) {
@@ -140,31 +141,22 @@ function createCells() {
         });
 
         if (isFinished) {
-            console.log ("Вы выиграли!");
-            clearInterval(intervalID);
-            congratulation.innerHTML = 
-            `<div class="congratulation"><span>Congratulations!</span>
-            <span>You won with ${ count + 1 } score </span>
-            <span>for time 0${hour}: 0${min}: ${sec}</span></div>`;
+            finishGame();
+        };
 
-
-            setTimeout(() => {
-               document.body.appendChild(congratulation); 
-               soundWin.play();  
-            }, 300)            
-
-            congratulation.addEventListener ('click', () => {
-               
-                document.body.removeChild(congratulation);
-                popapWrapper.style.display = 'flex';                
-
-            });
-        }  
         addScore();  
     };
 
-    const newCells = [...Array(15).keys()];
-    //.sort(() => Math.random() - 0.5);
+    const newCells = [...Array(15).keys()].sort(() => Math.random() - 0.5);
+    // ---- проверка на собираемость -----
+
+    // для поля 4х4 игра решаема, если 1) пустая ячейка в четной строке (снизу вверх) и количество инверсий нечетное
+    // или 2) пустая ячейка в нечетной строке (снизу вверх) и количество инверсий четное
+
+    // пустая ячейка всегда в 4 строке, для решаемости нужно нечетное количество инверсий
+    isSolvable(newCells);
+
+
     for (let i = 1; i < 16; i++) {
         const cellElement = document.createElement('div'); //клетка  
         cellElement.classList.add('puzzle-cell');
@@ -280,8 +272,7 @@ function addZero(number) {
 }
 
 const timer = () =>{
-    let time = document.querySelector('.time');
-    //time.classList.add('.time');    
+    let time = document.querySelector('.time');     
     sec++; 
     
     if (sec === 60){
@@ -293,9 +284,76 @@ const timer = () =>{
         hour += 1;
     };
 
-    time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;   
-    //intervalID = setInterval(timer, 1000);
+    time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;  
 };
+
+// подсчет инверсий в массиве ---- нужно нечетное число
+const isSolvable = (arr) => {
+    const isSolvable = (arr) => {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++){
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr [j]) {
+                    sum += 1; 
+                };    
+            };
+        };
+        if (sum % 2 === 0) {          
+          isSolvable(arr);
+        } else {
+          return sum;
+        };
+        
+    };
+};
+
+// если закончил игру
+
+const finishGame = () => {
+    console.log ("Вы выиграли!");
+    clearInterval(intervalID);
+    congratulation.innerHTML = 
+    `<div class="congratulation"><span>Congratulations!</span>
+    <span>You won with ${ count + 1 } score </span>
+    <span>for time 0${hour}: 0${min}: ${sec}</span></div>`;
+
+
+    setTimeout(() => {
+       document.body.appendChild(congratulation); 
+       soundWin.play();  
+    }, 300)  
+
+
+    congratulation.addEventListener ('click', () => {
+       
+        document.body.removeChild(congratulation);
+        popapWrapper.style.display = 'flex';                 
+        popapWrapper.removeChild(btnContinue);                
+    });
+    saveResult();
+};
+// сохранить результат в таблице
+const saveResult = () => {
+    const result = [...Array(10).keys()];
+    
+
+    for (let i = 1; i < 10; i++) {
+        let value = i + 1;
+        let score =  `${count + 1}`   
+        const player = {
+            value: value,    
+            score: score    
+        }; 
+        
+        console.log(player);
+        result.push(player);
+    };
+    console.log (result);
+    
+
+};
+
+
 
 // ++++++++++++++ Новая игра ++++++++++++++++++++
 
@@ -303,6 +361,7 @@ btnNewGame.addEventListener('click', () => {
     console.log ('клик по кнопке Новая игра'); 
          
     setTimeout(() => {popapWrapper.style.display = 'none'},100);
+    puzzleWrapper.innerHTML = '';
     
 
     //ИСПРАВИТЬ ОШИБКУ В КОНСОЛИ!!
@@ -313,14 +372,15 @@ btnNewGame.addEventListener('click', () => {
     //puzzleWrapper.appendChild(createCells());
     //cellElement.parentNode.removeChild(cellElement);   
     //puzzleWrapper.replaceChild(createCells());
+
     count = 0;
     sec = 0;
     min = 0;
     hour = 0;
 
-    //additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
-    //<div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
-    //additionalWrapper.appendChild(btnPause);
+    additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
+    <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
+    additionalWrapper.appendChild(btnPause);
 
     if (intervalID) {
        clearInterval(intervalID);  
@@ -352,7 +412,34 @@ btnPause.addEventListener('click', () => {
 });
 
 
+// +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
+
+btnProgress.addEventListener('click', () => {
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);  
+
+    resultWrapper.style.display = 'flex';
+    resultWrapper.classList.add('result-wrapper');
+    document.body.appendChild(resultWrapper);
+    resultWrapper.innerHTML = 
+    `<div class="result-wrapper"><span>Top of results</span>
+    <span>Player ${value}:</span><span> ${ count + 1 } score </span></div>`;
+
+            
+});
+
+resultWrapper.addEventListener('click', () => {
+    setTimeout(() => {resultWrapper.style.display = 'none'},100); 
+    popapWrapper.style.display = 'flex'; 
+});
+
+
+
 window.addEventListener("DOMContentLoaded", function() {
     init();        
 });
+
+/*window.onbeforeunload = function() {
+    return "Есть несохранённые изменения. Всё равно уходим?";
+};*/
+
 
