@@ -316,6 +316,11 @@ btnNewGame.addEventListener('click', () => {
     createCells();    
 });
 
+btnContinue.addEventListener('click', () => {
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);
+
+})
+
 btnPause.addEventListener('click', () => {
   
     clearInterval(intervalID);

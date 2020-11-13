@@ -24,14 +24,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ElenaNam/codejam-the-gem-puzzle.git"
+    "url": "git+https://github.com/rolling-scopes-school/elenanam-JS2020Q3/codejam-the-gem-puzzle.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ElenaNam/codejam-the-gem-puzzle/issues"
+    "url": "https://github.com/rolling-scopes-school/elenanam-JS2020Q3/codejam-the-gem-puzzle/issues"
   },
-  "homepage": "https://github.com/ElenaNam/codejam-the-gem-puzzle#readme",
+  "homepage": "https://github.com/rolling-scopes-school/elenanam-JS2020Q3/codejam-the-gem-puzzle#readme",
   "description": ""
 }
