@@ -2,7 +2,9 @@ const wrapper = document.createElement('div'); //фон
 const popapWrapper = document.createElement('div'); //popap
 const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
-const cellSize = 99; //размер клетки
+//let cellSize = 99; //размер клетки
+//const width = window.screen.width; //разрешение экрана
+//const widthClient = document.body.clientWidth; // ширина клиентской части окна браузера
 const cellElement = document.createElement('div'); //клетка 
 const congratulation = document.createElement('div');
 const sound = document.createElement('audio');
@@ -24,6 +26,8 @@ const btnContinue =  document.createElement('button');
 
 
 const fragment = document.createDocumentFragment();
+let cellSize = 93;  
+
 
 
 function init() {
@@ -35,7 +39,8 @@ function init() {
         puzzleWrapper.classList.add('puzzle-wrapper');
         document.body.appendChild(puzzleWrapper);
 
-        //клетки      
+        //клетки
+            
         puzzleWrapper.appendChild(createCells());
 
         //дополнительное поле
@@ -78,8 +83,7 @@ function init() {
 
         soundWin.setAttribute('src', 'src/assets/903a9e120e7b9b3.mp3');
         document.body.appendChild(soundWin);
-
-        
+      
 
 
 
@@ -96,10 +100,28 @@ function init() {
 
 
 };
+/*
+window.addEventListener("resize", function() {
+    console.log('размер окна меняется'); 
+    if (window.innerWidth <= 480) {
+        cellSize = 58;    
+        console.log (cellSize);
+       
+    } else if (window.innerWidth > 480) {
+        cellSize = 99;
+        console.log (cellSize);
+        
+    };
+});
+*/
+
+
 
 function createCells() {
+
     
     const cells = [];
+    
     const empty = {
         value: 0,    
         top: 0,
@@ -107,11 +129,13 @@ function createCells() {
     };  
     cells.push(empty);
 
+
+
     //поменяться координатами
     function move (index) {
         
-        const cell = cells[index];      
-        
+        const cell = cells[index]; 
+        cellSize === cell.element.style.width + cell.element.style.margin * 2;  
 
         //ищем разницу с коорд.пустой клетки
         const leftVar = Math.abs(empty.left - cell.left);
@@ -334,3 +358,4 @@ btnPause.addEventListener('click', () => {
 window.addEventListener("DOMContentLoaded", function() {
     init();        
 });
+

@@ -12,7 +12,7 @@ body {
     width: 100%;
     height: 100vh;
     display: flex;
-    background: url(assets/bg.jpg);
+    background: url(assets/bg.jpg) no-repeat;
     background-size: cover;
     /*opacity: 0.7;*/
 }
@@ -174,13 +174,13 @@ body {
 
 .puzzle-wrapper {
     position: relative; 
-    padding-top: 2px;   
+    /*padding-top: 2px;   */
     top: 300px;
     display: flex;  
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
+    /*flex-direction: row;*/
+    /*flex-wrap: wrap;*/
+    /*justify-content: flex-start;*/
+    /*align-items: center;*/
     margin: auto;
     left: 0;
     right: 0;
@@ -195,16 +195,14 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    box-sizing: border-box;
-    
-    width: 95px;
-    height: 95px;
+    box-sizing: border-box;   
+    width: 93px;
+    height: 93px;
     border: 1px solid rgb(51, 28, 6);
     border-radius: 10%;
     background-color: rgb(100, 57, 21);
     transition: all .5s;
-    margin: 2px;      
-
+    margin: 5px;  
     font-size: 4.5rem;
     text-shadow: 2px 3px 2px rgb(0, 0, 0, 0.8);
     color: rgb(228, 191, 133);
@@ -224,5 +222,85 @@ body {
     margin-left: 1px;
     margin-right: 1px;
 
+}
 
+@media screen and (max-device-width: 768px), screen and (max-width: 768px){
+    
+}
+
+@media screen and (max-device-width: 480px), screen and (max-width: 480px){
+    .wrapper {        
+        max-width: 100%;
+        height: 100%;
+        background-size: cover;      
+    }
+    .puzzle-wrapper {        
+        padding-top: 1px;   
+        top: 250px;
+        width: 30rem;
+        height: 30rem;
+        border: 2px double rgb(119, 72, 45);  
+    }
+    .additional-wrapper {
+        width: 30rem;
+        top: -108px;
+        border: 2px double rgb(119, 72, 45);
+        border-radius: 2%;
+    }
+    .score { 
+        top: 22px;
+        font-size: 1.5rem;   
+    }
+    .time {
+        width: 110px;
+        height: 20px;
+        position: absolute;
+        left: 120px;
+        top: 22px;
+        color: white;
+        font-size: 1.5rem;
+        text-shadow: 2px 3px 2px rgba(173, 97, 10, 0.8);
+    }
+    .pause {
+        position: absolute;
+        width: 64px;
+        height: 24px;
+        left: 225px;
+        top: 22px;
+        font-size: 1.5rem;
+    }
+    .puzzle-cell {  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        box-sizing: none;   
+        width: 55px;
+        height: 55px;
+        border: 1px solid rgb(51, 28, 6);
+        border-radius: 10%;
+        background-color: rgb(100, 57, 21);
+        transition: all .5s;
+        /*margin: 1px;    */       
+        font-size: 2.5rem;
+    }
+    .puzzle-cell--empty {
+        display: flex;    
+        width: 55px;
+        height: 55px;    
+    }
+    .congratulation {
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem; 
+        font-size: 2rem;
+        letter-spacing: 1.7px;
+    }
+    .popap-wrapper {
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem;   
+    }
 }
