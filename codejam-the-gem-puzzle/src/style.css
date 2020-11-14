@@ -328,4 +328,11 @@ body {
         width: 30rem;
         height: 35.5rem;   
     }
+    .result-wrapper {       
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem;
+        font-size: 2rem;
+    }
 }

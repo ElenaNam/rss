@@ -354,20 +354,32 @@ const saveResult = () => {
 
     countPlayer++;  
     let score =  count + 1;
-    let player = countPlayer;   
+    let stage = countPlayer;   
 
     const playerInfo = {
-        player: player,    
+        stage: stage,    
         score: score    
     };
 
-    result.push(playerInfo);
+    //ограничение по количеству рекордов
+    if (result.length < 8) {
+        result.push(playerInfo);
+        console.log (result.length);
+    } else if (result.length === 8) {
+        if(playerInfo.score <= result[result.length - 1].score) {
+            result.pop();
+            result.push(playerInfo);            
+        };
+    };
+
+
+
+    
+    result.sort((a, b) => a.score - b.score);
+    console.log ('отсортированный ' + result);
 
     let playerInformation = JSON.stringify(result);
-    localStorage.setItem('results', playerInformation);
-    
-
-
+    localStorage.setItem('results', playerInformation); 
 
 };
 
@@ -418,8 +430,7 @@ btnContinue.addEventListener('click', () => {
 
 // +++++++++++++++++ Пауза +++++++++++++++++++++++
 
-btnPause.addEventListener('click', () => {
-    
+btnPause.addEventListener('click', () => {    
   
     clearInterval(intervalID);
     console.log(intervalID);
@@ -444,11 +455,7 @@ btnProgress.addEventListener('click', () => {
         <p>${localStorage.getItem('results')}</p>
         </div>`
             
-});   
-
-
-
-
+});  
 
 
 resultWrapper.addEventListener('click', () => {
