@@ -184,9 +184,15 @@ body {
     width: 40.5rem;
     height: 47rem;    
     border-radius: 2%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.7);
     z-index: 2;
     transition: all .5s;
+    color: white;
+    font-size: 2.5rem;
+}
+.result-wrapper p {
+    text-align: center;
+    
 }
 
 

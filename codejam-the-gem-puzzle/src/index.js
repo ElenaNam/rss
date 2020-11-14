@@ -333,59 +333,41 @@ const finishGame = () => {
     saveResult();
 };
 
-// сохранить результат в таблице
-const result = [];
-let countPlayer = 0; 
+// -----------сохранить результат в таблице-------------
+
+let result;
+let countPlayer;
+
+// если в памяти сохранены результаты, то возьми оттуда
+if (localStorage.getItem('results')){
+    result = JSON.parse(localStorage.getItem('results'));
+    countPlayer = JSON.parse(localStorage.getItem('results')).length;
+} else {
+    result = [];
+    countPlayer = 0;
+};
+
 
 const saveResult = () => {
-    //const result = [...Array(10).keys()];
+    
+    console.log('localStorage.results ' + localStorage.results);
+
     countPlayer++;  
-    let score =  `${count + 1}`;
+    let score =  count + 1;
     let player = countPlayer;   
 
     const playerInfo = {
         player: player,    
         score: score    
     };
-/*
-    if (result.length <= 3){
-       result.push(playerInfo); 
-       console.log(result.length);
-       console.log(playerInfo.value);
-    } else {
-        return;
-    };
-   */ 
-    result.push(playerInfo);
 
+    result.push(playerInfo);
 
     let playerInformation = JSON.stringify(result);
     localStorage.setItem('results', playerInformation);
-    //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
-
-        // +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
-
-    btnProgress.addEventListener('click', () => {
-    setTimeout(() => {popapWrapper.style.display = 'none'},100);  
-
-    resultWrapper.style.display = 'flex';
-    resultWrapper.classList.add('result-wrapper');
-    document.body.appendChild(resultWrapper);
-
-    //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
-
-    //resultWrapper.innerHTML = `<div>${returnPlayerInfo}</div>`
-
-
-    //`<div class="result-wrapper"><span>Top of results</span>
-    //<span>Player ${value}:</span><span> ${ count + 1 } score </span></div>`;
-
-        
-    });
-
-
-
     
+
+
 
 };
 
@@ -446,6 +428,23 @@ btnPause.addEventListener('click', () => {
     btnContinue.textContent = "Continue";        
     popapWrapper.appendChild(btnContinue);
 });
+
+        // +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
+
+btnProgress.addEventListener('click', () => {
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);  
+    
+        resultWrapper.style.display = 'flex';
+        resultWrapper.classList.add('result-wrapper');
+        document.body.appendChild(resultWrapper);
+        //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
+        resultWrapper.innerHTML = `
+        <div class="result-wrapper">
+        <span>Top of results</span>
+        <p>${localStorage.getItem('results')}</p>
+        </div>`
+            
+});   
 
 
 
