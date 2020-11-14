@@ -100,6 +100,7 @@ window.addEventListener("resize", function() {
 
 function createCells() {
     
+    
     const cells = [];
     const empty = {
         value: 0,    
@@ -113,7 +114,7 @@ function createCells() {
     function move (index) {
         
         const cell = cells[index]; 
-        cellSize = cell.element.style.width + cell.element.style.margin * 2;  
+        //cellSize = cell.element.style.width + cell.element.style.margin * 2;  
 
         //ищем разницу с коорд.пустой клетки
         const leftVar = Math.abs(empty.left - cell.left);
@@ -147,15 +148,10 @@ function createCells() {
         addScore();  
     };
 
-    const newCells = [...Array(15).keys()].sort(() => Math.random() - 0.5);
+    const newCells = [...Array(15).keys()];
+    //.sort(() => Math.random() - 0.5);
     // ---- проверка на собираемость -----
-
-    // для поля 4х4 игра решаема, если 1) пустая ячейка в четной строке (снизу вверх) и количество инверсий нечетное
-    // или 2) пустая ячейка в нечетной строке (снизу вверх) и количество инверсий четное
-
-    // пустая ячейка всегда в 4 строке, для решаемости нужно нечетное количество инверсий
-    isSolvable(newCells);
-
+    //isSolvable(newCells);
 
     for (let i = 1; i < 16; i++) {
         const cellElement = document.createElement('div'); //клетка  
@@ -288,8 +284,8 @@ const timer = () =>{
 };
 
 // подсчет инверсий в массиве ---- нужно нечетное число
-const isSolvable = (arr) => {
-    const isSolvable = (arr) => {
+const isSolvable = (arr) => {   
+        
         let sum = 0;
         for (let i = 0; i < arr.length; i++){
             for (let j = i + 1; j < arr.length; j++) {
@@ -299,13 +295,16 @@ const isSolvable = (arr) => {
             };
         };
         if (sum % 2 === 0) {          
-          isSolvable(arr);
+            console.log (sum);            
+            return sum;
         } else {
-          return sum;
+            //isSolvable(arr); 
+                       
+            createCells();
         };
         
-    };
 };
+
 
 // если закончил игру
 
@@ -328,27 +327,64 @@ const finishGame = () => {
        
         document.body.removeChild(congratulation);
         popapWrapper.style.display = 'flex';                 
-        popapWrapper.removeChild(btnContinue);                
+        //popapWrapper.removeChild(btnContinue); 
+                  
     });
     saveResult();
 };
-// сохранить результат в таблице
-const saveResult = () => {
-    const result = [...Array(10).keys()];
-    
 
-    for (let i = 1; i < 10; i++) {
-        let value = i + 1;
-        let score =  `${count + 1}`   
-        const player = {
-            value: value,    
-            score: score    
-        }; 
-        
-        console.log(player);
-        result.push(player);
+// сохранить результат в таблице
+const result = [];
+let countPlayer = 0; 
+
+const saveResult = () => {
+    //const result = [...Array(10).keys()];
+    countPlayer++;  
+    let score =  `${count + 1}`;
+    let player = countPlayer;   
+
+    const playerInfo = {
+        player: player,    
+        score: score    
     };
-    console.log (result);
+/*
+    if (result.length <= 3){
+       result.push(playerInfo); 
+       console.log(result.length);
+       console.log(playerInfo.value);
+    } else {
+        return;
+    };
+   */ 
+    result.push(playerInfo);
+
+
+    let playerInformation = JSON.stringify(result);
+    localStorage.setItem('results', playerInformation);
+    //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
+
+        // +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
+
+    btnProgress.addEventListener('click', () => {
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);  
+
+    resultWrapper.style.display = 'flex';
+    resultWrapper.classList.add('result-wrapper');
+    document.body.appendChild(resultWrapper);
+
+    //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
+
+    //resultWrapper.innerHTML = `<div>${returnPlayerInfo}</div>`
+
+
+    //`<div class="result-wrapper"><span>Top of results</span>
+    //<span>Player ${value}:</span><span> ${ count + 1 } score </span></div>`;
+
+        
+    });
+
+
+
     
 
 };
@@ -412,20 +448,9 @@ btnPause.addEventListener('click', () => {
 });
 
 
-// +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
 
-btnProgress.addEventListener('click', () => {
-    setTimeout(() => {popapWrapper.style.display = 'none'},100);  
 
-    resultWrapper.style.display = 'flex';
-    resultWrapper.classList.add('result-wrapper');
-    document.body.appendChild(resultWrapper);
-    resultWrapper.innerHTML = 
-    `<div class="result-wrapper"><span>Top of results</span>
-    <span>Player ${value}:</span><span> ${ count + 1 } score </span></div>`;
 
-            
-});
 
 resultWrapper.addEventListener('click', () => {
     setTimeout(() => {resultWrapper.style.display = 'none'},100); 
