@@ -40,7 +40,21 @@ function init() {
         //--------поле игры------------       
         puzzleWrapper.classList.add('puzzle-wrapper');
         document.body.appendChild(puzzleWrapper);
-        // клетки            
+
+        // клетки         
+        // если в памяти сохраненa игра, то возьми оттуда
+     /*   if (localStorage.getItem('gameSave')){
+            puzzleWrapper.innerHTML = JSON.parse(localStorage.getItem('gameSave'));
+            btnContinue.classList.add ('button', 'button-continue');
+            btnContinue.textContent = "Continue";        
+            popapWrapper.appendChild(btnContinue);
+                        
+        } else {            
+            puzzleWrapper.appendChild(createCells());
+        };
+
+*/
+                
         puzzleWrapper.appendChild(createCells());
         // звук клеток
         sound.setAttribute('src', 'src/assets/1596830637_clickb7.mp3');     
@@ -147,6 +161,19 @@ function createCells() {
 
         addScore();  
     };
+/*
+
+    if (localStorage.getItem('gameSave')){
+        let gameSv = JSON.parse(localStorage.getItem('gameSave'));
+        console.log (gameSv);
+
+        btnContinue.classList.add ('button', 'button-continue');
+        btnContinue.textContent = "Continue";        
+        popapWrapper.appendChild(btnContinue);
+                    
+    } 
+
+*/
 
     const newCells = [...Array(15).keys()];
     //.sort(() => Math.random() - 0.5);
@@ -177,6 +204,8 @@ function createCells() {
         cellElement.style.top = `${top * cellSize}px`;
 
         puzzleWrapper.append(cellElement);
+
+   
 
         //---------------КЛИК------------------
         cellElement.addEventListener('click', () => {
@@ -249,8 +278,8 @@ function createCells() {
 */
 
     };
-        fragment.appendChild(cellElement);        
-        
+        fragment.appendChild(cellElement);    
+
         return fragment;
 };  
 
@@ -297,9 +326,8 @@ const isSolvable = (arr) => {
         if (sum % 2 === 0) {          
             console.log (sum);            
             return sum;
-        } else {
-            //isSolvable(arr); 
-                       
+        } else {         
+            
             createCells();
         };
         
@@ -348,9 +376,7 @@ if (localStorage.getItem('results')){
 };
 
 
-const saveResult = () => {
-    
-    console.log('localStorage.results ' + localStorage.results);
+const saveResult = () => {      
 
     countPlayer++;  
     let score =  count + 1;
@@ -362,25 +388,19 @@ const saveResult = () => {
     };
 
     //ограничение по количеству рекордов
-    if (result.length < 8) {
+    if (result.length < 10) {
         result.push(playerInfo);
         console.log (result.length);
-    } else if (result.length === 8) {
+    } else if (result.length === 10) {
         if(playerInfo.score <= result[result.length - 1].score) {
             result.pop();
             result.push(playerInfo);            
         };
-    };
-
-
-
-    
-    result.sort((a, b) => a.score - b.score);
-    console.log ('отсортированный ' + result);
+    };    
+    result.sort((a, b) => a.score - b.score);   
 
     let playerInformation = JSON.stringify(result);
     localStorage.setItem('results', playerInformation); 
-
 };
 
 
@@ -392,16 +412,6 @@ btnNewGame.addEventListener('click', () => {
          
     setTimeout(() => {popapWrapper.style.display = 'none'},100);
     puzzleWrapper.innerHTML = '';
-    
-
-    //ИСПРАВИТЬ ОШИБКУ В КОНСОЛИ!!
-    //puzzleWrapper.removeChild(puzzleWrapper.childNodes);
-   
-   // puzzleWrapper.removeChild(cellElement);
-    //puzzleWrapper.remove();
-    //puzzleWrapper.appendChild(createCells());
-    //cellElement.parentNode.removeChild(cellElement);   
-    //puzzleWrapper.replaceChild(createCells());
 
     count = 0;
     sec = 0;
@@ -440,7 +450,7 @@ btnPause.addEventListener('click', () => {
     popapWrapper.appendChild(btnContinue);
 });
 
-        // +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
+// +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
 
 btnProgress.addEventListener('click', () => {
     setTimeout(() => {popapWrapper.style.display = 'none'},100);  
@@ -448,11 +458,14 @@ btnProgress.addEventListener('click', () => {
         resultWrapper.style.display = 'flex';
         resultWrapper.classList.add('result-wrapper');
         document.body.appendChild(resultWrapper);
-        //let returnPlayerInfo = JSON.parse(localStorage.getItem('results'));
+
+        let resultMessage = JSON.parse(localStorage.getItem('results'));
+        resultMessage = resultMessage.map(item => {return `Stage ${item.stage}_____${item.score} <br>`});            
+              
         resultWrapper.innerHTML = `
         <div class="result-wrapper">
-        <span>Top of results</span>
-        <p>${localStorage.getItem('results')}</p>
+        <p>Top of results</p>
+        <span>${resultMessage.join(' ')}</span>
         </div>`
             
 });  
@@ -469,8 +482,13 @@ window.addEventListener("DOMContentLoaded", function() {
     init();        
 });
 
-/*window.onbeforeunload = function() {
-    return "Есть несохранённые изменения. Всё равно уходим?";
-};*/
+
+window.onbeforeunload = () => {    
+    wrapper.style.opacity = '.7';  
+    
+    //let gameSave = JSON.stringify(cell.element);
+    //localStorage.setItem('gameSave', gameSave);     
+  
+};
 
 

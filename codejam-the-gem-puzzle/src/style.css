@@ -172,7 +172,7 @@ body {
 }
 .result-wrapper {
     position: fixed; 
-    padding-top: 2px;   
+    padding-top: 2px;
     top: 244px;
     display: flex;  
     flex-direction: column;    
@@ -189,9 +189,15 @@ body {
     transition: all .5s;
     color: white;
     font-size: 2.5rem;
+    line-height: 35px;
 }
-.result-wrapper p {
-    text-align: center;
+.result-wrapper p {    
+    color: wheat;
+    
+}
+.result-wrapper span {
+    text-align: center; 
+
     
 }
 
@@ -334,5 +340,6 @@ body {
         width: 30rem;
         height: 35.5rem;
         font-size: 2rem;
+        line-height: 28px;
     }
 }
