@@ -1,3 +1,5 @@
+const { doc } = require("prettier");
+
 const wrapper = document.createElement('div'); //фон
 const popapWrapper = document.createElement('div'); //popap
 const resultWrapper = document.createElement('div'); //popap
@@ -7,6 +9,7 @@ const cellElement = document.createElement('div'); //клетка
 const congratulation = document.createElement('div');
 const sound = document.createElement('audio');
 const soundWin = document.createElement('audio');
+
 let intervalID;
 
 let count = 0;  //счетчик кликов
@@ -16,6 +19,7 @@ let hour = 0;
 
 
 const btnPause = document.createElement('button');
+const btnAllSound = document.createElement('button');
 // кнопки в popap
 const btnNewGame =  document.createElement('button');
 const btnSound = document.createElement('button');
@@ -47,7 +51,13 @@ window.addEventListener('resize', () => {
 })
 */
 
+//Create HTML for an icon
+const createIconHTML = (icon_name) => {
+    return `<i class = material-icons>${icon_name}</i>`            
+} 
+
 function init() {
+ 
         //---------фон----------        
         wrapper.classList.add('wrapper');
         document.body.appendChild(wrapper);
@@ -84,6 +94,11 @@ function init() {
         btnPause.classList.add('pause', 'button');
         btnPause.textContent = "PAUSE";        
         additionalWrapper.appendChild(btnPause);
+
+        //кнопка звука
+        btnAllSound.classList.add ('button', 'allsound');
+        btnAllSound.innerHTML = createIconHTML('volume_up');
+        additionalWrapper.appendChild(btnAllSound);
 
         document.body.appendChild(additionalWrapper);
       
@@ -177,9 +192,7 @@ function createCells() {
     // ---- проверка на собираемость -----
     //isSolvable(newCells);
 
-    for (let i = 1; i < 16; i++) {
-        
-        console.log ('cellSize в цикле ' + cellSize);
+    for (let i = 1; i < 16; i++) {       
         
         const cellElement = document.createElement('div'); //клетка  
         cellElement.classList.add('puzzle-cell');
@@ -414,6 +427,7 @@ btnNewGame.addEventListener('click', () => {
     additionalWrapper.innerHTML = `<div class="score"><span>score: 0</span></div>
     <div class="time"><span>0${hour}: 0${min}: 0${sec}</span></div>`;
     additionalWrapper.appendChild(btnPause);
+    additionalWrapper.appendChild(btnAllSound);
 
     if (intervalID) {
        clearInterval(intervalID);  
@@ -442,6 +456,25 @@ btnPause.addEventListener('click', () => {
     btnContinue.textContent = "Continue";        
     popapWrapper.appendChild(btnContinue);
 });
+
+// +++++++++++++++++ Звук +++++++++++++++++++++++
+
+btnAllSound.addEventListener('click', () => { 
+    
+    console.log('btnAllSound.textContent ' + btnAllSound.textContent);
+    console.log('btnAllSound.innerHTML ' + btnAllSound.innerHTML);
+
+    if (btnAllSound.textContent === 'volume_up') {
+        btnAllSound.innerHTML = createIconHTML('volume_off')
+        sound.volume = 0;
+        soundWin.volume = 0;
+    }  else {
+        btnAllSound.innerHTML = createIconHTML('volume_up')
+        sound.volume = 1;
+        soundWin.volume = 1;
+    };
+});
+
 
 // +++++++++++++++++ Таблица лучших +++++++++++++++++++++++
 
