@@ -17,12 +17,15 @@ let sec= 0;
 let min = 0;
 let hour = 0;
 
+let cells = [];
+let newCells=[];
 
+const btnSound = document.createElement('button');
 const btnPause = document.createElement('button');
 const btnAllSound = document.createElement('button');
 // кнопки в popap
 const btnNewGame =  document.createElement('button');
-const btnSound = document.createElement('button');
+const btnLoadGame =  document.createElement('button');
 const btnProgress =  document.createElement('button');
 const btnSelect3x3 =  document.createElement('button');
 const btnContinue =  document.createElement('button');
@@ -111,6 +114,10 @@ function init() {
         btnNewGame.textContent = "New Game";        
         popapWrapper.appendChild(btnNewGame);
 
+        btnLoadGame.classList.add ('button', 'button-load');
+        btnLoadGame.textContent = "Load Game";        
+        popapWrapper.appendChild(btnLoadGame);
+
         btnProgress.classList.add ('button', 'button-progress');
         btnProgress.textContent = "Progress";        
         popapWrapper.appendChild(btnProgress);
@@ -126,17 +133,21 @@ function init() {
         document.body.appendChild(soundWin); 
 };
 
-function createCells() { 
 
-    const cells = [];
-    const empty = {
+function createCells() { 
+    console.log ('в createCells ' + cells);
+   
+        cells = [];
+        //const cells = [];
+        const empty = {
         value: 0,    
         top: 0,
-        left: 0
-    }; 
+        left: 0        
+        }; 
 
-    cells.push(empty);
+        cells.push(empty);     
 
+    
     //поменяться координатами
     function move (index) {
         
@@ -173,27 +184,15 @@ function createCells() {
 
         addScore();  
     };
-/*
 
-    if (localStorage.getItem('gameSave')){
-        let gameSv = JSON.parse(localStorage.getItem('gameSave'));
-        console.log (gameSv);
-
-        btnContinue.classList.add ('button', 'button-continue');
-        btnContinue.textContent = "Continue";        
-        popapWrapper.appendChild(btnContinue);
-                    
-    } 
-
-*/
-
+    
     const newCells = [...Array(15).keys()];
     //.sort(() => Math.random() - 0.5);
     // ---- проверка на собираемость -----
     //isSolvable(newCells);
 
     for (let i = 1; i < 16; i++) {       
-        
+    
         const cellElement = document.createElement('div'); //клетка  
         cellElement.classList.add('puzzle-cell');
         //разрешить перетаскивание мышью
@@ -211,86 +210,41 @@ function createCells() {
             top: top,
             element: cellElement           
         });
+        
 
         cellElement.style.left = `${left * cellSize}px`;
         cellElement.style.top = `${top * cellSize}px`;  
 
-        puzzleWrapper.append(cellElement);
+        puzzleWrapper.append(cellElement);        
+    
 
+    
         //---------------КЛИК------------------
         cellElement.addEventListener('click', () => {
                    
             move(i);  
             sound.play();      
         });
-/*
-
-        //------------- DRAG N DROP-------------                   
-        cellElement.addEventListener('dragstart', function(e){
-            //e.dataTransfer.setData('class', e.target.className);
-                                    
-            setTimeout(() => {
-                this.style.display = 'none';
-            }, 0)
-            console.log ('dragstart');
-                            
-        });
-
-
-       cellElement.addEventListener('dragend', function(e){
-            //cellElement.style.position = 'absolute';
-            //cellElement.style.top = e.pageY + 'px';
-            //cellElement.style.left = e.pageX + 'px';
-
-            setTimeout(() => {
-                this.style.display = 'flex';
-            }, 0)
-            console.log ('dragend');
-                            
-        });
-            //когда пятнашка находится над пустым местом
-        puzzleWrapper.addEventListener('dragover', function(e){
-            e.preventDefault();
-            console.log('dragover');
-        }); 
-        puzzleWrapper.addEventListener('dragenter', function(e){
-            e.preventDefault();
-            console.log ('dragenter')
-                            
-        });
-                                
-            //
-        puzzleWrapper.addEventListener('drop', function(e){
-            //cellContainer.appendChild(cell[j]);            
-            //puzzleWrapper.setAttribute('droppable', 'true');
-            //let itemClass = e.dataTransfer.getData('class');
-            //console.log(itemClass);
-            //e.target.appendChild(document.querySelector(itemClass));
-
-
-            //cellElement.style.position = 'absolute';
-            //cellElement.style.top = e.pageY + 'px';
-            //cellElement.style.left = e.pageX + 'px';
-            //setTimeout(() => {
-               // this.style.display = 'flex';
-            //}, 0)
-            e.stopPropagation();
-            e.preventDefault();
-            this.append(cellElement);
-
-
-            //puzzleWrapper.appendChild(cellElement);
-            
-            //e.target.appendChild(cellElement);
-            console.log('drop');
-        }); 
-*/
-
+        window.onbeforeunload = () => {    
+            delete localStorage.field;
+            let fieldSave = JSON.stringify(cells);
+            localStorage.setItem('field', fieldSave);   
+          
+        };
     };
-        fragment.appendChild(cellElement);    
+    
+        fragment.appendChild(cellElement); 
+           
 
         return fragment;
 };  
+
+
+
+
+
+
+
 
 
 //считать ходы
@@ -437,6 +391,23 @@ btnNewGame.addEventListener('click', () => {
     createCells();    
 });
 
+// ++++++++++++++ Загрузить игру +++++++++++++++
+btnLoadGame.addEventListener('click', () => {
+    setTimeout(() => {popapWrapper.style.display = 'none'},100);
+    puzzleWrapper.innerHTML = '';
+
+    if (localStorage.getItem('field')){
+        cells = JSON.parse(localStorage.getItem('field'));
+        console.log (cells);
+        createCells();
+    } else {
+        return;
+    } 
+
+});
+
+
+
 // ++++++++++++++ Продолжить ++++++++++++++++++++
 
 btnContinue.addEventListener('click', () => {
@@ -489,6 +460,7 @@ btnProgress.addEventListener('click', () => {
         let resultMessage;
         if (JSON.parse(localStorage.getItem('results'))){
             resultMessage = JSON.parse(localStorage.getItem('results'));
+            console.log (resultMessage);
             resultMessage = resultMessage.map(item => {return `Stage ${item.stage}_____${item.score} <br>`}); 
         }        
         
@@ -511,8 +483,7 @@ btnProgress.addEventListener('click', () => {
 
 resultWrapper.addEventListener('click', () => {
     setTimeout(() => {resultWrapper.style.display = 'none'},100); 
-    setTimeout(() => {popapWrapper.style.display = 'flex'},100);
-    //popapWrapper.style.display = 'flex'; 
+    setTimeout(() => {popapWrapper.style.display = 'flex'},100);  
 });
 
 
@@ -522,12 +493,6 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 
 
-window.onbeforeunload = () => {    
-    wrapper.style.opacity = '.7';  
-    
-    //let gameSave = JSON.stringify(cell.element);
-    //localStorage.setItem('gameSave', gameSave);     
-  
-};
+
 
 
