@@ -3,15 +3,11 @@ const popapWrapper = document.createElement('div'); //popap
 const resultWrapper = document.createElement('div'); //popap
 const puzzleWrapper = document.createElement('div');//поле
 const additionalWrapper = document.createElement('div');//доп.поле
-let cellSize = 99; //размер клетки
-//const width = window.screen.width; //разрешение экрана
-//const widthClient = document.body.clientWidth; // ширина клиентской части окна браузера
 const cellElement = document.createElement('div'); //клетка 
 const congratulation = document.createElement('div');
 const sound = document.createElement('audio');
 const soundWin = document.createElement('audio');
 let intervalID;
-
 
 let count = 0;  //счетчик кликов
 let sec= 0;
@@ -30,7 +26,26 @@ const btnContinue =  document.createElement('button');
 
 const fragment = document.createDocumentFragment();
 
+//размер клетки
+let cellSize;
 
+if (window.innerWidth > 480){
+    cellSize = 99; 
+} else if (window.innerWidth <= 480) {
+    cellSize = 78; 
+};
+
+
+/*
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 480){
+        cellSize = 99; 
+    } else if (window.innerWidth <= 480) {
+        cellSize = 78; 
+    };
+
+})
+*/
 
 function init() {
         //---------фон----------        
@@ -52,10 +67,10 @@ function init() {
         } else {            
             puzzleWrapper.appendChild(createCells());
         };
-
 */
                 
-        puzzleWrapper.appendChild(createCells());
+        puzzleWrapper.appendChild(createCells());   
+
         // звук клеток
         sound.setAttribute('src', 'src/assets/1596830637_clickb7.mp3');     
         document.body.appendChild(sound);
@@ -95,26 +110,9 @@ function init() {
         soundWin.setAttribute('src', 'src/assets/903a9e120e7b9b3.mp3');
         document.body.appendChild(soundWin); 
 };
-/*
-window.addEventListener("resize", function() {
-    console.log('размер окна меняется'); 
-    if (window.innerWidth <= 480) {
-        cellSize = 58;    
-        console.log (cellSize);
-       
-    } else if (window.innerWidth > 480) {
-        cellSize = 99;
-        console.log (cellSize);
-        
-    };
-});
-*/
 
+function createCells() { 
 
-
-function createCells() {
-    
-    
     const cells = [];
     const empty = {
         value: 0,    
@@ -127,8 +125,7 @@ function createCells() {
     //поменяться координатами
     function move (index) {
         
-        const cell = cells[index]; 
-        //cellSize = cell.element.style.width + cell.element.style.margin * 2;  
+        const cell = cells[index];
 
         //ищем разницу с коорд.пустой клетки
         const leftVar = Math.abs(empty.left - cell.left);
@@ -136,8 +133,8 @@ function createCells() {
         //если рядом пустой клетки нет, ничего не делай
         if (leftVar + topVar > 1) {
             return;
-        }
-        
+        }      
+
         cell.element.style.left = `${empty.left * cellSize}px`;
         cell.element.style.top = `${empty.top * cellSize}px`;
         //в промеж.переменные записываем коорд-ты пустой клетки
@@ -181,6 +178,9 @@ function createCells() {
     //isSolvable(newCells);
 
     for (let i = 1; i < 16; i++) {
+        
+        console.log ('cellSize в цикле ' + cellSize);
+        
         const cellElement = document.createElement('div'); //клетка  
         cellElement.classList.add('puzzle-cell');
         //разрешить перетаскивание мышью
@@ -196,23 +196,19 @@ function createCells() {
             value: value,
             left: left,
             top: top,
-            element: cellElement
+            element: cellElement           
         });
 
-
         cellElement.style.left = `${left * cellSize}px`;
-        cellElement.style.top = `${top * cellSize}px`;
+        cellElement.style.top = `${top * cellSize}px`;  
 
         puzzleWrapper.append(cellElement);
-
-   
 
         //---------------КЛИК------------------
         cellElement.addEventListener('click', () => {
                    
             move(i);  
-            sound.play();        
-
+            sound.play();      
         });
 /*
 
@@ -288,9 +284,9 @@ function createCells() {
 function addScore(){
     const score = document.querySelector('.score');
     count++;
-    score.textContent = `score: ${count}`;  
-    console.log (`Сделано ${count} ходов`);      
+    score.textContent = `score: ${count}`;      
 }
+
 // добавить ноль
 function addZero(number) {
     return (parseInt(number, 10) < 10 ? '0' : '') + number;
@@ -312,7 +308,7 @@ const timer = () =>{
     time.textContent = `${addZero(hour)}: ${addZero(min)}: ${addZero(sec)}`;  
 };
 
-// подсчет инверсий в массиве ---- нужно нечетное число
+// подсчет инверсий в массиве ---- нужно четное число
 const isSolvable = (arr) => {   
         
         let sum = 0;
@@ -323,26 +319,24 @@ const isSolvable = (arr) => {
                 };    
             };
         };
-        if (sum % 2 === 0) {          
-            console.log (sum);            
+        if (sum % 2 === 0) {      
+                        
             return sum;
-        } else {         
-            
+        } else {        
             createCells();
-        };
-        
+        };        
 };
 
 
 // если закончил игру
 
 const finishGame = () => {
-    console.log ("Вы выиграли!");
+   
     clearInterval(intervalID);
     congratulation.innerHTML = 
     `<div class="congratulation"><span>Congratulations!</span>
-    <span>You won with ${ count + 1 } score </span>
-    <span>for time 0${hour}: 0${min}: ${sec}</span></div>`;
+    <span>You won with <i>${ count + 1 }</i> score </span>
+    <span>for time <i>0${hour}: 0${min}: ${sec}</i></span></div>`;
 
 
     setTimeout(() => {
@@ -390,7 +384,7 @@ const saveResult = () => {
     //ограничение по количеству рекордов
     if (result.length < 10) {
         result.push(playerInfo);
-        console.log (result.length);
+        
     } else if (result.length === 10) {
         if(playerInfo.score <= result[result.length - 1].score) {
             result.pop();
@@ -407,8 +401,7 @@ const saveResult = () => {
 
 // ++++++++++++++ Новая игра ++++++++++++++++++++
 
-btnNewGame.addEventListener('click', () => {
-    console.log ('клик по кнопке Новая игра'); 
+btnNewGame.addEventListener('click', () => {    
          
     setTimeout(() => {popapWrapper.style.display = 'none'},100);
     puzzleWrapper.innerHTML = '';
@@ -443,7 +436,7 @@ btnContinue.addEventListener('click', () => {
 btnPause.addEventListener('click', () => {    
   
     clearInterval(intervalID);
-    console.log(intervalID);
+    //console.log(intervalID);
     popapWrapper.style.display = 'flex';
     btnContinue.classList.add ('button', 'button-continue');
     btnContinue.textContent = "Continue";        
@@ -454,18 +447,30 @@ btnPause.addEventListener('click', () => {
 
 btnProgress.addEventListener('click', () => {
     setTimeout(() => {popapWrapper.style.display = 'none'},100);  
-    
-        resultWrapper.style.display = 'flex';
+    setTimeout(() => {resultWrapper.style.display = 'flex'},100);
+        //resultWrapper.style.display = 'flex';
+
         resultWrapper.classList.add('result-wrapper');
         document.body.appendChild(resultWrapper);
-
-        let resultMessage = JSON.parse(localStorage.getItem('results'));
-        resultMessage = resultMessage.map(item => {return `Stage ${item.stage}_____${item.score} <br>`});            
+        // проверь, есть ли в памяти
+        let resultMessage;
+        if (JSON.parse(localStorage.getItem('results'))){
+            resultMessage = JSON.parse(localStorage.getItem('results'));
+            resultMessage = resultMessage.map(item => {return `Stage ${item.stage}_____${item.score} <br>`}); 
+        }        
+        
+        // если рекордов нет, то ничего не пиши (кроме заголовка)
+        let resultMessageItem;
+        if (resultMessage){
+            resultMessageItem = resultMessage.join(' ');
+        } else {
+            resultMessageItem = '';
+        }
               
         resultWrapper.innerHTML = `
         <div class="result-wrapper">
         <p>Top of results</p>
-        <span>${resultMessage.join(' ')}</span>
+        <span>${resultMessageItem}</span>
         </div>`
             
 });  
@@ -473,7 +478,8 @@ btnProgress.addEventListener('click', () => {
 
 resultWrapper.addEventListener('click', () => {
     setTimeout(() => {resultWrapper.style.display = 'none'},100); 
-    popapWrapper.style.display = 'flex'; 
+    setTimeout(() => {popapWrapper.style.display = 'flex'},100);
+    //popapWrapper.style.display = 'flex'; 
 });
 
 

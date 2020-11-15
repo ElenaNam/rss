@@ -163,12 +163,18 @@ body {
     height: 47rem;    
     border-radius: 2%;
     background: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-weight: bold;
+    color: white;    
     font-size: 3rem;
     letter-spacing: 1.5px;
     z-index: 3;  
     transition: all .5s; 
+}
+.congratulation span:first-child {
+    font-weight: bold;
+    color: rgb(156, 23, 123);
+}
+.congratulation span i {
+    color: wheat;
 }
 .result-wrapper {
     position: fixed; 
@@ -226,8 +232,9 @@ body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    box-sizing: border-box;   
-    width: 93px;
+    box-sizing: border-box;
+    width: calc(25% - 10px);   
+    /*width: 93px;*/
     height: 93px;
     border: 1px solid rgb(51, 28, 6);
     border-radius: 10%;
@@ -266,11 +273,14 @@ body {
         background-size: cover;      
     }
     .puzzle-wrapper {        
-        padding-top: 1px;   
+        padding-top: 1px;        
         top: 250px;
         width: 30rem;
         height: 30rem;
         border: 2px double rgb(119, 72, 45);  
+        font-size: 0;
+        line-height: 0;
+        
     }
     .additional-wrapper {
         width: 30rem;
@@ -304,8 +314,9 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        position: absolute;
-        box-sizing: none;   
+        position: absolute;        
+       
+        /*width: calc(10% - 5px);   */
         width: 55px;
         height: 55px;
         border: 1px solid rgb(51, 28, 6);
@@ -316,8 +327,9 @@ body {
         font-size: 2.5rem;
     }
     .puzzle-cell--empty {
-        display: flex;    
-        width: 55px;
+        display: flex;
+        width: calc(25% - 5px);     
+        /*width: 55px;*/
         height: 55px;    
     }
     .congratulation {
