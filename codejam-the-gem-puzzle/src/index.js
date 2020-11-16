@@ -693,6 +693,7 @@ btnPause.addEventListener('click', () => {
   
     clearInterval(intervalID);
     //console.log(intervalID);
+    saveGame();
     popapWrapper.style.display = 'flex';
     btnContinue.classList.add ('button', 'button-continue');
     btnContinue.textContent = "Continue";        
