@@ -13,14 +13,7 @@ body {
     height: 100vh;
     display: flex;
     background: url(assets/bg.jpg) no-repeat;
-    background-size: cover;
-    /*opacity: 0.7;*/
-}
-.cell-container {
-    display: flex;
-    width: 40.5rem;
-    height: 10.1rem;
-    align-items: center;
+    background-size: cover;    
 }
 
 .additional-wrapper {
@@ -41,9 +34,7 @@ body {
     position: absolute;
     left: 10px;
     top: 20px;
-
-    display: flex;
-    /*border: 1px solid rgb(119, 72, 45);*/
+    display: flex;    
     color: white;
     font-size: 1.8rem;
     text-shadow: 2px 3px 2px rgba(93, 14, 14, 0.8);
@@ -80,16 +71,6 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     outline: none;
 }
-/*
-.button-load {
-    position: absolute;
-    width: 150px;
-    height: 28px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 200px;
-}*/
 
 .button-continue {
     position: absolute;
@@ -218,12 +199,8 @@ body {
     
 }
 .result-wrapper span {
-    text-align: center; 
-
-    
+    text-align: center;    
 }
-
-
 
 .puzzle-wrapper {
     position: relative; 
@@ -255,7 +232,7 @@ body {
     border: 1px solid rgb(51, 28, 6);
     border-radius: 10%;
     background-color: rgb(100, 57, 21);
-    transition: all .5s;
+    transition: all .3s;
     margin: 5px;  
     font-size: 4.5rem;
     text-shadow: 2px 3px 2px rgb(0, 0, 0, 0.8);
@@ -267,16 +244,6 @@ body {
     opacity: 0.8;
 }
 
-.puzzle-cell--empty {
-    display: flex;
-
-    width: 93px;
-    height: 93px;
-
-    /*margin-left: 1px;
-    margin-right: 1px;*/
-
-}
 
 @media screen and (max-device-width: 768px), screen and (max-width: 768px){
     
@@ -349,12 +316,12 @@ body {
         /*margin: 1px;    */       
         font-size: 2.5rem;
     }
-    .puzzle-cell--empty {
+    /*.puzzle-cell--empty {
         display: flex;
         width: calc(25% - 5px);     
         /*width: 55px;*/
-        height: 55px;    
-    }
+       /* height: 55px;    
+    }*/
     .congratulation {
         padding-top: 2px;   
         top: 200px;
@@ -381,8 +348,6 @@ body {
     .button-select3x3 {
         top: 250px;
     }
-
-
     .result-wrapper {       
         padding-top: 2px;   
         top: 200px;
