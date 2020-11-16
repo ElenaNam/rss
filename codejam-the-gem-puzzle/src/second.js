@@ -258,3 +258,127 @@ function createCells() {
 
 
 
+        function createCells() { 
+            console.log (JSON.parse(localStorage.field));
+        
+        
+            if (localStorage.field){
+                //array = JSON.parse(localStorage.field);
+                //console.log('array ' + array);
+                console.log('сохраненная игра'  + JSON.parse(localStorage.field));//так не хочет
+                console.log(JSON.parse(localStorage.field));
+        
+            };
+           
+                     
+          
+                /*const newCells = [...Array(15).keys()];
+                //.sort(() => Math.random() - 0.5);
+                // ---- проверка на собираемость -----
+                //isSolvable(newCells);
+            */
+        
+           
+                cells = [];
+                //const cells = [];
+                const empty = {
+                value: 0,    
+                top: 0,
+                left: 0        
+                }; 
+        
+                cells.push(empty);     
+        
+            
+            //поменяться координатами
+            function move (index) {
+                
+                const cell = cells[index];
+        
+                //ищем разницу с коорд.пустой клетки
+                const leftVar = Math.abs(empty.left - cell.left);
+                const topVar = Math.abs(empty.top - cell.top);
+                //если рядом пустой клетки нет, ничего не делай
+                if (leftVar + topVar > 1) {
+                    return;
+                }      
+        
+                cell.element.style.left = `${empty.left * cellSize}px`;
+                cell.element.style.top = `${empty.top * cellSize}px`;
+                //в промеж.переменные записываем коорд-ты пустой клетки
+                const emptyLeft = empty.left;
+                const emptyTop = empty.top;
+                //в коорд-ты пустой клетки записываем коорд-ты текущей клетки
+                empty.left = cell.left;
+                empty.top = cell.top;
+                //в коорд-ты текущей клетки записываем коорд-ты пустой
+                cell.left = emptyLeft;
+                cell.top = emptyTop;
+        
+                //-----------проверка на выигрыш----------------
+                const isFinished = cells.every(cell => {
+                    return cell.value === cell.top * 4 + cell.left;
+                });
+        
+                if (isFinished) {
+                    finishGame();
+                };
+        
+                addScore();  
+            };
+        
+            
+            const newCells = [...Array(15).keys()];
+            //.sort(() => Math.random() - 0.5);
+            // ---- проверка на собираемость -----
+            //isSolvable(newCells);
+            
+        
+            for (let i = 1; i < 16; i++) {       
+            
+                const cellElement = document.createElement('div'); //клетка  
+                cellElement.classList.add('puzzle-cell');
+                //разрешить перетаскивание мышью
+                cellElement.setAttribute('draggable', 'true');
+        
+                const value = newCells[i-1] + 1;                
+                cellElement.textContent = value;
+        
+                const left = i % 4;
+                const top = (i - left) / 4;
+        
+                cells.push ({
+                    value: value,
+                    left: left,
+                    top: top,
+                    element: cellElement           
+                });
+                
+        
+                cellElement.style.left = `${left * cellSize}px`;
+                cellElement.style.top = `${top * cellSize}px`;  
+        
+                puzzleWrapper.append(cellElement);        
+            
+        
+            
+                //---------------КЛИК------------------
+                cellElement.addEventListener('click', () => {
+                           
+                    move(i);  
+                    sound.play();      
+                });
+                window.onbeforeunload = () => {    
+                    delete localStorage.field;
+                    let fieldSave = JSON.stringify(cells);
+                    localStorage.setItem('field', fieldSave);   
+                  
+                };
+            };
+            
+                fragment.appendChild(cellElement); 
+                   
+        
+                return fragment;
+        };  
+        

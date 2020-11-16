@@ -80,7 +80,7 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     outline: none;
 }
-
+/*
 .button-load {
     position: absolute;
     width: 150px;
@@ -89,7 +89,7 @@ body {
     right: 0;
     margin: auto;
     top: 200px;
-}
+}*/
 
 .button-continue {
     position: absolute;
@@ -98,7 +98,7 @@ body {
     left: 0;
     right: 0;
     margin: auto;
-    top: 100px;
+    top: 150px;
 }
 .button-newgame {
     position: absolute;
@@ -107,7 +107,7 @@ body {
     left: 0;
     right: 0;
     margin: auto;
-    top: 150px;
+    top: 200px;
 }
 .button-progress {
     position: absolute;
@@ -369,6 +369,20 @@ body {
         width: 30rem;
         height: 35.5rem;   
     }
+    .button-continue {
+        top: 100px;
+    }
+    .button-newgame {
+        top: 150px;
+    }
+    .button-progress {
+        top: 200px;
+    }
+    .button-select3x3 {
+        top: 250px;
+    }
+
+
     .result-wrapper {       
         padding-top: 2px;   
         top: 200px;
