@@ -1,8 +1,9 @@
+
 const { document } = global;
 const renderHeader = () => {
   const headerWrapper = document.createElement('div');
   headerWrapper.classList.add('header-wrapper');
-  document.body.appendChild(headerWrapper);
+  document.body.appendChild(headerWrapper); 
 
   /* burger-menu */
   const burgerWrapper = document.createElement('div');
@@ -42,9 +43,54 @@ const renderHeader = () => {
   burgerOverlay.addEventListener('click', () => {
     burgerWrapper.classList.toggle('burger-menu_active');
   });
-  nav.addEventListener('click', (e) => {
+
+/*   nav.addEventListener('click', (e) => {
     e.preventDefault();
     burgerWrapper.classList.remove('burger-menu_active');
-  });
+  }); */
+  let arrLinks = nav.childNodes;
+  arrLinks.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      console.log('sdfaaasdfsfsfasf');
+      console.log(e.target);
+      /* e.preventDefault(); */
+      burgerWrapper.classList.remove('burger-menu_active');
+    });
+  })
+
+  /* SELECTOR */
+  const selectorWrapper = document.createElement('div');
+  selectorWrapper.classList.add('selector-wrapper');
+  headerWrapper.appendChild(selectorWrapper);
+
+  const input = document.createElement('input');
+  input.classList.add('input');
+  input.setAttribute('type', 'checkbox');
+  input.id = 'selector'
+  selectorWrapper.appendChild(input);
+
+  const label = document.createElement('label');
+  label.classList.add('label');
+  label.setAttribute('for', 'selector');
+  label.textContent = 'Train';
+  selectorWrapper.appendChild(label);
+
+  label.addEventListener('click', () => {
+    if(label.textContent === 'Train') {
+      label.textContent = 'Play';
+      label.style.color = 'crimson';
+    } else {
+      label.textContent = 'Train';
+      label.style.color = 'wheat';
+    }
+  })
+
+
+
+
+
+
+
+
 };
 export default renderHeader;
