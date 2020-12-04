@@ -1,7 +1,7 @@
-/* const createVariables = () => {    
+/* const createVariables = () => {
   let cardWrapper;
   let cardImage;
-  let cardSection; 
+  let cardSection;
   let cardName;
 }
 

@@ -82,7 +82,7 @@ body {
   padding-top: 115px;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 12;
   display: flex;
   flex-flow: column;
   width: 300px;
@@ -100,7 +100,6 @@ body {
 
 .burger-nav_link {
   padding: 18px 35px;
-  font-family: "Roboto", sans-serif;
   font-size: 18px;
   text-decoration: none;
   text-transform: uppercase;
@@ -127,7 +126,7 @@ body {
 }
 .burger-menu_active .burger-menu_overlay {
   display: block;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Selector */
@@ -187,7 +186,7 @@ body {
   width: 80%;
   min-height: 76vh;
   height: auto;
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
 }
 
 .card-image {
@@ -196,13 +195,15 @@ body {
 }
 .card-wrapper {
   width: 300px;
-  height: 360px;
+  /*  height: 360px; */
+  height: 100%;
   display: flex;
   margin: 10px 20px;
   flex-direction: column;
   list-style-type: none;
   text-decoration: none;
   color: rgb(10, 54, 19);
+  box-shadow: 3px 3px 10px rgb(59, 56, 197);
 }
 .card-wrapper:hover {
   transform: skew(-3deg, 3deg);
@@ -214,7 +215,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   width: 300px;
-  background-color: greenyellow;
+  background-color: rgb(180, 146, 84);
   align-items: center;
   justify-content: center;
 }

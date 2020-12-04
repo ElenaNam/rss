@@ -1,5 +1,9 @@
 import cards from './cards';
 import state from './state';
+import renderCategoryPage from './categorypage';
+import {container} from './mainpage';
+import {containerCategoryPage} from './categorypage';
+
 
 const { document } = global;
 const renderHeader = () => {
@@ -23,17 +27,22 @@ const renderHeader = () => {
   const nav = document.createElement('nav');
   nav.classList.add('burger-nav');
   burgerWrapper.appendChild(nav);
+  let navLink;
 
   cards[0].forEach((link) => {
-    const navLink = document.createElement('a');
+    navLink = document.createElement('a');
     navLink.classList.add('burger-nav_link');
-    navLink.setAttribute('href', '#');
+    navLink.setAttribute('href', '#');    
     navLink.textContent = link;
-    nav.appendChild(navLink);
+    nav.append(navLink);
 
     navLink.addEventListener('click', (e) => {
-      console.log(e.target);
-      burgerWrapper.classList.remove('burger-menu_active');
+      burgerWrapper.classList.remove('burger-menu_active'); 
+      container.style.display = 'none';
+      console.log('container ' + container); //видит
+      console.log('containerCategoryPage ' + containerCategoryPage); //не видит
+      /* containerCategoryPage.style.display = 'none';  */
+      renderCategoryPage(e.target.textContent);
     });
   });
 
@@ -79,4 +88,4 @@ const renderHeader = () => {
     }
   });
 };
-export default renderHeader;
+export default renderHeader
