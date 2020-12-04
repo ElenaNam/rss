@@ -179,10 +179,57 @@ body {
 /* MAIN PAGE */
 
 .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0 auto;
-  width: 80%;
-  height: 76vh;
+  max-width: 80%;
+  min-height: 76vh;
+  height: auto;
   background-color: cadetblue;
+}
+.category {
+  display: flex;
+  /* margin: 20px 20px; */
+}
+.card-wrapper {
+  width: 300px;
+  height: 360px;
+  display: flex;
+  margin: 20px 20px;
+  flex-direction: column;
+  list-style-type: none;
+  text-decoration: none;
+  color: rgb(10, 54, 19);
+}
+.card-wrapper:hover {
+  transform: skew(-3deg, 3deg);
+  transition: 0.3s;
+}
+
+.category-section {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 300px;
+  background-color: greenyellow;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-name {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.card {
+}
+.card-front {
+}
+.card-back {
+}
+.card-rotate {
 }
 
 /* FOOTER */
@@ -197,10 +244,10 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
 }
 .logo-wrapper {
-  width: 15%; 
+  width: 15%;
   display: flex;
   margin-left: 15px;
 }
@@ -226,10 +273,8 @@ body {
   flex-direction: column;
   text-align: center;
   margin-top: -45px;
- 
 }
 
 .year-wrapper {
   display: flex;
-
 }

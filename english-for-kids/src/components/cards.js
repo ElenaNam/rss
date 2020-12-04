@@ -4,13 +4,13 @@ const cards = [
     {
       word: 'cry',
       translation: 'плакать',
-      image: '../assets/image/cry.jpg',
+      image: 'img/cry.jpg',
       audioSrc: 'audio/cry.mp3',
     },
     {
       word: 'dance',
       translation: 'танцевать',
-      image: '../assets/image/dance.jpg',
+      image: 'img/dance.jpg',
       audioSrc: 'audio/dance.mp3',
     },
     {
@@ -54,7 +54,7 @@ const cards = [
     {
       word: 'open',
       translation: 'открывать',
-      image: '../assets/image/open.jpg',
+      image: 'img/open.jpg',
       audioSrc: 'audio/open.mp3',
     },
     {
@@ -72,7 +72,7 @@ const cards = [
     {
       word: 'ride',
       translation: 'ездить',
-      image: '../assets/image/ride.jpg',
+      image: 'img/ride.jpg',
       audioSrc: 'audio/ride.mp3',
     },
     {
@@ -104,7 +104,7 @@ const cards = [
     {
       word: 'cat',
       translation: 'кот',
-      image: '../assets/image/cat.jpg',
+      image: 'img/cat.jpg',
       audioSrc: 'audio/cat.mp3',
     },
     {
@@ -154,7 +154,7 @@ const cards = [
     {
       word: 'bird',
       translation: 'птица',
-      image: '../assets/image/bird.jpg',
+      image: 'img/bird.jpg',
       audioSrc: 'audio/bird.mp3',
     },
     {
@@ -204,7 +204,7 @@ const cards = [
     {
       word: 'skirt',
       translation: 'юбка',
-      image: '../assets/image/skirt.jpg',
+      image: 'img/skirt.jpg',
       audioSrc: 'audio/skirt.mp3',
     },
     {
@@ -222,7 +222,7 @@ const cards = [
     {
       word: 'dress',
       translation: 'платье',
-      image: '../assets/image/dress.jpg',
+      image: 'img/dress.jpg',
       audioSrc: 'audio/dress.mp3',
     },
     {
@@ -254,7 +254,7 @@ const cards = [
     {
       word: 'sad',
       translation: 'грустный',
-      image: '../assets/image/sad.jpg',
+      image: 'img/sad.jpg',
       audioSrc: 'audio/sad.mp3',
     },
     {
