@@ -1,3 +1,7 @@
+import cards from './cards';
+import state from './state';
+
+
 
 const { document } = global;
 const renderHeader = () => {
@@ -22,13 +26,17 @@ const renderHeader = () => {
   nav.classList.add('burger-nav');
   burgerWrapper.appendChild(nav);
 
-  const menuLinks = ['Home page', 'Action (set A)', 'Action (set B)', 'Action (set C)', 'Adjective', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotion'];
-  menuLinks.forEach((link) => {
-    const navLink = document.createElement('a');
-    navLink.classList.add('burger-nav_link');
+  cards[0].forEach((link) => {
+    let navLink = document.createElement('a');
+    navLink.classList.add('burger-nav_link');    
     navLink.setAttribute('href', '#');
     navLink.textContent = link;
     nav.appendChild(navLink);
+
+    navLink.addEventListener('click', (e) => {      
+      console.log(e.target);
+      burgerWrapper.classList.remove('burger-menu_active');
+    });
   });
 
   const burgerOverlay = document.createElement('div');
@@ -44,19 +52,6 @@ const renderHeader = () => {
     burgerWrapper.classList.toggle('burger-menu_active');
   });
 
-/*   nav.addEventListener('click', (e) => {
-    e.preventDefault();
-    burgerWrapper.classList.remove('burger-menu_active');
-  }); */
-  let arrLinks = nav.childNodes;
-  arrLinks.forEach((el) => {
-    el.addEventListener('click', (e) => {
-      console.log('sdfaaasdfsfsfasf');
-      console.log(e.target);
-      /* e.preventDefault(); */
-      burgerWrapper.classList.remove('burger-menu_active');
-    });
-  })
 
   /* SELECTOR */
   const selectorWrapper = document.createElement('div');
@@ -79,9 +74,11 @@ const renderHeader = () => {
     if(label.textContent === 'Train') {
       label.textContent = 'Play';
       label.style.color = 'crimson';
+      state.play = true;
     } else {
       label.textContent = 'Train';
       label.style.color = 'wheat';
+      state.play = false;
     }
   })
 
