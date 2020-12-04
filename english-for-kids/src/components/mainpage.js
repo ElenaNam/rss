@@ -1,16 +1,23 @@
 import renderHeader from './header';
 import cards from './cards';
+import createVariables from './variables';
+import renderCategoryPage from './categorypage';
 
-const renderMainPage = () => {
+
+
+const renderMainPage = () => {  
+/*   const pageWrapper = document.createElement('div');
+  pageWrapper.classList.add('page-wrapper');
+  document.body.appendChild(pageWrapper); */
+  
   const container = document.createElement('div');
   container.classList.add('container');
   document.body.appendChild(container);
 
   let cardWrapper;
-  let category;
-  let cardSection;
-  let categoryName;
-
+  let cardImage;
+  let cardSection; 
+  let cardName;
 
   for (let i = 1; i < cards.length; i++) {
     cardWrapper = document.createElement('a');
@@ -19,20 +26,32 @@ const renderMainPage = () => {
     container.appendChild(cardWrapper);
 
 
-    category = document.createElement('div');   
-    category.innerHTML = `<img src = ${cards[i][0].image} width = '300px' height = '280px'/>`; 
-    category.classList.add('category');
-    cardWrapper.appendChild(category);
+    cardImage = document.createElement('div');   
+    cardImage.innerHTML = `<img src = ${cards[i][0].image} width = '300px' height = '280px'/>`; 
+    cardImage.classList.add('card-image');
+    cardWrapper.appendChild(cardImage);
 
-    cardSection = document.createElement('div');
+    cardSection = document.createElement('footer');
     cardSection.classList.add('category-section');
     cardWrapper.appendChild(cardSection);
 
-    categoryName = document.createElement('span');
-    categoryName.classList.add('category-name');
-    categoryName.textContent = `${cards[0][i -1]}`
-    cardSection.appendChild(categoryName);
+    cardName = document.createElement('span');
+    cardName.classList.add('card-name');
+    cardName.textContent = `${cards[0][i -1]}`
+    cardSection.appendChild(cardName);
+
+
+    cardWrapper.addEventListener('click', (e) => {      
+      console.log (e.currentTarget);
+      console.log (container);
+      /* container.remove();  */
+      /* container.classList.remove('container'); */
+      container.style.display = 'none';
+      setTimeout(renderCategoryPage, 100);        
+    })
   }
+
+
 };
 
 export default renderMainPage;
