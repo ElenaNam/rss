@@ -19,38 +19,39 @@ rotate.classList.add('card-rotate');
 card.appendChild(rotate); */
 import cards from './cards';
 
-const renderCategoryPage = () => {  
-  
-    const container = document.createElement('div');
-    container.classList.add('container');
-    document.body.appendChild(container);
-    
-    let cardWrapper;
-    let cardImage;
-    let cardSection; 
-    let cardName;
-  
-    for (let i = 0; i < cards[1].length; i++) {
-      cardWrapper = document.createElement('a');
-      cardWrapper.classList.add('card-wrapper');
-      cardWrapper.setAttribute('href', '#');
-      container.appendChild(cardWrapper);
-  
-  
-      cardImage = document.createElement('div');   
-      cardImage.innerHTML = `<img src = ${cards[1][i].image} width = '300px' height = '280px'/>`; 
-      cardImage.classList.add('card-image');
-      cardWrapper.appendChild(cardImage);
-  
-      cardSection = document.createElement('footer');
-      cardSection.classList.add('category-section');
-      cardWrapper.appendChild(cardSection);
-  
-      cardName = document.createElement('span');
-      cardName.classList.add('card-name');
-      cardName.textContent = `${cards[1][i].word}`
-      cardSection.appendChild(cardName);
-    }
-  };
+const renderCategoryPage = (category) => {  
+  const container = document.createElement('div');
+  container.classList.add('container');
+  document.body.appendChild(container);
+
+  let cardWrapper;
+  let cardImage;
+  let cardSection; 
+  let cardName;
+
+  let index = cards[0].findIndex((el) => el === category);
+
+  cards[index + 1].forEach((elem) => {
+    console.log (elem.word);
+    cardWrapper = document.createElement('a');
+    cardWrapper.classList.add('card-wrapper');
+    cardWrapper.setAttribute('href', '#');
+    container.appendChild(cardWrapper);
+
+    cardImage = document.createElement('div');
+    cardImage.innerHTML = `<img src = ${elem.image} width = '300px' height = '280px'/>`; 
+    cardImage.classList.add('card-image');
+    cardWrapper.appendChild(cardImage); 
+
+    cardSection = document.createElement('footer');
+    cardSection.classList.add('category-section');
+    cardWrapper.appendChild(cardSection);
+ 
+    cardName = document.createElement('span');
+    cardName.classList.add('card-name');
+    cardName.textContent = `${elem.word}`
+    cardSection.appendChild(cardName);  
+  })
+};
 
 export default renderCategoryPage;

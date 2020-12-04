@@ -7,7 +7,7 @@ import renderFooter from './components/footer';
 
 window.onload = () => {
   renderHeader();
-  renderMainPage(); 
-  /* renderCategoryPage(); */
+  renderMainPage();  
+  /* renderCategoryPage('Action (set B)'); */ 
   renderFooter();
 };
