@@ -1,8 +1,5 @@
 const state = {
-    play: false,
-}
-
-
-
+  play: false,
+};
 
 export default state;

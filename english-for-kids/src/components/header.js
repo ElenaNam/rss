@@ -1,13 +1,11 @@
 import cards from './cards';
 import state from './state';
 
-
-
 const { document } = global;
 const renderHeader = () => {
   const headerWrapper = document.createElement('div');
   headerWrapper.classList.add('header-wrapper');
-  document.body.appendChild(headerWrapper); 
+  document.body.appendChild(headerWrapper);
 
   /* burger-menu */
   const burgerWrapper = document.createElement('div');
@@ -27,13 +25,13 @@ const renderHeader = () => {
   burgerWrapper.appendChild(nav);
 
   cards[0].forEach((link) => {
-    let navLink = document.createElement('a');
-    navLink.classList.add('burger-nav_link');    
+    const navLink = document.createElement('a');
+    navLink.classList.add('burger-nav_link');
     navLink.setAttribute('href', '#');
     navLink.textContent = link;
     nav.appendChild(navLink);
 
-    navLink.addEventListener('click', (e) => {      
+    navLink.addEventListener('click', (e) => {
       console.log(e.target);
       burgerWrapper.classList.remove('burger-menu_active');
     });
@@ -52,7 +50,6 @@ const renderHeader = () => {
     burgerWrapper.classList.toggle('burger-menu_active');
   });
 
-
   /* SELECTOR */
   const selectorWrapper = document.createElement('div');
   selectorWrapper.classList.add('selector-wrapper');
@@ -61,7 +58,7 @@ const renderHeader = () => {
   const input = document.createElement('input');
   input.classList.add('input');
   input.setAttribute('type', 'checkbox');
-  input.id = 'selector'
+  input.id = 'selector';
   selectorWrapper.appendChild(input);
 
   const label = document.createElement('label');
@@ -71,7 +68,7 @@ const renderHeader = () => {
   selectorWrapper.appendChild(label);
 
   label.addEventListener('click', () => {
-    if(label.textContent === 'Train') {
+    if (label.textContent === 'Train') {
       label.textContent = 'Play';
       label.style.color = 'crimson';
       state.play = true;
@@ -80,14 +77,6 @@ const renderHeader = () => {
       label.style.color = 'wheat';
       state.play = false;
     }
-  })
-
-
-
-
-
-
-
-
+  });
 };
 export default renderHeader;

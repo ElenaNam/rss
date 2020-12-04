@@ -10,8 +10,7 @@ module.exports = {
     rules: [
       {test: /\.svg$/, use: 'svg-inline-loader'},
       {test: /\.css$/, use: ['style-loader', 'css-loader']},
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-      {test: /\.(png|jpe?g|gif|ttf|woff|woff2|eot)$/, loader: 'file-loader', options: {publicPath: 'dist/assets/img'}},
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},      
     ],
   },
   output: {
