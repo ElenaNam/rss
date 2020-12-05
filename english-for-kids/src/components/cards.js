@@ -1,5 +1,5 @@
 const cards = [
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Furniture'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Furniture', 'Colors'],
   [
     {
       word: 'cry',
@@ -348,6 +348,56 @@ const cards = [
       translation: 'дверь',
       image: 'img/door.jpg',
       audioSrc: 'audio/door.mp3',
+    },
+  ],
+  [
+    {
+      word: 'red',
+      translation: 'красный',
+      image: 'img/red.jpg',
+      audioSrc: 'audio/red.mp3',
+    },
+    {
+      word: 'yellow',
+      translation: 'желтый',
+      image: 'img/yellow.jpg',
+      audioSrc: 'audio/yellow.mp3',
+    },
+    {
+      word: 'white',
+      translation: 'белый',
+      image: 'img/white.jpg',
+      audioSrc: 'audio/white.mp3',
+    },
+    {
+      word: 'black',
+      translation: 'черный',
+      image: 'img/black.jpg',
+      audioSrc: 'audio/black.mp3',
+    },
+    {
+      word: 'blue',
+      translation: 'синий',
+      image: 'img/blue.jpg',
+      audioSrc: 'audio/blue.mp3',
+    },
+    {
+      word: 'orange',
+      translation: 'оранжевый',
+      image: 'img/orange.jpg',
+      audioSrc: 'audio/orange.mp3',
+    },
+    {
+      word: 'green',
+      translation: 'зелёный',
+      image: 'img/green.jpg',
+      audioSrc: 'audio/green.mp3',
+    },
+    {
+      word: 'brown',
+      translation: 'коричневый',
+      image: 'img/brown.jpg',
+      audioSrc: 'audio/brown.mp3',
     },
   ],
 ];

@@ -33,5 +33,6 @@ module.exports = {
     open: true,
     port: 8080,
   },
+  devtool: "source-map",
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
 }
