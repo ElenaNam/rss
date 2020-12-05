@@ -9,23 +9,33 @@ const renderFooter = () => {
 
   const logo = document.createElement('div');
   logo.classList.add('logo-wrapper');
-  logo.innerHTML = "<img src = 'img/rs_school_js.png' alt = 'logo' width = 100px'/>";
+  logo.innerHTML = "<img src = 'img/rs_school_js.png' alt = 'logo'/>";
   footer.appendChild(logo);
 
+  const linkCourseWrapper = document.createElement('div');
+  linkCourseWrapper.classList.add('footer-link-course-wrapper');
+  footer.appendChild(linkCourseWrapper);
+
   const linkCourse = document.createElement('a');
-  linkCourse.classList.add('footer-link');
+  linkCourse.classList.add('footer-link', 'footer-link-course');
   linkCourse.setAttribute('href', 'https://rs.school/js/');
   linkCourse.textContent = 'Курс «JavaScript/Front-end»';
-  footer.appendChild(linkCourse);
+  linkCourseWrapper.appendChild(linkCourse);
 
   const footerInformation = document.createElement('div');
   footerInformation.classList.add('footer-information');
   footer.appendChild(footerInformation);
 
+  const yearWrapper = document.createElement('div'); 
+  yearWrapper.classList.add('year-wrapper');
+  footerInformation.appendChild(yearWrapper);
+
+
+
   const year = document.createElement('div');
-  logo.classList.add('year-wrapper');
-  year.innerHTML = "<img src = 'img/2020.png' alt = '2020' width = 50px'/>";
-  footerInformation.appendChild(year);
+  /* logo.classList.add('year-wrapper'); */
+  year.innerHTML = "<img src = 'img/2020.png' alt = '2020'/>";
+  yearWrapper.appendChild(year);
 
   const linkAuthor = document.createElement('a');
   linkAuthor.classList.add('footer-link', 'footer-link-color');

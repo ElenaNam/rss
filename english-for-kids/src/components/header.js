@@ -51,7 +51,7 @@ const renderHeader = () => {
   burgerWrapper.appendChild(burgerOverlay);
 
   burgerMenuBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault();    
     burgerWrapper.classList.toggle('burger-menu_active');
     document.body.classList.toggle('lock');
   });

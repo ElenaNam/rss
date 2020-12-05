@@ -22,7 +22,7 @@ const renderMainPage = () => {
       container.appendChild(cardWrapper);
 
       cardImage = document.createElement('div');
-      cardImage.innerHTML = `<img src = ${el[0].image} width = '300px' height = '280px'/>`;
+      cardImage.innerHTML = `<img src = ${el[0].image} width = '300px' height = '260px'/>`;
       cardImage.classList.add('card-image');
       cardWrapper.appendChild(cardImage);
 
