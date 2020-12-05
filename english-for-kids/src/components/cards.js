@@ -1,5 +1,5 @@
 const cards = [
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Furniture'],
   [
     {
       word: 'cry',
@@ -298,6 +298,56 @@ const cards = [
       translation: 'смех',
       image: 'img/laugh.jpg',
       audioSrc: 'audio/laugh.mp3',
+    },
+  ],
+  [
+    {
+      word: 'bed',
+      translation: 'кровать',
+      image: 'img/bed.jpg',
+      audioSrc: 'audio/bed.mp3',
+    },
+    {
+      word: 'bookcase',
+      translation: 'книжный шкаф',
+      image: 'img/bookcase.jpeg',
+      audioSrc: 'audio/bookcase.mp3',
+    },
+    {
+      word: 'chair',
+      translation: 'стул',
+      image: 'img/chair.jpg',
+      audioSrc: 'audio/chair.mp3',
+    },
+    {
+      word: 'table',
+      translation: 'стол',
+      image: 'img/table.jpg',
+      audioSrc: 'audio/table.mp3',
+    },
+    {
+      word: 'mirror',
+      translation: 'зеркало',
+      image: 'img/mirror.jpg',
+      audioSrc: 'audio/mirror.mp3',
+    },
+    {
+      word: 'wardrobe',
+      translation: 'платяной шкаф',
+      image: 'img/wardrobe.jpg',
+      audioSrc: 'audio/wardrobe.mp3',
+    },
+    {
+      word: 'sofa',
+      translation: 'диван',
+      image: 'img/sofa.jpg',
+      audioSrc: 'audio/sofa.mp3',
+    },
+    {
+      word: 'door',
+      translation: 'дверь',
+      image: 'img/door.jpg',
+      audioSrc: 'audio/door.mp3',
     },
   ],
 ];
