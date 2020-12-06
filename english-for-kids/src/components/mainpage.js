@@ -9,16 +9,12 @@ export let cardSection;
 export let cardName; */
 export let container;
 
-
-
-
-const renderMainPage = () => {
-  console.log('main page');   
-    
-  container = document.createElement('div');
-  container.classList.add('container');
-  document.body.appendChild(container);  
-
+const renderMainPage = () => {    
+  if(!container){
+    container = document.createElement('div');
+    container.classList.add('container');
+    document.body.appendChild(container);  
+  }  
 
   let cardWrapper;
   let cardImage;

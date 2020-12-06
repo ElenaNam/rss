@@ -1,4 +1,5 @@
 import cards from './cards';
+import rotateCard from './card';
 import { container } from './mainpage';
 
 
@@ -16,11 +17,12 @@ const renderCategoryPage = (category) => {
   let cardImage;
   let cardSection;
   let cardName;
+  let rotateBtn;
+  
 
   const index = cards[0].findIndex((el) => el === category);
 
-  cards[index + 1].forEach((elem) => {
-    /* console.log(elem.word); */
+  cards[index + 1].forEach((elem) => {    
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
     cardWrapper.setAttribute('href', '#');
@@ -41,18 +43,28 @@ const renderCategoryPage = (category) => {
     cardName = document.createElement('span');
     cardName.classList.add('card-name');
     cardName.textContent = `${elem.word}`;
+    /* console.log(cardName); */
     cardSection.appendChild(cardName);
 
-    let rotateBtn = document.createElement('button');
+    rotateBtn = document.createElement('button');
     rotateBtn.classList.add('rotate-button');   
     rotateBtn.innerHTML = '<img src = "img/rotate1.png"/>'; 
-    cardSection.appendChild(rotateBtn);
+    cardSection.append(rotateBtn);
 
-    cardWrapper.addEventListener('click', (e) => {
-      console.log(e.currentTarget);                        
+    rotateBtn.addEventListener('click', (e) => {  
+      e.stopPropagation();
+      console.log(e.currentTarget.parentNode.children); 
+      rotateCard(e.currentTarget.parentNode.parentNode, index + 1);        
+      e.currentTarget.parentNode.children[1].remove();
+
+      sound.volume = 0;
+      /* cardName.textContent = `${elem.translation}`; */
+
+    })
+    cardWrapper.addEventListener('click', (e) => {      
+      console.log(e.target);                        
       sound.play();
     })
-
 
   });
 };

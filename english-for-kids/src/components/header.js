@@ -37,8 +37,7 @@ const renderHeader = () => {
 
   mainPageLink.addEventListener('click', () => {
     burgerWrapper.classList.remove('burger-menu_active');
-    /* container.innerHTML = ''; */
-    container.remove();
+    container.innerHTML = ''; 
     renderMainPage();
   });
 
