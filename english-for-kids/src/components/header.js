@@ -1,8 +1,9 @@
 import cards from './cards';
 import state from './state';
+import renderMainPage from './mainpage';
 import renderCategoryPage from './categorypage';
 import {container} from './mainpage';
-import {containerCategoryPage} from './categorypage';
+/* import {containerCategoryPage} from './categorypage'; */
 
 
 const { document } = global;
@@ -27,7 +28,19 @@ const renderHeader = () => {
   const nav = document.createElement('nav');
   nav.classList.add('burger-nav');
   burgerWrapper.appendChild(nav);
+
   let navLink;
+  let mainPageLink = document.createElement('a');
+  mainPageLink.classList.add('burger-nav_link');
+  mainPageLink.textContent = 'Main page';
+  nav.append(mainPageLink);
+
+  mainPageLink.addEventListener('click', () => {
+    burgerWrapper.classList.remove('burger-menu_active');
+    /* container.innerHTML = ''; */
+    container.remove();
+    renderMainPage();
+  });
 
   cards[0].forEach((link) => {
     navLink = document.createElement('a');
@@ -37,14 +50,13 @@ const renderHeader = () => {
     nav.append(navLink);
 
     navLink.addEventListener('click', (e) => {
-      burgerWrapper.classList.remove('burger-menu_active'); 
-      container.style.display = 'none';
-      console.log('container ' + container); //видит
-      console.log('containerCategoryPage ' + containerCategoryPage); //не видит
-      /* containerCategoryPage.style.display = 'none';  */
+      burgerWrapper.classList.remove('burger-menu_active');
+      container.innerHTML = '';
       renderCategoryPage(e.target.textContent);
-    });
+    }); 
   });
+
+
 
   const burgerOverlay = document.createElement('div');
   burgerOverlay.classList.add('burger-menu_overlay');

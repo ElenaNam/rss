@@ -257,7 +257,7 @@ body {
   display: flex;
   margin-left: 3%;
 }
-.logo-wrapper img {
+.logo-wrapper a img {
   width: 8rem;
   height: 3rem;
 }
@@ -314,13 +314,7 @@ body {
     height: 3.5px;
     border-radius: 80%;
   }
-  .logo-wrapper {
-    margin-right: 10%;
-  }
-  .logo-wrapper img {
-    width: 3rem;
-    height: 1.2rem;
-  }
+
   /* MAIN PAGE */
   .container {
     width: 95%;
@@ -328,6 +322,13 @@ body {
   /* FOOTER */
   .footer-wrapper {
     height: 8vh;
+  }
+  .logo-wrapper {
+    margin-right: 10%;
+  }
+  .logo-wrapper a img {
+    width: 3rem;
+    height: 1.2rem;
   }
 
   .footer-link-course-wrapper {
@@ -354,7 +355,7 @@ body {
 }
 
 @media screen and (min-width: 500px) and (max-width: 767px) {
-  .logo-wrapper img {
+  .logo-wrapper a img {
     width: 3.3rem;
     height: 1.5rem;
   }

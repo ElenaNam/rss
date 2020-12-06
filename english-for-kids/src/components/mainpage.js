@@ -1,21 +1,34 @@
 /* import { container } from 'webpack'; */
 import cards from './cards';
 import renderCategoryPage from './categorypage';
+
+/* export let container;
+export let cardWrapper;
+export let cardImage;
+export let cardSection;
+export let cardName; */
 export let container;
 
+
+
+
 const renderMainPage = () => {
+  console.log('main page');   
+    
   container = document.createElement('div');
   container.classList.add('container');
-  document.body.appendChild(container);
+  document.body.appendChild(container);  
+
 
   let cardWrapper;
   let cardImage;
   let cardSection;
-  let cardName;
+  let cardName; 
+
 
   cards.forEach((el, i) => {
     if (el !== cards[0]) {
-      console.log(i);
+      /* console.log(i); */
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
       cardWrapper.setAttribute('href', '#');
@@ -36,7 +49,7 @@ const renderMainPage = () => {
       cardSection.appendChild(cardName);
 
       cardWrapper.addEventListener('click', (e) => {
-        container.style.display = 'none';
+        container.innerHTML = '';
         renderCategoryPage(e.currentTarget.children[1].children[0].textContent);
       });
     }

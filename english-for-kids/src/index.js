@@ -1,6 +1,8 @@
 import './style.css';
 import renderHeader from './components/header';
-import renderMainPage from './components/mainpage';
+/* import renderMainPage, {container} from './components/mainpage'; */
+import renderMainPage from './components/mainpage'; 
+/* import {container} from './components/mainpage'; */
 
 import renderFooter from './components/footer';
 

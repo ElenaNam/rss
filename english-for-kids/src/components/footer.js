@@ -9,7 +9,8 @@ const renderFooter = () => {
 
   const logo = document.createElement('div');
   logo.classList.add('logo-wrapper');
-  logo.innerHTML = "<img src = 'img/rs_school_js.png' alt = 'logo'/>";
+  logo.innerHTML = "<a><img src = 'img/rs_school_js.png' alt = 'logo'/></a>";
+  logo.children[0].setAttribute('href', 'https://rs.school/js/');
   footer.appendChild(logo);
 
   const linkCourseWrapper = document.createElement('div');
