@@ -209,9 +209,11 @@ body {
 .card-wrapper:hover {
   transform: skew(-3deg, 3deg);
   transition: 0.3s;
+  cursor: default;
 }
 
 .category-section {
+  position: relative;
   display: flex;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -225,6 +227,28 @@ body {
   display: flex;
   font-size: 2rem;
   font-weight: bold;
+}
+
+.rotate-button {
+  position: absolute;
+  right: 10%;
+  display: flex;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+.rotate-button img {
+  width: 40px;
+  height: 40px;
+}
+.rotate-button:hover {
+  transform: scaleX(-1);
+}
+.rotate-button:active,
+:focus {
+  outline-style: none;
+  outline-width: 0px !important;
+  outline-color: none !important;
 }
 
 .card {

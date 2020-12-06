@@ -43,12 +43,14 @@ const renderCategoryPage = (category) => {
     cardName.textContent = `${elem.word}`;
     cardSection.appendChild(cardName);
 
+    let rotateBtn = document.createElement('button');
+    rotateBtn.classList.add('rotate-button');   
+    rotateBtn.innerHTML = '<img src = "img/rotate1.png"/>'; 
+    cardSection.appendChild(rotateBtn);
+
     cardWrapper.addEventListener('click', (e) => {
-      console.log(e.currentTarget);
-
-      /* const sound = document.getElementById('arrow'); */                    
+      console.log(e.currentTarget);                        
       sound.play();
-
     })
 
 
