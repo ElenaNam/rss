@@ -4,10 +4,16 @@ import renderMainPage, { container } from './mainpage';
 import renderCategoryPage from './categorypage';
 
 const { document } = global;
+let headerWrapper;
+
 const renderHeader = () => {
-  const headerWrapper = document.createElement('div');
-  headerWrapper.classList.add('header-wrapper');
-  document.body.appendChild(headerWrapper);
+  
+  if (!headerWrapper) {
+    headerWrapper = document.createElement('div');
+    headerWrapper.classList.add('header-wrapper');
+    document.body.appendChild(headerWrapper);
+  }
+
 
   /* burger-menu */
   const burgerWrapper = document.createElement('div');
@@ -102,15 +108,19 @@ const renderHeader = () => {
   selectorWrapper.appendChild(label);
 
   label.addEventListener('click', () => {
+    
     if (label.textContent === 'Train') {
       label.textContent = 'Play';
-      label.style.color = 'crimson';
+      label.style.color = 'yellow';
       state.play = true;
     } else {
       label.textContent = 'Train';
-      label.style.color = 'wheat';
+      label.style.color = 'rgb(170, 38, 130)';
+      label.style.fontWeight = 'bold';
       state.play = false;
     }
+    console.log('header ' + state.play);
+    renderMainPage(state.play);
   });
 };
 export default renderHeader;

@@ -5,12 +5,15 @@ import state from './state';
 
 let container;
 
-const renderMainPage = () => {
+const renderMainPage = (mode) => {
+  console.log('mainPage ' + mode);
+  
   if (!container) {
-    container = document.createElement('div');
+    container = document.createElement('div');    
     container.classList.add('container');
     document.body.appendChild(container);
   }
+  container.innerHTML = '';
 
   let cardWrapper;
   let cardImage;
@@ -18,10 +21,28 @@ const renderMainPage = () => {
   let cardName;
 
   cards.forEach((el, i) => {
+    console.log('mainPage в цикле по карточкам ' + mode);
+    console.log(mode === true);
     if (el !== cards[0]) {
-      /* console.log(i); */
+       
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
+
+      console.log(cardWrapper); 
+
+      if (mode === true) {
+
+        console.log('if mode===true ' + mode);   
+
+        cardWrapper.style.backgroundColor = 'yellow';
+
+      } else if (mode === false) {
+
+        console.log('if mode===false undefined ' + mode);
+
+        cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
+      }
+
       cardWrapper.setAttribute('href', '#');
       container.appendChild(cardWrapper);
 

@@ -140,20 +140,21 @@ body {
   position: absolute;
   top: 42px;
   right: 20%;
-  width: 100px;
+  width: auto;
 }
 .input {
   display: none;
 }
 .input:checked + .label::before {
-  right: -58px;
+  right: -60px;
 }
 .label {
   position: relative;
   font-size: 1.5rem;
   letter-spacing: 0.18rem;
   font-weight: bold;
-  color: wheat;
+  color: rgb(170, 38, 130);
+  text-shadow: 1px 1px black;
   cursor: pointer;
 }
 .label::after {
