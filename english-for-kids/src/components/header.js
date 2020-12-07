@@ -1,15 +1,10 @@
 import cards from './cards';
 import state from './state';
-import renderMainPage from './mainpage';
+import renderMainPage, { container } from './mainpage';
 import renderCategoryPage from './categorypage';
-import {container} from './mainpage';
-
-/* import {containerCategoryPage} from './categorypage'; */
-
 
 const { document } = global;
 const renderHeader = () => {
-  //console.log('header state.page = ' + state.page);
   const headerWrapper = document.createElement('div');
   headerWrapper.classList.add('header-wrapper');
   document.body.appendChild(headerWrapper);
@@ -35,10 +30,9 @@ const renderHeader = () => {
 
   cards[0].unshift('Main Page');
   cards[0].forEach((link, j) => {
-
     navLink = document.createElement('a');
     navLink.classList.add('burger-nav_link');
-    
+
     if (j === state.page) {
       navLink.classList.add('burger-nav_link-active');
     }
@@ -50,22 +44,22 @@ const renderHeader = () => {
       burgerWrapper.classList.remove('burger-menu_active');
       container.innerHTML = '';
 
-      Array.from(e.currentTarget.parentNode.children).forEach((link, i) => {
-        if(link === e.currentTarget) {
-          link.classList.add('burger-nav_link-active'); 
-          state.page = i;          
-        } else {          
-          link.classList.remove('burger-nav_link-active');
+      Array.from(e.currentTarget.parentNode.children).forEach((item, i) => {
+        if (item === e.currentTarget) {
+          item.classList.add('burger-nav_link-active');
+          state.page = i;
+        } else {
+          item.classList.remove('burger-nav_link-active');
         }
-      })
+      });
 
-      if(e.target.textContent === 'Main Page') {
+      if (e.target.textContent === 'Main Page') {
         state.page = 0;
         renderMainPage();
       } else {
         renderCategoryPage(e.target.textContent, state.page);
       }
-    }); 
+    });
   });
 
   const burgerOverlay = document.createElement('div');
@@ -73,20 +67,18 @@ const renderHeader = () => {
   burgerWrapper.appendChild(burgerOverlay);
 
   burgerMenuBtn.addEventListener('click', (e) => {
-    console.log('бургер меню кнопка state.page = ' + state.page);
-    e.preventDefault();   
+    e.preventDefault();
 
     Array.from(navLink.parentNode.children).forEach((item, v) => {
-      if(v === state.page) {
+      if (v === state.page) {
         item.classList.add('burger-nav_link-active');
       } else {
         item.classList.remove('burger-nav_link-active');
       }
-    })  
+    });
 
     burgerWrapper.classList.toggle('burger-menu_active');
     document.body.classList.toggle('lock');
-
   });
   burgerOverlay.addEventListener('click', () => {
     burgerWrapper.classList.toggle('burger-menu_active');
@@ -121,4 +113,4 @@ const renderHeader = () => {
     }
   });
 };
-export default renderHeader
+export default renderHeader;

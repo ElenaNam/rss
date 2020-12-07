@@ -3,26 +3,19 @@ import cards from './cards';
 import renderCategoryPage from './categorypage';
 import state from './state';
 
-/* export let container;
-export let cardWrapper;
-export let cardImage;
-export let cardSection;
-export let cardName; */
-export let container;
+let container;
 
-const renderMainPage = () => { 
-  console.log('главная страница state.page = ' + state.page);   
-  if(!container){
+const renderMainPage = () => {
+  if (!container) {
     container = document.createElement('div');
     container.classList.add('container');
-    document.body.appendChild(container);  
-  }  
+    document.body.appendChild(container);
+  }
 
   let cardWrapper;
   let cardImage;
   let cardSection;
-  let cardName; 
-
+  let cardName;
 
   cards.forEach((el, i) => {
     if (el !== cards[0]) {
@@ -54,6 +47,5 @@ const renderMainPage = () => {
     }
   });
 };
-
-export default renderMainPage
-
+export { container };
+export default renderMainPage;

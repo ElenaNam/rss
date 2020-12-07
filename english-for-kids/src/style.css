@@ -89,9 +89,10 @@ body {
   width: 300px;
   height: 100vh;
   background-color: #064b74;
+  border-radius: 10px;
   overflow-y: auto;
   left: -100%;
-  transition: 0.9s;
+  transition: 1s;
 }
 .burger-menu_active .burger-nav {
   left: 0;
@@ -197,20 +198,22 @@ body {
 .card-wrapper {
   position: relative;
   width: 300px;
-  /*  height: 360px; */
-  height: auto;
-  /*   display: flex; */
+  height: 340px;
+  /* height: auto; */
+  display: flex;
   margin: 10px 20px;
-  /*   flex-direction: column;
-  justify-content: center; */
   list-style-type: none;
   text-decoration: none;
   color: rgb(47, 74, 161);
   box-shadow: 3px 3px 10px rgb(59, 56, 197);
   perspective: 800px;
   background: rgb(170, 38, 130);
+  border: 2px solid rgb(170, 38, 130);
   border-radius: 15%;
   transition: 1s;
+  overflow: hidden;
+  outline: none;
+  backface-visibility: hidden;
 }
 .card-wrapper:hover {
   transform: skew(-3deg, 3deg);
@@ -235,6 +238,8 @@ body {
   position: absolute;
   width: 100%;
   height: auto;
+  border: none;
+  outline: none;
   /*   left: 0;
   top: 0; */
   display: flex;
@@ -257,6 +262,10 @@ body {
   transform: rotateY(360deg);
 }
  */
+.front,
+.back img {
+  overflow: hidden;
+}
 
 .category-section {
   position: absolute;
@@ -279,20 +288,19 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-shadow: 1px 1px rgb(12, 12, 12);
+  text-align: center;
 }
 
 .rotate-button {
   position: absolute;
-  bottom: 7%;
+  bottom: 20%;
   right: 10%;
   display: flex;
   border: none;
   padding: 0;
   background-color: transparent;
 }
-/* .rotate-button-hidden {
-  visibility: hidden;
-} */
+
 .rotate-button img {
   width: 40px;
   height: 40px;
@@ -399,6 +407,7 @@ body {
   .container {
     width: 95%;
   }
+
   /* FOOTER */
   .footer-wrapper {
     height: 8vh;
@@ -458,9 +467,12 @@ body {
   }
 }
 
-@media screen and (min-width: 850px) and (max-width: 1280px) {
+@media screen and (min-width: 851px) and (max-width: 1280px) {
   .burger-menu_button {
     top: 11%;
     left: 15%;
+  }
+  .container {
+    width: 95%;
   }
 }

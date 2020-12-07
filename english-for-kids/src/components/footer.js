@@ -27,14 +27,11 @@ const renderFooter = () => {
   footerInformation.classList.add('footer-information');
   footer.appendChild(footerInformation);
 
-  const yearWrapper = document.createElement('div'); 
+  const yearWrapper = document.createElement('div');
   yearWrapper.classList.add('year-wrapper');
   footerInformation.appendChild(yearWrapper);
 
-
-
   const year = document.createElement('div');
-  /* logo.classList.add('year-wrapper'); */
   year.innerHTML = "<img src = 'img/2020.png' alt = '2020'/>";
   yearWrapper.appendChild(year);
 
