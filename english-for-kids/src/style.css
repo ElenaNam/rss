@@ -210,6 +210,7 @@ body {
   perspective: 800px;
   background: rgb(170, 38, 130);
   border-radius: 15%;
+  transition: 1s;
 }
 .card-wrapper:hover {
   transform: skew(-3deg, 3deg);
@@ -217,10 +218,10 @@ body {
   cursor: default;
 }
 
-.card-wrapper-active {
+/* .card-wrapper-active {
   transform: rotateY(180deg);
   transition: 1s;
-}
+} */
 
 /* .card-image {
   display: flex;
@@ -240,7 +241,7 @@ body {
   transition: 1s;
   backface-visibility: hidden;
   border-radius: 25%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .front {
   /* background-color: #fff;  */
@@ -256,6 +257,7 @@ body {
   transform: rotateY(360deg);
 }
  */
+
 .category-section {
   position: absolute;
   bottom: 0;

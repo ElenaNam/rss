@@ -8,11 +8,7 @@ const rotateCard = (target, i) => {  //class='card-wrapper'
         .card:hover .back {transform: rotateY(360deg);} */
         console.log('мышь ушла');
 
-      })
- 
-
-
-  
+      })  
 }
 
 

@@ -30,6 +30,23 @@ const renderCategoryPage = (category, index) => {
     /* containerCategoryPage.appendChild(cardWrapper); */
     container.appendChild(cardWrapper);
 
+    /* back */
+
+    back = document.createElement('div');
+    back.innerHTML = `<img src = ${elem.image} width = '300px' height = '260px'/>`;
+    back.classList.add('back');
+    cardWrapper.appendChild(back);    
+
+    cardSection = document.createElement('footer');
+    cardSection.classList.add('category-section', 'back');
+    cardWrapper.appendChild(cardSection);
+
+    cardName = document.createElement('span');
+    cardName.classList.add('card-name');
+    cardName.textContent = `${elem.translation}`;
+    /* console.log(cardName); */
+    cardSection.appendChild(cardName);
+
     /* front */
     front = document.createElement('div');
     front.innerHTML = `<img src = ${elem.image} width = '300px' height = '260px'/>`;
@@ -46,58 +63,40 @@ const renderCategoryPage = (category, index) => {
     /* console.log(cardName); */
     cardSection.appendChild(cardName);
 
-    /* back */
-
-    back = document.createElement('div');
-    back.innerHTML = `<img src = ${elem.image} width = '300px' height = '260px'/>`;
-    back.classList.add('back');
-    cardWrapper.appendChild(back);    
-
-    cardSection = document.createElement('footer');
-    cardSection.classList.add('category-section', 'back');
-    cardWrapper.appendChild(cardSection);
-    
-    cardName = document.createElement('span');
-    cardName.classList.add('card-name');
-    cardName.textContent = `${elem.translation}`;
-    /* console.log(cardName); */
-    cardSection.appendChild(cardName);
-
     const sound = new Audio(`${elem.audioSrc}`);
 
     rotateBtn = document.createElement('button');
     rotateBtn.classList.add('rotate-button');   
-    rotateBtn.innerHTML = '<img src = "img/rotate1.png"/>'; 
-    cardWrapper.append(rotateBtn);
+    rotateBtn.innerHTML = '<img src = "img/rotate1.png"/>';   
+    cardSection.append(rotateBtn);
 
     rotateBtn.addEventListener('click', (e) => {  
       e.stopPropagation();
-      console.log(e.currentTarget.parentNode.children[0]); 
-      console.log(e.currentTarget.parentNode.children[2]); 
-      
-
-      e.currentTarget.parentNode.children[0].style.transform = 'rotateY(180deg)';
-      e.currentTarget.parentNode.children[2].style.transform = 'rotateY(360deg)';
-
-/*       front.style.transform = 'rotateY(180deg)';
-      back.style.transform = 'rotateY(360deg)';  */
-
-
+      Array.from(e.currentTarget.parentNode.parentNode.children).forEach((el) => {
+        if(el.classList.contains('front')) {
+          el.setAttribute('style', 'transform: rotateY(180deg)');
+        } else if(el.classList.contains('back')) {
+          el.setAttribute('style', 'transform: rotateY(360deg)');
+        }
+      })
       sound.volume = 0;
-      /* cardName.textContent = `${elem.translation}`; */
-
     })
 
-    cardWrapper.addEventListener('click', (e) => {      
-      console.log(e.target);                        
+    cardWrapper.addEventListener('click', (e) => {    
       sound.play();
     })
 
-    cardWrapper.addEventListener('mouseleave', () => {
-      //cardWrapper.children[0].style.transform = 'rotateY(360deg)';
-      //cardWrapper.children[2].style.transform = 'rotateY(180deg)';  
-      front.style.transform = 'rotateY(360deg)';
-      back.style.transform = 'rotateY(180deg)';   
+    cardWrapper.addEventListener('mouseleave', (e) => {
+      Array.from(e.currentTarget.children).forEach((el) => {
+        if(el.classList.contains('front')) {
+          el.removeAttribute('style', 'transform: rotateY(180deg)');         
+          e.currentTarget.children[3].lastChild.removeAttribute('style', 'display:none');
+        } else if(el.classList.contains('back')) {
+          el.removeAttribute('style', 'transform: rotateY(360deg)');
+          console.log('при mouseleave back кнопка - ');          
+          console.log(e.currentTarget.children[3].lastChild);
+        }
+      })  
     })
   });
 };
