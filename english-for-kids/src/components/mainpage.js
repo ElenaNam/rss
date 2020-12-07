@@ -5,8 +5,7 @@ import state from './state';
 
 let container;
 
-const renderMainPage = (mode) => {
-  console.log('mainPage ' + mode);
+const renderMainPage = (mode) => {  
   
   if (!container) {
     container = document.createElement('div');    
@@ -21,25 +20,16 @@ const renderMainPage = (mode) => {
   let cardName;
 
   cards.forEach((el, i) => {
-    console.log('mainPage в цикле по карточкам ' + mode);
-    console.log(mode === true);
+
     if (el !== cards[0]) {
        
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
 
-      console.log(cardWrapper); 
-
-      if (mode === true) {
-
-        console.log('if mode===true ' + mode);   
-
+      if (mode === true) {   
         cardWrapper.style.backgroundColor = 'yellow';
 
       } else if (mode === false) {
-
-        console.log('if mode===false undefined ' + mode);
-
         cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       }
 

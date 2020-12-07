@@ -12,10 +12,7 @@ const renderCategoryPage = (category, index, mode) => {
   let cardName;
   let rotateBtn;
 
-  if (mode === true) {
-
-    console.log('страница категории if mode===true ' + mode); 
-    
+  if (mode === true) {    
     cards[index].forEach((elem) => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
@@ -29,15 +26,11 @@ const renderCategoryPage = (category, index, mode) => {
 
 
   } else  {
-
-    console.log('страница категории if mode !==true ' + mode);
-
     cards[index].forEach((elem) => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
       cardWrapper.setAttribute('href', '#');
-      container.appendChild(cardWrapper);
-      
+      container.appendChild(cardWrapper);      
   
       /* back */
   

@@ -223,18 +223,6 @@ body {
   cursor: default;
 }
 
-/* .card-wrapper-active {
-  transform: rotateY(180deg);
-  transition: 1s;
-} */
-
-/* .card-image {
-  display: flex;
-  border-radius: 25%;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-} */
 .front,
 .back {
   position: absolute;
@@ -257,13 +245,7 @@ body {
   /* background-color: #BDBDBD; */
   transform: rotateY(180deg);
 }
-/* .card-wrapper:hover .front {
-  transform: rotateY(180deg);
-}
-.card-wrapper:hover .back {
-  transform: rotateY(360deg);
-}
- */
+
 .front,
 .back img {
   width: 300px;
@@ -336,9 +318,34 @@ body {
 .startgame-button:hover {
   cursor: pointer;
   background-color: rgb(250, 238, 216);
-  /* background-color: #064b74; */
   border: 1px solid #064b74;
   box-shadow: 1px 1px 5px rgb(59, 56, 197);
+}
+
+.repeat-button__wrapper {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+}
+.repeat-button:hover {
+  cursor: pointer;
+  transform: rotate(-90deg);
+  transition: 1.2s;
+}
+
+.repeat-button {
+  display: flex;
+  height: auto;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+}
+.repeat-button img {
+  width: 80px;
 }
 
 /* FOOTER */
@@ -426,7 +433,7 @@ body {
   /* MAIN PAGE */
   .container {
     width: 95%;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
   .card-wrapper {
     margin-bottom: 15px;
@@ -437,6 +444,12 @@ body {
     width: 200px;
     height: 50px;
     font-size: 2rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
   }
 
   /* FOOTER */
@@ -514,6 +527,12 @@ body {
     height: 50px;
     font-size: 2rem;
   }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
 }
 
 @media screen and (min-width: 851px) and (max-width: 1280px) {
@@ -534,6 +553,12 @@ body {
     height: 50px;
     font-size: 2.2rem;
   }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
 }
 @media screen and (min-width: 1281px) and (max-width: 1600px) {
   .container {
@@ -545,6 +570,12 @@ body {
   .startgame-button {
     bottom: -30px;
     font-size: 2.5rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
   }
 }
 @media screen and (min-width: 1601px) and (max-width: 1900px) {
