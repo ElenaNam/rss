@@ -1,6 +1,7 @@
 /* import { container } from 'webpack'; */
 import cards from './cards';
 import renderCategoryPage from './categorypage';
+import state from './state';
 
 /* export let container;
 export let cardWrapper;
@@ -9,7 +10,8 @@ export let cardSection;
 export let cardName; */
 export let container;
 
-const renderMainPage = () => {    
+const renderMainPage = () => { 
+  console.log('главная страница state.page = ' + state.page);   
   if(!container){
     container = document.createElement('div');
     container.classList.add('container');
@@ -32,7 +34,7 @@ const renderMainPage = () => {
 
       cardImage = document.createElement('div');
       cardImage.innerHTML = `<img src = ${el[0].image} width = '300px' height = '260px'/>`;
-      cardImage.classList.add('card-image');
+      cardImage.classList.add('front');
       cardWrapper.appendChild(cardImage);
 
       cardSection = document.createElement('footer');
@@ -41,12 +43,13 @@ const renderMainPage = () => {
 
       cardName = document.createElement('span');
       cardName.classList.add('card-name');
-      cardName.textContent = `${cards[0][i - 1]}`;
+      cardName.textContent = `${cards[0][i]}`;
       cardSection.appendChild(cardName);
 
       cardWrapper.addEventListener('click', (e) => {
         container.innerHTML = '';
-        renderCategoryPage(e.currentTarget.children[1].children[0].textContent);
+        state.page = i;
+        renderCategoryPage(e.currentTarget.children[1].children[0].textContent, i);
       });
     }
   });

@@ -112,8 +112,12 @@ body {
 /* .burger-nav_link:first-child {
   border-top: 1px solid #fff;
 } */
-.burger-nav_link:hover {
+.burger-nav_link-active {
   color: gold;
+  cursor: pointer;
+}
+.burger-nav_link:hover {
+  color: rgb(113, 171, 204);
   cursor: pointer;
 }
 .burger-menu_overlay {
@@ -191,13 +195,14 @@ body {
 }
 
 .card-wrapper {
+  position: relative;
   width: 300px;
   /*  height: 360px; */
-  height: 100%;
-  display: flex;
+  height: auto;
+  /*   display: flex; */
   margin: 10px 20px;
-  flex-direction: column;
-  justify-content: center;
+  /*   flex-direction: column;
+  justify-content: center; */
   list-style-type: none;
   text-decoration: none;
   color: rgb(47, 74, 161);
@@ -217,20 +222,48 @@ body {
   transition: 1s;
 }
 
-.card-image {
+/* .card-image {
   display: flex;
   border-radius: 25%;
   width: 100%;
   height: auto;
   overflow: hidden;
+} */
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  /*   left: 0;
+  top: 0; */
+  display: flex;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-radius: 25%;
+  overflow: hidden;
 }
-
+.front {
+  /* background-color: #fff;  */
+}
+.back {
+  /* background-color: #BDBDBD; */
+  transform: rotateY(180deg);
+}
+/* .card-wrapper:hover .front {
+  transform: rotateY(180deg);
+}
+.card-wrapper:hover .back {
+  transform: rotateY(360deg);
+}
+ */
 .category-section {
-  position: relative;
+  position: absolute;
+  bottom: 0;
   display: flex;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 300px;
+  height: 60px;
   background-color: rgb(180, 146, 84);
   align-items: center;
   justify-content: center;
@@ -248,6 +281,7 @@ body {
 
 .rotate-button {
   position: absolute;
+  bottom: 7%;
   right: 10%;
   display: flex;
   border: none;

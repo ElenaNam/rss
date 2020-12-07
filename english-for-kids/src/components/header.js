@@ -3,11 +3,13 @@ import state from './state';
 import renderMainPage from './mainpage';
 import renderCategoryPage from './categorypage';
 import {container} from './mainpage';
+
 /* import {containerCategoryPage} from './categorypage'; */
 
 
 const { document } = global;
 const renderHeader = () => {
+  //console.log('header state.page = ' + state.page);
   const headerWrapper = document.createElement('div');
   headerWrapper.classList.add('header-wrapper');
   document.body.appendChild(headerWrapper);
@@ -30,41 +32,61 @@ const renderHeader = () => {
   burgerWrapper.appendChild(nav);
 
   let navLink;
-  let mainPageLink = document.createElement('a');
-  mainPageLink.classList.add('burger-nav_link');
-  mainPageLink.textContent = 'Main page';
-  nav.append(mainPageLink);
 
-  mainPageLink.addEventListener('click', () => {
-    burgerWrapper.classList.remove('burger-menu_active');
-    container.innerHTML = ''; 
-    renderMainPage();
-  });
+  cards[0].unshift('Main Page');
+  cards[0].forEach((link, j) => {
 
-  cards[0].forEach((link) => {
     navLink = document.createElement('a');
     navLink.classList.add('burger-nav_link');
-    navLink.setAttribute('href', '#');    
+    
+    if (j === state.page) {
+      navLink.classList.add('burger-nav_link-active');
+    }
+    navLink.setAttribute('href', '#');
     navLink.textContent = link;
     nav.append(navLink);
 
     navLink.addEventListener('click', (e) => {
       burgerWrapper.classList.remove('burger-menu_active');
       container.innerHTML = '';
-      renderCategoryPage(e.target.textContent);
+
+      Array.from(e.currentTarget.parentNode.children).forEach((link, i) => {
+        if(link === e.currentTarget) {
+          link.classList.add('burger-nav_link-active'); 
+          state.page = i;          
+        } else {          
+          link.classList.remove('burger-nav_link-active');
+        }
+      })
+
+      if(e.target.textContent === 'Main Page') {
+        state.page = 0;
+        renderMainPage();
+      } else {
+        renderCategoryPage(e.target.textContent, state.page);
+      }
     }); 
   });
-
-
 
   const burgerOverlay = document.createElement('div');
   burgerOverlay.classList.add('burger-menu_overlay');
   burgerWrapper.appendChild(burgerOverlay);
 
   burgerMenuBtn.addEventListener('click', (e) => {
-    e.preventDefault();    
+    console.log('бургер меню кнопка state.page = ' + state.page);
+    e.preventDefault();   
+
+    Array.from(navLink.parentNode.children).forEach((item, v) => {
+      if(v === state.page) {
+        item.classList.add('burger-nav_link-active');
+      } else {
+        item.classList.remove('burger-nav_link-active');
+      }
+    })  
+
     burgerWrapper.classList.toggle('burger-menu_active');
     document.body.classList.toggle('lock');
+
   });
   burgerOverlay.addEventListener('click', () => {
     burgerWrapper.classList.toggle('burger-menu_active');

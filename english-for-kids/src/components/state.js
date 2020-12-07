@@ -1,5 +1,6 @@
 const state = {
   play: false,
+  page: 0,
 
 };
 
