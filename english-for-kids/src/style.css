@@ -186,10 +186,11 @@ body {
 .container-size {
 }
 .container {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 0 auto;
+  margin: 30px auto 60px;
   width: 80%;
   min-height: 76vh;
   height: auto;
@@ -199,10 +200,10 @@ body {
 .card-wrapper {
   position: relative;
   width: 300px;
-  height: 340px;
+  height: 280px;
   /* height: auto; */
   display: flex;
-  margin: 10px 20px;
+  margin: 5px 20px;
   list-style-type: none;
   text-decoration: none;
   color: rgb(47, 74, 161);
@@ -247,7 +248,7 @@ body {
   transition: 1s;
   backface-visibility: hidden;
   border-radius: 25%;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .front {
   /* background-color: #fff;  */
@@ -265,6 +266,8 @@ body {
  */
 .front,
 .back img {
+  width: 300px;
+  height: 250px;
   overflow: hidden;
 }
 
@@ -275,7 +278,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   width: 300px;
-  height: 60px;
+  height: 40px;
   background-color: rgb(180, 146, 84);
   align-items: center;
   justify-content: center;
@@ -315,14 +318,27 @@ body {
   outline-width: 0px !important;
   outline-color: none !important;
 }
-
-.card {
+.startgame-button {
+  position: absolute;
+  bottom: 2%;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  height: 50px;
+  background-color: wheat;
+  text-shadow: 1px 1px black;
+  color: #064b74;
+  font-weight: bold;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  border: 3px solid #064b74;
 }
-.card-front {
-}
-.card-back {
-}
-.card-rotate {
+.startgame-button:hover {
+  cursor: pointer;
+  background-color: rgb(250, 238, 216);
+  /* background-color: #064b74; */
+  border: 1px solid #064b74;
+  box-shadow: 1px 1px 5px rgb(59, 56, 197);
 }
 
 /* FOOTER */
@@ -403,10 +419,24 @@ body {
     height: 3.5px;
     border-radius: 80%;
   }
+  .selector-wrapper {
+    right: 25%;
+  }
 
   /* MAIN PAGE */
   .container {
     width: 95%;
+    margin-bottom: 30px;
+  }
+  .card-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .startgame-button {
+    position: sticky;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
   }
 
   /* FOOTER */
@@ -449,9 +479,21 @@ body {
     width: 3.3rem;
     height: 1.5rem;
   }
+  .container {
+    width: 95%;
+    margin-bottom: 50px;
+  }
+
   .card-wrapper {
     margin-left: 10px;
     margin-right: 10px;
+  }
+  .startgame-button {
+    position: absolute;
+    bottom: -45px;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
   }
   .footer-link {
     font-size: 0.8rem;
@@ -466,6 +508,12 @@ body {
   .container {
     width: 95%;
   }
+  .startgame-button {
+    bottom: -55px;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
+  }
 }
 
 @media screen and (min-width: 851px) and (max-width: 1280px) {
@@ -474,6 +522,41 @@ body {
     left: 15%;
   }
   .container {
+    width: 90%;
+  }
+  .card-wrapper {
+    margin: 5px 30px;
+  }
+
+  .startgame-button {
+    bottom: -55px;
+    width: 250px;
+    height: 50px;
+    font-size: 2.2rem;
+  }
+}
+@media screen and (min-width: 1281px) and (max-width: 1600px) {
+  .container {
     width: 95%;
+  }
+  .card-wrapper {
+    margin: 20px 15px;
+  }
+  .startgame-button {
+    bottom: -30px;
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-width: 1601px) and (max-width: 1900px) {
+  .container {
+    width: 85%;
+  }
+  .card-wrapper {
+    margin: 20px 15px;
+  }
+  .startgame-button {
+    bottom: -25px;
+    font-size: 2.5rem;
+    height: 60px;
   }
 }

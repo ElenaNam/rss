@@ -63,7 +63,7 @@ const renderHeader = () => {
         state.page = 0;
         renderMainPage();
       } else {
-        renderCategoryPage(e.target.textContent, state.page);
+        renderCategoryPage(e.target.textContent, state.page, state.play);
       }
     });
   });
@@ -88,6 +88,7 @@ const renderHeader = () => {
   });
   burgerOverlay.addEventListener('click', () => {
     burgerWrapper.classList.toggle('burger-menu_active');
+    document.body.classList.toggle('lock');
   });
 
   /* SELECTOR */
@@ -115,8 +116,7 @@ const renderHeader = () => {
       state.play = true;
     } else {
       label.textContent = 'Train';
-      label.style.color = 'rgb(170, 38, 130)';
-      label.style.fontWeight = 'bold';
+      label.style.color = 'rgb(170, 38, 130)';      
       state.play = false;
     }
     console.log('header ' + state.play);
