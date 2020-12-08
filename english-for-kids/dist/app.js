@@ -779,7 +779,7 @@ const startGame = () => {
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
     cardWrapper.setAttribute('href', '#');
-    cardWrapper.innerHTML = `<img src = ${_cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page][i].image}/>`;
+    cardWrapper.innerHTML = `<img src = ${_cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page][i].image} width = '100%' height = '100%'/>`;
     sound = new Audio(`${el.audioSrc}`);
     _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.appendChild(cardWrapper); //console.log(cardWrapper);
 
