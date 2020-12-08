@@ -324,7 +324,7 @@ body {
 
 .repeat-button__wrapper {
   position: absolute;
-  bottom: 0;
+  bottom: 41%;
   display: flex;
   justify-content: center;
   width: 80px;
@@ -343,9 +343,10 @@ body {
   text-align: center;
   background-color: transparent;
   border: 0;
+  z-index: 2;
 }
 .repeat-button img {
-  width: 80px;
+  width: 78px;
 }
 
 .star-wrapper {
@@ -354,7 +355,7 @@ body {
   justify-content: flex-end;
   width: 100%;
   height: 50px;
-  border: 1px solid #064b74;
+  /* border: 1px solid #064b74; */
   overflow: hidden;
 }
 .star {
@@ -533,6 +534,7 @@ body {
   }
   .container {
     width: 95%;
+    margin-bottom: 70px;
   }
   .startgame-button {
     bottom: -55px;
@@ -555,6 +557,7 @@ body {
   }
   .container {
     width: 90%;
+    margin-bottom: 60px;
   }
   .card-wrapper {
     margin: 5px 30px;
@@ -576,6 +579,7 @@ body {
 @media screen and (min-width: 1281px) and (max-width: 1600px) {
   .container {
     width: 95%;
+    margin-bottom: 60px;
   }
   .card-wrapper {
     margin: 10px 15px;
@@ -594,6 +598,7 @@ body {
 @media screen and (min-width: 1601px) and (max-width: 1900px) {
   .container {
     width: 85%;
+    margin-bottom: 60px;
   }
   .card-wrapper {
     margin: 10px 15px;

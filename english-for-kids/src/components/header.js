@@ -118,8 +118,7 @@ const renderHeader = () => {
       label.textContent = 'Train';
       label.style.color = 'rgb(170, 38, 130)';      
       state.play = false;
-    }
-    console.log('header ' + state.play);
+    }    
     renderMainPage(state.play);
   });
 };

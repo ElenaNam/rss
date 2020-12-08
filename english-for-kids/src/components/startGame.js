@@ -30,13 +30,13 @@ export const startGame = () => {
 
 
   cards[state.page].sort(() => Math.random() - 0.5).forEach((el, i) => {
-    console.log(cards[state.page][i].audioSrc);
+/*     console.log(cards[state.page][i].audioSrc);
     console.log(el);
-    console.log(i);
+    console.log(i); */
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
     cardWrapper.setAttribute('href', '#');
-    cardWrapper.innerHTML = `<img src = ${el.image}/>`;
+    cardWrapper.innerHTML = `<img src = ${cards[state.page][i].image}/>`;
     
     sound = new Audio(`${el.audioSrc}`);  
     container.appendChild(cardWrapper);  
@@ -44,9 +44,9 @@ export const startGame = () => {
       
     cardWrapper.addEventListener('click', (e) => {  
       
-      console.log(e.currentTarget.children);
+      //console.log(e.currentTarget.children);
       if (el.audioSrc == sound.getAttribute('src')) {
-        console.log ('верно');
+        //console.log ('верно');
         starWrapper.appendChild(starWin);
         new Audio('audio/success.mp3').play();
         //cards[state.page][i+1]
@@ -57,7 +57,7 @@ export const startGame = () => {
         }, 2000);
             
       } else {
-        console.log ('ошибка');
+        //console.log ('ошибка');
         starWrapper.appendChild(star);
         new Audio('audio/failure.mp3').play();
       }
