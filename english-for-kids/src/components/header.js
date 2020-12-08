@@ -48,6 +48,7 @@ const renderHeader = () => {
 
     navLink.addEventListener('click', (e) => {
       burgerWrapper.classList.remove('burger-menu_active');
+      document.body.classList.remove('lock');
       container.innerHTML = '';
 
       Array.from(e.currentTarget.parentNode.children).forEach((item, i) => {
@@ -62,7 +63,7 @@ const renderHeader = () => {
       if (e.target.textContent === 'Main Page') {
         state.page = 0;
         renderMainPage();
-      } else {
+      } else {        
         renderCategoryPage(e.target.textContent, state.page, state.play);
       }
     });
@@ -108,7 +109,7 @@ const renderHeader = () => {
   label.textContent = 'Train';
   selectorWrapper.appendChild(label);
 
-  label.addEventListener('click', () => {
+  label.addEventListener('click', (e) => {
     
     if (label.textContent === 'Train') {
       label.textContent = 'Play';
@@ -118,8 +119,26 @@ const renderHeader = () => {
       label.textContent = 'Train';
       label.style.color = 'rgb(170, 38, 130)';      
       state.play = false;
-    }    
-    renderMainPage(state.play);
+    }
+    console.log(state.page);
+    if(state.page === 0) {
+      renderMainPage(state.play);
+    } else {
+      //console.log(e.currentTarget.parentNode.parentNode.children[0].children[1].children);
+      let array = e.currentTarget.parentNode.parentNode.children[0].children[1].children;
+      Array.from(array).forEach((item, ind) => {
+        //console.log('array');
+        //console.log(array);
+        if(ind === state.page + 2){
+          container.innerHTML = '';
+          console.log(ind);
+          console.log(item.textContent);
+          renderCategoryPage(item.textContent, state.page, state.play);
+        }
+      })
+      
+    }   
+    
   });
 };
 export default renderHeader;

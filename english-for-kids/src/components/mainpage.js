@@ -52,7 +52,7 @@ const renderMainPage = (mode) => {
 
       cardWrapper.addEventListener('click', (e) => {
         container.innerHTML = '';
-        state.page = i;
+        state.page = i;        
         renderCategoryPage(e.currentTarget.children[1].children[0].textContent, i, state.play);
       });
     }

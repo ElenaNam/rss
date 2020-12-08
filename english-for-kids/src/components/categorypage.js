@@ -11,12 +11,14 @@ const renderCategoryPage = (category, index, mode) => {
   let cardSection;
   let cardName;
   let rotateBtn;
+  console.log(mode);
 
   if (mode === true) {    
     cards[index].forEach((elem) => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
       cardWrapper.setAttribute('href', '#');
+      cardWrapper.style.backgroundColor = 'yellow';
       cardWrapper.innerHTML = `<img src = ${elem.image} width = '100%' height = '100%'/>`;
       cardWrapper.style.border = '2px solid yellow';
       container.appendChild(cardWrapper);
@@ -25,11 +27,12 @@ const renderCategoryPage = (category, index, mode) => {
     container.appendChild(startGameBtn);
 
 
-  } else  {
+  } else {
     cards[index].forEach((elem) => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
       cardWrapper.setAttribute('href', '#');
+      cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       container.appendChild(cardWrapper);      
   
       /* back */
