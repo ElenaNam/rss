@@ -5,10 +5,9 @@ import state from './state';
 
 let container;
 
-const renderMainPage = (mode) => {  
-  
+const renderMainPage = (mode) => {
   if (!container) {
-    container = document.createElement('div');    
+    container = document.createElement('div');
     container.classList.add('container');
     document.body.appendChild(container);
   }
@@ -18,17 +17,17 @@ const renderMainPage = (mode) => {
   let cardImage;
   let cardSection;
   let cardName;
-
+  
   cards.forEach((el, i) => {
-
     if (el !== cards[0]) {
-       
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
 
-      if (mode === true) {   
-        cardWrapper.style.backgroundColor = 'yellow';
+      console.log('-/-/-/-/');
+      console.log(state.play);
 
+      if (mode === true) {
+        cardWrapper.style.backgroundColor = 'yellow';
       } else if (mode === false) {
         cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       }
@@ -46,13 +45,13 @@ const renderMainPage = (mode) => {
       cardWrapper.appendChild(cardSection);
 
       cardName = document.createElement('span');
-      cardName.classList.add('card-name');
-      cardName.textContent = `${cards[0][i]}`;
+      cardName.classList.add('card-name');  
+      cardName.textContent = `${cards[0][i]}`;      
       cardSection.appendChild(cardName);
 
       cardWrapper.addEventListener('click', (e) => {
         container.innerHTML = '';
-        state.page = i;        
+        state.page = i;
         renderCategoryPage(e.currentTarget.children[1].children[0].textContent, i, state.play);
       });
     }
