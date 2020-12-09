@@ -9,7 +9,7 @@ const renderCategoryPage = (category, index, mode) => {
   let cardSection;
   let cardName;
   let rotateBtn;
-  console.log(mode);
+  //console.log(mode);
 
   if (mode === true) {
     cards[index].forEach((elem) => {

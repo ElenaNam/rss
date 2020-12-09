@@ -17,14 +17,11 @@ const renderMainPage = (mode) => {
   let cardImage;
   let cardSection;
   let cardName;
-  
+
   cards.forEach((el, i) => {
     if (el !== cards[0]) {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
-
-      console.log('-/-/-/-/');
-      console.log(state.play);
 
       if (mode === true) {
         cardWrapper.style.backgroundColor = 'yellow';
@@ -45,8 +42,8 @@ const renderMainPage = (mode) => {
       cardWrapper.appendChild(cardSection);
 
       cardName = document.createElement('span');
-      cardName.classList.add('card-name');  
-      cardName.textContent = `${cards[0][i]}`;      
+      cardName.classList.add('card-name');
+      cardName.textContent = `${cards[0][i]}`;
       cardSection.appendChild(cardName);
 
       cardWrapper.addEventListener('click', (e) => {

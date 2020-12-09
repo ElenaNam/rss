@@ -348,7 +348,7 @@ body {
   width: 400px;
   height: 500px;
   background-color: wheat;
-  border: 3px solid green;
+  border: 3px solid rgb(170, 38, 130);
   border-radius: 15px;
   overflow: hidden;
 }
@@ -358,6 +358,9 @@ body {
   font-weight: bold;
   color: rgb(37, 59, 119);
   margin-bottom: 10px;
+}
+.result-wrapper img {
+  background-color: transparent;
 }
 
 /* FOOTER */

@@ -24,6 +24,7 @@ export const startGame = () => {
   let soundNextLink;
   let starWin;
   let star;
+  let audioCurrent;
 
   starWrapper.innerHTML = '';
   container.prepend(starWrapper);
@@ -34,48 +35,42 @@ export const startGame = () => {
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
     cardWrapper.setAttribute('href', '#');
+    cardWrapper.style.backgroundColor = 'yellow';
+    cardWrapper.style.border = '2px solid yellow';
     cardWrapper.innerHTML = `<img src = ${cards[state.page][i].image} width = '100%' height = '100%'/>`;
     sound = new Audio(`${el.audioSrc}`);
+    audioCurrent = sound.src;
     cardWrapper.appendChild(sound);
     container.appendChild(cardWrapper);
     // console.log(cardWrapper.parentNode.children);
   });
   sound.play();
 
-  const arrayCardWrappers = Array.from(cardWrapper.parentNode.children);
-  console.log(Array.from(cardWrapper.parentNode.children));
-  console.log(arrayCardWrappers);
 
-  Array.from(cardWrapper.parentNode.children).forEach((el, j) => { // массив с карточками (div)
-    console.log(cardWrapper.parentNode.children.length);
-
+  Array.from(cardWrapper.parentNode.children).forEach((el, j) => { // массив с карточками (div)   
     el.addEventListener('click', (e) => {
-      // console.log(el);
-      // если выбранная карточка соответствует звуку (первому по умолчанию или последующему), то
-      // измени ее внешний вид, издай радостный звук, подари желтую звезду и
-      // через секунду давай следующий звук
 
-      if (el.classList.contains('card-wrapper') && el.children[1].getAttribute('src') == sound.getAttribute('src') || el.children[1].getAttribute('src') == soundNextLink) {
+      if (el.classList.contains('card-wrapper') && (el.children[1].getAttribute('src') === sound.getAttribute('src') || el.children[1].getAttribute('src') === soundNextLink)) {
+/*         repeatBtn.addEventListener('click', () => {
+            new Audio(`${audioCurrent}`).play();
+            console.log('если следующий звук');
+            console.log(audioCurrent);
+          
+        }); */
         if (el.children[0].style.opacity !== '0.2') {
           el.children[0].style.opacity = '0.2';
-          // el.children[0].style.pointerEvents = "none";
           starWin = document.createElement('div');
           starWin.classList.add('star');
           starWin.innerHTML = '<img src = "img/star-win.svg"/>';
           starWrapper.appendChild(starWin);          
           new Audio('audio/correct.mp3').play();
-          console.log(Array.from(cardWrapper.parentNode.children)[0]);
-          console.log(el.parentNode.children.length);
-          console.log(j);
 
-          if(j === 2) {
-            console.log('конец игры');
+          if(j === 2) {// если карточки кончились
             container.innerHTML = '';
             const resultWrapper = document.createElement('div');
             resultWrapper.classList.add('result-wrapper');
 
             if(state.error > 0){ 
-              console.log('state.error ' + state.error);   
               resultWrapper.innerHTML = `
               <span>Сделано ошибок: ${state.error}!</span>
               <img src = "img/failure.png"/>`;              
@@ -93,26 +88,26 @@ export const startGame = () => {
               renderMainPage();
             }, 2000)
 
-          } else {
+          } else { //если карточки еще не кончились 
             soundNextLink = e.currentTarget.previousElementSibling.children[1].getAttribute('src');
+            audioCurrent = soundNextLink;
             setTimeout(() => {
               new Audio(`${soundNextLink}`).play();
             }, 1000);
           }
         }
-      } else {
+      } else if (el.classList.contains('card-wrapper')){
         star = document.createElement('div');
         star.classList.add('star');
         star.innerHTML = '<img src = "img/star.svg"/>';
         starWrapper.appendChild(star);
-        new Audio('audio/error.mp3').play();
-        state.error = +1;
+        new Audio('audio/error.mp3').play();        
+        state.error += 1;
       }
     });
-    repeatBtn.addEventListener('click', (e) => {
-      console.log(e.currentTarget.parentNode);
-      sound.play();
-    });
+  });
+  repeatBtn.addEventListener('click', () => {
+    new Audio(audioCurrent).play();
   });
 };
 

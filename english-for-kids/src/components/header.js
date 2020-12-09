@@ -32,15 +32,15 @@ const renderHeader = () => {
   burgerWrapper.appendChild(nav);
 
   let navLink;
-  if(cards[0][0] !== 'Main Page'){
+  if (cards[0][0] !== 'Main Page') {
     cards[0].unshift('Main Page');
   }
-  
+
   cards[0].forEach((link, j) => {
     navLink = document.createElement('a');
     navLink.classList.add('burger-nav_link');
 
-    if (j === state.page ) {
+    if (j === state.page) {
       navLink.classList.add('burger-nav_link-active');
     }
     navLink.setAttribute('href', '#');
@@ -69,7 +69,6 @@ const renderHeader = () => {
       }
     });
   });
-  
 
   const burgerOverlay = document.createElement('div');
   burgerOverlay.classList.add('burger-menu_overlay');
@@ -121,14 +120,13 @@ const renderHeader = () => {
       label.style.color = 'rgb(170, 38, 130)';
       state.play = false;
     }
-    console.log('state.page ' + state.page);
+    console.log(`state.page ${state.page}`);
     if (state.page === 0) {
       renderMainPage(state.play);
     } else {
       // console.log(e.currentTarget.parentNode.parentNode.children[0].children[1].children);
       const array = e.currentTarget.parentNode.parentNode.children[0].children[1].children;
       Array.from(array).forEach((item, ind) => {
-
         if (ind === state.page) {
           container.innerHTML = '';
           renderCategoryPage(item.textContent, state.page, state.play);
