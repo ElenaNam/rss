@@ -188,7 +188,7 @@ body {
   width: 300px;
   height: 240px;
   display: flex;
-  margin: 15px 20px;
+  margin: 15px 25px;
   list-style-type: none;
   text-decoration: none;
   color: rgb(47, 74, 161);
@@ -303,7 +303,7 @@ body {
 
 .repeat-button__wrapper {
   position: absolute;
-  bottom: 49%;
+  bottom: 48%;
   display: flex;
   justify-content: center;
   width: 80px;
@@ -325,7 +325,7 @@ body {
   z-index: 2;
 }
 .repeat-button img {
-  width: 78px;
+  width: 75px;
 }
 
 .star-wrapper {
@@ -421,7 +421,7 @@ body {
   /* HEADER */
   .burger-menu_button {
     top: 17%;
-    left: 15%;
+    left: 10%;
     width: 55px;
     height: 55px;
   }
@@ -444,6 +444,13 @@ body {
   .card-wrapper {
     margin-bottom: 15px;
   }
+  .star-wrapper {
+    height: 35px;
+  }
+  .star img {
+    width: 30px;
+    height: 30px;
+  }
 
   .startgame-button {
     position: sticky;
@@ -452,15 +459,33 @@ body {
     font-size: 2rem;
   }
   .repeat-button__wrapper {
-    bottom: -73px;
+    bottom: -65px;
+    z-index: 2;
   }
   .repeat-button img {
     width: 50px;
+  }
+  .result-wrapper {
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+    border: 3px solid rgb(170, 38, 130);
+    border-radius: 15px;
+  }
+  .result-wrapper span {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .result-wrapper img {
+    width: 90%;
+    height: auto;
   }
 
   /* FOOTER */
   .footer-wrapper {
     height: 8vh;
+    padding-top: 20px;
   }
   .logo-wrapper {
     margin-right: 10%;
@@ -475,7 +500,6 @@ body {
   }
   .footer-link {
     font-size: 0.6rem;
-    /* margin-bottom: 10px; */
     margin: 0 5px;
     padding: 0;
   }
@@ -485,7 +509,6 @@ body {
   .footer-information {
     margin-left: 7%;
     margin-top: 1.5%;
-    /* padding-top: -2.5%; */
     flex-direction: column-reverse;
   }
   .year-wrapper img {
@@ -500,7 +523,10 @@ body {
   }
   .container {
     width: 95%;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+  }
+  .star-wrapper {
+    height: 40px;
   }
 
   .card-wrapper {
@@ -589,15 +615,21 @@ body {
 }
 @media screen and (min-width: 1601px) and (max-width: 1900px) {
   .container {
-    width: 85%;
+    width: 90%;
     margin-bottom: 60px;
   }
   .card-wrapper {
-    margin: 10px 15px;
+    margin: 25px 25px;
   }
   .startgame-button {
     bottom: -25px;
     font-size: 2.5rem;
     height: 60px;
+  }
+  .repeat-button__wrapper {
+    bottom: 250px;
+  }
+  .repeat-button img {
+    width: 70px;
   }
 }

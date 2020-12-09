@@ -11,23 +11,40 @@ repeatWrapper.classList.add('repeat-button__wrapper');
 const repeatBtn = document.createElement('button');
 repeatBtn.classList.add('repeat-button');
 repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
-repeatWrapper.append(repeatBtn);
+repeatWrapper.append(repeatBtn); 
+
+
+//let repeatBtn;
+
+
 
 
 export const startGame = () => {
-  // startGameBtn.parentElement.replaceChild(repeatWrapper, startGameBtn);
+
   container.innerHTML = '';
   container.appendChild(repeatWrapper);
+  state.count += 1;
+  console.log(state.count);
+
 
   let cardWrapper;
   let sound;
   let soundNextLink;
   let starWin;
   let star;
-  let audioCurrent;
+
+/*   if(!repeatBtn) {
+    repeatBtn = document.createElement('button');
+    repeatBtn.classList.add('repeat-button');
+    repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
+    repeatWrapper.append(repeatBtn);
+  } */
+  state.audioCurrent = '';
+  console.log('state.audioCurrent в начале новой игры ' + state.audioCurrent);
 
   starWrapper.innerHTML = '';
   container.prepend(starWrapper);
+  
 
   // отсортируй массив с объектами данных и создай карточки (div)
 
@@ -39,24 +56,23 @@ export const startGame = () => {
     cardWrapper.style.border = '2px solid yellow';
     cardWrapper.innerHTML = `<img src = ${cards[state.page][i].image} width = '100%' height = '100%'/>`;
     sound = new Audio(`${el.audioSrc}`);
-    audioCurrent = sound.src;
+    state.audioCurrent = sound.src;
+    console.log('при созданиии карточек ' + state.audioCurrent);
     cardWrapper.appendChild(sound);
     container.appendChild(cardWrapper);
-    // console.log(cardWrapper.parentNode.children);
+
   });
   sound.play();
+  
+  console.log('первый звук ' + state.audioCurrent);
 
 
   Array.from(cardWrapper.parentNode.children).forEach((el, j) => { // массив с карточками (div)   
+    console.log(j);
     el.addEventListener('click', (e) => {
 
       if (el.classList.contains('card-wrapper') && (el.children[1].getAttribute('src') === sound.getAttribute('src') || el.children[1].getAttribute('src') === soundNextLink)) {
-/*         repeatBtn.addEventListener('click', () => {
-            new Audio(`${audioCurrent}`).play();
-            console.log('если следующий звук');
-            console.log(audioCurrent);
-          
-        }); */
+
         if (el.children[0].style.opacity !== '0.2') {
           el.children[0].style.opacity = '0.2';
           starWin = document.createElement('div');
@@ -84,15 +100,18 @@ export const startGame = () => {
               state.play = false;
               state.page = 0;
               state.error = 0;
+              /* state.audioCurrent = ''; */
               renderHeader();
               renderMainPage();
             }, 2000)
 
           } else { //если карточки еще не кончились 
-            soundNextLink = e.currentTarget.previousElementSibling.children[1].getAttribute('src');
-            audioCurrent = soundNextLink;
+            soundNextLink = e.currentTarget.previousElementSibling.children[1].getAttribute('src');           
+            state.audioCurrent = soundNextLink;
             setTimeout(() => {
-              new Audio(`${soundNextLink}`).play();
+              //new Audio(`${soundNextLink}`).play();
+              new Audio(state.audioCurrent).play();             
+              console.log('следующий звук ' + state.audioCurrent);
             }, 1000);
           }
         }
@@ -106,8 +125,9 @@ export const startGame = () => {
       }
     });
   });
-  repeatBtn.addEventListener('click', () => {
-    new Audio(audioCurrent).play();
+  repeatBtn.addEventListener('click', () => {    
+    new Audio(state.audioCurrent).play();  
+    console.log('текущий не по клику но в цикле ' + state.audioCurrent);
   });
 };
 
