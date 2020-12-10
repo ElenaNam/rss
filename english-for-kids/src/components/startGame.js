@@ -73,6 +73,7 @@ export const startGame = () => {
       if (el.classList.contains('card-wrapper') && el.children[1].getAttribute('src') === state.audioCurrent) {
 
         if (el.children[0].style.opacity !== '0.2') {
+          
           el.children[0].style.opacity = '0.2';
           starWin = document.createElement('div');
           starWin.classList.add('star');
@@ -115,7 +116,7 @@ export const startGame = () => {
             }, 1000);
           }
         }
-      } else if (el.classList.contains('card-wrapper')){
+      } else if (el.classList.contains('card-wrapper') && el.children[0].style.opacity !== '0.2'){
         star = document.createElement('div');
         star.classList.add('star');
         star.innerHTML = '<img src = "img/star.svg"/>';

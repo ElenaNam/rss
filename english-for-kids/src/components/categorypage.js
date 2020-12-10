@@ -11,7 +11,7 @@ const renderCategoryPage = (category, index, mode) => {
   let cardSection;
   let cardName;
   let rotateBtn;
-  //console.log(mode);
+  
 /*   const categoryTitle = showCategoryName(index);
   container.appendChild(categoryTitle); */
 
