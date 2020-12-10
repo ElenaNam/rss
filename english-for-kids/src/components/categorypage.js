@@ -1,8 +1,7 @@
 import cards from './cards';
 import { container } from './mainpage';
 import startGameBtn from './startGame';
-import showCategoryName from './categoryName';
-
+/* import showCategoryName from './categoryName'; */
 
 const renderCategoryPage = (category, index, mode) => {
   let cardWrapper;
@@ -11,8 +10,8 @@ const renderCategoryPage = (category, index, mode) => {
   let cardSection;
   let cardName;
   let rotateBtn;
-  
-/*   const categoryTitle = showCategoryName(index);
+
+  /*   const categoryTitle = showCategoryName(index);
   container.appendChild(categoryTitle); */
 
   if (mode === true) {

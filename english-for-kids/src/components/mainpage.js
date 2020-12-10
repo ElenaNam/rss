@@ -3,7 +3,6 @@ import cards from './cards';
 import renderCategoryPage from './categorypage';
 import state from './state';
 
-
 let container;
 
 const renderMainPage = (mode) => {
@@ -13,8 +12,6 @@ const renderMainPage = (mode) => {
     document.body.appendChild(container);
   }
   container.innerHTML = '';
-  
-
 
   let cardWrapper;
   let cardImage;

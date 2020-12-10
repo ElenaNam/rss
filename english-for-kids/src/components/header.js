@@ -120,7 +120,6 @@ const renderHeader = () => {
       label.style.color = 'rgb(170, 38, 130)';
       state.play = false;
     }
-    console.log(`state.page ${state.page}`);
     if (state.page === 0) {
       renderMainPage(state.play);
     } else {
