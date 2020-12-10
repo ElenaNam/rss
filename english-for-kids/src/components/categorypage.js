@@ -1,6 +1,8 @@
 import cards from './cards';
 import { container } from './mainpage';
 import startGameBtn from './startGame';
+import showCategoryName from './categoryName';
+
 
 const renderCategoryPage = (category, index, mode) => {
   let cardWrapper;
@@ -10,6 +12,8 @@ const renderCategoryPage = (category, index, mode) => {
   let cardName;
   let rotateBtn;
   //console.log(mode);
+/*   const categoryTitle = showCategoryName(index);
+  container.appendChild(categoryTitle); */
 
   if (mode === true) {
     cards[index].forEach((elem) => {
@@ -27,7 +31,7 @@ const renderCategoryPage = (category, index, mode) => {
     cards[index].forEach((elem) => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
-      cardWrapper.setAttribute('href', '#');
+      cardWrapper.setAttribute('href', 'javascript://');
       cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       container.appendChild(cardWrapper);
 

@@ -48,7 +48,7 @@ export const startGame = () => {
   cards[state.page].sort(() => Math.random() - 0.5).forEach((el, i) => {
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
-    cardWrapper.setAttribute('href', '#');
+    cardWrapper.setAttribute('href', 'javascript://');
     cardWrapper.style.backgroundColor = 'yellow';
     cardWrapper.style.border = '2px solid yellow';
     cardWrapper.innerHTML = `<img src = ${cards[state.page][i].image} width = '100%' height = '100%'/>`;
