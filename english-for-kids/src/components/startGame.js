@@ -13,19 +13,22 @@ repeatBtn.classList.add('repeat-button');
 repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
 repeatWrapper.append(repeatBtn); 
 
-
-//let repeatBtn;
-
-
-
+const fillArrUniqValue = (array) => {
+  let resultArr = [];
+  let value;
+  for (let i = 0; resultArr.length < array.length; i+=1){
+    value = Math.floor(Math.random(array.length) * array.length);
+    if(resultArr.indexOf(value) === -1){
+      resultArr.push(value);
+    }
+  }
+  return resultArr;
+}
 
 export const startGame = () => {
 
   container.innerHTML = '';
   container.appendChild(repeatWrapper);
-  state.count += 1;
-  console.log(state.count);
-
 
   let cardWrapper;
   let sound;
@@ -33,17 +36,11 @@ export const startGame = () => {
   let starWin;
   let star;
 
-/*   if(!repeatBtn) {
-    repeatBtn = document.createElement('button');
-    repeatBtn.classList.add('repeat-button');
-    repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
-    repeatWrapper.append(repeatBtn);
-  } */
   state.audioCurrent = '';
-  console.log('state.audioCurrent в начале новой игры ' + state.audioCurrent);
 
   starWrapper.innerHTML = '';
   container.prepend(starWrapper);
+  let arrAudio = [];
   
 
   // отсортируй массив с объектами данных и создай карточки (div)
@@ -56,22 +53,24 @@ export const startGame = () => {
     cardWrapper.style.border = '2px solid yellow';
     cardWrapper.innerHTML = `<img src = ${cards[state.page][i].image} width = '100%' height = '100%'/>`;
     sound = new Audio(`${el.audioSrc}`);
-    state.audioCurrent = sound.src;
-    console.log('при созданиии карточек ' + state.audioCurrent);
+    arrAudio.push(el.audioSrc);
     cardWrapper.appendChild(sound);
     container.appendChild(cardWrapper);
 
   });
-  sound.play();
-  
-  console.log('первый звук ' + state.audioCurrent);
+
+  let arrAudioRandom = fillArrUniqValue(arrAudio);
+
+  state.audioCurrent = cards[state.page][arrAudioRandom[0]].audioSrc;
+
+  new Audio(state.audioCurrent).play();// звучит рандомный звук
 
 
-  Array.from(cardWrapper.parentNode.children).forEach((el, j) => { // массив с карточками (div)   
-    console.log(j);
+
+  Array.from(cardWrapper.parentNode.children).forEach((el, j) => { // массив с карточками (div)    
     el.addEventListener('click', (e) => {
-
-      if (el.classList.contains('card-wrapper') && (el.children[1].getAttribute('src') === sound.getAttribute('src') || el.children[1].getAttribute('src') === soundNextLink)) {
+      
+      if (el.classList.contains('card-wrapper') && el.children[1].getAttribute('src') === state.audioCurrent) {
 
         if (el.children[0].style.opacity !== '0.2') {
           el.children[0].style.opacity = '0.2';
@@ -81,7 +80,8 @@ export const startGame = () => {
           starWrapper.appendChild(starWin);          
           new Audio('audio/correct.mp3').play();
 
-          if(j === 2) {// если карточки кончились
+          if(arrAudioRandom.length === 1){ // если карточки кончились
+         
             container.innerHTML = '';
             const resultWrapper = document.createElement('div');
             resultWrapper.classList.add('result-wrapper');
@@ -106,12 +106,12 @@ export const startGame = () => {
             }, 2000)
 
           } else { //если карточки еще не кончились 
-            soundNextLink = e.currentTarget.previousElementSibling.children[1].getAttribute('src');           
+            soundNextLink = cards[state.page][arrAudioRandom[arrAudioRandom.length -1]].audioSrc;
+            arrAudioRandom.pop();
             state.audioCurrent = soundNextLink;
+
             setTimeout(() => {
-              //new Audio(`${soundNextLink}`).play();
-              new Audio(state.audioCurrent).play();             
-              console.log('следующий звук ' + state.audioCurrent);
+              new Audio(state.audioCurrent).play();
             }, 1000);
           }
         }
