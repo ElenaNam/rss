@@ -385,7 +385,7 @@ const renderCategoryPage = (category, index, mode) => {
     _cards__WEBPACK_IMPORTED_MODULE_0__.default[index].forEach(elem => {
       cardWrapper = document.createElement('a');
       cardWrapper.classList.add('card-wrapper');
-      cardWrapper.setAttribute('href', '#');
+      cardWrapper.setAttribute('href', 'javascript://');
       cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       _mainpage__WEBPACK_IMPORTED_MODULE_1__.container.appendChild(cardWrapper);
       /* back */
@@ -707,7 +707,7 @@ const renderMainPage = mode => {
         cardWrapper.style.backgroundColor = 'rgb(170, 38, 130)';
       }
 
-      cardWrapper.setAttribute('href', '#');
+      cardWrapper.setAttribute('href', 'javascript://');
       container.appendChild(cardWrapper);
       cardImage = document.createElement('div');
       cardImage.innerHTML = `<img src = ${el[0].image} width = '300px' height = '260px'/>`;
@@ -765,50 +765,56 @@ repeatWrapper.classList.add('repeat-button__wrapper');
 const repeatBtn = document.createElement('button');
 repeatBtn.classList.add('repeat-button');
 repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
-repeatWrapper.append(repeatBtn); //let repeatBtn;
+repeatWrapper.append(repeatBtn);
+
+const fillArrUniqValue = array => {
+  let resultArr = [];
+  let value;
+
+  for (let i = 0; resultArr.length < array.length; i += 1) {
+    value = Math.floor(Math.random(array.length) * array.length);
+
+    if (resultArr.indexOf(value) === -1) {
+      resultArr.push(value);
+    }
+  }
+
+  return resultArr;
+};
 
 const startGame = () => {
   _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.innerHTML = '';
   _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.appendChild(repeatWrapper);
-  _state__WEBPACK_IMPORTED_MODULE_1__.default.count += 1;
-  console.log(_state__WEBPACK_IMPORTED_MODULE_1__.default.count);
   let cardWrapper;
   let sound;
   let soundNextLink;
   let starWin;
   let star;
-  /*   if(!repeatBtn) {
-      repeatBtn = document.createElement('button');
-      repeatBtn.classList.add('repeat-button');
-      repeatBtn.innerHTML = '<img src = "img/rotate2.png"/>';
-      repeatWrapper.append(repeatBtn);
-    } */
-
   _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent = '';
-  console.log('state.audioCurrent в начале новой игры ' + _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent);
   starWrapper.innerHTML = '';
-  _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.prepend(starWrapper); // отсортируй массив с объектами данных и создай карточки (div)
+  _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.prepend(starWrapper);
+  let arrAudio = []; // отсортируй массив с объектами данных и создай карточки (div)
 
   _cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page].sort(() => Math.random() - 0.5).forEach((el, i) => {
     cardWrapper = document.createElement('a');
     cardWrapper.classList.add('card-wrapper');
-    cardWrapper.setAttribute('href', '#');
+    cardWrapper.setAttribute('href', 'javascript://');
     cardWrapper.style.backgroundColor = 'yellow';
     cardWrapper.style.border = '2px solid yellow';
     cardWrapper.innerHTML = `<img src = ${_cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page][i].image} width = '100%' height = '100%'/>`;
     sound = new Audio(`${el.audioSrc}`);
-    _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent = sound.src;
-    console.log('при созданиии карточек ' + _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent);
+    arrAudio.push(el.audioSrc);
     cardWrapper.appendChild(sound);
     _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.appendChild(cardWrapper);
   });
-  sound.play();
-  console.log('первый звук ' + _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent);
+  let arrAudioRandom = fillArrUniqValue(arrAudio);
+  _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent = _cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page][arrAudioRandom[0]].audioSrc;
+  new Audio(_state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent).play(); // звучит рандомный звук
+
   Array.from(cardWrapper.parentNode.children).forEach((el, j) => {
-    // массив с карточками (div)   
-    console.log(j);
+    // массив с карточками (div)    
     el.addEventListener('click', e => {
-      if (el.classList.contains('card-wrapper') && (el.children[1].getAttribute('src') === sound.getAttribute('src') || el.children[1].getAttribute('src') === soundNextLink)) {
+      if (el.classList.contains('card-wrapper') && el.children[1].getAttribute('src') === _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent) {
         if (el.children[0].style.opacity !== '0.2') {
           el.children[0].style.opacity = '0.2';
           starWin = document.createElement('div');
@@ -817,7 +823,7 @@ const startGame = () => {
           starWrapper.appendChild(starWin);
           new Audio('audio/correct.mp3').play();
 
-          if (j === 2) {
+          if (arrAudioRandom.length === 1) {
             // если карточки кончились
             _mainpage__WEBPACK_IMPORTED_MODULE_2__.container.innerHTML = '';
             const resultWrapper = document.createElement('div');
@@ -845,12 +851,11 @@ const startGame = () => {
             }, 2000);
           } else {
             //если карточки еще не кончились 
-            soundNextLink = e.currentTarget.previousElementSibling.children[1].getAttribute('src');
+            soundNextLink = _cards__WEBPACK_IMPORTED_MODULE_0__.default[_state__WEBPACK_IMPORTED_MODULE_1__.default.page][arrAudioRandom[arrAudioRandom.length - 1]].audioSrc;
+            arrAudioRandom.pop();
             _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent = soundNextLink;
             setTimeout(() => {
-              //new Audio(`${soundNextLink}`).play();
               new Audio(_state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent).play();
-              console.log('следующий звук ' + _state__WEBPACK_IMPORTED_MODULE_1__.default.audioCurrent);
             }, 1000);
           }
         }
@@ -897,8 +902,7 @@ const state = {
   play: false,
   page: 0,
   error: 0,
-  audioCurrent: '',
-  count: 0
+  audioCurrent: ''
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (state);
 
