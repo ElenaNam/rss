@@ -400,8 +400,7 @@ const renderCategoryPage = (category, index, mode) => {
   let back;
   let cardSection;
   let cardName;
-  let rotateBtn; //console.log(mode);
-
+  let rotateBtn;
   /*   const categoryTitle = showCategoryName(index);
     container.appendChild(categoryTitle); */
 
@@ -894,7 +893,7 @@ const startGame = () => {
             }, 1000);
           }
         }
-      } else if (el.classList.contains('card-wrapper')) {
+      } else if (el.classList.contains('card-wrapper') && el.children[0].style.opacity !== '0.2') {
         star = document.createElement('div');
         star.classList.add('star');
         star.innerHTML = '<img src = "img/star.svg"/>';
@@ -961,6 +960,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+document.title = 'English for kids';
 
 window.onload = () => {
   (0,_components_header__WEBPACK_IMPORTED_MODULE_1__.default)();
