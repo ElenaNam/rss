@@ -5,7 +5,7 @@
 
 .footer {
   width: 80%;
-  height: 15vh;
+  height: 10vh;
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -36,7 +36,7 @@
 
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .footer {
-    height: 10vh;
+    height: 8vh;
   }
   .logo-wrapper a img {
     width: 3rem;
@@ -56,8 +56,16 @@
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+  .logo-wrapper a img {
+    width: 6rem;
+    height: 2rem;
+  }
 }
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .logo-wrapper a img {
+    width: 7rem;
+    height: 2.3rem;
+  }
 }
 @media screen and (min-width: 1281px) and (max-width: 1900px) {
 }
