@@ -6,7 +6,7 @@
   "dependencies": {
     "babel-loader": "^8.2.2",
     "html-webpack-plugin": "^4.5.0",
-    "style-loader": "^2.0.0",
+    "leaflet": "^1.7.1",
     "webpack": "^5.9.0"
   },
   "devDependencies": {
@@ -26,6 +26,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "file-loader": "^6.2.0",
+    "style-loader": "^2.0.0",
     "svg-inline-loader": "^0.8.2",
     "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.11.0"

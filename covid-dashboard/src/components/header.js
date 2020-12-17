@@ -23,8 +23,9 @@ const renderHeader = () => {
     headerSection.appendChild(titleHeader);
 
     const subtitleHeader = document.createElement('span');
-    subtitleHeader.classList.add('header-subtitle');
-    subtitleHeader.innerHTML = 'Актуально на 00 декабря 2020г';
+    subtitleHeader.classList.add('header-subtitle');   
+    const dateToday =  new Date().toLocaleDateString();    
+    subtitleHeader.innerHTML = `Актуально на ${dateToday}`;
     header.appendChild(subtitleHeader);
 
 
