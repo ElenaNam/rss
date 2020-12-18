@@ -29,6 +29,7 @@ body {
   background: rgb(114, 14, 2);
 }
 
+
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .main-page-wrapper {
     height: 82vh;
