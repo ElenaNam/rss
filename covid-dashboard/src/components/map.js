@@ -91,11 +91,11 @@ xhrCountries.onload = function() {
         }
     }).addTo(map);
     Array.from(xhrCountries.response).forEach((d) => {
-        if(d.country) console.log(`${d.country}`);
+        //if(d.country) console.log(`${d.country}`);
     }); 
 
 
-    console.log(layerCountries);
+   // console.log(layerCountries);
     //console.log(xhrCountries.response.country);
 
 };
