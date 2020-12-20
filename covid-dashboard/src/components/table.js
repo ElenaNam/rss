@@ -1,11 +1,11 @@
 import {state} from './state';
 //import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
-
+import getDataCountries from './countries';
 
 const arrData = setTimeout(() => {   
-     console.log ('state ' + state.casesAllAbsoluteCountAlltime);
-     console.log ('state ' + state.deadthsAllAbsoluteCountAlltime);
-     console.log ('state ' + state.recoveredAllAbsoluteCountAlltime);
+     //console.log ('state ' + state.casesAllAbsoluteCountAlltime);
+     //console.log ('state ' + state.deadthsAllAbsoluteCountAlltime);
+     //console.log ('state ' + state.recoveredAllAbsoluteCountAlltime);
 }, 1000) 
 
 

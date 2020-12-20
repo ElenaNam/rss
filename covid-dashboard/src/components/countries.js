@@ -1,5 +1,5 @@
  
-const arrDataRes = [];
+let worldPopulationCount = 0;
 
 function getDataCountries(url) {
     return new Promise((resolve, reject) => {  
@@ -21,24 +21,16 @@ function getDataCountries(url) {
     });
 }
 
-getDataCountries('https://restcountries.eu/rest/v2/all?fields=name;population;flag').then(function(response) {
-    
-    const objData = response;
-    console.log(Object.keys(objData))
-      for(let key in objData) {
-       
-        let last = Object.values(objData[key])[Object.keys(objData[key]).length-1]; 
-        arrDataResult.push(last); 
-    }  
-    const arrData = Object.keys(objData);
-       
+getDataCountries('https://cors-anywhere.herokuapp.com/https://restcountries.eu/rest/v2/all?fields=name;population;flag').then(function(response) {
+    //console.log(response)
+    const arrData = response;
+    worldPopulationCount = arrData.reduce((acc, el) => acc + el.population, 0)
+    //console.log(worldPopulationCount);       
 
   }, function(error) {
     console.error("Failed!", error);
 });
 
-
-
-
+export { worldPopulationCount };
 export default getDataCountries;
  
