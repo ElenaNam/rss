@@ -29,8 +29,8 @@ body {
   background: rgb(114, 14, 2);
 }
 .table {
-  margin-top: 10px;
-  margin-left: 50px;
+  margin-top: 12px;
+  margin-left: 70px;
   background: rgb(226, 221, 221);
   border: 1px solid black;
   width: 25%;
@@ -42,11 +42,41 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: start;
+  padding-bottom: 10px;
 }
 .table tr th,
 td {
   border-right: 1px dotted black;
   font-size: 1.2rem;
+  letter-spacing: 0.2rem;
+}
+th {
+  padding: 10px 10px 10px 10px;
+}
+.table tfoot {
+  color: rgb(21, 20, 22);
+}
+.table tfoot tr:first-child {
+  background-color: rgb(153, 233, 233);
+}
+.table tfoot tr:last-child {
+  background-color: rgb(212, 208, 255);
+}
+.table tfoot tr td {
+  font-size: 1rem;
+}
+
+.arrow {
+}
+.arrow:hover {
+  cursor: pointer;
+  transform: scaleY(1.1);
+  transition: 0.5s;
+}
+.arrow-table {
+  float: right;
+  margin-top: 2px;
+  margin-right: 10px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 500px) {

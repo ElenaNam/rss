@@ -7,19 +7,19 @@ let state = {};
 const getState = setTimeout (() =>  {  
   //console.log('state ' + worldPopulationCount);
   state = { 
-    //за весь период в абс.цифрах 
+    /* за весь период в абс.цифрах */
   casesAllAbsoluteCountAlltime: casesAll,
   deadthsAllAbsoluteCountAlltime: deadthsAll,
   recoveredAllAbsoluteCountAlltime: recoveredAll,
-    //за весь период на 100тыс населения
+    /* за весь период на 100тыс населения */
   casesAll100Alltime: Math.ceil(casesAll / worldPopulationCount * 100000), // неточные данные, не учитываются все страны
   deadthsAll100Alltime: Math.ceil(deadthsAll / worldPopulationCount * 100000),
   recoveredAll100Alltime: Math.ceil(recoveredAll / worldPopulationCount * 100000),
-    //за последний день в абс.цифрах
+    /* за последний день в абс.цифрах */
   casesAllAbsoluteCountLastDay: casesAllDay,
   deadthsAllAbsoluteCountLastDay: deadthsAllDay,
   recoveredAllAbsoluteCountLastDay: recoveredAllDay,
-    //за последний день на 100тыс населения
+    /* за последний день на 100тыс населения */
   casesAll100LastDay: Math.ceil(casesAllDay / worldPopulationCount * 100000),
   deadthsAll100LastDay: Math.ceil(deadthsAllDay / worldPopulationCount * 100000),
   recoveredAll100LastDay: Math.ceil(recoveredAllDay / worldPopulationCount * 100000),
@@ -39,10 +39,6 @@ const getState = setTimeout (() =>  {
   console.log('заболевших за день на 100тыс ' + state.casesAll100LastDay)
   console.log('умерших за день  на 100тыс ' + state.deadthsAll100LastDay)
   console.log('выздоровевших за день  на 100тыс' + state.recoveredAll100LastDay)
-
-
-
-
 }, 900)
 
 
