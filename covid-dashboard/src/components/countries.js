@@ -21,7 +21,7 @@ function getDataCountries(url) {
     });
 }
 
-getDataCountries('https://cors-anywhere.herokuapp.com/https://restcountries.eu/rest/v2/all?fields=name;population;flag').then(function(response) {
+getDataCountries('https://corona.lmao.ninja/v2/countries').then(function(response) {
     //console.log(response)
     const arrData = response;
     worldPopulationCount = arrData.reduce((acc, el) => acc + el.population, 0)
