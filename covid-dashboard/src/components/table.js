@@ -1,15 +1,12 @@
-//import * as state from "./state";
-/* import {hello} from "./state"; */
-//import getDataDiseased from './state';
-//import a, { casesAll } from './variant';
-import get, {casesAll, deadthsAll, recoveredAll} from './state';
-get('https://disease.sh/v3/covid-19/historical/all?lastdays=366');
+import {state} from './state';
+//import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
 
-/* const arrData = setTimeout(() => {
-     console.log(casesAll);
-     console.log(deadthsAll);
-     console.log(arrDataResult)
-}, 1000) */
+
+const arrData = setTimeout(() => {   
+     console.log ('state ' + state.casesAllAbsoluteCountAlltime);
+     console.log ('state ' + state.deadthsAllAbsoluteCountAlltime);
+     console.log ('state ' + state.recoveredAllAbsoluteCountAlltime);
+}, 1000) 
 
 
 let table;
@@ -20,7 +17,6 @@ const renderTable = () => {
     const caption = document.createElement('caption');
     caption.innerHTML = `В мире`;
     table.appendChild(caption);
-
 
     const tr1 = document.createElement('tr');  
     table.appendChild(tr1);
@@ -38,13 +34,13 @@ const renderTable = () => {
           const tr2 = document.createElement('tr');
           table.appendChild(tr2);
           const td1 = document.createElement('td');
-          td1.innerHTML = `${casesAll}`;
+          td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
           tr2.appendChild(td1);
           const td2 = document.createElement('td');
-          td2.innerHTML = `${deadthsAll}`;
+          td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
           tr2.appendChild(td2);
           const td3 = document.createElement('td');
-          td3.innerHTML = `${recoveredAll}`;
+          td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
           tr2.appendChild(td3);
     }, 1000)
 
