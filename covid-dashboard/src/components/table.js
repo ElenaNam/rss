@@ -1,6 +1,7 @@
 import {state} from './state';
 //import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
 import getDataCountries from './countries';
+import changeSizeScreen from './btnFullscreen';
 
 const arrData = setTimeout(() => {   
      //console.log ('state ' + state.casesAllAbsoluteCountAlltime);
@@ -15,7 +16,8 @@ const renderTable = () => {
     setTimeout(() => {
         table.classList.add('table');
         const caption = document.createElement('caption');
-        caption.innerHTML = `В мире`;
+        caption.innerHTML = `В мире`;        
+        changeSizeScreen(table, caption);
         table.appendChild(caption);
     
         const tr1 = document.createElement('tr');  

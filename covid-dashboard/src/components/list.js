@@ -1,17 +1,25 @@
 import getDataCountries from './countries';
 import { state } from './state';
+import changeSizeScreen from './btnFullscreen';
 let listWrapper;
+
+
 
 const getListCountries = async () => {
 
     listWrapper = document.createElement('div');
     listWrapper.classList.add('list-wrapper');
 
+    const listHeader = document.createElement('div');
+    listHeader.classList.add('list-header');
+    listWrapper.appendChild(listHeader);
+
     const search = document.createElement('input');
     search.setAttribute('type', 'text');
     search.setAttribute('placeholder', 'Найти');
     search.classList.add('list-search');
-    listWrapper.appendChild(search);
+    listHeader.appendChild(search);
+    changeSizeScreen(listWrapper, listHeader);
 
     const listCountries = document.createElement('ul');
     listCountries.classList.add('list-countries');
@@ -61,6 +69,9 @@ const getListCountries = async () => {
     }) 
 
 }
+
+
+
 
 
 export { listWrapper }

@@ -105,6 +105,10 @@ th {
   overflow: hidden;
   padding: 0;
 }
+.list-header {
+  display: flex;
+  justify-content: space-between;
+}
 .list-search {
   display: flex;
   width: 50%;
@@ -148,6 +152,18 @@ th {
   float: right;
   margin-top: 2px;
   margin-right: 10px;
+}
+
+/* Button */
+.fullscreen {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.fullscreen:hover {
+  cursor: pointer;
+  transform: scaleY(1.1);
+  transition: 0.5s;
 }
 
 @media screen and (min-width: 320px) and (max-width: 500px) {
