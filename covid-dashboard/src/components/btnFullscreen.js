@@ -15,6 +15,4 @@ const changeSizeScreen = (element, block) => {
         } 
     }, false )
 } 
-
-
 export default changeSizeScreen;
