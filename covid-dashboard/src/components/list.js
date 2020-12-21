@@ -55,16 +55,15 @@ const getListCountries = async () => {
     listWrapper.appendChild(casesCount); 
 
     arrowList.addEventListener('click', () => {
-        if(document.getElementById('span-cases').innerHTML === `<span>заболевших</span>`) {
-            document.getElementById('span-cases').innerHTML = '';
-            document.getElementById('span-cases').innerHTML = `<span>умерших</span>`;            
+        if(document.getElementById('span-cases').innerHTML === 'заболевших') {
+           
+            document.getElementById('span-cases').innerHTML = 'умерших';            
 
-        } else if(document.getElementById('span-cases').innerHTML === `<span>умерших</span>`) {
-            document.getElementById('span-cases').innerHTML = '';
-            document.getElementById('span-cases').innerHTML = `<span>выздоровевших</span>`;
+        } else if(document.getElementById('span-cases').innerHTML === 'умерших') {
+            
+            document.getElementById('span-cases').innerHTML = 'выздоровевших';
         } else {
-            document.getElementById('span-cases').innerHTML = '';
-            document.getElementById('span-cases').innerHTML = `<span>заболевших</span>`;
+            document.getElementById('span-cases').innerHTML = 'заболевших';
         }   
     }) 
 

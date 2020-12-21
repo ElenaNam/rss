@@ -6,7 +6,7 @@ import renderMainPage from './components/mainPage';
 import renderFooter from './components/footer';
 
 
-window.onload = () => {
+window.onload = async() => {
   renderHeader();
   renderMainPage();
   renderFooter();

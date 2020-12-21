@@ -70,26 +70,25 @@ const renderTable = () => {
         tr4.appendChild(tdValue);
 
         table.appendChild(tf);
+        console.log(document.getElementById('span-period').innerHTML);
 
         tdPeriod.addEventListener('click', () => {
-            if(document.getElementById('span-period').innerHTML === `<span>за весь период</span>`) {
-                document.getElementById('span-period').innerHTML = '';
-                document.getElementById('span-period').innerHTML = `<span>за последний день</span>`;            
+            if(document.getElementById('span-period').innerHTML === 'за весь период') {               
+                document.getElementById('span-period').innerHTML = 'за последний день';       
 
-            } else {
-                document.getElementById('span-period').innerHTML = '';
-                document.getElementById('span-period').innerHTML = `<span>за весь период</span>`;
+            } else {               
+                document.getElementById('span-period').innerHTML = 'за весь период';
             }            
         }) 
 
         tdValue.addEventListener('click', () => {
-            if(document.getElementById('span-value').innerHTML === `<span>в абсолютных цифрах</span>`) {
-                document.getElementById('span-value').innerHTML = '';
-                document.getElementById('span-value').innerHTML = `<span>на 100тыс населения</span>`;            
+            if(document.getElementById('span-value').innerHTML === 'в абсолютных цифрах') {
+               
+                document.getElementById('span-value').innerHTML = 'на 100тыс населения';            
 
             } else {
-                document.getElementById('span-value').innerHTML = '';
-                document.getElementById('span-value').innerHTML = `<span>в абсолютных цифрах</span>`;
+                
+                document.getElementById('span-value').innerHTML = 'в абсолютных цифрах';
             }            
         }) 
         
