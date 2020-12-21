@@ -7,6 +7,7 @@ let state = {};
 const getState = setTimeout (() =>  {  
   //console.log('state ' + worldPopulationCount);
   state = { 
+  country: '',
     /* за весь период в абс.цифрах */
   casesAllAbsoluteCountAlltime: casesAll,
   deadthsAllAbsoluteCountAlltime: deadthsAll,

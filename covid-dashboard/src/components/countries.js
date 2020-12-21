@@ -1,5 +1,6 @@
  
 let worldPopulationCount = 0;
+let arrData = [];
 
 function getDataCountries(url) {
     return new Promise((resolve, reject) => {  
@@ -23,14 +24,14 @@ function getDataCountries(url) {
 
 getDataCountries('https://corona.lmao.ninja/v2/countries').then(function(response) {
     //console.log(response)
-    const arrData = response;
+    arrData = response;
     worldPopulationCount = arrData.reduce((acc, el) => acc + el.population, 0)
     //console.log(worldPopulationCount);       
 
   }, function(error) {
     console.error("Failed!", error);
 });
-
+export { arrData };
 export { worldPopulationCount };
 export default getDataCountries;
  

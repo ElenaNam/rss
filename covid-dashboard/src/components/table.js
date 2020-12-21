@@ -16,7 +16,12 @@ const renderTable = () => {
     setTimeout(() => {
         table.classList.add('table');
         const caption = document.createElement('caption');
-        caption.innerHTML = `В мире`;        
+        if(state.country === '') {
+            caption.innerHTML = `В мире`;
+        } else {
+            caption.innerHTML = state.country;
+        }
+              
         changeSizeScreen(table, caption);
         table.appendChild(caption);
     
@@ -90,8 +95,7 @@ const renderTable = () => {
                 
                 document.getElementById('span-value').innerHTML = 'в абсолютных цифрах';
             }            
-        }) 
-        
+        })     
         
 
 

@@ -6,6 +6,7 @@ const changeSizeScreen = (element, block) => {
     block.append(btnFullscreen);
 
     btnFullscreen.addEventListener('click', () => {
+        //btnFullscreen.innerHTML = '';
         if (element.requestFullscreen) { 
             element.requestFullscreen();
         } else if (element.mozRequestFullScreen) { 
@@ -14,5 +15,6 @@ const changeSizeScreen = (element, block) => {
             element.webkitRequestFullScreen();
         } 
     }, false )
+    
 } 
 export default changeSizeScreen;
