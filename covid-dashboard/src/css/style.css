@@ -16,56 +16,24 @@ body {
   width: 50%;
   height: 40vh;
   margin-top: 1%;
-  margin-left: 6%;
-  border: 1px solid rgb(255, 230, 0);
+  margin-left: 6%; 
+  box-shadow: 3px 3px 5px black;
 }
-.round {
-  width: 10em;
-  height: 10em;
-  border: 2px solid rgb(100, 11, 11);
-  border-radius: 50%;
-  background: rgb(114, 14, 2);
-}
-/* .icon-marker {
-  display: flex;
-  position: relative;
-  width: 30px;
-  height: 30px;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  background-color: pink;
-  border-radius: 50%;
-}
-.icon-marker:hover {
-  display: block;
-}
-
-.icon-marker-tooltip {
-  display: none;
-  position: absolute;
-  width: 50px;
-  font-size: 1rem;
-  border-radius: 15%;
-  background-color: grey;
-}
-.icon-marker-tooltip::before {
-  display: block;
-} */
 
 .icon-marker {
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
-  color: rgb(10, 10, 10);
-  width: 50px;
-  height: 50px;
-  font-size: 1rem;
+  color: white;
+  width: 40px;
+  height: 20px; 
+  font-size: .8rem;
   font-weight: bold;
-  background-color: rgb(187, 98, 98);
-  border-radius: 50%;
-  /* box-shadow: 0 2px 5px rgba(black, 0.9); */
+  background-color: #e66761;
+  border-radius: 15%;
+  border: 1px solid #cd4a4c;
+  box-shadow: 2px 2px 5px rgba(black, 0.9); 
 }
 
 .icon-marker:hover .icon-marker-tooltip {
@@ -75,46 +43,36 @@ body {
 .icon-marker-tooltip {
   display: none;
   position: absolute;
-  /* bottom: 100%; */
-  width: 100px;
+  width: 200px;
   font-size: 1rem;
   padding: 5px;
   background-color: rgb(199, 199, 199);
-  border-radius: 15%;
-  /* margin-bottom: 1em; */
-  /* box-shadow: 0 3px 5px rgba(black, 0.9); */
+  border-radius: 15px;
+  border: 1px solid black;
 }
 
 .icon-marker-tooltip:before {
   display: block;
   position: absolute;
-  /* bottom: -0.6em; */
   left: 50%;
-  /* content: ""; */
   width: 100px;
   height: 100px;
   background-color: rgb(238, 238, 238);
-  transform: rotate(45deg);
-  /* margin-left: -0.7em; */
+  /* transform: rotate(45deg); */
 }
 
 .icon-marker-tooltip h2 {
   font-size: 1.1rem;
-  /*   line-height: 1.2;
-  margin-bottom: 0.1em;
-  margin-top: 0; */
-}
-
-.icon-marker-tooltip ul,
-li {
-  font-weight: normal;
+  font-weight: bold;
+  color: #e66761;
+  border-bottom: 1px solid #cd4a4c;
 }
 
 .icon-marker-tooltip ul {
   list-style: none;
   padding: 0;
-  margin: 0.5rem 0 0;
-}
+  text-align: center; 
+} 
 
 /*----column2-----*/
 .column-2 {
@@ -133,6 +91,7 @@ li {
   height: 70px;
   text-align: center;
   border-collapse: collapse;
+  box-shadow: 3px 3px 5px black; 
 }
 
 .table:-webkit-full-screen {
@@ -225,6 +184,7 @@ th {
   /* border: 1px solid green; */
   overflow: hidden;
   padding: 0;
+  box-shadow: 3px 3px 5px black; 
 }
 .list-wrapper:-webkit-full-screen {
   height: 100vh;

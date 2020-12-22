@@ -28,12 +28,16 @@ const renderMap = async() => {
         maxZoom: 20,
         attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     });
+
+    map.addLayer(layer);
+
+
 // слой с границами стран
     const geoJSONLayer = L.geoJSON(dataGeo, {
-        //l.bindPopup(feature);
+        
         style: function (feature) {
             return {
-                color: 'gold'
+                color: 'grey'
             };
         }
     })
@@ -53,19 +57,18 @@ const renderMap = async() => {
                 },
                 geometry: {
                     type: 'Point',
-                    coordinates: [ lng, lat]
+                    coordinates: [ lng, lat ]
                 }
             }
         })
     }
-
-    function countryPointToLayer (feature = {}, latlng) {
+    
+   function countryPointToLayer (feature = {}, latlng) {
+        console.log('countryPointToLayer')
         const {properties = {} } = feature;
-        let updatedFormatted;
         let casesString;
         const {
             country,
-            updated,
             cases,
             deaths,
             recovered        
@@ -76,9 +79,6 @@ const renderMap = async() => {
         if ( cases > 1000 ) {
             casesString = `${casesString.slice(0, -3)}k+`
         } 
-        if ( updated ) {
-            updatedFormatted = new Date(updated).toLocaleString()
-        }
 
         const html = `
         <span class = 'icon-marker'>
@@ -88,7 +88,7 @@ const renderMap = async() => {
                     <li>Заболели: ${cases}</li>
                     <li>Умерли: ${deaths}</li>
                     <li>Выздоровели: ${recovered}</li>
-                    <li>Last Update: ${updatedFormatted}</li>
+                    
                 </ul>
             </span>
             ${ casesString }
@@ -103,12 +103,15 @@ const renderMap = async() => {
             riseOnHover: true
         })    
     }
-
-    const geoJSONLayer1 = new L.GeoJSON(geoJson1, {
+  
+        const geoJSONLayer1 = new L.GeoJSON(geoJson1, {
         pointToLayer: countryPointToLayer
-    });
-    geoJSONLayer1.addTo(map);
+        });
+        geoJSONLayer1.addTo(map);
+    
 
+
+    
 
     // вариант с дивом
     let roundIcon = L.divIcon({className: 'round'});
@@ -127,7 +130,7 @@ const renderMap = async() => {
 
 
 
-    map.addLayer(layer);
+    
     //map.addLayer(layer1);
     //L.control.geocoder().addTo(map);
     
@@ -135,7 +138,7 @@ const renderMap = async() => {
         map.invalidateSize();
     }, 0);
     
-    /* mapWrapper.append(map); */ //нужно или нет?
+    //mapWrapper.append(map);  //нужно или нет?
 }
 export { mapWrapper };
 

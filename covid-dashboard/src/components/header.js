@@ -7,9 +7,45 @@ const renderHeader = () => {
     header.classList.add('header');
     headerWrapper.appendChild(header);
 
+    const headerSectionImg = document.createElement('div');
+    //headerSectionImg.classList.add('header-section-img');
+
+    const arrImg = [
+        'img/1.png',
+        'img/2.png',
+        'img/3.png',
+        'img/4.png',
+        'img/5.png',
+    ]
+/*     arrImg.forEach(img => {
+        //headerSectionImg.style.display = 'none';
+        //headerSectionImg.classList.add('header-section-img');
+        headerSectionImg.innerHTML += `
+        <img src = ${img} alt = 'image' width = '170px'/>
+        `
+    });
+    console.log(Array.from(headerSectionImg.children))
+         Array.from(headerSectionImg.children).forEach(element => {
+            let timer = setInterval(() => {
+            element.style.display = 'block';
+            //headerSectionImg.classList.add('header-section-img');
+            
+        }, 3000);
+        setTimeout(() => { clearInterval(timer); element.style.display= 'none'; }, 5000);                 
+    });   */  
+    
+
+
+
+
+
+    header.appendChild(headerSectionImg);
+
     const headerSection = document.createElement('div');
     headerSection.classList.add('header-section');
     header.appendChild(headerSection);
+
+
 
     const imgHeader = document.createElement('div');
     imgHeader.classList.add('header-img');

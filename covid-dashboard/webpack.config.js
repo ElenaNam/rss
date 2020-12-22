@@ -73,7 +73,7 @@ module.exports = {
     compress: true,
     overlay: true,
     open: true,
-    port: 8081,
+    port: 8080,
   },
   devtool: "source-map",
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'

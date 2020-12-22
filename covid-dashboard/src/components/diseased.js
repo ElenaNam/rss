@@ -8,8 +8,8 @@ const arrDataResult = [];
 const arrDataResultDay = [];
 
 
-function get(url) {
-    return new Promise((resolve, reject) => {  
+/*function get(url) {
+     return new Promise((resolve, reject) => {  
       let xhr = new XMLHttpRequest();
       xhr.open('GET', url);
       xhr.setRequestHeader('Content-Type', 'application/json');
@@ -26,11 +26,22 @@ function get(url) {
       };
       xhr.send();
     });
+} */
+
+async function get(url) {
+  try {
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
+  } catch (e) {
+    console.log('Ошибка ' + e);
+  }
 }
 
-get('https://disease.sh/v3/covid-19/historical/all?lastdays=366').then(function(response) {
+
+get('https://disease.sh/v3/covid-19/historical/all?lastdays=366').then(function(data) {
     
-    const objData = response;
+    const objData = data;
     //console.log(Object.keys(objData))
      for(let key in objData) {
        
@@ -40,7 +51,7 @@ get('https://disease.sh/v3/covid-19/historical/all?lastdays=366').then(function(
         arrDataResultDay.push(last - beforeDay);
         console.log(arrDataResultDay);
     }  
-    const arrData = Object.keys(objData);
+    //const arrData = Object.keys(objData);
        
     casesAll = +arrDataResult[0];
     deadthsAll = +arrDataResult[1];

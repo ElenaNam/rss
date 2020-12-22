@@ -1,11 +1,13 @@
 import get, {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
-import getDataCountries, { worldPopulationCount } from './countries';
-
+import getDataCountries, { worldPopulationCount, arrData } from './countries';
 
 
 let state = {};
 const getState = setTimeout (() =>  {  
-  //console.log('state ' + worldPopulationCount);
+  console.log('worldPopulationCount in state ' + worldPopulationCount);
+  console.log('state ')
+  console.log(arrData)
+
   state = { 
   country: '',
     /* за весь период в абс.цифрах */

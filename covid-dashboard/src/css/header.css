@@ -3,6 +3,7 @@
   background: linear-gradient(45deg, #979695, #f1f2f3);
 }
 .header {
+  position: relative;
   width: 80%;
   /* height: 150px; */
   height: 10vh;
@@ -13,6 +14,30 @@
   align-items: center;
   /* border: 1px solid red; */
 }
+.header-section-img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  border: 1px solid blue;
+  right: 0;
+  animation: anim;
+  animation-duration: 10s;
+}
+@keyframes anim {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
 .header-section {
   display: flex;
   margin-top: 0.9%;
