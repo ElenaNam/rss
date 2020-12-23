@@ -8,6 +8,7 @@ L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
 let mapWrapper;
 const renderMap = async() => { 
     mapWrapper = document.createElement('div');
+    
     mapWrapper.id = 'map';    
     
     let mapOptions = {

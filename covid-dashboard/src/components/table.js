@@ -1,7 +1,8 @@
 import {state} from './state';
 //import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
 import getDataCountries from './countries';
-import changeSizeScreen from './btnFullscreen';
+/* import changeSizeScreen from './btnFullscreen'; */
+import changeSizeScreen1 from './btnFullScreenVar';
 
 const arrData = setTimeout(() => {   
      //console.log ('state ' + state.casesAllAbsoluteCountAlltime);
@@ -19,12 +20,12 @@ const renderTable = () => {
         if(state.country === '') {
             caption.innerHTML = `В мире`;
         } else {
-            caption.innerHTML = state.country;
-        }
+            caption.innerHTML = state.country;        }
               
-        changeSizeScreen(table, caption);
+        
         table.appendChild(caption);
-    
+        changeSizeScreen1(table, caption);
+        
         const tr1 = document.createElement('tr');  
         table.appendChild(tr1);
         const th1 = document.createElement('th');

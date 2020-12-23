@@ -1,8 +1,11 @@
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
+import "leaflet/dist/Control.FullScreen.css";
 import { arrData } from './countries';
 import { dataGeo } from './countries_geo.js';
 import { state } from './state';
+import changeSizeScreen from './btnFullscreen';
+import changeSizeScreen1 from './btnFullScreenVar';
 //L.Icon.Default.imagePath = 'node_modules/leaflet/dist/images/';
 
 let mapWrapper;
@@ -12,15 +15,24 @@ const renderMap = async () => {
     console.log(arrData)
 
     mapWrapper = document.createElement('div');
-    mapWrapper.id = 'map';    
+    mapWrapper.id = 'map'; 
+    
     
     let mapOptions = {
         center: [55.753215, 37.622504], 
         zoom: 2,
-        worldCopyJump: true,       
+        worldCopyJump: true,
+        fullscreenControl: true,  
+        fullscreenControlOptions: {
+            position: 'topleft'
+        }        
     }
+
    
-    let map = new L.map(mapWrapper, mapOptions);    
+    let map = new L.map(mapWrapper, mapOptions);
+
+     
+      
  
     const layer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
         maxZoom: 18,
@@ -28,6 +40,7 @@ const renderMap = async () => {
     });  
 
     map.addLayer(layer);
+
 
 //источник https://github.com/HandsOnDataViz/leaflet-map-polygon-hover/blob/main/script.js
     const geoJSONLayer = L.geoJSON(dataGeo, {
@@ -131,13 +144,18 @@ const renderMap = async () => {
     geoJSONLayer1.addTo(map);
     
     setTimeout(() => {
+       
         map.invalidateSize();
     }, 0);
+    
+    
+    changeSizeScreen1(mapWrapper, mapWrapper);  
+
+
 
     return map; 
 }
 //renderMap().then(map => mapWrapper.appendChild(map))
-
 
 
 export { mapWrapper };

@@ -28,7 +28,8 @@ const renderMainPage = async () => {
     mainPageWrapper.classList.add('main-page-wrapper');
     document.body.appendChild(mainPageWrapper);
     
-    renderMap().then(map => mapWrapper.appendChild(map));
+    //renderMap().then(map => mainPageWrapper.appendChild(mapWrapper));
+    renderMap();
     mainPageWrapper.appendChild(mapWrapper);
 
     const column2 = document.createElement('div');
