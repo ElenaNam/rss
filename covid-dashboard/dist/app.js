@@ -1,6 +1,39 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/components/btnFullScreenVar.js":
+/*!********************************************!*\
+  !*** ./src/components/btnFullScreenVar.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+const changeSizeScreen1 = (element, block) => {
+  const btnFullscreen = document.createElement('button');
+  btnFullscreen.classList.add('btn-fullscreen');
+  btnFullscreen.innerHTML = '<img src = "img/fs1.png" alt = "fullscreen" width = "20px"/>';
+  block.append(btnFullscreen);
+  btnFullscreen.addEventListener('click', () => {
+    if (btnFullscreen.children[0].getAttribute('src') === "img/fs1.png") {
+      btnFullscreen.children[0].setAttribute('src', "img/fs2.png");
+      element.classList.add('element-fullscreen');
+      console.log('фулскрин вкл');
+    } else if (btnFullscreen.children[0].getAttribute('src') === "img/fs2.png") {
+      btnFullscreen.children[0].setAttribute('src', "img/fs1.png");
+      console.log('фулскрин выкл');
+      element.classList.remove('element-fullscreen');
+    }
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (changeSizeScreen1);
+
+/***/ }),
+
 /***/ "./src/components/btnFullscreen.js":
 /*!*****************************************!*\
   !*** ./src/components/btnFullscreen.js ***!
@@ -14,11 +47,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 const changeSizeScreen = (element, block) => {
   const btnFullscreen = document.createElement('button');
-  btnFullscreen.classList.add('fullscreen');
+  btnFullscreen.classList.add('btn-fullscreen');
   btnFullscreen.innerHTML = '<img src = "img/fs1.png" alt = "fullscreen" width = "20px"/>';
   block.append(btnFullscreen);
-  btnFullscreen.addEventListener('click', () => {
+  btnFullscreen.addEventListener('click', e => {
+    e.preventDefault(); //ничего не изменилось
     //btnFullscreen.innerHTML = '';
+
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {
@@ -30,6 +65,27 @@ const changeSizeScreen = (element, block) => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (changeSizeScreen);
+/* 
+function toggleFullScreen() {
+    if (!document.fullscreenElement &&    // alternative standard method
+        //!document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    } else {
+      if (document.cancelFullScreen) {
+        document.cancelFullScreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+      }
+    }
+  } */
 
 /***/ }),
 
@@ -2109,7 +2165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
-/* harmony import */ var _btnFullscreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnFullscreen */ "./src/components/btnFullscreen.js");
+/* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
 
 
 
@@ -2126,37 +2182,57 @@ const getListCountries = async () => {
   search.setAttribute('placeholder', 'Найти');
   search.classList.add('list-search');
   listHeader.appendChild(search);
-  (0,_btnFullscreen__WEBPACK_IMPORTED_MODULE_2__.default)(listWrapper, listHeader);
+  (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__.default)(listWrapper, listHeader);
   const listCountries = document.createElement('ul');
   listCountries.classList.add('list-countries');
   listWrapper.appendChild(listCountries);
   const response = await (0,_countries__WEBPACK_IMPORTED_MODULE_0__.default)('https://corona.lmao.ninja/v2/countries'); //https://cors-anywhere.herokuapp.com/
   //console.log(response);
 
-  const arrCountries = response;
-  const arrCountriesSort = arrCountries.
-  /* splice(0, 9). */
-  sort((a, b) => b.cases - a.cases);
+  const arrCountries = response; //const arrCountriesSort = arrCountries./* splice(0, 9). */sort((a, b) => b.cases - a.cases);
 
   const createList = () => {
-    arrCountriesSort.forEach((element, i) => {
-      let value;
+    let value;
 
-      if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'заболевших') {
-        value = element.cases;
-      } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'умерших') {
-        value = element.deaths;
-      } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'выздоровевших') {
-        value = element.recovered;
+    if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'заболевших') {
+      value = 'cases';
+    } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'умерших') {
+      value = 'deaths';
+    } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'выздоровевших') {
+      value = 'recovered';
+    } else {
+      value = 'cases';
+    }
+
+    const arrCountriesSort = arrCountries.sort((a, b) => {
+      if (value === 'cases') {
+        return b.cases - a.cases;
+      } else if (value === 'deaths') {
+        return b.deaths - a.deaths;
+      } else if (value === 'recovered') {
+        return b.recovered - a.recovered;
       } else {
-        value = element.cases;
+        return b.cases - a.cases;
+      }
+    });
+    arrCountriesSort.forEach((element, i) => {
+      let val;
+
+      if (value === 'cases') {
+        val = element.cases;
+      } else if (value === 'deaths') {
+        val = element.deaths;
+      } else if (value === 'recovered') {
+        val = element.recovered;
+      } else {
+        val = element.cases;
       }
 
       listCountries.innerHTML += `
             <li class = "list-item-country">
             <img src = ${element.countryInfo.flag} alt = 'flag' width = '30px' />
             <span>${element.country}</span>
-            <span>${value}</span></li>
+            <span>${val}</span></li>
             `;
       if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';
     });
@@ -2212,9 +2288,10 @@ const getListCountries = async () => {
   casesCount.innerHTML = `<span id = 'span-cases'>заболевших</span>`;
   const arrowList = document.createElement('div');
   arrowList.classList.add('arrow', 'arrow-list');
-  arrowList.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>';
+  arrowList.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>';
   casesCount.appendChild(arrowList);
-  listWrapper.appendChild(casesCount);
+  listWrapper.appendChild(casesCount); // переключатель заболевших/умерших/выздоровевших
+
   arrowList.addEventListener('click', () => {
     if (document.getElementById('span-cases').innerHTML === 'заболевших') {
       document.getElementById('span-cases').innerHTML = 'умерших';
@@ -2224,7 +2301,8 @@ const getListCountries = async () => {
       document.getElementById('span-cases').innerHTML = 'заболевших';
     }
 
-    listCountries.innerHTML = ""; //createList(); 
+    listCountries.innerHTML = "";
+    createList();
   });
 };
 
@@ -2272,8 +2350,9 @@ __webpack_require__.r(__webpack_exports__);
 const renderMainPage = async () => {
   const mainPageWrapper = document.createElement('div');
   mainPageWrapper.classList.add('main-page-wrapper');
-  document.body.appendChild(mainPageWrapper);
-  (0,_map1__WEBPACK_IMPORTED_MODULE_0__.default)().then(map => _map1__WEBPACK_IMPORTED_MODULE_0__.mapWrapper.appendChild(map));
+  document.body.appendChild(mainPageWrapper); //renderMap().then(map => mainPageWrapper.appendChild(mapWrapper));
+
+  (0,_map1__WEBPACK_IMPORTED_MODULE_0__.default)();
   mainPageWrapper.appendChild(_map1__WEBPACK_IMPORTED_MODULE_0__.mapWrapper);
   const column2 = document.createElement('div');
   column2.classList.add('column-2');
@@ -2303,9 +2382,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! leaflet */ "./node_modules/leaflet/dist/leaflet-src.js");
 /* harmony import */ var leaflet__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(leaflet__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var leaflet_dist_leaflet_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! leaflet/dist/leaflet.css */ "./node_modules/leaflet/dist/leaflet.css");
-/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
-/* harmony import */ var _countries_geo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./countries_geo.js */ "./src/components/countries_geo.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
+/* harmony import */ var leaflet_dist_Control_FullScreen_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! leaflet/dist/Control.FullScreen.css */ "./node_modules/leaflet/dist/Control.FullScreen.css");
+/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
+/* harmony import */ var _countries_geo_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./countries_geo.js */ "./src/components/countries_geo.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
+/* harmony import */ var _btnFullscreen__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./btnFullscreen */ "./src/components/btnFullscreen.js");
+/* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
+
+
+
 
 
 
@@ -2316,13 +2401,17 @@ let mapWrapper;
 
 const renderMap = async () => {
   console.log('map1 ');
-  console.log(_countries__WEBPACK_IMPORTED_MODULE_2__.arrData);
+  console.log(_countries__WEBPACK_IMPORTED_MODULE_3__.arrData);
   mapWrapper = document.createElement('div');
   mapWrapper.id = 'map';
   let mapOptions = {
     center: [55.753215, 37.622504],
     zoom: 2,
-    worldCopyJump: true
+    worldCopyJump: true,
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+      position: 'topleft'
+    }
   };
   let map = new (leaflet__WEBPACK_IMPORTED_MODULE_0___default().map)(mapWrapper, mapOptions);
   const layer = leaflet__WEBPACK_IMPORTED_MODULE_0___default().tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
@@ -2331,7 +2420,7 @@ const renderMap = async () => {
   });
   map.addLayer(layer); //источник https://github.com/HandsOnDataViz/leaflet-map-polygon-hover/blob/main/script.js
 
-  const geoJSONLayer = leaflet__WEBPACK_IMPORTED_MODULE_0___default().geoJSON(_countries_geo_js__WEBPACK_IMPORTED_MODULE_3__.dataGeo, {
+  const geoJSONLayer = leaflet__WEBPACK_IMPORTED_MODULE_0___default().geoJSON(_countries_geo_js__WEBPACK_IMPORTED_MODULE_4__.dataGeo, {
     style: style,
     onEachFeature: onEachFeature
   }).addTo(map);
@@ -2369,7 +2458,7 @@ const renderMap = async () => {
 
   const geoJson1 = {
     type: 'FeatureCollection',
-    features: _countries__WEBPACK_IMPORTED_MODULE_2__.arrData.map((country = {}) => {
+    features: _countries__WEBPACK_IMPORTED_MODULE_3__.arrData.map((country = {}) => {
       const {
         countryInfo = {}
       } = country;
@@ -2431,6 +2520,7 @@ const renderMap = async () => {
   setTimeout(() => {
     map.invalidateSize();
   }, 0);
+  (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_7__.default)(mapWrapper, mapWrapper);
   return map;
 }; //renderMap().then(map => mapWrapper.appendChild(map))
 
@@ -2515,11 +2605,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "table": () => /* binding */ table,
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
-/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
-/* harmony import */ var _btnFullscreen__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnFullscreen */ "./src/components/btnFullscreen.js");
+/* harmony import */ var _diseased__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./diseased */ "./src/components/diseased.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
+/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
+/* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
+
  //import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
 
+
+/* import changeSizeScreen from './btnFullscreen'; */
 
 
 const arrData = setTimeout(() => {//console.log ('state ' + state.casesAllAbsoluteCountAlltime);
@@ -2534,14 +2628,14 @@ const renderTable = () => {
     table.classList.add('table');
     const caption = document.createElement('caption');
 
-    if (_state__WEBPACK_IMPORTED_MODULE_0__.state.country === '') {
+    if (_state__WEBPACK_IMPORTED_MODULE_1__.state.country === '') {
       caption.innerHTML = `В мире`;
     } else {
-      caption.innerHTML = _state__WEBPACK_IMPORTED_MODULE_0__.state.country;
+      caption.innerHTML = _state__WEBPACK_IMPORTED_MODULE_1__.state.country;
     }
 
-    (0,_btnFullscreen__WEBPACK_IMPORTED_MODULE_2__.default)(table, caption);
     table.appendChild(caption);
+    (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_3__.default)(table, caption);
     const tr1 = document.createElement('tr');
     table.appendChild(tr1);
     const th1 = document.createElement('th');
@@ -2555,14 +2649,17 @@ const renderTable = () => {
     tr1.appendChild(th3);
     const tr2 = document.createElement('tr');
     table.appendChild(tr2);
-    const td1 = document.createElement('td');
-    td1.innerHTML = `${_state__WEBPACK_IMPORTED_MODULE_0__.state.casesAllAbsoluteCountAlltime}`;
+    const td1 = document.createElement('td'); //td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
+
+    td1.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.casesAll}`;
     tr2.appendChild(td1);
-    const td2 = document.createElement('td');
-    td2.innerHTML = `${_state__WEBPACK_IMPORTED_MODULE_0__.state.deadthsAllAbsoluteCountAlltime}`;
+    const td2 = document.createElement('td'); //td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
+
+    td2.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAll}`;
     tr2.appendChild(td2);
-    const td3 = document.createElement('td');
-    td3.innerHTML = `${_state__WEBPACK_IMPORTED_MODULE_0__.state.recoveredAllAbsoluteCountAlltime}`;
+    const td3 = document.createElement('td'); //td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
+
+    td3.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAll}`;
     tr2.appendChild(td3);
     const tf = document.createElement('tfoot');
     const tr3 = document.createElement('tr');
@@ -2574,7 +2671,7 @@ const renderTable = () => {
     tdPeriod.innerHTML = `<span id = 'span-period'>за весь период</span>`;
     const arrowTable = document.createElement('div');
     arrowTable.classList.add('arrow', 'arrow-table');
-    arrowTable.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>';
+    arrowTable.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>';
     tdPeriod.appendChild(arrowTable);
     tr3.appendChild(tdPeriod);
     const tdValue = document.createElement('td');
@@ -2582,7 +2679,7 @@ const renderTable = () => {
     tdValue.innerHTML = `<span id = 'span-value'>в абсолютных цифрах</span>`;
     const arrowTable1 = document.createElement('div');
     arrowTable1.classList.add('arrow', 'arrow-table');
-    arrowTable1.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>';
+    arrowTable1.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>';
     tdValue.appendChild(arrowTable1);
     tr4.appendChild(tdValue);
     table.appendChild(tf);
@@ -2590,8 +2687,14 @@ const renderTable = () => {
     tdPeriod.addEventListener('click', () => {
       if (document.getElementById('span-period').innerHTML === 'за весь период') {
         document.getElementById('span-period').innerHTML = 'за последний день';
+        td1.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.casesAllDay}`;
+        td2.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAllDay}`;
+        td3.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAllDay}`;
       } else {
         document.getElementById('span-period').innerHTML = 'за весь период';
+        td1.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.casesAll}`;
+        td2.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAll}`;
+        td3.innerHTML = `${_diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAll}`;
       }
     });
     tdValue.addEventListener('click', () => {
@@ -2648,6 +2751,44 @@ window.onload = () => {
   (0,_components_mainPage__WEBPACK_IMPORTED_MODULE_4__.default)();
   (0,_components_footer__WEBPACK_IMPORTED_MODULE_5__.default)();
 };
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet/dist/Control.FullScreen.css":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet/dist/Control.FullScreen.css ***!
+  \************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
+/* harmony import */ var _css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _icon_fullscreen_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icon-fullscreen.png */ "./node_modules/leaflet/dist/icon-fullscreen.png");
+/* harmony import */ var _icon_fullscreen_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_icon_fullscreen_png__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _icon_fullscreen_2x_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon-fullscreen-2x.png */ "./node_modules/leaflet/dist/icon-fullscreen-2x.png");
+/* harmony import */ var _icon_fullscreen_2x_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_icon_fullscreen_2x_png__WEBPACK_IMPORTED_MODULE_4__);
+// Imports
+
+
+
+
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()((_icon_fullscreen_png__WEBPACK_IMPORTED_MODULE_3___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()((_icon_fullscreen_2x_png__WEBPACK_IMPORTED_MODULE_4___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".fullscreen-icon { background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + "); }\n.leaflet-retina .fullscreen-icon { background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + "); background-size: 26px 26px; }\n/* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */\n.leaflet-container:-webkit-full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:-ms-fullscreen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:fullscreen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-pseudo-fullscreen { position: fixed !important; width: 100% !important; height: 100% !important; top: 0px !important; left: 0px !important; z-index: 99999; }", "",{"version":3,"sources":["webpack://./node_modules/leaflet/dist/Control.FullScreen.css"],"names":[],"mappings":"AAAA,mBAAmB,yDAA0C,EAAE;AAC/D,mCAAmC,yDAA6C,EAAE,0BAA0B,EAAE;AAC9G,8FAA8F;AAC9F,yCAAyC,sBAAsB,EAAE,uBAAuB,EAAE,cAAc,EAAE;AAC1G,oCAAoC,sBAAsB,EAAE,uBAAuB,EAAE,cAAc,EAAE;AACrG,iCAAiC,sBAAsB,EAAE,uBAAuB,EAAE,cAAc,EAAE;AAClG,gCAAgC,sBAAsB,EAAE,uBAAuB,EAAE,cAAc,EAAE;AACjG,6BAA6B,0BAA0B,EAAE,sBAAsB,EAAE,uBAAuB,EAAE,mBAAmB,EAAE,oBAAoB,EAAE,cAAc,EAAE","sourcesContent":[".fullscreen-icon { background-image: url(icon-fullscreen.png); }\n.leaflet-retina .fullscreen-icon { background-image: url(icon-fullscreen-2x.png); background-size: 26px 26px; }\n/* one selector per rule as explained here : http://www.sitepoint.com/html5-full-screen-api/ */\n.leaflet-container:-webkit-full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:-ms-fullscreen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:full-screen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-container:fullscreen { width: 100% !important; height: 100% !important; z-index: 99999; }\n.leaflet-pseudo-fullscreen { position: fixed !important; width: 100% !important; height: 100% !important; top: 0px !important; left: 0px !important; z-index: 99999; }"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
 
 /***/ }),
 
@@ -2767,7 +2908,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  font-size: 10px;\r\n}\r\n.main-page-wrapper {\r\n  width: 80%;\r\n  height: 80vh;\r\n  margin: auto;\r\n  display: flex;\r\n  border: 1px solid red;\r\n}\r\n/* КАРТА */\r\n#map {\r\n  width: 50%;\r\n  height: 40vh;\r\n  margin-top: 1%;\r\n  margin-left: 6%; \r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.icon-marker {\r\n  display: flex;\r\n  position: relative;\r\n  justify-content: center;\r\n  align-items: center;\r\n  color: white;\r\n  width: 40px;\r\n  height: 20px; \r\n  font-size: .8rem;\r\n  font-weight: bold;\r\n  background-color: #e66761;\r\n  border-radius: 15%;\r\n  border: 1px solid #cd4a4c;\r\n  box-shadow: 2px 2px 5px rgba(black, 0.9); \r\n}\r\n\r\n.icon-marker:hover .icon-marker-tooltip {\r\n  display: block;\r\n}\r\n\r\n.icon-marker-tooltip {\r\n  display: none;\r\n  position: absolute;\r\n  width: 200px;\r\n  font-size: 1rem;\r\n  padding: 5px;\r\n  background-color: rgb(199, 199, 199);\r\n  border-radius: 15px;\r\n  border: 1px solid black;\r\n}\r\n\r\n.icon-marker-tooltip:before {\r\n  display: block;\r\n  position: absolute;\r\n  left: 50%;\r\n  width: 100px;\r\n  height: 100px;\r\n  background-color: rgb(238, 238, 238);\r\n  /* transform: rotate(45deg); */\r\n}\r\n\r\n.icon-marker-tooltip h2 {\r\n  font-size: 1.1rem;\r\n  font-weight: bold;\r\n  color: #e66761;\r\n  border-bottom: 1px solid #cd4a4c;\r\n}\r\n\r\n.icon-marker-tooltip ul {\r\n  list-style: none;\r\n  padding: 0;\r\n  text-align: center; \r\n} \r\n\r\n/*----column2-----*/\r\n.column-2 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 50%;\r\n}\r\n\r\n/* ТАБЛИЦА */\r\n\r\n.table {\r\n  margin: 12px auto 10px;\r\n  background: rgb(226, 221, 221);\r\n  border: 1px solid black;\r\n  width: 80%;\r\n  height: 70px;\r\n  text-align: center;\r\n  border-collapse: collapse;\r\n  box-shadow: 3px 3px 5px black; \r\n}\r\n\r\n.table:-webkit-full-screen {\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-webkit-full-screen caption img {\r\n  display: none;\r\n}\r\n.table:-webkit-full-screen caption {\r\n  background-color: rgb(231, 228, 229);\r\n  /* height: 100px; */\r\n  text-align: center;\r\n  /* padding-top: 50px; */\r\n}\r\n/* .table:-webkit-full-screen tfoot {\r\n  height: 100px;\r\n} */\r\n\r\n.table:-webkit-full-screen tfoot tr:first-child {\r\n  /*  padding-bottom: 200px; */\r\n}\r\n.table:-webkit-full-screen tfoot tr:last-child {\r\n}\r\n\r\n.table:-ms-fullscreen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-moz-full-screen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.table caption {\r\n  font-size: 1.5rem;\r\n  font-weight: bold;\r\n  text-align: start;\r\n  padding-bottom: 10px;\r\n}\r\n.table caption button {\r\n  float: right;\r\n}\r\n.table tr th {\r\n  font-weight: normal;\r\n}\r\n\r\n.table tr th,\r\ntd {\r\n  border-right: 1px dotted black;\r\n  font-size: 1.2rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\nth {\r\n  padding: 10px;\r\n}\r\n.table tfoot {\r\n  color: rgb(21, 20, 22);\r\n}\r\n.table tfoot tr:first-child {\r\n  background-color: rgb(153, 233, 233);\r\n}\r\n.table tfoot tr:last-child {\r\n  background-color: rgb(212, 208, 255);\r\n}\r\n.table tfoot tr td {\r\n  font-size: 1rem;\r\n}\r\n\r\n.arrow {\r\n}\r\n.arrow:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n.arrow-table {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* СПИСОК */\r\n\r\n.list-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 80%;\r\n\r\n  margin: 100px auto 10px;\r\n  /* border: 1px solid green; */\r\n  overflow: hidden;\r\n  padding: 0;\r\n  box-shadow: 3px 3px 5px black; \r\n}\r\n.list-wrapper:-webkit-full-screen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-webkit-full-screen :first-child img {\r\n  display: none;\r\n}\r\n.list-wrapper:-ms-fullscreen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-moz-full-screen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.list-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n.list-search {\r\n  display: flex;\r\n  width: 50%;\r\n  font-size: 1.2rem;\r\n  outline: none;\r\n  border: 0;\r\n  border-bottom: 1px solid rgb(200, 200, 200);\r\n}\r\n.list-countries {\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 5px;\r\n  max-height: 500px;\r\n  overflow-y: scroll;\r\n}\r\n.list-countries li:hover {\r\n  border: 1px solid rgb(99, 189, 241);\r\n}\r\n\r\n.list-item-country {\r\n  list-style: none;\r\n  padding: 10px;\r\n  font-size: 1.5rem;\r\n}\r\n.list-item-country :hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.list-item-country img {\r\n  margin-right: 10px;\r\n}\r\n.list-item-country span + span {\r\n  margin-right: 10px;\r\n  float: right;\r\n}\r\n\r\n.list-cases {\r\n  background-color: rgb(247, 171, 250);\r\n  text-align: center;\r\n  padding: 2px 0;\r\n}\r\n.list-cases span {\r\n  font-size: 1.1rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\n.arrow-list {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* Button */\r\n.fullscreen {\r\n  background-color: transparent;\r\n  border: 0;\r\n  outline: none;\r\n}\r\n.fullscreen:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n\r\n@media screen and (min-width: 320px) and (max-width: 500px) {\r\n  .main-page-wrapper {\r\n    /* height: 82vh; */\r\n    width: 95%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 25%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n  }\r\n  .table caption {\r\n    font-size: 1rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 0.9rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 1px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    margin: 70px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 5px;\r\n    font-size: 1rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n@media screen and (min-width: 501px) and (max-width: 767px) {\r\n  .main-page-wrapper {\r\n    /* width: 80%; */\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 35%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n    margin-left: 0;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 768px) and (max-width: 1024px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 65%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n\r\n@media screen and (min-width: 1025px) and (max-width: 1280px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 55%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 1281px) and (max-width: 1900px) {\r\n  .list-wrapper {\r\n  }\r\n}\r\n", "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,UAAU;EACV,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,qBAAqB;AACvB;AACA,UAAU;AACV;EACE,UAAU;EACV,YAAY;EACZ,cAAc;EACd,eAAe;EACf,6BAA6B;AAC/B;;AAEA;EACE,aAAa;EACb,kBAAkB;EAClB,uBAAuB;EACvB,mBAAmB;EACnB,YAAY;EACZ,WAAW;EACX,YAAY;EACZ,gBAAgB;EAChB,iBAAiB;EACjB,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;EACzB,wCAAwC;AAC1C;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,oCAAoC;EACpC,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,cAAc;EACd,kBAAkB;EAClB,SAAS;EACT,YAAY;EACZ,aAAa;EACb,oCAAoC;EACpC,8BAA8B;AAChC;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;EACjB,cAAc;EACd,gCAAgC;AAClC;;AAEA;EACE,gBAAgB;EAChB,UAAU;EACV,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;AACZ;;AAEA,YAAY;;AAEZ;EACE,sBAAsB;EACtB,8BAA8B;EAC9B,uBAAuB;EACvB,UAAU;EACV,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,6BAA6B;AAC/B;;AAEA;EACE,oCAAoC;AACtC;AACA;EACE,aAAa;AACf;AACA;EACE,oCAAoC;EACpC,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;AACzB;AACA;;GAEG;;AAEH;EACE,4BAA4B;AAC9B;AACA;AACA;;AAEA;EACE,YAAY;EACZ,oCAAoC;AACtC;AACA;EACE,YAAY;EACZ,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;AACtB;AACA;EACE,YAAY;AACd;AACA;EACE,mBAAmB;AACrB;;AAEA;;EAEE,8BAA8B;EAC9B,iBAAiB;EACjB,sBAAsB;AACxB;AACA;EACE,aAAa;AACf;AACA;EACE,sBAAsB;AACxB;AACA;EACE,oCAAoC;AACtC;AACA;EACE,oCAAoC;AACtC;AACA;EACE,eAAe;AACjB;;AAEA;AACA;AACA;EACE,eAAe;EACf,sBAAsB;EACtB,gBAAgB;AAClB;AACA;EACE,YAAY;EACZ,eAAe;EACf,kBAAkB;AACpB;;AAEA,WAAW;;AAEX;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;;EAEV,uBAAuB;EACvB,6BAA6B;EAC7B,gBAAgB;EAChB,UAAU;EACV,6BAA6B;AAC/B;AACA;EACE,aAAa;EACb,oCAAoC;AACtC;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;EACb,oCAAoC;AACtC;AACA;EACE,aAAa;EACb,oCAAoC;AACtC;;AAEA;EACE,aAAa;EACb,8BAA8B;AAChC;AACA;EACE,aAAa;EACb,UAAU;EACV,iBAAiB;EACjB,aAAa;EACb,SAAS;EACT,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,kBAAkB;AACpB;AACA;EACE,mCAAmC;AACrC;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,iBAAiB;AACnB;AACA;EACE,eAAe;AACjB;;AAEA;EACE,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,YAAY;AACd;;AAEA;EACE,oCAAoC;EACpC,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;AACA;EACE,YAAY;EACZ,eAAe;EACf,kBAAkB;AACpB;;AAEA,WAAW;AACX;EACE,6BAA6B;EAC7B,SAAS;EACT,aAAa;AACf;AACA;EACE,eAAe;EACf,sBAAsB;EACtB,gBAAgB;AAClB;;AAEA;EACE;IACE,kBAAkB;IAClB,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,eAAe;EACjB;EACA;;IAEE,8BAA8B;IAC9B,iBAAiB;IACjB,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,WAAW;IACX,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,eAAe;EACjB;EACA;IACE,iBAAiB;EACnB;AACF;AACA;EACE;IACE,gBAAgB;IAChB,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,WAAW;IACX,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,WAAW;IACX,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;AACA;EACE;IACE,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,UAAU;IACV,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,UAAU;IACV,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;;AAEA;EACE;IACE,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,UAAU;IACV,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,UAAU;IACV,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;AACA;EACE;EACA;AACF","sourcesContent":["body {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  font-size: 10px;\r\n}\r\n.main-page-wrapper {\r\n  width: 80%;\r\n  height: 80vh;\r\n  margin: auto;\r\n  display: flex;\r\n  border: 1px solid red;\r\n}\r\n/* КАРТА */\r\n#map {\r\n  width: 50%;\r\n  height: 40vh;\r\n  margin-top: 1%;\r\n  margin-left: 6%; \r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.icon-marker {\r\n  display: flex;\r\n  position: relative;\r\n  justify-content: center;\r\n  align-items: center;\r\n  color: white;\r\n  width: 40px;\r\n  height: 20px; \r\n  font-size: .8rem;\r\n  font-weight: bold;\r\n  background-color: #e66761;\r\n  border-radius: 15%;\r\n  border: 1px solid #cd4a4c;\r\n  box-shadow: 2px 2px 5px rgba(black, 0.9); \r\n}\r\n\r\n.icon-marker:hover .icon-marker-tooltip {\r\n  display: block;\r\n}\r\n\r\n.icon-marker-tooltip {\r\n  display: none;\r\n  position: absolute;\r\n  width: 200px;\r\n  font-size: 1rem;\r\n  padding: 5px;\r\n  background-color: rgb(199, 199, 199);\r\n  border-radius: 15px;\r\n  border: 1px solid black;\r\n}\r\n\r\n.icon-marker-tooltip:before {\r\n  display: block;\r\n  position: absolute;\r\n  left: 50%;\r\n  width: 100px;\r\n  height: 100px;\r\n  background-color: rgb(238, 238, 238);\r\n  /* transform: rotate(45deg); */\r\n}\r\n\r\n.icon-marker-tooltip h2 {\r\n  font-size: 1.1rem;\r\n  font-weight: bold;\r\n  color: #e66761;\r\n  border-bottom: 1px solid #cd4a4c;\r\n}\r\n\r\n.icon-marker-tooltip ul {\r\n  list-style: none;\r\n  padding: 0;\r\n  text-align: center; \r\n} \r\n\r\n/*----column2-----*/\r\n.column-2 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 50%;\r\n}\r\n\r\n/* ТАБЛИЦА */\r\n\r\n.table {\r\n  margin: 12px auto 10px;\r\n  background: rgb(226, 221, 221);\r\n  border: 1px solid black;\r\n  width: 80%;\r\n  height: 70px;\r\n  text-align: center;\r\n  border-collapse: collapse;\r\n  box-shadow: 3px 3px 5px black; \r\n}\r\n\r\n.table:-webkit-full-screen {\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-webkit-full-screen caption img {\r\n  display: none;\r\n}\r\n.table:-webkit-full-screen caption {\r\n  background-color: rgb(231, 228, 229);\r\n  /* height: 100px; */\r\n  text-align: center;\r\n  /* padding-top: 50px; */\r\n}\r\n/* .table:-webkit-full-screen tfoot {\r\n  height: 100px;\r\n} */\r\n\r\n.table:-webkit-full-screen tfoot tr:first-child {\r\n  /*  padding-bottom: 200px; */\r\n}\r\n.table:-webkit-full-screen tfoot tr:last-child {\r\n}\r\n\r\n.table:-ms-fullscreen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-moz-full-screen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.table caption {\r\n  font-size: 1.5rem;\r\n  font-weight: bold;\r\n  text-align: start;\r\n  padding-bottom: 10px;\r\n}\r\n.table caption button {\r\n  float: right;\r\n}\r\n.table tr th {\r\n  font-weight: normal;\r\n}\r\n\r\n.table tr th,\r\ntd {\r\n  border-right: 1px dotted black;\r\n  font-size: 1.2rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\nth {\r\n  padding: 10px;\r\n}\r\n.table tfoot {\r\n  color: rgb(21, 20, 22);\r\n}\r\n.table tfoot tr:first-child {\r\n  background-color: rgb(153, 233, 233);\r\n}\r\n.table tfoot tr:last-child {\r\n  background-color: rgb(212, 208, 255);\r\n}\r\n.table tfoot tr td {\r\n  font-size: 1rem;\r\n}\r\n\r\n.arrow {\r\n}\r\n.arrow:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n.arrow-table {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* СПИСОК */\r\n\r\n.list-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 80%;\r\n\r\n  margin: 100px auto 10px;\r\n  /* border: 1px solid green; */\r\n  overflow: hidden;\r\n  padding: 0;\r\n  box-shadow: 3px 3px 5px black; \r\n}\r\n.list-wrapper:-webkit-full-screen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-webkit-full-screen :first-child img {\r\n  display: none;\r\n}\r\n.list-wrapper:-ms-fullscreen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-moz-full-screen {\r\n  height: 100vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.list-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n.list-search {\r\n  display: flex;\r\n  width: 50%;\r\n  font-size: 1.2rem;\r\n  outline: none;\r\n  border: 0;\r\n  border-bottom: 1px solid rgb(200, 200, 200);\r\n}\r\n.list-countries {\r\n  display: flex;\r\n  flex-direction: column;\r\n  padding-left: 5px;\r\n  max-height: 500px;\r\n  overflow-y: scroll;\r\n}\r\n.list-countries li:hover {\r\n  border: 1px solid rgb(99, 189, 241);\r\n}\r\n\r\n.list-item-country {\r\n  list-style: none;\r\n  padding: 10px;\r\n  font-size: 1.5rem;\r\n}\r\n.list-item-country :hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.list-item-country img {\r\n  margin-right: 10px;\r\n}\r\n.list-item-country span + span {\r\n  margin-right: 10px;\r\n  float: right;\r\n}\r\n\r\n.list-cases {\r\n  background-color: rgb(247, 171, 250);\r\n  text-align: center;\r\n  padding: 2px 0;\r\n}\r\n.list-cases span {\r\n  font-size: 1.1rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\n.arrow-list {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* Button */\r\n.fullscreen {\r\n  background-color: transparent;\r\n  border: 0;\r\n  outline: none;\r\n}\r\n.fullscreen:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n\r\n@media screen and (min-width: 320px) and (max-width: 500px) {\r\n  .main-page-wrapper {\r\n    /* height: 82vh; */\r\n    width: 95%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 25%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n  }\r\n  .table caption {\r\n    font-size: 1rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 0.9rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 1px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    margin: 70px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 5px;\r\n    font-size: 1rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n@media screen and (min-width: 501px) and (max-width: 767px) {\r\n  .main-page-wrapper {\r\n    /* width: 80%; */\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 35%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n    margin-left: 0;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 768px) and (max-width: 1024px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 65%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n\r\n@media screen and (min-width: 1025px) and (max-width: 1280px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 55%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 1281px) and (max-width: 1900px) {\r\n  .list-wrapper {\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  font-size: 10px;\r\n}\r\n.main-page-wrapper {\r\n  position: relative;\r\n  width: 80%;\r\n  height: 80vh;\r\n  margin: auto;\r\n  display: flex;\r\n  border: 1px solid red;\r\n}\r\n/* КАРТА */\r\n#map {\r\n  width: 50%;\r\n  height: 40vh;\r\n  margin-top: 1%;\r\n  margin-left: 6%;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.icon-marker {\r\n  display: flex;\r\n  position: relative;\r\n  justify-content: center;\r\n  align-items: center;\r\n  color: white;\r\n  width: 40px;\r\n  height: 20px;\r\n  font-size: 0.8rem;\r\n  font-weight: bold;\r\n  background-color: #e66761;\r\n  border-radius: 15%;\r\n  border: 1px solid #cd4a4c;\r\n  box-shadow: 2px 2px 5px rgba(black, 0.9);\r\n}\r\n\r\n.icon-marker:hover .icon-marker-tooltip {\r\n  display: block;\r\n}\r\n\r\n.icon-marker-tooltip {\r\n  display: none;\r\n  position: absolute;\r\n  width: 200px;\r\n  font-size: 1rem;\r\n  padding: 5px;\r\n  background-color: rgb(199, 199, 199);\r\n  border-radius: 15px;\r\n  border: 1px solid black;\r\n}\r\n\r\n.icon-marker-tooltip:before {\r\n  display: block;\r\n  position: absolute;\r\n  left: 50%;\r\n  width: 100px;\r\n  height: 100px;\r\n  background-color: rgb(238, 238, 238);\r\n  /* transform: rotate(45deg); */\r\n}\r\n\r\n.icon-marker-tooltip h2 {\r\n  font-size: 1.1rem;\r\n  font-weight: bold;\r\n  color: #e66761;\r\n  border-bottom: 1px solid #cd4a4c;\r\n}\r\n\r\n.icon-marker-tooltip ul {\r\n  list-style: none;\r\n  padding: 0;\r\n  text-align: center;\r\n}\r\n\r\n/*----column2-----*/\r\n.column-2 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 50%;\r\n}\r\n\r\n/* ТАБЛИЦА */\r\n\r\n.table {\r\n  margin: 12px auto 10px;\r\n  background: rgb(226, 221, 221);\r\n  border: 1px solid black;\r\n  width: 80%;\r\n  height: 70px;\r\n  text-align: center;\r\n  border-collapse: collapse;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.table:-webkit-full-screen {\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-webkit-full-screen caption img {\r\n  display: none;\r\n}\r\n.table:-webkit-full-screen caption {\r\n  background-color: rgb(231, 228, 229);\r\n  /* height: 100px; */\r\n  text-align: center;\r\n  /* padding-top: 50px; */\r\n}\r\n/* .table:-webkit-full-screen tfoot {\r\n  height: 100px;\r\n} */\r\n\r\n.table:-webkit-full-screen tfoot tr:first-child {\r\n  /*  padding-bottom: 200px; */\r\n}\r\n.table:-webkit-full-screen tfoot tr:last-child {\r\n}\r\n\r\n.table:-ms-fullscreen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-moz-full-screen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.table caption {\r\n  font-size: 1.5rem;\r\n  font-weight: bold;\r\n  text-align: start;\r\n  padding-bottom: 10px;\r\n}\r\n.table caption button {\r\n  float: right;\r\n}\r\n.table tr th {\r\n  font-weight: normal;\r\n}\r\n\r\n.table tr th,\r\ntd {\r\n  border-right: 1px dotted black;\r\n  font-size: 1.2rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\nth {\r\n  padding: 10px;\r\n}\r\n.table tfoot {\r\n  color: rgb(21, 20, 22);\r\n}\r\n.table tfoot tr:first-child {\r\n  background-color: rgb(153, 233, 233);\r\n}\r\n.table tfoot tr:last-child {\r\n  background-color: rgb(212, 208, 255);\r\n}\r\n.table tfoot tr td {\r\n  font-size: 1rem;\r\n}\r\n\r\n.arrow {\r\n}\r\n.arrow:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.2);\r\n  transition: 0.5s;\r\n}\r\n.arrow-table {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* СПИСОК */\r\n\r\n.list-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 80%;\r\n  height: 100%;\r\n\r\n  margin: 100px auto 10px;\r\n  /* border: 1px solid green; */\r\n  /* overflow: hidden; */\r\n  padding: 0;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.list-wrapper:-webkit-full-screen {\r\n  height: 100% !important;\r\n  width: 70% !important;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-webkit-full-screen :first-child img {\r\n  display: none;\r\n}\r\n.list-wrapper:-ms-fullscreen {\r\n  /* height: 100vh; */\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-moz-full-screen {\r\n  /* height: 100vh; */\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.list-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n.list-search {\r\n  display: flex;\r\n  width: 50%;\r\n  font-size: 1.2rem;\r\n  outline: none;\r\n  border: 0;\r\n  border-bottom: 1px solid rgb(200, 200, 200);\r\n}\r\n.list-countries {\r\n  display: flex;\r\n  flex: 1;\r\n  flex-direction: column;\r\n  padding-left: 5px;\r\n  max-height: 500px;\r\n  overflow-y: scroll;\r\n}\r\n.list-countries li:hover {\r\n  border: 1px solid rgb(99, 189, 241);\r\n}\r\n\r\n.list-item-country {\r\n  list-style: none;\r\n  padding: 10px;\r\n  font-size: 1.5rem;\r\n}\r\n.list-item-country :hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.list-item-country img {\r\n  margin-right: 10px;\r\n}\r\n.list-item-country span + span {\r\n  margin-right: 10px;\r\n  float: right;\r\n}\r\n\r\n.list-cases {\r\n  background-color: rgb(247, 171, 250);\r\n  text-align: center;\r\n  padding: 2px 0;\r\n}\r\n.list-cases span {\r\n  font-size: 1.1rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\n.arrow-list {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* Button */\r\n.btn-fullscreen {\r\n  background-color: transparent;\r\n  border: 0;\r\n  outline: none;\r\n  z-index: 9999999;\r\n}\r\n.btn-fullscreen:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n.element-fullscreen {\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  padding: 0;\r\n  margin: 0;\r\n  z-index: 9999;\r\n}\r\n\r\n@media screen and (min-width: 320px) and (max-width: 500px) {\r\n  .main-page-wrapper {\r\n    /* height: 82vh; */\r\n    /* height: auto; */\r\n    width: 95%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    /* height: 25%; */\r\n    height: 200px;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n  }\r\n  .table caption {\r\n    font-size: 1rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 0.9rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 1px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    height: 350px;\r\n    margin: 70px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 5px;\r\n    font-size: 1rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.8rem;\r\n  }\r\n  .footer {\r\n    position: sticky;\r\n    bottom: 0;\r\n  }\r\n}\r\n@media screen and (min-width: 501px) and (max-width: 767px) {\r\n  .main-page-wrapper {\r\n    /* width: 80%; */\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 350px;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n    margin-left: 0;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 768px) and (max-width: 1024px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 65%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n\r\n@media screen and (min-width: 1025px) and (max-width: 1280px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 55%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 1281px) and (max-width: 1900px) {\r\n  #map {\r\n    margin-right: 15px;\r\n  }\r\n  .list-wrapper {\r\n  }\r\n}\r\n", "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"AAAA;EACE,SAAS;EACT,UAAU;EACV,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,qBAAqB;AACvB;AACA,UAAU;AACV;EACE,UAAU;EACV,YAAY;EACZ,cAAc;EACd,eAAe;EACf,6BAA6B;AAC/B;;AAEA;EACE,aAAa;EACb,kBAAkB;EAClB,uBAAuB;EACvB,mBAAmB;EACnB,YAAY;EACZ,WAAW;EACX,YAAY;EACZ,iBAAiB;EACjB,iBAAiB;EACjB,yBAAyB;EACzB,kBAAkB;EAClB,yBAAyB;EACzB,wCAAwC;AAC1C;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,YAAY;EACZ,oCAAoC;EACpC,mBAAmB;EACnB,uBAAuB;AACzB;;AAEA;EACE,cAAc;EACd,kBAAkB;EAClB,SAAS;EACT,YAAY;EACZ,aAAa;EACb,oCAAoC;EACpC,8BAA8B;AAChC;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;EACjB,cAAc;EACd,gCAAgC;AAClC;;AAEA;EACE,gBAAgB;EAChB,UAAU;EACV,kBAAkB;AACpB;;AAEA,mBAAmB;AACnB;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;AACZ;;AAEA,YAAY;;AAEZ;EACE,sBAAsB;EACtB,8BAA8B;EAC9B,uBAAuB;EACvB,UAAU;EACV,YAAY;EACZ,kBAAkB;EAClB,yBAAyB;EACzB,6BAA6B;AAC/B;;AAEA;EACE,oCAAoC;AACtC;AACA;EACE,aAAa;AACf;AACA;EACE,oCAAoC;EACpC,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;AACzB;AACA;;GAEG;;AAEH;EACE,4BAA4B;AAC9B;AACA;AACA;;AAEA;EACE,YAAY;EACZ,oCAAoC;AACtC;AACA;EACE,YAAY;EACZ,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;EACjB,iBAAiB;EACjB,iBAAiB;EACjB,oBAAoB;AACtB;AACA;EACE,YAAY;AACd;AACA;EACE,mBAAmB;AACrB;;AAEA;;EAEE,8BAA8B;EAC9B,iBAAiB;EACjB,sBAAsB;AACxB;AACA;EACE,aAAa;AACf;AACA;EACE,sBAAsB;AACxB;AACA;EACE,oCAAoC;AACtC;AACA;EACE,oCAAoC;AACtC;AACA;EACE,eAAe;AACjB;;AAEA;AACA;AACA;EACE,eAAe;EACf,sBAAsB;EACtB,gBAAgB;AAClB;AACA;EACE,YAAY;EACZ,eAAe;EACf,kBAAkB;AACpB;;AAEA,WAAW;;AAEX;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,YAAY;;EAEZ,uBAAuB;EACvB,6BAA6B;EAC7B,sBAAsB;EACtB,UAAU;EACV,6BAA6B;AAC/B;;AAEA;EACE,uBAAuB;EACvB,qBAAqB;EACrB,oCAAoC;AACtC;AACA;EACE,aAAa;AACf;AACA;EACE,mBAAmB;EACnB,oCAAoC;AACtC;AACA;EACE,mBAAmB;EACnB,oCAAoC;AACtC;;AAEA;EACE,aAAa;EACb,8BAA8B;AAChC;AACA;EACE,aAAa;EACb,UAAU;EACV,iBAAiB;EACjB,aAAa;EACb,SAAS;EACT,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,OAAO;EACP,sBAAsB;EACtB,iBAAiB;EACjB,iBAAiB;EACjB,kBAAkB;AACpB;AACA;EACE,mCAAmC;AACrC;;AAEA;EACE,gBAAgB;EAChB,aAAa;EACb,iBAAiB;AACnB;AACA;EACE,eAAe;AACjB;;AAEA;EACE,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,YAAY;AACd;;AAEA;EACE,oCAAoC;EACpC,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;AACA;EACE,YAAY;EACZ,eAAe;EACf,kBAAkB;AACpB;;AAEA,WAAW;AACX;EACE,6BAA6B;EAC7B,SAAS;EACT,aAAa;EACb,gBAAgB;AAClB;AACA;EACE,eAAe;EACf,sBAAsB;EACtB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,UAAU;EACV,SAAS;EACT,aAAa;AACf;;AAEA;EACE;IACE,kBAAkB;IAClB,kBAAkB;IAClB,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,iBAAiB;IACjB,aAAa;EACf;EACA;IACE,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,eAAe;EACjB;EACA;;IAEE,8BAA8B;IAC9B,iBAAiB;IACjB,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,WAAW;IACX,aAAa;IACb,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,eAAe;EACjB;EACA;IACE,iBAAiB;EACnB;EACA;IACE,gBAAgB;IAChB,SAAS;EACX;AACF;AACA;EACE;IACE,gBAAgB;IAChB,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,aAAa;EACf;EACA;IACE,WAAW;EACb;EACA;IACE,WAAW;IACX,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,WAAW;IACX,aAAa;IACb,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;AACA;EACE;IACE,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,UAAU;IACV,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,UAAU;IACV,aAAa;IACb,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;;AAEA;EACE;IACE,UAAU;IACV,sBAAsB;EACxB;EACA;IACE,cAAc;IACd,aAAa;IACb,WAAW;IACX,WAAW;EACb;EACA;IACE,WAAW;EACb;EACA;IACE,UAAU;IACV,cAAc;EAChB;EACA;IACE,iBAAiB;EACnB;EACA;;IAEE,8BAA8B;IAC9B,eAAe;IACf,iBAAiB;EACnB;EACA;IACE,YAAY;EACd;EACA;IACE,iBAAiB;EACnB;;EAEA;IACE,UAAU;IACV,aAAa;IACb,qBAAqB;EACvB;EACA;IACE,eAAe;EACjB;EACA;IACE,YAAY;IACZ,iBAAiB;EACnB;EACA;IACE,iBAAiB;EACnB;AACF;AACA;EACE;IACE,kBAAkB;EACpB;EACA;EACA;AACF","sourcesContent":["body {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  font-size: 10px;\r\n}\r\n.main-page-wrapper {\r\n  position: relative;\r\n  width: 80%;\r\n  height: 80vh;\r\n  margin: auto;\r\n  display: flex;\r\n  border: 1px solid red;\r\n}\r\n/* КАРТА */\r\n#map {\r\n  width: 50%;\r\n  height: 40vh;\r\n  margin-top: 1%;\r\n  margin-left: 6%;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.icon-marker {\r\n  display: flex;\r\n  position: relative;\r\n  justify-content: center;\r\n  align-items: center;\r\n  color: white;\r\n  width: 40px;\r\n  height: 20px;\r\n  font-size: 0.8rem;\r\n  font-weight: bold;\r\n  background-color: #e66761;\r\n  border-radius: 15%;\r\n  border: 1px solid #cd4a4c;\r\n  box-shadow: 2px 2px 5px rgba(black, 0.9);\r\n}\r\n\r\n.icon-marker:hover .icon-marker-tooltip {\r\n  display: block;\r\n}\r\n\r\n.icon-marker-tooltip {\r\n  display: none;\r\n  position: absolute;\r\n  width: 200px;\r\n  font-size: 1rem;\r\n  padding: 5px;\r\n  background-color: rgb(199, 199, 199);\r\n  border-radius: 15px;\r\n  border: 1px solid black;\r\n}\r\n\r\n.icon-marker-tooltip:before {\r\n  display: block;\r\n  position: absolute;\r\n  left: 50%;\r\n  width: 100px;\r\n  height: 100px;\r\n  background-color: rgb(238, 238, 238);\r\n  /* transform: rotate(45deg); */\r\n}\r\n\r\n.icon-marker-tooltip h2 {\r\n  font-size: 1.1rem;\r\n  font-weight: bold;\r\n  color: #e66761;\r\n  border-bottom: 1px solid #cd4a4c;\r\n}\r\n\r\n.icon-marker-tooltip ul {\r\n  list-style: none;\r\n  padding: 0;\r\n  text-align: center;\r\n}\r\n\r\n/*----column2-----*/\r\n.column-2 {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 50%;\r\n}\r\n\r\n/* ТАБЛИЦА */\r\n\r\n.table {\r\n  margin: 12px auto 10px;\r\n  background: rgb(226, 221, 221);\r\n  border: 1px solid black;\r\n  width: 80%;\r\n  height: 70px;\r\n  text-align: center;\r\n  border-collapse: collapse;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.table:-webkit-full-screen {\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-webkit-full-screen caption img {\r\n  display: none;\r\n}\r\n.table:-webkit-full-screen caption {\r\n  background-color: rgb(231, 228, 229);\r\n  /* height: 100px; */\r\n  text-align: center;\r\n  /* padding-top: 50px; */\r\n}\r\n/* .table:-webkit-full-screen tfoot {\r\n  height: 100px;\r\n} */\r\n\r\n.table:-webkit-full-screen tfoot tr:first-child {\r\n  /*  padding-bottom: 200px; */\r\n}\r\n.table:-webkit-full-screen tfoot tr:last-child {\r\n}\r\n\r\n.table:-ms-fullscreen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.table:-moz-full-screen {\r\n  height: 50vh;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.table caption {\r\n  font-size: 1.5rem;\r\n  font-weight: bold;\r\n  text-align: start;\r\n  padding-bottom: 10px;\r\n}\r\n.table caption button {\r\n  float: right;\r\n}\r\n.table tr th {\r\n  font-weight: normal;\r\n}\r\n\r\n.table tr th,\r\ntd {\r\n  border-right: 1px dotted black;\r\n  font-size: 1.2rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\nth {\r\n  padding: 10px;\r\n}\r\n.table tfoot {\r\n  color: rgb(21, 20, 22);\r\n}\r\n.table tfoot tr:first-child {\r\n  background-color: rgb(153, 233, 233);\r\n}\r\n.table tfoot tr:last-child {\r\n  background-color: rgb(212, 208, 255);\r\n}\r\n.table tfoot tr td {\r\n  font-size: 1rem;\r\n}\r\n\r\n.arrow {\r\n}\r\n.arrow:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.2);\r\n  transition: 0.5s;\r\n}\r\n.arrow-table {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* СПИСОК */\r\n\r\n.list-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 80%;\r\n  height: 100%;\r\n\r\n  margin: 100px auto 10px;\r\n  /* border: 1px solid green; */\r\n  /* overflow: hidden; */\r\n  padding: 0;\r\n  box-shadow: 3px 3px 5px black;\r\n}\r\n\r\n.list-wrapper:-webkit-full-screen {\r\n  height: 100% !important;\r\n  width: 70% !important;\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-webkit-full-screen :first-child img {\r\n  display: none;\r\n}\r\n.list-wrapper:-ms-fullscreen {\r\n  /* height: 100vh; */\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n.list-wrapper:-moz-full-screen {\r\n  /* height: 100vh; */\r\n  background-color: rgb(255, 255, 255);\r\n}\r\n\r\n.list-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n}\r\n.list-search {\r\n  display: flex;\r\n  width: 50%;\r\n  font-size: 1.2rem;\r\n  outline: none;\r\n  border: 0;\r\n  border-bottom: 1px solid rgb(200, 200, 200);\r\n}\r\n.list-countries {\r\n  display: flex;\r\n  flex: 1;\r\n  flex-direction: column;\r\n  padding-left: 5px;\r\n  max-height: 500px;\r\n  overflow-y: scroll;\r\n}\r\n.list-countries li:hover {\r\n  border: 1px solid rgb(99, 189, 241);\r\n}\r\n\r\n.list-item-country {\r\n  list-style: none;\r\n  padding: 10px;\r\n  font-size: 1.5rem;\r\n}\r\n.list-item-country :hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.list-item-country img {\r\n  margin-right: 10px;\r\n}\r\n.list-item-country span + span {\r\n  margin-right: 10px;\r\n  float: right;\r\n}\r\n\r\n.list-cases {\r\n  background-color: rgb(247, 171, 250);\r\n  text-align: center;\r\n  padding: 2px 0;\r\n}\r\n.list-cases span {\r\n  font-size: 1.1rem;\r\n  letter-spacing: 0.2rem;\r\n}\r\n.arrow-list {\r\n  float: right;\r\n  margin-top: 2px;\r\n  margin-right: 10px;\r\n}\r\n\r\n/* Button */\r\n.btn-fullscreen {\r\n  background-color: transparent;\r\n  border: 0;\r\n  outline: none;\r\n  z-index: 9999999;\r\n}\r\n.btn-fullscreen:hover {\r\n  cursor: pointer;\r\n  transform: scaleY(1.1);\r\n  transition: 0.5s;\r\n}\r\n.element-fullscreen {\r\n  position: absolute;\r\n  left: 0;\r\n  top: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  padding: 0;\r\n  margin: 0;\r\n  z-index: 9999;\r\n}\r\n\r\n@media screen and (min-width: 320px) and (max-width: 500px) {\r\n  .main-page-wrapper {\r\n    /* height: 82vh; */\r\n    /* height: auto; */\r\n    width: 95%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    /* height: 25%; */\r\n    height: 200px;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n  }\r\n  .table caption {\r\n    font-size: 1rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 0.9rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 1px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    height: 350px;\r\n    margin: 70px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 5px;\r\n    font-size: 1rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.8rem;\r\n  }\r\n  .footer {\r\n    position: sticky;\r\n    bottom: 0;\r\n  }\r\n}\r\n@media screen and (min-width: 501px) and (max-width: 767px) {\r\n  .main-page-wrapper {\r\n    /* width: 80%; */\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 350px;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 100%;\r\n    margin-left: 0;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 100%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 768px) and (max-width: 1024px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 65%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n\r\n@media screen and (min-width: 1025px) and (max-width: 1280px) {\r\n  .main-page-wrapper {\r\n    width: 80%;\r\n    flex-direction: column;\r\n  }\r\n  #map {\r\n    margin: 10px 0;\r\n    display: flex;\r\n    width: 100%;\r\n    height: 55%;\r\n  }\r\n  .column-2 {\r\n    width: 100%;\r\n  }\r\n  .table {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n  }\r\n  .table caption {\r\n    font-size: 1.2rem;\r\n  }\r\n  .table tr th,\r\n  td {\r\n    border-right: 1px dotted black;\r\n    font-size: 1rem;\r\n    letter-spacing: 0;\r\n  }\r\n  th {\r\n    padding: 3px;\r\n  }\r\n  .table tfoot tr td {\r\n    font-size: 0.9rem;\r\n  }\r\n\r\n  .list-wrapper {\r\n    width: 80%;\r\n    height: 300px;\r\n    margin: 80px auto 5px;\r\n  }\r\n  .list-search {\r\n    font-size: 1rem;\r\n  }\r\n  .list-item-country {\r\n    padding: 8px;\r\n    font-size: 1.2rem;\r\n  }\r\n  .list-cases span {\r\n    font-size: 0.9rem;\r\n  }\r\n}\r\n@media screen and (min-width: 1281px) and (max-width: 1900px) {\r\n  #map {\r\n    margin-right: 15px;\r\n  }\r\n  .list-wrapper {\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -2933,6 +3074,26 @@ module.exports = function (url, options) {
 
   return url;
 };
+
+/***/ }),
+
+/***/ "./node_modules/leaflet/dist/icon-fullscreen-2x.png":
+/*!**********************************************************!*\
+  !*** ./node_modules/leaflet/dist/icon-fullscreen-2x.png ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "img1/5f9466b787e4bfc7041992d84ea8f607.png";
+
+/***/ }),
+
+/***/ "./node_modules/leaflet/dist/icon-fullscreen.png":
+/*!*******************************************************!*\
+  !*** ./node_modules/leaflet/dist/icon-fullscreen.png ***!
+  \*******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "img1/e0e51f0dc929076603e24bf879cdb2bd.png";
 
 /***/ }),
 
@@ -17034,6 +17195,36 @@ module.exports = __webpack_require__.p + "img1/2b3e1faf89f94a4835397e7a43b4f77d.
 })));
 //# sourceMappingURL=leaflet-src.js.map
 
+
+/***/ }),
+
+/***/ "./node_modules/leaflet/dist/Control.FullScreen.css":
+/*!**********************************************************!*\
+  !*** ./node_modules/leaflet/dist/Control.FullScreen.css ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_Control_FullScreen_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js!./Control.FullScreen.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet/dist/Control.FullScreen.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_Control_FullScreen_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_Control_FullScreen_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
