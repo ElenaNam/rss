@@ -150,7 +150,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "recoveredAll100Day": () => /* binding */ recoveredAll100Day,
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-//import { casesAll } from "./diseased";
 let worldPopulationCount = 0;
 let casesAll = 0;
 let deathsAll = 0;
@@ -177,10 +176,7 @@ async function getDataCountries(url) {
 }
 
 getDataCountries('https://corona.lmao.ninja/v2/countries').then(function (data) {
-  //console.log(response)
-  arrData = data;
-  console.log('arrData получен из json ');
-  console.log(arrData); //данные для мира
+  arrData = data; //данные для мира
 
   worldPopulationCount = arrData.reduce((acc, el) => acc + el.population, 0);
   casesAll = arrData.reduce((acc, el) => acc + el.cases, 0);
@@ -2063,92 +2059,6 @@ let dataGeo = {
 
 /***/ }),
 
-/***/ "./src/components/diseased.js":
-/*!************************************!*\
-  !*** ./src/components/diseased.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "casesAll": () => /* binding */ casesAll,
-/* harmony export */   "deadthsAll": () => /* binding */ deadthsAll,
-/* harmony export */   "recoveredAll": () => /* binding */ recoveredAll,
-/* harmony export */   "casesAllDay": () => /* binding */ casesAllDay,
-/* harmony export */   "deadthsAllDay": () => /* binding */ deadthsAllDay,
-/* harmony export */   "recoveredAllDay": () => /* binding */ recoveredAllDay,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-let casesAll;
-let deadthsAll;
-let recoveredAll;
-let casesAllDay;
-let deadthsAllDay;
-let recoveredAllDay;
-const arrDataResult = [];
-const arrDataResultDay = [];
-/*function get(url) {
-     return new Promise((resolve, reject) => {  
-      let xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.responseType = 'json';  
-      xhr.onload = function() {
-        if (xhr.status == 200) {
-          resolve(xhr.response);
-        } else {
-          reject(Error(xhr.statusText));
-        }        
-      }; 
-      xhr.onerror = function() {
-        reject(Error("Network Error"));
-      };
-      xhr.send();
-    });
-} */
-
-async function get(url) {
-  try {
-    let response = await fetch(url);
-    let data = await response.json();
-    return data;
-  } catch (e) {
-    console.log('Ошибка ' + e);
-  }
-}
-
-get('https://disease.sh/v3/covid-19/historical/all?lastdays=366').then(function (data) {
-  const objData = data; //console.log(Object.keys(objData))
-
-  for (let key in objData) {
-    let last = Object.values(objData[key])[Object.keys(objData[key]).length - 1];
-    let beforeDay = Object.values(objData[key])[Object.keys(objData[key]).length - 2];
-    arrDataResult.push(last);
-    arrDataResultDay.push(last - beforeDay);
-    console.log(arrDataResultDay);
-  } //const arrData = Object.keys(objData);
-
-
-  casesAll = +arrDataResult[0];
-  deadthsAll = +arrDataResult[1];
-  recoveredAll = +arrDataResult[2];
-  casesAllDay = +arrDataResultDay[0];
-  deadthsAllDay = +arrDataResultDay[1];
-  recoveredAllDay = +arrDataResultDay[2];
-}, function (error) {
-  console.error("Failed!", error);
-});
-
-
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (get);
-
-/***/ }),
-
 /***/ "./src/components/footer.js":
 /*!**********************************!*\
   !*** ./src/components/footer.js ***!
@@ -2227,7 +2137,7 @@ const renderHeader = () => {
   header.appendChild(headerSection);
   const imgHeader = document.createElement('div');
   imgHeader.classList.add('header-img');
-  imgHeader.innerHTML = '<img src = "/img/logo.png" alt = "molecule" width = "100%" height = "100%"/>';
+  imgHeader.innerHTML = '<img src = "img/logo.png" alt = "molecule" width = "100%" height = "100%"/>';
   headerSection.appendChild(imgHeader);
   const titleHeader = document.createElement('div');
   titleHeader.classList.add('header-title'); //titleHeader.innerHTML = 'CORONAVIRUS (COVID-19)';
@@ -2258,14 +2168,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
-/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
-/* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
+/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table */ "./src/components/table.js");
+/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
+/* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
+
 
 
 
 let listWrapper;
 
 const getListCountries = async () => {
+  let value;
+  let arrCountriesSort = [];
   listWrapper = document.createElement('div');
   listWrapper.classList.add('list-wrapper');
   const listHeader = document.createElement('div');
@@ -2276,29 +2190,18 @@ const getListCountries = async () => {
   search.setAttribute('placeholder', 'Найти');
   search.classList.add('list-search');
   listHeader.appendChild(search);
-  (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__.default)(listWrapper, listHeader);
+  (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_3__.default)(listWrapper, listHeader);
   const listCountries = document.createElement('ul');
   listCountries.classList.add('list-countries');
   listWrapper.appendChild(listCountries);
-  const response = await (0,_countries__WEBPACK_IMPORTED_MODULE_0__.default)('https://corona.lmao.ninja/v2/countries'); //https://cors-anywhere.herokuapp.com/
-  //console.log(response);
+  /*     const response = await  getDataCountries('https://corona.lmao.ninja/v2/countries'); //https://cors-anywhere.herokuapp.com/
+      //console.log(response);
+      const arrCountries = response; */
+  //const arrCountriesSort = arrCountries./* splice(0, 9). */sort((a, b) => b.cases - a.cases);
+  //const arrCountriesSort = arrData.sort((a, b) => b.cases - a.cases);
 
-  const arrCountries = response; //const arrCountriesSort = arrCountries./* splice(0, 9). */sort((a, b) => b.cases - a.cases);
-
-  const createList = () => {
-    let value;
-
-    if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'заболевших') {
-      value = 'cases';
-    } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'умерших') {
-      value = 'deaths';
-    } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'выздоровевших') {
-      value = 'recovered';
-    } else {
-      value = 'cases';
-    }
-
-    const arrCountriesSort = arrCountries.sort((a, b) => {
+  const createList = async () => {
+    arrCountriesSort = _countries__WEBPACK_IMPORTED_MODULE_0__.arrData.sort((a, b) => {
       if (value === 'cases') {
         return b.cases - a.cases;
       } else if (value === 'deaths') {
@@ -2329,12 +2232,27 @@ const getListCountries = async () => {
             <span>${val}</span></li>
             `;
       if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';
+      listCountries.addEventListener('click', e => {
+        if (element.country === e.target.parentNode.children[1].textContent) {
+          //console.log(element.country); 
+          _state__WEBPACK_IMPORTED_MODULE_2__.state.country = element.country;
+          console.log(_state__WEBPACK_IMPORTED_MODULE_2__.state.country);
+          (0,_table__WEBPACK_IMPORTED_MODULE_1__.default)();
+        }
+      }, true);
     });
   };
 
-  createList();
+  createList(); //listCountries.addEventListener('click', (e) => { 
+  //state.country = element;
+  //console.log(state.country)        
+  //console.log(e.target.children[1].innerHTML)        
+  //console.log(el.children[1].innerHTML);          
+  //}) 
 
-  const createListInput = () => {};
+  /*     const createListInput = () => {
+          
+      } */
 
   search.addEventListener('input', e => {
     const target = e.target.value.toLowerCase();
@@ -2343,28 +2261,29 @@ const getListCountries = async () => {
       const country = elem.country.toLowerCase();
 
       if (country.indexOf(target) > -1) {
-        let value;
+        let val;
 
-        if (document.getElementById('span-cases').innerHTML === 'заболевших') {
-          value = elem.cases;
-        } else if (document.getElementById('span-cases').innerHTML === 'умерших') {
-          value = elem.deaths;
-        } else if (document.getElementById('span-cases').innerHTML === 'выздоровевших') {
-          value = elem.recovered;
+        if (value === 'cases') {
+          val = elem.cases;
+        } else if (value === 'deaths') {
+          val = elem.deaths;
+        } else if (value === 'recovered') {
+          val = elem.recovered;
+        } else {
+          val = elem.cases;
         }
 
         listCountries.innerHTML += `
                 <li class = "list-item-country">
                 <img src = ${elem.countryInfo.flag} alt = 'flag' width = '30px' />
                 <span>${elem.country}</span>
-                <span>${value}</span></li>`; //if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';
-
+                <span>${val}</span></li>`;
         /* клик по измененному списку */
 
         Array.from(listCountries.children).forEach(el => {
           el.addEventListener('click', () => {
             console.log(el.children[1].innerHTML);
-            _state__WEBPACK_IMPORTED_MODULE_1__.state.country = el.children[1].innerHTML;
+            _state__WEBPACK_IMPORTED_MODULE_2__.state.country = el.children[1].innerHTML;
           });
         });
       }
@@ -2372,34 +2291,51 @@ const getListCountries = async () => {
   });
   /* клик по изначально сформированному списку */
 
-  Array.from(listCountries.children).forEach(el => {
-    el.addEventListener('click', () => {
-      console.log(el.children[1].innerHTML);
-    });
-  });
-  const casesCount = document.createElement('div');
-  casesCount.classList.add('list-cases');
-  casesCount.innerHTML = `<span id = 'span-cases'>заболевших</span>`;
+  /*     Array.from(listCountries.children).forEach((el) => {    
+          el.addEventListener('click', () => { 
+              state.country = el;
+              console.log(state.country)        
+              console.log(el)        
+           //console.log(el.children[1].innerHTML);          
+          }) 
+      })  */
+
+  const showState = document.createElement('div');
+  showState.classList.add('list-cases');
+  showState.innerHTML = `<span id = 'span-cases'>заболевших</span>`;
+  var stateHeader = showState.children[0];
   const arrowList = document.createElement('div');
   arrowList.classList.add('arrow', 'arrow-list');
   arrowList.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>';
-  casesCount.appendChild(arrowList);
-  listWrapper.appendChild(casesCount); // переключатель заболевших/умерших/выздоровевших
+  showState.appendChild(arrowList);
+  listWrapper.appendChild(showState); // переключатель заболевших/умерших/выздоровевших
 
   arrowList.addEventListener('click', () => {
-    arrowList.style.transform = 'scaleY(1)';
-
-    if (document.getElementById('span-cases').innerHTML === 'заболевших') {
-      document.getElementById('span-cases').innerHTML = 'умерших';
-    } else if (document.getElementById('span-cases').innerHTML === 'умерших') {
-      document.getElementById('span-cases').innerHTML = 'выздоровевших';
+    if (stateHeader.innerHTML === 'заболевших') {
+      stateHeader.innerHTML = 'умерших';
+      value = 'deaths';
+    } else if (stateHeader.innerHTML === 'умерших') {
+      stateHeader.innerHTML = 'выздоровевших';
+      value = 'recovered';
     } else {
-      document.getElementById('span-cases').innerHTML = 'заболевших';
+      stateHeader.innerHTML = 'заболевших';
+      value = 'cases';
     }
 
     listCountries.innerHTML = "";
     createList();
   });
+  /* 
+      if(stateHeader && stateHeader.innerHTML === 'заболевших') {
+          value = 'cases';
+      } else if (stateHeader && stateHeader.innerHTML === 'умерших') {
+          value = 'deaths';
+      } else if (stateHeader && stateHeader.innerHTML === 'выздоровевших') {
+          value = 'recovered';
+      } else {
+          value = 'cases';
+      }
+   */
 };
 
 
@@ -2503,8 +2439,8 @@ __webpack_require__.r(__webpack_exports__);
 let mapWrapper;
 
 const renderMap = async () => {
-  console.log('map1 ');
-  console.log(_countries__WEBPACK_IMPORTED_MODULE_3__.arrData);
+  //console.log('map1 ')
+  //console.log(arrData)
   mapWrapper = document.createElement('div');
   mapWrapper.id = 'map';
   let mapOptions = {
@@ -2642,57 +2578,26 @@ const renderMap = async () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "state": () => /* binding */ state,
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */   "state": () => /* binding */ state
 /* harmony export */ });
-/* harmony import */ var _diseased__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./diseased */ "./src/components/diseased.js");
-/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
+/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
 
-
+/* 
 let state = {};
-const getState = setTimeout(() => {
-  console.log('worldPopulationCount in state ' + _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount);
-  console.log('state ');
-  console.log(_countries__WEBPACK_IMPORTED_MODULE_1__.arrData);
-  state = {
-    country: '',
+const getState = async () =>  {  
 
-    /* за весь период в абс.цифрах */
-    casesAllAbsoluteCountAlltime: _diseased__WEBPACK_IMPORTED_MODULE_0__.casesAll,
-    deadthsAllAbsoluteCountAlltime: _diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAll,
-    recoveredAllAbsoluteCountAlltime: _diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAll,
 
-    /* за весь период на 100тыс населения */
-    casesAll100Alltime: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.casesAll / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000),
-    // неточные данные, не учитываются все страны
-    deadthsAll100Alltime: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAll / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000),
-    recoveredAll100Alltime: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAll / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000),
+  return state = { 
+      country: '',  
 
-    /* за последний день в абс.цифрах */
-    casesAllAbsoluteCountLastDay: _diseased__WEBPACK_IMPORTED_MODULE_0__.casesAllDay,
-    deadthsAllAbsoluteCountLastDay: _diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAllDay,
-    recoveredAllAbsoluteCountLastDay: _diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAllDay,
+  }
 
-    /* за последний день на 100тыс населения */
-    casesAll100LastDay: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.casesAllDay / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000),
-    deadthsAll100LastDay: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.deadthsAllDay / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000),
-    recoveredAll100LastDay: Math.ceil(_diseased__WEBPACK_IMPORTED_MODULE_0__.recoveredAllDay / _countries__WEBPACK_IMPORTED_MODULE_1__.worldPopulationCount * 100000)
-  };
-  console.log('заболевших всего в абс.цифрах ' + state.casesAllAbsoluteCountAlltime);
-  console.log('умерших всего в абс.цифрах ' + state.deadthsAllAbsoluteCountAlltime);
-  console.log('выздоровевших всего в абс.цифрах ' + state.recoveredAllAbsoluteCountAlltime);
-  console.log('заболевших всего на 100тыс ' + state.casesAll100Alltime);
-  console.log('умерших всего на 100тыс ' + state.deadthsAll100Alltime);
-  console.log('выздоровевших всего на 100тыс ' + state.recoveredAll100Alltime);
-  console.log('заболевших за день в абс.цифрах ' + state.casesAllAbsoluteCountLastDay);
-  console.log('умерших за день  в абс.цифрах ' + state.deadthsAllAbsoluteCountLastDay);
-  console.log('выздоровевших за день  в абс.цифрах' + state.recoveredAllAbsoluteCountLastDay);
-  console.log('заболевших за день на 100тыс ' + state.casesAll100LastDay);
-  console.log('умерших за день  на 100тыс ' + state.deadthsAll100LastDay);
-  console.log('выздоровевших за день  на 100тыс' + state.recoveredAll100LastDay);
-}, 900);
+} */
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (getState);
+const state = {
+  country: ''
+};
+ //export default getState;
 
 /***/ }),
 
@@ -2711,23 +2616,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./countries */ "./src/components/countries.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./state */ "./src/components/state.js");
 /* harmony import */ var _btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./btnFullScreenVar */ "./src/components/btnFullScreenVar.js");
-//import {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
 
 
 
 let table;
 
 const renderTable = () => {
-  table = document.createElement('table');
+  /*     if(table) {
+          table.innerHTML = '';
+      } else {
+          table = document.createElement('table');
+      } */
+  table = document.createElement('table'); //let caption;
+  //const caption = document.createElement('caption');
+
   setTimeout(() => {
     table.classList.add('table');
+    /*         if (caption) {
+                caption.innerHTML = '';
+            } else {
+                caption = document.createElement('caption');
+            } */
+
     const caption = document.createElement('caption');
 
     if (_state__WEBPACK_IMPORTED_MODULE_1__.state.country === '') {
-      caption.innerHTML = `В мире`;
+      caption.innerText = `В мире`;
     } else {
-      caption.innerHTML = _state__WEBPACK_IMPORTED_MODULE_1__.state.country;
-    }
+      caption.innerText = `${_state__WEBPACK_IMPORTED_MODULE_1__.state.country}`;
+    } //caption.innerText = `${state.country}`;
+
 
     table.appendChild(caption);
     (0,_btnFullScreenVar__WEBPACK_IMPORTED_MODULE_2__.default)(table, caption);
@@ -2746,16 +2664,13 @@ const renderTable = () => {
     tr2.style.backgroundColor = '#EFEBEB';
     tr2.style.fontWeight = 'bold';
     table.appendChild(tr2);
-    const td1 = document.createElement('td'); //td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
-
+    const td1 = document.createElement('td');
     td1.innerHTML = `${_countries__WEBPACK_IMPORTED_MODULE_0__.casesAll}`;
     tr2.appendChild(td1);
-    const td2 = document.createElement('td'); //td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
-
+    const td2 = document.createElement('td');
     td2.innerHTML = `${_countries__WEBPACK_IMPORTED_MODULE_0__.deathsAll}`;
     tr2.appendChild(td2);
-    const td3 = document.createElement('td'); //td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
-
+    const td3 = document.createElement('td');
     td3.innerHTML = `${_countries__WEBPACK_IMPORTED_MODULE_0__.recoveredAll}`;
     tr2.appendChild(td3);
     const tf = document.createElement('tfoot');
@@ -2781,8 +2696,7 @@ const renderTable = () => {
     tr4.appendChild(tdValue);
     table.appendChild(tf);
     let period = document.getElementById('span-period');
-    let value = document.getElementById('span-value'); //console.log('period ' + period);
-
+    let value = document.getElementById('span-value');
     tdPeriod.addEventListener('click', () => {
       if (period.innerHTML === 'за весь период' && value.innerHTML === 'в абсолютных цифрах') {
         period.innerHTML = 'за последний день';
@@ -2868,15 +2782,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_mainPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/mainPage */ "./src/components/mainPage.js");
 /* harmony import */ var _components_footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/footer */ "./src/components/footer.js");
 /* harmony import */ var _components_countries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/countries */ "./src/components/countries.js");
-/* harmony import */ var _components_diseased__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/diseased */ "./src/components/diseased.js");
 
 
 
 
 
- //import renderMap from './components/map';
 
-
+ //import getState from './components/state';
 
 /* window.onload = setTimeout(() => {
   renderHeader();
@@ -2884,13 +2796,11 @@ __webpack_require__.r(__webpack_exports__);
   renderFooter();
 }, 1500); */
 
-window.onload = () => {
-  (0,_components_countries__WEBPACK_IMPORTED_MODULE_6__.default)('https://corona.lmao.ninja/v2/countries');
-  (0,_components_diseased__WEBPACK_IMPORTED_MODULE_7__.default)('https://disease.sh/v3/covid-19/historical/all?lastdays=366'); //renderMap();
-
+window.onload = async () => {
+  await (0,_components_countries__WEBPACK_IMPORTED_MODULE_6__.default)('https://corona.lmao.ninja/v2/countries');
   (0,_components_header__WEBPACK_IMPORTED_MODULE_3__.default)();
   (0,_components_mainPage__WEBPACK_IMPORTED_MODULE_4__.default)();
-  (0,_components_footer__WEBPACK_IMPORTED_MODULE_5__.default)();
+  (0,_components_footer__WEBPACK_IMPORTED_MODULE_5__.default)(); //getState();
 };
 
 /***/ }),
