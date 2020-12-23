@@ -35,9 +35,6 @@
   }
 }
 
-
-
-
 .header-section {
   display: flex;
   margin-top: 0.9%;
@@ -122,10 +119,25 @@
     font-size: 2.5rem;
   }
   .header-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .header-title {
+    width: 100%;
+    font-size: 2.5rem;
+  }
+  .header-subtitle {
+    font-size: 1.2rem;
+  }
 }
 @media screen and (min-width: 1281px) and (max-width: 1900px) {
+  .header-section {
+    margin-top: -0.3%;
+    margin-bottom: 0.3%;
+  }
+  .header-subtitle {
+    margin-top: -5px;
+    font-size: 1.3rem;
+  }
 }

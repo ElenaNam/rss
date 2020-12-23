@@ -10,11 +10,19 @@ body {
   height: 80vh;
   margin: auto;
   display: flex;
-  border: 1px solid red;
+  /*  border: 1px solid red; */
 }
+
+/*----column1-----*/
+.column-1 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
 /* КАРТА */
 #map {
-  width: 50%;
+  width: 100%;
   height: 40vh;
   margin-top: 1%;
   margin-left: 6%;
@@ -73,6 +81,22 @@ body {
   list-style: none;
   padding: 0;
   text-align: center;
+}
+
+/* ГРАФИК */
+
+.chart-wrapper {
+  position: relative;
+  margin-left: 6%;
+  margin-top: 70px;
+  width: 60%;
+  height: 300px;
+  border: 1px solid #db6b02;
+  box-shadow: 3px 3px 5px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 }
 
 /*----column2-----*/
@@ -165,7 +189,7 @@ th {
 }
 .arrow:hover {
   cursor: pointer;
-  transform: scaleY(1.1);
+  transform: scaleY(1.2);
   transition: 0.5s;
 }
 .arrow-table {
@@ -288,9 +312,12 @@ th {
 @media screen and (min-width: 320px) and (max-width: 500px) {
   .main-page-wrapper {
     /* height: 82vh; */
-    /* height: auto; */
+    height: auto;
     width: 95%;
     flex-direction: column;
+  }
+  .column-1 {
+    width: 100%;
   }
   #map {
     margin: 10px 0;
@@ -299,6 +326,13 @@ th {
     /* height: 25%; */
     height: 200px;
   }
+  .chart-wrapper {
+    width: 100%;
+    margin: 0;
+    height: 200px;
+    font-size: 1.2rem;
+  }
+
   .column-2 {
     width: 100%;
   }
@@ -337,20 +371,30 @@ th {
     font-size: 0.8rem;
   }
   .footer {
-    position: sticky;
+    /*position: sticky;*/
     bottom: 0;
   }
 }
 @media screen and (min-width: 501px) and (max-width: 767px) {
   .main-page-wrapper {
     /* width: 80%; */
+    height: auto;
     flex-direction: column;
+  }
+  .column-1 {
+    width: 100%;
   }
   #map {
     margin: 10px 0;
     display: flex;
     width: 100%;
     height: 350px;
+  }
+  .chart-wrapper {
+    width: 100%;
+    margin: 0;
+    height: 200px;
+    font-size: 1.5rem;
   }
   .column-2 {
     width: 100%;
@@ -391,23 +435,33 @@ th {
     font-size: 0.9rem;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .main-page-wrapper {
     width: 80%;
+    height: auto;
     flex-direction: column;
   }
-  #map {
-    margin: 10px 0;
-    display: flex;
+  .column-1 {
     width: 100%;
-    height: 65%;
+  }
+  #map {
+    margin: 10px auto;
+    display: flex;
+    width: 80%;
+    height: 370px;
+  }
+  .chart-wrapper {
+    width: 80%;
+    margin: 0 auto;
+    height: 250px;
+    font-size: 1.7rem;
   }
   .column-2 {
     width: 100%;
   }
   .table {
     width: 80%;
-    margin: 0 auto;
+    margin: 10px auto;
   }
   .table caption {
     font-size: 1.2rem;
@@ -442,19 +496,29 @@ th {
   }
 }
 
-@media screen and (min-width: 1025px) and (max-width: 1280px) {
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
   .main-page-wrapper {
     width: 80%;
-    flex-direction: column;
-  }
-  #map {
-    margin: 10px 0;
-    display: flex;
-    width: 100%;
-    height: 55%;
+    height: auto;
   }
   .column-2 {
+    width: 50%;
+  }
+  #map {
+    /* margin: 10px 0; */
+    display: flex;
     width: 100%;
+    height: 350px;
+  }
+  .chart-wrapper {
+    width: 60%;
+    margin-top: 23px;
+    height: 230px;
+    font-size: 1.2rem;
+  }
+
+  .column-2 {
+    width: 50%;
   }
   .table {
     width: 80%;
@@ -478,7 +542,7 @@ th {
 
   .list-wrapper {
     width: 80%;
-    height: 300px;
+    height: 459px;
     margin: 80px auto 5px;
   }
   .list-search {
@@ -493,9 +557,62 @@ th {
   }
 }
 @media screen and (min-width: 1281px) and (max-width: 1900px) {
-  #map {
-    margin-right: 15px;
+  .main-page-wrapper {
+    width: 80%;
+    height: auto;
   }
+  .column-2 {
+    width: 50%;
+  }
+  #map {
+    /* margin: 10px 0; */
+    display: flex;
+    width: 100%;
+    height: 350px;
+  }
+  .chart-wrapper {
+    width: 60%;
+    margin-top: 23px;
+    height: 230px;
+    font-size: 1.2rem;
+  }
+
+  .column-2 {
+    width: 50%;
+  }
+  .table {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .table caption {
+    font-size: 1.2rem;
+  }
+  .table tr th,
+  td {
+    border-right: 1px dotted black;
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+  th {
+    padding: 3px;
+  }
+  .table tfoot tr td {
+    font-size: 0.9rem;
+  }
+
   .list-wrapper {
+    width: 80%;
+    height: 459px;
+    margin: 80px auto 5px;
+  }
+  .list-search {
+    font-size: 1rem;
+  }
+  .list-item-country {
+    padding: 8px;
+    font-size: 1.2rem;
+  }
+  .list-cases span {
+    font-size: 0.9rem;
   }
 }

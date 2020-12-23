@@ -10,6 +10,7 @@ const getState = setTimeout (() =>  {
 
   state = { 
   country: '',
+  
     /* за весь период в абс.цифрах */
   casesAllAbsoluteCountAlltime: casesAll,
   deadthsAllAbsoluteCountAlltime: deadthsAll,

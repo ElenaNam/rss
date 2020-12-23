@@ -131,13 +131,14 @@ const getListCountries = async () => {
     casesCount.innerHTML = `<span id = 'span-cases'>заболевших</span>`;  
     const arrowList = document.createElement('div');
     arrowList.classList.add('arrow', 'arrow-list');   
-    arrowList.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>'
+    arrowList.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'
     casesCount.appendChild(arrowList);    
     listWrapper.appendChild(casesCount); 
 
          // переключатель заболевших/умерших/выздоровевших
 
     arrowList.addEventListener('click', () => {
+        arrowList.style.transform = 'scaleY(1)';
         if(document.getElementById('span-cases').innerHTML === 'заболевших') {           
             document.getElementById('span-cases').innerHTML = 'умерших'; 
 

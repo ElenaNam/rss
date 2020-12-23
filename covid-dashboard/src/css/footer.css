@@ -62,10 +62,18 @@
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .footer-wrapper {
+    position: absolute;
+    bottom: 0;
+  }
   .logo-wrapper a img {
     width: 7rem;
     height: 2.3rem;
   }
 }
 @media screen and (min-width: 1281px) and (max-width: 1900px) {
+  .footer-wrapper {
+    position: absolute;
+    bottom: 0;
+  }
 }

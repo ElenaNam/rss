@@ -1,3 +1,4 @@
+import {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
 import {state} from './state';
 //import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
 import getDataCountries from './countries';
@@ -20,7 +21,8 @@ const renderTable = () => {
         if(state.country === '') {
             caption.innerHTML = `В мире`;
         } else {
-            caption.innerHTML = state.country;        }
+            caption.innerHTML = state.country;
+        }
               
         
         table.appendChild(caption);
@@ -42,13 +44,16 @@ const renderTable = () => {
         const tr2 = document.createElement('tr');
         table.appendChild(tr2);
         const td1 = document.createElement('td');
-        td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
+        //td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
+        td1.innerHTML = `${casesAll}`;
         tr2.appendChild(td1);
         const td2 = document.createElement('td');
-        td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
+        //td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
+        td2.innerHTML = `${deadthsAll}`;
         tr2.appendChild(td2);
         const td3 = document.createElement('td');
-        td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
+        //td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
+        td3.innerHTML = `${recoveredAll}`;
         tr2.appendChild(td3);
 
         const tf = document.createElement('tfoot');
@@ -62,7 +67,7 @@ const renderTable = () => {
         tdPeriod.innerHTML = `<span id = 'span-period'>за весь период</span>`;  
         const arrowTable = document.createElement('div');
         arrowTable.classList.add('arrow', 'arrow-table');   
-        arrowTable.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>'   
+        arrowTable.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'   
         tdPeriod.appendChild(arrowTable);
         tr3.appendChild(tdPeriod);
 
@@ -71,7 +76,7 @@ const renderTable = () => {
         tdValue.innerHTML = `<span id = 'span-value'>в абсолютных цифрах</span>`;  
         const arrowTable1 = document.createElement('div');
         arrowTable1.classList.add('arrow', 'arrow-table');   
-        arrowTable1.innerHTML = '<img src = "img/arrows.png" alt = "arrow" width = "30px"/>'    
+        arrowTable1.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'    
         tdValue.appendChild(arrowTable1);      
         tr4.appendChild(tdValue);
 
@@ -80,26 +85,27 @@ const renderTable = () => {
 
         tdPeriod.addEventListener('click', () => {
             if(document.getElementById('span-period').innerHTML === 'за весь период') {               
-                document.getElementById('span-period').innerHTML = 'за последний день';       
+                document.getElementById('span-period').innerHTML = 'за последний день';
+                td1.innerHTML = `${casesAllDay}`;       
+                td2.innerHTML = `${deadthsAllDay}`;       
+                td3.innerHTML = `${recoveredAllDay}`;       
 
             } else {               
                 document.getElementById('span-period').innerHTML = 'за весь период';
+                td1.innerHTML = `${casesAll}`;       
+                td2.innerHTML = `${deadthsAll}`;       
+                td3.innerHTML = `${recoveredAll}`; 
             }            
         }) 
 
-        tdValue.addEventListener('click', () => {
-            if(document.getElementById('span-value').innerHTML === 'в абсолютных цифрах') {
-               
-                document.getElementById('span-value').innerHTML = 'на 100тыс населения';            
-
-            } else {
-                
+        tdValue.addEventListener('click', (e) => {
+            
+            if(document.getElementById('span-value').innerHTML === 'в абсолютных цифрах') {               
+                document.getElementById('span-value').innerHTML = 'на 100тыс населения';          
+            } else {                
                 document.getElementById('span-value').innerHTML = 'в абсолютных цифрах';
             }            
-        })     
-        
-
-
+        }) 
     }, 1000)
 
 }
