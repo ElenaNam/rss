@@ -1,5 +1,3 @@
-//import { casesAll } from "./diseased";
-
  
 let worldPopulationCount = 0;
 let casesAll = 0;
@@ -29,10 +27,7 @@ async function getDataCountries(url) {
 }
 
 getDataCountries('https://corona.lmao.ninja/v2/countries').then(function(data) {
-    //console.log(response)
     arrData = data;
-    console.log('arrData получен из json ')
-    console.log(arrData); 
 
     //данные для мира
     worldPopulationCount = arrData.reduce((acc, el) => acc + el.population, 0);

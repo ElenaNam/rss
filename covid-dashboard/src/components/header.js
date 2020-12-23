@@ -49,7 +49,7 @@ const renderHeader = () => {
 
     const imgHeader = document.createElement('div');
     imgHeader.classList.add('header-img');
-    imgHeader.innerHTML = '<img src = "/img/logo.png" alt = "molecule" width = "100%" height = "100%"/>';
+    imgHeader.innerHTML = '<img src = "img/logo.png" alt = "molecule" width = "100%" height = "100%"/>';
     headerSection.appendChild(imgHeader);
     
     const titleHeader = document.createElement('div');

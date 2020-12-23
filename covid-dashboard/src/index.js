@@ -4,10 +4,9 @@ import './css/footer.css';
 import renderHeader from './components/header';
 import renderMainPage from './components/mainPage';
 import renderFooter from './components/footer';
-//import renderMap from './components/map';
 
 import getDataCountries from './components/countries';
-import get from './components/diseased';
+//import getState from './components/state';
 
 
 /* window.onload = setTimeout(() => {
@@ -17,12 +16,10 @@ import get from './components/diseased';
 }, 1500); */
 
 
-window.onload = () => {
-  getDataCountries('https://corona.lmao.ninja/v2/countries');
-  get('https://disease.sh/v3/covid-19/historical/all?lastdays=366');
-  //renderMap();
-
+window.onload = async() => {
+  await getDataCountries('https://corona.lmao.ninja/v2/countries');
   renderHeader();
   renderMainPage();
   renderFooter();
+  //getState();
 };

@@ -49,7 +49,7 @@ get('https://disease.sh/v3/covid-19/historical/all?lastdays=366').then(function(
         let beforeDay = Object.values(objData[key])[Object.keys(objData[key]).length-2]; 
         arrDataResult.push(last); 
         arrDataResultDay.push(last - beforeDay);
-        console.log(arrDataResultDay);
+        //console.log(arrDataResultDay);
     }  
     //const arrData = Object.keys(objData);
        

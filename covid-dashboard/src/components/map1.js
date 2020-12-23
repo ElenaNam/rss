@@ -11,8 +11,8 @@ import changeSizeScreen1 from './btnFullScreenVar';
 let mapWrapper;
 
 const renderMap = async () => { 
-    console.log('map1 ')
-    console.log(arrData)
+    //console.log('map1 ')
+    //console.log(arrData)
 
     mapWrapper = document.createElement('div');
     mapWrapper.id = 'map'; 

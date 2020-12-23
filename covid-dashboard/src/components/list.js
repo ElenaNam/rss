@@ -1,9 +1,15 @@
-import getDataCountries from './countries';
+import getDataCountries, { arrData } from './countries';
+import renderTable from './table'
+
 import { state } from './state';
 import changeSizeScreen1 from './btnFullScreenVar';
+
 let listWrapper;
 
 const getListCountries = async () => {
+
+    let value;
+    let arrCountriesSort = [];
 
     listWrapper = document.createElement('div');
     listWrapper.classList.add('list-wrapper');
@@ -23,25 +29,16 @@ const getListCountries = async () => {
     listCountries.classList.add('list-countries');
     listWrapper.appendChild(listCountries);
 
-    const response = await  getDataCountries('https://corona.lmao.ninja/v2/countries'); //https://cors-anywhere.herokuapp.com/
+/*     const response = await  getDataCountries('https://corona.lmao.ninja/v2/countries'); //https://cors-anywhere.herokuapp.com/
     //console.log(response);
-    const arrCountries = response;
-
+    const arrCountries = response; */
 
 
     //const arrCountriesSort = arrCountries./* splice(0, 9). */sort((a, b) => b.cases - a.cases);
-    const createList = () => {
-        let value;
-        if(document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'заболевших') {
-            value = 'cases';
-        } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'умерших') {
-            value = 'deaths';
-        } else if (document.getElementById('span-cases') && document.getElementById('span-cases').innerHTML === 'выздоровевших') {
-            value = 'recovered';
-        } else {
-            value = 'cases';
-        }
-        const arrCountriesSort = arrCountries.sort((a, b) => {
+    //const arrCountriesSort = arrData.sort((a, b) => b.cases - a.cases);
+    const createList = async() => {        
+
+        arrCountriesSort = arrData.sort((a, b) => {
             if (value === 'cases') {
                 return b.cases - a.cases;
             } else if (value === 'deaths') {
@@ -51,9 +48,7 @@ const getListCountries = async () => {
             } else {
                 return b.cases - a.cases;
             }
-
-        });
-
+        }); 
 
         arrCountriesSort.forEach((element, i) => {
 
@@ -74,14 +69,33 @@ const getListCountries = async () => {
             <span>${element.country}</span>
             <span>${val}</span></li>
             `
-            if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';    
+            if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';  
+
+          
+            listCountries.addEventListener('click', (e) => { 
+                if (element.country === e.target.parentNode.children[1].textContent ) {
+                    //console.log(element.country); 
+                    state.country = element.country;
+                    console.log(state.country);
+                    renderTable();
+
+                }     
+            }, true)    
+             
         });
     }
     createList();
 
-    const createListInput = () => {
+   //listCountries.addEventListener('click', (e) => { 
+        //state.country = element;
+        //console.log(state.country)        
+        //console.log(e.target.children[1].innerHTML)        
+     //console.log(el.children[1].innerHTML);          
+    //}) 
+
+/*     const createListInput = () => {
         
-    }
+    } */
 
     search.addEventListener('input', (e) => {
         const target = e.target.value.toLowerCase();
@@ -89,21 +103,23 @@ const getListCountries = async () => {
         arrCountriesSort.filter((elem) => {
             const country = elem.country.toLowerCase();
             if(country.indexOf(target) > -1) {
-                let value;
-                if(document.getElementById('span-cases').innerHTML === 'заболевших') {
-                    value = elem.cases;
-                } else if (document.getElementById('span-cases').innerHTML === 'умерших') {
-                    value = elem.deaths;
-                } else if (document.getElementById('span-cases').innerHTML === 'выздоровевших') {
-                    value = elem.recovered;
+
+                let val;
+                if (value === 'cases') {
+                    val = elem.cases;
+                } else if (value === 'deaths') {
+                    val = elem.deaths;
+                } else if (value === 'recovered') {
+                    val = elem.recovered;
+                } else {
+                    val = elem.cases;
                 }
 
                 listCountries.innerHTML +=`
                 <li class = "list-item-country">
                 <img src = ${elem.countryInfo.flag} alt = 'flag' width = '30px' />
                 <span>${elem.country}</span>
-                <span>${value}</span></li>`  
-                //if (i % 2 === 0) listCountries.children[i].style.backgroundColor = '#f2f2f2';
+                <span>${val}</span></li>`                  
                 
                 /* клик по измененному списку */
                 Array.from(listCountries.children).forEach((el) => {    
@@ -118,38 +134,62 @@ const getListCountries = async () => {
        
     })
            /* клик по изначально сформированному списку */
-    Array.from(listCountries.children).forEach((el) => {    
-        el.addEventListener('click', () => {         
-         console.log(el.children[1].innerHTML);          
+/*     Array.from(listCountries.children).forEach((el) => {    
+        el.addEventListener('click', () => { 
+            state.country = el;
+            console.log(state.country)        
+            console.log(el)        
+         //console.log(el.children[1].innerHTML);          
         }) 
-    }) 
+    })  */
 
+    const showState = document.createElement('div');  
+    showState.classList.add('list-cases');
+    showState.innerHTML = `<span id = 'span-cases'>заболевших</span>`; 
+    var stateHeader = showState.children[0]; 
 
-
-    const casesCount = document.createElement('div');  
-    casesCount.classList.add('list-cases');
-    casesCount.innerHTML = `<span id = 'span-cases'>заболевших</span>`;  
     const arrowList = document.createElement('div');
     arrowList.classList.add('arrow', 'arrow-list');   
     arrowList.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'
-    casesCount.appendChild(arrowList);    
-    listWrapper.appendChild(casesCount); 
 
-         // переключатель заболевших/умерших/выздоровевших
+    showState.appendChild(arrowList);    
+    listWrapper.appendChild(showState); 
+
+
+
+    // переключатель заболевших/умерших/выздоровевших
 
     arrowList.addEventListener('click', () => {
-        arrowList.style.transform = 'scaleY(1)';
-        if(document.getElementById('span-cases').innerHTML === 'заболевших') {           
-            document.getElementById('span-cases').innerHTML = 'умерших'; 
+        
+        if(stateHeader.innerHTML === 'заболевших') {           
+            stateHeader.innerHTML = 'умерших'; 
+            value = 'deaths';           
 
-        } else if(document.getElementById('span-cases').innerHTML === 'умерших') {            
-            document.getElementById('span-cases').innerHTML = 'выздоровевших';
+        } else if(stateHeader.innerHTML === 'умерших') {            
+            stateHeader.innerHTML = 'выздоровевших';
+            value = 'recovered';
         } else {
-            document.getElementById('span-cases').innerHTML = 'заболевших';
+            stateHeader.innerHTML = 'заболевших';
+            value = 'cases';
         }  
         listCountries.innerHTML = "";
         createList(); 
     }) 
+
+
+/* 
+    if(stateHeader && stateHeader.innerHTML === 'заболевших') {
+        value = 'cases';
+    } else if (stateHeader && stateHeader.innerHTML === 'умерших') {
+        value = 'deaths';
+    } else if (stateHeader && stateHeader.innerHTML === 'выздоровевших') {
+        value = 'recovered';
+    } else {
+        value = 'cases';
+    }
+ */
+
+
 }
 
 export { listWrapper }

@@ -1,4 +1,3 @@
-//import {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
 import getDataCountries, {arrData, casesAll, deathsAll, recoveredAll, casesAllDay, deathsAllDay, recoveredAllDay,
     casesAll100, deathsAll100,  recoveredAll100,  casesAll100Day, deathsAll100Day, recoveredAll100Day } from './countries'
 import {state} from './state';
@@ -6,16 +5,34 @@ import changeSizeScreen1 from './btnFullScreenVar';
 
 
 let table;
-const renderTable = () => {
+const renderTable =  () => {
+    
+/*     if(table) {
+        table.innerHTML = '';
+    } else {
+        table = document.createElement('table');
+    } */
+
     table = document.createElement('table');
+    //let caption;
+    //const caption = document.createElement('caption');
+
     setTimeout(() => {
         table.classList.add('table');
-        const caption = document.createElement('caption');
-        if(state.country === '') {
-            caption.innerHTML = `В мире`;
+/*         if (caption) {
+            caption.innerHTML = '';
         } else {
-            caption.innerHTML = state.country;
-        }
+            caption = document.createElement('caption');
+        } */
+
+        const caption = document.createElement('caption');
+
+        if(state.country === '') {
+            caption.innerText = `В мире`;
+        } else {            
+            caption.innerText = `${state.country}`;
+        } 
+        //caption.innerText = `${state.country}`;
               
         
         table.appendChild(caption);
@@ -38,47 +55,52 @@ const renderTable = () => {
         tr2.style.backgroundColor = '#EFEBEB';
         tr2.style.fontWeight = 'bold';
         table.appendChild(tr2);
+
         const td1 = document.createElement('td');
-        //td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
         td1.innerHTML = `${casesAll}`;        
         tr2.appendChild(td1);
+
         const td2 = document.createElement('td');
-        //td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
         td2.innerHTML = `${deathsAll}`;
         tr2.appendChild(td2);
+
         const td3 = document.createElement('td');
-        //td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
         td3.innerHTML = `${recoveredAll}`;
         tr2.appendChild(td3);
 
         const tf = document.createElement('tfoot');
         const tr3 = document.createElement('tr');
         const tr4 = document.createElement('tr');
+
         tf.appendChild(tr3);
         tf.appendChild(tr4);
 
         const tdPeriod = document.createElement('td');
         tdPeriod.setAttribute('colspan', '3');                
-        tdPeriod.innerHTML = `<span id = 'span-period'>за весь период</span>`;  
+        tdPeriod.innerHTML = `<span id = 'span-period'>за весь период</span>`; 
+
         const arrowTable = document.createElement('div');
         arrowTable.classList.add('arrow', 'arrow-table');   
-        arrowTable.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'   
+        arrowTable.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'
+
         tdPeriod.appendChild(arrowTable);
         tr3.appendChild(tdPeriod);
 
         const tdValue = document.createElement('td');
         tdValue.setAttribute('colspan', '3');   
-        tdValue.innerHTML = `<span id = 'span-value'>в абсолютных цифрах</span>`;  
+        tdValue.innerHTML = `<span id = 'span-value'>в абсолютных цифрах</span>`; 
+        
         const arrowTable1 = document.createElement('div');
         arrowTable1.classList.add('arrow', 'arrow-table');   
-        arrowTable1.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'    
+        arrowTable1.innerHTML = '<img src = "img/arrows1.png" alt = "arrow" width = "30px"/>'  
+
         tdValue.appendChild(arrowTable1);      
         tr4.appendChild(tdValue);
 
         table.appendChild(tf);
+
         let period = document.getElementById('span-period')
-        let value = document.getElementById('span-value')
-        //console.log('period ' + period);
+        let value = document.getElementById('span-value')   
 
         tdPeriod.addEventListener('click', () => {
             if(period.innerHTML === 'за весь период' && value.innerHTML === 'в абсолютных цифрах') {               
