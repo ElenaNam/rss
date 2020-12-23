@@ -1,15 +1,8 @@
-import {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
+//import {casesAll, deadthsAll, recoveredAll, casesAllDay, deadthsAllDay, recoveredAllDay} from './diseased';
+import getDataCountries, {arrData, casesAll, deathsAll, recoveredAll, casesAllDay, deathsAllDay, recoveredAllDay,
+    casesAll100, deathsAll100,  recoveredAll100,  casesAll100Day, deathsAll100Day, recoveredAll100Day } from './countries'
 import {state} from './state';
-//import get, {casesAll, deadthsAll, recoveredAll} from './diseased';
-import getDataCountries from './countries';
-/* import changeSizeScreen from './btnFullscreen'; */
 import changeSizeScreen1 from './btnFullScreenVar';
-
-const arrData = setTimeout(() => {   
-     //console.log ('state ' + state.casesAllAbsoluteCountAlltime);
-     //console.log ('state ' + state.deadthsAllAbsoluteCountAlltime);
-     //console.log ('state ' + state.recoveredAllAbsoluteCountAlltime);
-}, 1000) 
 
 
 let table;
@@ -42,14 +35,16 @@ const renderTable = () => {
         
         
         const tr2 = document.createElement('tr');
+        tr2.style.backgroundColor = '#EFEBEB';
+        tr2.style.fontWeight = 'bold';
         table.appendChild(tr2);
         const td1 = document.createElement('td');
         //td1.innerHTML = `${state.casesAllAbsoluteCountAlltime}`;
-        td1.innerHTML = `${casesAll}`;
+        td1.innerHTML = `${casesAll}`;        
         tr2.appendChild(td1);
         const td2 = document.createElement('td');
         //td2.innerHTML = `${state.deadthsAllAbsoluteCountAlltime}`;
-        td2.innerHTML = `${deadthsAll}`;
+        td2.innerHTML = `${deathsAll}`;
         tr2.appendChild(td2);
         const td3 = document.createElement('td');
         //td3.innerHTML = `${state.recoveredAllAbsoluteCountAlltime}`;
@@ -81,30 +76,57 @@ const renderTable = () => {
         tr4.appendChild(tdValue);
 
         table.appendChild(tf);
-        console.log(document.getElementById('span-period').innerHTML);
+        let period = document.getElementById('span-period')
+        let value = document.getElementById('span-value')
+        //console.log('period ' + period);
 
         tdPeriod.addEventListener('click', () => {
-            if(document.getElementById('span-period').innerHTML === 'за весь период') {               
-                document.getElementById('span-period').innerHTML = 'за последний день';
-                td1.innerHTML = `${casesAllDay}`;       
-                td2.innerHTML = `${deadthsAllDay}`;       
+            if(period.innerHTML === 'за весь период' && value.innerHTML === 'в абсолютных цифрах') {               
+                period.innerHTML = 'за последний день';
+                td1.innerHTML = `${casesAllDay}`;      //354285    
+                td2.innerHTML = `${deathsAllDay}`;       //7369    
                 td3.innerHTML = `${recoveredAllDay}`;       
 
-            } else {               
-                document.getElementById('span-period').innerHTML = 'за весь период';
-                td1.innerHTML = `${casesAll}`;       
-                td2.innerHTML = `${deadthsAll}`;       
+            } else if (period.innerHTML === 'за весь период' && value.innerHTML === 'на 100тыс населения') {               
+                period.innerHTML = 'за последний день';
+                td1.innerHTML = `${casesAll100Day}`;   //1010     
+                td2.innerHTML = `${deathsAll100Day}`;      //23   
+                td3.innerHTML = `${recoveredAll100Day}`; 
+            } else if (period.innerHTML === 'за последний день' && value.innerHTML === 'в абсолютных цифрах') {               
+                period.innerHTML = 'за весь период';
+                td1.innerHTML = `${casesAll}`;     //78697495  
+                td2.innerHTML = `${deathsAll}`;       //1730411
                 td3.innerHTML = `${recoveredAll}`; 
-            }            
+            } else if (period.innerHTML === 'за последний день' && value.innerHTML === 'на 100тыс населения') {               
+                period.innerHTML = 'за весь период';
+                td1.innerHTML = `${casesAll100}`;    //324797    
+                td2.innerHTML = `${deathsAll100}`;      //5554     
+                td3.innerHTML = `${recoveredAll100}`; 
+            }             
         }) 
 
-        tdValue.addEventListener('click', (e) => {
-            
-            if(document.getElementById('span-value').innerHTML === 'в абсолютных цифрах') {               
-                document.getElementById('span-value').innerHTML = 'на 100тыс населения';          
-            } else {                
-                document.getElementById('span-value').innerHTML = 'в абсолютных цифрах';
-            }            
+        tdValue.addEventListener('click', (e) => {            
+            if(value.innerHTML === 'в абсолютных цифрах' && period.innerHTML === 'за весь период') {               
+                value.innerHTML = 'на 100тыс населения'; 
+                td1.innerHTML = `${casesAll100}`;   //324797    
+                td2.innerHTML = `${deathsAll100}`;    //5554   
+                td3.innerHTML = `${recoveredAll100}`; 
+            } else if (value.innerHTML === 'в абсолютных цифрах' && period.innerHTML === 'за последний день') {                
+                value.innerHTML = 'на 100тыс населения';
+                td1.innerHTML = `${casesAll100Day}`;      //1010 
+                td2.innerHTML = `${deathsAll100Day}`;      //23 
+                td3.innerHTML = `${recoveredAll100Day}`;                 
+            } else if (value.innerHTML === 'на 100тыс населения' && period.innerHTML === 'за весь период') {                
+                value.innerHTML = 'в абсолютных цифрах';
+                td1.innerHTML = `${casesAll}`;       //78697495
+                td2.innerHTML = `${deathsAll}`;       //1730411
+                td3.innerHTML = `${recoveredAll}`;               
+            } else if (value.innerHTML === 'на 100тыс населения' && period.innerHTML === 'за последний день') {                
+                value.innerHTML = 'в абсолютных цифрах';
+                td1.innerHTML = `${casesAllDay}`;   //354285     
+                td2.innerHTML = `${deathsAllDay}`;    //7369   
+                td3.innerHTML = `${recoveredAllDay}`;                    
+            }          
         }) 
     }, 1000)
 

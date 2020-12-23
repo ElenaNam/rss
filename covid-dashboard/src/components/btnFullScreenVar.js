@@ -9,13 +9,16 @@ const changeSizeScreen1 = ((element, block) => {
         if (btnFullscreen.children[0].getAttribute('src') === "img/fs1.png") {
             btnFullscreen.children[0].setAttribute('src', "img/fs2.png");       
 
-            element.classList.add('element-fullscreen');
+            element.classList.add('element-fullscreen', 'visible');
+            element.parentNode.parentNode.classList.add('hidden');
+            console.log(element.parentNode.parentNode)
             console.log('фулскрин вкл')
 
         } else if (btnFullscreen.children[0].getAttribute('src') === "img/fs2.png") {
             btnFullscreen.children[0].setAttribute('src', "img/fs1.png"); 
             console.log('фулскрин выкл')
-            element.classList.remove('element-fullscreen');
+            element.parentNode.parentNode.classList.remove('hidden');
+            element.classList.remove('element-fullscreen', 'visible');
         }
     })    
 })
