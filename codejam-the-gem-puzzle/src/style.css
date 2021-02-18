@@ -1,0 +1,359 @@
+body {
+    margin: 0 auto;
+}
+
+:root {
+    font-size: 10px;
+    font-family: 'Changa', sans-serif;
+}
+
+.wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background: url(assets/bg.jpg) no-repeat;
+    background-size: cover;    
+}
+
+.additional-wrapper {
+    width: 400px;
+    height: 50px;
+    background: linear-gradient(270deg, #5a4125, #ff9b29, #df3b6c);
+    position: relative;
+    margin: auto;
+    top: -175px;
+    display: flex;
+    flex-direction: row;
+    border: 5px double rgb(119, 72, 45);
+    border-radius: 2%;
+}
+.score {
+    width: 90px;
+    height: 20px;
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    display: flex;    
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 2px 3px 2px rgba(93, 14, 14, 0.8);
+}
+
+.time {
+    width: 110px;
+    height: 20px;
+    position: absolute;
+    left: 130px;
+    top: 20px;
+    display: flex;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 2px 3px 2px rgba(173, 97, 10, 0.8);
+}
+
+.button {
+    background: rgba(255, 255, 255, 0.8);    
+    color: rgb(128, 0, 90);    
+    border:1px solid rgb(194, 9, 117);
+    border-radius: 15%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(226, 161, 161, 0.8);
+
+}
+.button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    outline: none;
+}
+
+.button-continue {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+}
+.button-newgame {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 200px;
+}
+.button-progress {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 250px;
+}
+.button-select3x3 {
+    position: absolute;
+    width: 150px;
+    height: 28px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 300px;
+}
+
+.pause {
+    position: absolute;
+    width: 66px;
+    height: 28px;
+    left: 305px;
+    top: 17px;
+    font-size: 1.8rem;
+}
+.allsound {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: 260px;
+    top: 19px;
+    font-size: 2rem;
+}
+
+
+.popap-wrapper {
+    position: fixed; 
+    padding-top: 2px;   
+    top: 244px;
+    display: flex;  
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 47rem;    
+    border-radius: 2%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2;
+    transition: all .5s;
+}
+.congratulation {
+    position: fixed; 
+    padding-top: 2px;   
+    top: 244px;
+    display: flex;  
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 47rem;    
+    border-radius: 2%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;    
+    font-size: 3rem;
+    letter-spacing: 1.5px;
+    z-index: 3;  
+    transition: all .5s; 
+}
+.congratulation span:first-child {
+    font-weight: bold;
+    color: rgb(156, 23, 123);
+}
+.congratulation span i {
+    color: wheat;
+}
+.result-wrapper {
+    position: fixed; 
+    padding-top: 2px;
+    top: 244px;
+    display: flex;  
+    flex-direction: column;    
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 47rem;    
+    border-radius: 2%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    transition: all .5s;
+    color: white;
+    font-size: 2.5rem;
+    line-height: 35px;
+}
+.result-wrapper p {    
+    color: wheat;
+    
+}
+.result-wrapper span {
+    text-align: center;    
+}
+
+.puzzle-wrapper {
+    position: relative; 
+    /*padding-top: 2px;   */
+    top: 300px;
+    display: flex;  
+    /*flex-direction: row;*/
+    /*flex-wrap: wrap;*/
+    /*justify-content: flex-start;*/
+    /*align-items: center;*/
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 40.5rem;
+    height: 40.5rem;
+    border: 5px double rgb(119, 72, 45);
+    border-radius: 2%;
+    background: linear-gradient(45deg, #5a4125, #ff9b29, #df3b6c);
+}
+.puzzle-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    box-sizing: border-box;
+    width: calc(25% - 10px);   
+    /*width: 93px;*/
+    height: 93px;
+    border: 1px solid rgb(51, 28, 6);
+    border-radius: 10%;
+    background-color: rgb(100, 57, 21);
+    transition: all .3s;
+    margin: 5px;  
+    font-size: 4.5rem;
+    text-shadow: 2px 3px 2px rgb(0, 0, 0, 0.8);
+    color: rgb(228, 191, 133);
+}
+.puzzle-cell:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    opacity: 0.8;
+}
+
+
+@media screen and (max-device-width: 768px), screen and (max-width: 768px){
+    
+}
+
+@media screen and (max-device-width: 480px), screen and (max-width: 480px){
+    .wrapper {        
+        max-width: 100%;
+        height: 100%;
+        background-size: cover;      
+    }
+    .puzzle-wrapper {        
+        padding-top: 1px;        
+        top: 250px;
+        width: 30rem;
+        height: 30rem;
+        border: 2px double rgb(119, 72, 45);  
+        font-size: 0;
+        line-height: 0;
+        
+    }
+    .additional-wrapper {
+        width: 30rem;
+        top: -108px;
+        border: 2px double rgb(119, 72, 45);
+        border-radius: 2%;
+    }
+    .score { 
+        top: 22px;
+        font-size: 1.5rem;   
+    }
+    .time {
+        width: 110px;
+        height: 20px;
+        position: absolute;
+        left: 100px;
+        top: 22px;
+        color: white;
+        font-size: 1.5rem;
+        text-shadow: 2px 3px 2px rgba(173, 97, 10, 0.8);
+    }
+    .allsound {    
+        width: 24px;
+        height: 24px;
+        left: 190px;
+        top: 22px;       
+    }
+
+    .pause {
+        position: absolute;
+        width: 64px;
+        height: 24px;
+        left: 225px;
+        top: 22px;
+        font-size: 1.5rem;
+    }
+    .puzzle-cell {  
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;        
+       
+        /*width: calc(10% - 5px);   */
+        width: 55px;
+        height: 55px;
+        border: 1px solid rgb(51, 28, 6);
+        border-radius: 10%;
+        background-color: rgb(100, 57, 21);
+        transition: all .5s;
+        /*margin: 1px;    */       
+        font-size: 2.5rem;
+    }
+    /*.puzzle-cell--empty {
+        display: flex;
+        width: calc(25% - 5px);     
+        /*width: 55px;*/
+       /* height: 55px;    
+    }*/
+    .congratulation {
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem; 
+        font-size: 2rem;
+        letter-spacing: 1.7px;
+    }
+    .popap-wrapper {
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem;   
+    }
+    .button-continue {
+        top: 100px;
+    }
+    .button-newgame {
+        top: 150px;
+    }
+    .button-progress {
+        top: 200px;
+    }
+    .button-select3x3 {
+        top: 250px;
+    }
+    .result-wrapper {       
+        padding-top: 2px;   
+        top: 200px;
+        width: 30rem;
+        height: 35.5rem;
+        font-size: 2rem;
+        line-height: 28px;
+    }
+}
