@@ -1,8 +1,7 @@
 # RSS
 
 Учебные проекты курса "JavaScript/Front-end" 2020-Q3 from The Rolling Scopes community
-
-====
+___
 
 * https://elenanam.github.io/rss/calculator/
 * https://elenanam.github.io/rss/codejam-the-gem-puzzle/
