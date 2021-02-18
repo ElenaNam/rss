@@ -1,0 +1,227 @@
+body {   
+    margin: 0; 
+    padding: 0;
+    font-size: 20px;
+  }
+
+  .wrapper {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    height: 800px;     
+    
+  }
+
+  .wrapper__image {
+    position: absolute;
+    z-index: -99999;
+    width: 100%;
+    height: 800px;
+    background-image: url(assets/5390918_071219-ktrk-ninfa-teachers-discounts-school-vid.jpg);
+    background-size: 100% cover;
+    background-position: center;
+    background-repeat:  no-repeat;
+    opacity: 0.3;
+
+  }
+  .main {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 40px;  
+    padding-bottom: 150px;     
+  }
+
+
+  .list__wrapper {
+    display: block;        
+    background-color: blanchedalmond;
+    width: 300px;   
+    height: 45%;    
+    border-radius: 10%;
+    border: 1px solid white;      
+  }
+
+  .list {
+    padding-left: 30px;
+    padding-right: 10px; 
+           
+  }
+  .li-head {
+    list-style-type: none;
+    font-weight: bold;    
+  }
+
+  li {    
+    margin-top: 10px;
+  }
+
+  .main__image {
+      margin: 0 -5px;
+      padding: 0;
+  }
+  
+  .image_left {
+    margin: 130px 0 0;     
+    width: 250px;
+    height: 240px;
+    transform: rotate(90deg);  
+    /*cursor: pointer;    */
+  }
+  .image_left:hover {
+    margin-top: 135px;
+  }
+  
+  .image_right {
+    margin: 220px 0 0;    
+    width: 250px;
+    height: 240px;
+    transform: rotate(270deg);
+    
+  }
+  .image_right:hover {
+    margin-top: 215px; 
+  }
+
+
+  .calc {
+    background: #3878a3;
+    border: 3px solid #050444;
+    width: 385px;
+    padding: 30px;
+    border-radius: 46px;
+  }
+  .calc-display-input {
+    display: flex;
+    flex-wrap: wrap;
+    width: 360px;
+    height: 60px;
+    margin: 20px 0;
+    border-radius: 6px;    
+    background-color: #1d1d1d;
+    color: #fff;
+    text-align: right;
+    font-size: 35px;
+    padding: 10px;  
+    
+
+  }
+
+  .calc-buttons {   
+    
+    
+  }
+  .calc-table {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .calc_button-row td {
+    margin: 0 auto;
+    padding: 5px;
+  }
+  .btn {
+    width: 65px;
+    height: 60px;
+    background-color: #f4f4f4;
+    font-size: 27px;
+    color: #666666;
+    text-transform: uppercase;
+    border-radius: 16px;
+    border: 2px solid grey;
+    padding: 0;
+    cursor: pointer;
+    transition: 0.2s all;
+  }
+
+  #plusMinus {
+    height: 140px;
+  }
+  .btn-hover-red:hover {
+    background-color: #d83e33;
+    color: #f2f2f2;
+    font-weight: bold;
+  }
+  .btn-hover-orange:hover {
+    background-color: #c794b0;
+    color: #141212;
+    font-weight: bold;
+  }
+  .btn-hover-green:hover {
+    background-color: rgb(181, 247, 181);
+    color: #141212;
+    font-weight: bold;
+  }
+  .btn:active {
+    transform: translateY(-1px);
+  }
+  .btn-long {
+    width: 140px;
+  }
+  .btn-equal {
+    height: 140px;
+  }
+
+  input,
+  button {
+    padding: 5px 15px;
+    margin: 10px;
+    border: 0;
+    outline: 0;
+    border-radius: 4px;
+  }
+  button {
+    margin-left: 0;
+    padding: 15px 24px;
+  }
+  @media screen and (max-width: 768px) {
+    .calc {
+      width: 300px;
+      margin: 0 auto;
+    }
+    .calc-table{
+      width: 280px;
+    }
+    .calc-display-input {
+      width: 280px;
+    }
+    input[placeholder] {
+      font-size: 28px;
+    }
+    input::-moz-placeholder {
+      font-size: 28px;
+    }
+    input:-moz-placeholder {
+      font-size: 28px;
+    }
+    input:-ms-input-placeholder {
+      font-size: 28px;
+    }
+    .btn {
+      width: 44px;
+    }
+    .btn-long {
+      width: 110px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .calc {
+      width: 280px;
+      margin: 0 auto;
+    }
+    .calc-display-input {
+      width: 260px;
+    }
+    .calc-table{
+      width: 260px;
+    }
+    .btn {
+      width: 42px;
+    }
+    .btn-long {
+      width: 100px;
+    }
+  }
+  
