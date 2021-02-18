@@ -1,0 +1,646 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: rgb(42, 134, 99);
+}
+
+/* Burger-menu */
+.lock {
+  overflow: hidden;
+}
+.header-wrapper {
+  position: relative;
+  margin: 0 auto;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 12vh;
+  background-color: rgb(8, 77, 42);
+}
+
+.burger-menu_button {
+  position: absolute;
+  top: 13%;
+  left: 17%;
+  z-index: 20;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(31, 168, 84, 0.5);
+  border: 1px solid rgb(16, 122, 126);
+}
+.burger-menu_button:hover {
+  cursor: pointer;
+  background-color: rgba(201, 211, 64, 0.7);
+  border: 1px solid rgb(10, 34, 110);
+}
+.burger-menu_lines::before,
+.burger-menu_lines::after,
+.burger-menu_lines {
+  position: absolute;
+  width: 50px;
+  height: 5px;
+  border-radius: 80%;
+  background-color: #1e2ebb;
+}
+.burger-menu_lines {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.burger-menu_lines::before {
+  content: "";
+  top: -12px;
+}
+.burger-menu_lines::after {
+  content: "";
+  top: 12px;
+}
+.burger-menu_active .burger-menu_lines {
+  background-color: transparent;
+}
+.burger-menu_active .burger-menu_lines::before {
+  top: 0;
+  transform: rotate(45deg);
+  transition: 0.6s;
+}
+.burger-menu_active .burger-menu_lines::after {
+  top: 0;
+  transform: rotate(-45deg);
+  transition: 0.6s;
+}
+.burger-nav {
+  padding-top: 115px;
+  position: fixed;
+  top: 0;
+  z-index: 12;
+  display: flex;
+  flex-flow: column;
+  width: 300px;
+  height: 100vh;
+  background-color: #064b74;
+  border-radius: 10px;
+  overflow-y: auto;
+  left: -100%;
+  transition: 1s;
+}
+.burger-menu_active .burger-nav {
+  left: 0;
+  transform: rotate(720deg);
+  transition: 0.8s;
+}
+
+.burger-nav_link {
+  padding: 18px 35px;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.burger-nav_link-active {
+  color: gold;
+  cursor: pointer;
+}
+.burger-nav_link:hover {
+  color: rgb(113, 171, 204);
+  cursor: pointer;
+}
+.burger-menu_overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+.burger-menu_active .burger-menu_overlay {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Selector */
+.selector-wrapper {
+  position: absolute;
+  top: 42px;
+  right: 20%;
+  width: auto;
+}
+.input {
+  display: none;
+}
+.input:checked + .label::before {
+  right: -60px;
+}
+.label {
+  position: relative;
+  font-size: 1.5rem;
+  letter-spacing: 0.18rem;
+  font-weight: bold;
+  color: rgb(170, 38, 130);
+  text-shadow: 1px 1px black;
+  cursor: pointer;
+}
+.label::after {
+  position: absolute;
+  top: -4px;
+  right: -62px;
+  content: "";
+  width: 50px;
+  height: 25px;
+  background-color: wheat;
+  border: 1px solid blue;
+  border-radius: 15px;
+}
+.label::before {
+  position: absolute;
+  top: -1px;
+  right: -35px;
+  content: "";
+  width: 21px;
+  height: 21px;
+  background-color: rgb(37, 47, 107);
+  border: 1px solid rgb(163, 132, 31);
+  border-radius: 100%;
+  z-index: 1;
+  transition-duration: 400ms;
+}
+
+/* MAIN PAGE */
+.container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px auto 10px;
+  width: 80%;
+  min-height: 72vh;
+  align-content: baseline;
+}
+.category-name-wrapper {
+  display: flex;
+  position: fixed;
+  left: 0;
+  padding-bottom: 10px;
+  bottom: 50%;
+  transform: rotate(-90deg);
+}
+.category-name-wrapper span {
+  font-size: 2rem;
+  color: wheat;
+  text-align: center;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 300px;
+  height: 240px;
+  display: flex;
+  margin: 15px 25px;
+  list-style-type: none;
+  text-decoration: none;
+  color: rgb(47, 74, 161);
+  box-shadow: 3px 3px 10px rgb(59, 56, 197);
+  perspective: 800px;
+  background: rgb(170, 38, 130);
+  border: 2px solid rgb(170, 38, 130);
+  border-radius: 15%;
+  transition: 1s;
+  overflow: hidden;
+  outline: none;
+  backface-visibility: hidden;
+}
+.card-wrapper:hover {
+  transform: skew(-3deg, 3deg);
+  transition: 0.3s;
+  cursor: default;
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  border: none;
+  outline: none;
+  display: flex;
+  transition: 1s;
+  backface-visibility: hidden;
+  border-radius: 25%;
+  overflow: hidden;
+}
+.back {
+  transform: rotateY(180deg);
+}
+
+.front img,
+.back img {
+  width: 300px;
+  height: 210px;
+  overflow: hidden;
+}
+
+.category-section {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(180, 146, 84);
+  align-items: center;
+  justify-content: center;
+  border-radius: 15%;
+  border: 1px solid rgb(170, 38, 130);
+  margin: 0 auto;
+}
+
+.card-name {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px rgb(12, 12, 12);
+  text-align: center;
+}
+
+.rotate-button {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  display: flex;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+}
+
+.rotate-button img {
+  width: 40px;
+  height: 40px;
+}
+.rotate-button:hover {
+  transform: scaleX(-1);
+}
+.rotate-button:active,
+:focus {
+  outline-style: none;
+  outline-width: 0px !important;
+  outline-color: none !important;
+}
+.startgame-button {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  height: 50px;
+  background-color: wheat;
+  text-shadow: 1px 1px black;
+  color: #064b74;
+  font-weight: bold;
+  font-size: 2.5rem;
+  border-radius: 15px;
+  border: 3px solid #064b74;
+}
+.startgame-button:hover {
+  cursor: pointer;
+  background-color: rgb(250, 238, 216);
+  border: 1px solid #064b74;
+  box-shadow: 1px 1px 5px rgb(59, 56, 197);
+}
+
+.repeat-button__wrapper {
+  position: absolute;
+  bottom: 48%;
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+}
+.repeat-button:hover {
+  cursor: pointer;
+  transform: rotate(-90deg);
+  transition: 1.2s;
+}
+
+.repeat-button {
+  display: flex;
+  height: auto;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  z-index: 2;
+}
+.repeat-button img {
+  width: 75px;
+}
+
+.star-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+}
+.star {
+  display: flex;
+}
+.result-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 400px;
+  height: 500px;
+  background-color: wheat;
+  border: 3px solid rgb(170, 38, 130);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.result-wrapper span {
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: rgb(37, 59, 119);
+  margin-bottom: 10px;
+}
+.result-wrapper img {
+  background-color: transparent;
+}
+
+/* FOOTER */
+.footer-wrapper {
+  width: 100%;
+  height: 12vh;
+  background-color: rgb(8, 77, 42);
+}
+.footer {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo-wrapper {
+  display: flex;
+  margin-top: 2%;
+}
+.logo-wrapper a img {
+  width: 8rem;
+  height: 3rem;
+}
+
+.footer-link-course-wrapper {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.footer-link {
+  display: flex;
+  list-style-type: none;
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  margin: 20px 10px 10px;
+}
+.footer-link-color {
+  color: rgb(136, 130, 212);
+}
+.footer-information {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.year-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.year-wrapper img {
+  width: 3.2rem;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .burger-menu_button {
+    top: 17%;
+    left: 10%;
+    width: 55px;
+    height: 55px;
+  }
+  .burger-menu_lines::before,
+  .burger-menu_lines::after,
+  .burger-menu_lines {
+    width: 35px;
+    height: 3.5px;
+    border-radius: 80%;
+  }
+  .selector-wrapper {
+    right: 25%;
+  }
+
+  .container {
+    width: 95%;
+    margin-bottom: 50px;
+  }
+
+  .card-wrapper {
+    margin-bottom: 15px;
+  }
+
+  .star-wrapper {
+    height: 35px;
+  }
+  .star img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .startgame-button {
+    position: sticky;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -65px;
+    z-index: 2;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
+  .result-wrapper {
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+    border: 3px solid rgb(170, 38, 130);
+    border-radius: 15px;
+  }
+  .result-wrapper span {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .result-wrapper img {
+    width: 90%;
+    height: auto;
+  }
+
+  .footer-wrapper {
+    height: 8vh;
+    padding-top: 20px;
+  }
+  .logo-wrapper {
+    margin-right: 10%;
+  }
+  .logo-wrapper a img {
+    width: 3rem;
+    height: 1.2rem;
+  }
+
+  .footer-link-course-wrapper {
+    width: 30%;
+  }
+  .footer-link {
+    font-size: 0.6rem;
+    margin: 0 5px;
+    padding: 0;
+  }
+  .footer-link-course {
+    transform: rotate(-12deg);
+  }
+  .footer-information {
+    margin-left: 7%;
+    margin-top: 1.5%;
+    flex-direction: column-reverse;
+  }
+  .year-wrapper img {
+    width: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 767px) {
+  .logo-wrapper a img {
+    width: 3.3rem;
+    height: 1.5rem;
+  }
+  .container {
+    width: 95%;
+    margin-bottom: 60px;
+  }
+  .star-wrapper {
+    height: 40px;
+  }
+
+  .card-wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .startgame-button {
+    position: absolute;
+    bottom: -45px;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
+  }
+  .footer-link {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px) {
+  .burger-menu_button {
+    top: 11%;
+    left: 15%;
+  }
+  .container {
+    width: 95%;
+    margin-bottom: 70px;
+  }
+  .startgame-button {
+    bottom: -55px;
+    width: 200px;
+    height: 50px;
+    font-size: 2rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
+}
+
+@media screen and (min-width: 851px) and (max-width: 1280px) {
+  .burger-menu_button {
+    top: 11%;
+    left: 15%;
+  }
+  .container {
+    width: 90%;
+    margin-bottom: 60px;
+  }
+  .card-wrapper {
+    margin: 5px 30px;
+  }
+
+  .startgame-button {
+    bottom: -55px;
+    width: 250px;
+    height: 50px;
+    font-size: 2.2rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
+}
+@media screen and (min-width: 1281px) and (max-width: 1600px) {
+  .container {
+    width: 95%;
+    margin-bottom: 60px;
+  }
+  .card-wrapper {
+    margin: 10px 15px;
+  }
+  .startgame-button {
+    bottom: -30px;
+    font-size: 2.5rem;
+  }
+  .repeat-button__wrapper {
+    bottom: -73px;
+  }
+  .repeat-button img {
+    width: 50px;
+  }
+}
+@media screen and (min-width: 1601px) and (max-width: 1900px) {
+  .container {
+    width: 90%;
+    margin-bottom: 60px;
+  }
+  .card-wrapper {
+    margin: 25px 25px;
+  }
+  .startgame-button {
+    bottom: -25px;
+    font-size: 2.5rem;
+    height: 60px;
+  }
+  .repeat-button__wrapper {
+    bottom: 250px;
+  }
+  .repeat-button img {
+    width: 70px;
+  }
+}
