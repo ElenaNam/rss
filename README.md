@@ -9,3 +9,5 @@ ___
 * https://rolling-scopes-school.github.io/elenanam-JS2020Q3/english-for-kids/dist/
 * https://rolling-scopes-school.github.io/elenanam-JS2020Q3/virtual-keyboard/
 * https://rolling-scopes-school.github.io/elenanam-JS2020Q3/covid-dashboard/dist/
+* https://rolling-scopes-school.github.io/elenanam-JS2020Q3/virtual-piano
+* https://rolling-scopes-school.github.io/elenanam-JS2020Q3/wildlife
